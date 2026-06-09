@@ -1,0 +1,13 @@
+slug	status	registry_row	confidence	notes
+azul-zulu-jdk-8	review		high	duplicate of existing Homebrew cask zulu@8
+azul-zulu-jdk-11	review		high	duplicate of existing Homebrew cask zulu@11
+azul-zulu-jdk-17	review		high	duplicate of existing Homebrew cask zulu@17
+azul-zulu-jdk-21	review		high	duplicate of existing Homebrew cask zulu@21
+amazon-corretto-8	review		high	duplicate of existing Homebrew cask corretto@8
+amazon-corretto-11	review		high	duplicate of existing Homebrew cask corretto@11
+amazon-corretto-17	review		high	duplicate of existing Homebrew cask corretto@17
+amazon-corretto-21	review		high	duplicate of existing Homebrew cask corretto@21
+amazon-corretto-22	review		med	EOL/non-LTS; Homebrew dropped corretto@22. Download exists arch-split: https://corretto.aws/downloads/resources/22.0.2.9.1/amazon-corretto-22.0.2.9.1-macosx-{x64,aarch64}.pkg ; livecheck github corretto/corretto-22. Authorable as source=custom if Fleet still wants 22.
+zerotier	review		high	duplicate of existing Homebrew cask zerotier-one (ZeroTier One)
+xink	review		med	account-gated SaaS email-signature client; download https://downloads.xink.io/macos/pkg is unversioned and no public version page found
+zoho-workdrive-genie	review		med	download confirmed (200, ~55MB) https://www.zoho.com/workdrive/downloads/edit-tool/Zoho_WorkDrive_Genie.dmg but unversioned "latest" with no public version source -> would need version :latest + sha256 :no_check (Homebrew discourages for new casks)

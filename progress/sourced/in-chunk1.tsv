@@ -1,0 +1,18 @@
+slug	name	installer_type	source_class	downloadURL	appNewVersion	team_id	pkg_receipt	appcatalog_url
+acoustica	Acoustica	pkg	direct					https://appcatalog.cloud/apps/acoustica
+agenda	Agenda	dmg	direct					https://appcatalog.cloud/apps/agenda
+airradar	Airradar	dmg	direct					https://appcatalog.cloud/apps/airradar
+akvis-airbrush	Akvis Airbrush	dmg	direct					https://appcatalog.cloud/apps/akvis-airbrush
+akvis-artifact-remover-ai	Akvis Artifact Remover Ai	dmg	direct					https://appcatalog.cloud/apps/akvis-artifact-remover-ai
+akvis-frames	Akvis Frames	dmg	direct					https://appcatalog.cloud/apps/akvis-frames
+alarm-clock-pro	Alarm Clock Pro	dmg	direct					https://appcatalog.cloud/apps/alarm-clock-pro
+alivecolors	Alivecolors	dmg	direct					https://appcatalog.cloud/apps/alivecolors
+anaconda-navigator	Anaconda Navigator	pkg	direct	https://repo.anaconda.com/archive/$archiveName	"$( awk -F'-' '{print $2}' <<< ""$archiveName"" )"	Z5788K4JT7	com.anaconda.io	https://appcatalog.cloud/apps/anaconda-navigator
+anka	Anka	pkg	direct					https://appcatalog.cloud/apps/anka
+apache-netbeans-15	Apache Netbeans 15	pkg	github	$(downloadURLFromGit Friends-of-Apache-NetBeans netbeans-installers)	"$(curl -sLI ""https://github.com/Friends-of-Apache-NetBeans/netbeans-installers/releases/latest"" | grep -i ""^location"" | tr ""/"" ""\n"" | tail -1 | sed -E 's/v([0-9]+).*/\1/')"	44YNN9Q525		https://appcatalog.cloud/apps/apache-netbeans-15
+app-cleaner-and-uninstaller	App Cleaner And Uninstaller	zip	sparkle/feed	"$(curl -fs https://freemacsoft.net/appcleaner/Updates.xml | xpath '//rss/channel/item[last()]/enclosure/@url' 2>/dev/null | tr "" "" ""\n"" | sort | tail -1 | cut -d '""' -f 2)"	"$(curl -fsL ""https://freemacsoft.net/appcleaner/Updates.xml"" | xpath '//rss/channel/item[last()]/enclosure/@sparkle:shortVersionString' 2>/dev/null  | cut -d '""' -f 2)"	X85ZX835W9		https://appcatalog.cloud/apps/app-cleaner-and-uninstaller
+atlassian-companion	Atlassian Companion	dmg	dynamic-scrape	"$(curl -fsL https://confluence.atlassian.com/display/DOC/Install+Atlassian+Companion | sed -nE 's/.*(https:.*\.dmg)\"".*/\1/p')"	"$(getJSONValue ""$(curl -fsL https://update-nucleus.atlassian.com/Atlassian-Companion/291cb34fe2296e5fb82b83a04704c9b4/darwin/x64/RELEASES.json)"" ""currentRelease"" )"	UPXU4CQZ5P		https://appcatalog.cloud/apps/atlassian-companion
+automounter	Automounter	dmg	direct	https://www.pixeleyes.co.nz/automounter/AutoMounter.dmg	$( curl -fs https://www.pixeleyes.co.nz/automounter/version )	UKWABN4MGL		https://appcatalog.cloud/apps/automounter
+aws-cli	Aws Cli	pkg	direct	https://awscli.amazonaws.com/AWSCLIV2.pkg	"$( curl -fs ""https://raw.githubusercontent.com/aws/aws-cli/v2/CHANGELOG.rst"" | grep -i ""CHANGELOG"" -a4 | grep ""[0-9.]"" )"	94KV3E626L	com.amazon.aws.cli2	https://appcatalog.cloud/apps/aws-cli
+beam-studio	Beam Studio	dmg	dynamic-scrape	"$( curl -s https://id.flux3dp.com/api/check-update?key=beamstudio-stable"" | tr '""' '\n' | grep -m1 dmg )"""	"$( echo $downloadURL"" | cut -d '+' -f 3 | cut -d '.' -f 1-3 )"""	4Y92JWKV94		https://appcatalog.cloud/apps/beam-studio
+brosix	Brosix	pkg	direct	https://www.brosix.com/downloads/builds/official/Brosix.pkg		TA6P23NW8H		https://appcatalog.cloud/apps/brosix
