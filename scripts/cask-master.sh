@@ -22,6 +22,10 @@
 # fleetdm/fleet access), a `fork` remote in the homebrew-cask tap, and sudo
 # (pkg installs need it — primed once, kept alive for the run).
 #
+# AUTHOR: Adam Baali <adam@mpc.ad>  ·  https://github.com/AdamBaali
+#   Cask PRs open from the fork https://github.com/AdamBaali/homebrew-cask, and the
+#   cask commits are authored as the above (override with AUTHOR_NAME/AUTHOR_EMAIL).
+#
 # -------------------------- HOW TO RUN ---------------------------------------
 #   1) Add rows to the REGISTRY heredoc below (format + examples are there).
 #   2) PREVIEW FIRST (writes + audits casks, touches nothing else):
@@ -45,6 +49,14 @@
 #   SUDO_NOPASSWD=0   don't write a temp passwordless-sudo drop-in; just keep the
 #                     sudo timestamp warm (default 1 = one prompt, then no re-prompts;
 #                     the temp /etc/sudoers.d entry is auto-removed when the run ends)
+#   AUTHOR_NAME / AUTHOR_EMAIL   git identity for the cask commits, scoped to the
+#                     tap only (defaults "AdamBaali" / "adam@mpc.ad"). Use
+#                     AUTHOR_EMAIL=AdamBaali@users.noreply.github.com to keep it private.
+#   FORK_OWNER=you    GitHub owner for the fork PR head/blob URLs (default: derived
+#                     from the `fork` remote, else "AdamBaali")
+#   HOMEBREW_NO_REQUIRE_TAP_TRUST is exported =1 so Homebrew 5.1.15+ will load
+#                     casks from the local homebrew/cask clone (Tap Trust, 2026-05-30);
+#                     the run also does `brew trust homebrew/cask` as the recommended path.
 #
 # ------------------------- REGISTRY FORMAT -----------------------------------
 # Pipe-delimited, one row per app. Whitespace around each field is trimmed.
@@ -93,6 +105,25 @@
 # to need a tweak are the livecheck regex and (for arch-split electron) the dmg
 # filenames. Anything that doesn't fit a source => use source=custom.
 ###############################################################################
+
+# --- bash 4+ guard -----------------------------------------------------------
+# macOS ships bash 3.2 at /bin/bash (frozen for GPLv3 licensing). This harness
+# uses associative arrays (declare -A), which need bash 4.2+. If we were launched
+# under an older bash (or sh) — e.g. `bash cask-master.sh` resolving to /bin/bash —
+# re-exec under a modern bash (Homebrew's), preserving the current environment
+# (DRYRUN=…, ONLY=…, etc.) and any args. If none exists, stop with an actionable
+# message instead of the cryptic "declare: -g: invalid option" / "unbound variable".
+if [ -z "${BASH_VERSINFO:-}" ] || [ "${BASH_VERSINFO:-0}" -lt 4 ]; then
+  for _b in /opt/homebrew/bin/bash /usr/local/bin/bash "$(command -v bash 2>/dev/null)"; do
+    [ -n "$_b" ] && [ -x "$_b" ] || continue
+    _v="$("$_b" -c 'echo "${BASH_VERSINFO:-0}"' 2>/dev/null)"
+    case "$_v" in ''|*[!0-9]*) continue;; esac
+    [ "$_v" -ge 4 ] && exec "$_b" "$0" "$@"
+  done
+  echo "ERROR: this needs bash 4+ (you have ${BASH_VERSION:-an old shell})." >&2
+  echo "       Install one and re-run:  brew install bash" >&2
+  exit 1
+fi
 
 # ----------------------------------------------------------------------------
 # REGISTRY — ADD YOUR APPS HERE. Examples are commented out; copy the shape.
@@ -455,10 +486,17 @@ TABLE
 # Environment + flags
 # ----------------------------------------------------------------------------
 set -uo pipefail
-export GIT_PAGER=cat HOMEBREW_NO_INSTALL_FROM_API=1 HOMEBREW_NO_AUTO_UPDATE=1
+# HOMEBREW_NO_REQUIRE_TAP_TRUST=1: Homebrew 5.1.15+ (Tap Trust, added 2026-05-30)
+# refuses to *load* casks from an "untrusted" tap — which now includes a locally
+# cloned/forked homebrew/cask — so `brew audit` and `brew livecheck` fail with
+# "Refusing to load cask ... from untrusted tap" (while `brew style`, which only
+# lints the file, still passes). This keeps the local tap loadable for the run.
+# Recommended long-term alternative: `brew trust homebrew/cask` (done below too).
+export GIT_PAGER=cat HOMEBREW_NO_INSTALL_FROM_API=1 HOMEBREW_NO_AUTO_UPDATE=1 HOMEBREW_NO_REQUIRE_TAP_TRUST=1
 DRYRUN="${DRYRUN:-0}"; FORK="${FORK:-fork}"; FILE_FR="${FILE_FR:-1}"; CUSTOMER_LABEL="${CUSTOMER_LABEL:-}"
 FRESH="${FRESH:-1}"; STRICT="${STRICT:-1}"; ZAP="${ZAP:-1}"
 ONLY="${ONLY:-}"; LIMIT="${LIMIT:-}"; STOP_ON_FAIL="${STOP_ON_FAIL:-0}"
+AUTHOR_NAME="${AUTHOR_NAME:-AdamBaali}"; AUTHOR_EMAIL="${AUTHOR_EMAIL:-adam@mpc.ad}"
 [ "$STRICT" = 1 ] && SFLAG="--strict" || SFLAG=""
 if [ "$STRICT" = 1 ]; then AUDIT_DESC="--strict --online --new"; else AUDIT_DESC="--online --new"; fi
 if [ "$ZAP" = 1 ]; then TESTED="installed, reinstalled, uninstalled, and zapped"; VERIFIED="the artifact, a clean uninstall, an idempotent reinstall, and the zap stanza paths"; else TESTED="installed and uninstalled"; VERIFIED="the artifact and uninstall"; fi
@@ -472,12 +510,24 @@ trim(){ local s="$1"; s="${s#"${s%%[![:space:]]*}"}"; s="${s%"${s##*[![:space:]]
 # ----------------------------------------------------------------------------
 TAP="$(brew --repository homebrew/cask 2>/dev/null)" || { echo "ERROR: Homebrew not found"; exit 1; }
 [ -d "$TAP" ] || { echo "ERROR: homebrew-cask tap not found at $TAP"; exit 1; }
+# Tap Trust (Homebrew 5.1.15+): mark the official cask tap trusted once so `brew
+# audit`/`brew livecheck` will load casks from this local clone. The env export
+# above is the guaranteed fallback; this is the recommended path and is a silent
+# no-op on older brew (and harmless if already trusted).
+brew trust homebrew/cask </dev/null >/dev/null 2>&1 || true
+# Author the cask commits as you, scoped to THIS tap only (your global git
+# config is untouched). Override with AUTHOR_NAME / AUTHOR_EMAIL.
+git -C "$TAP" config user.name  "$AUTHOR_NAME"  >/dev/null 2>&1 || true
+git -C "$TAP" config user.email "$AUTHOR_EMAIL" >/dev/null 2>&1 || true
 DEF="$(git -C "$TAP" symbolic-ref refs/remotes/origin/HEAD 2>/dev/null | sed 's@.*/@@')"; [ -z "$DEF" ] && DEF=master
 command -v gh >/dev/null 2>&1 || { echo "ERROR: install gh: brew install gh"; exit 1; }
 if [ "$DRYRUN" != 1 ]; then
   gh auth status >/dev/null 2>&1 || { echo "ERROR: run: gh auth login"; exit 1; }
 fi
-FORK_OWNER="$(git -C "$TAP" remote get-url "$FORK" 2>/dev/null | sed -E 's#.*github\.com[:/]([^/]+)/.*#\1#')"
+if [ -z "${FORK_OWNER:-}" ]; then
+  FORK_OWNER="$(git -C "$TAP" remote get-url "$FORK" 2>/dev/null | sed -E 's#.*github\.com[:/]([^/]+)/.*#\1#')"
+  [ -n "$FORK_OWNER" ] || FORK_OWNER="AdamBaali"
+fi
 if [ "$DRYRUN" != 1 ] && [ -z "$FORK_OWNER" ]; then
   echo "ERROR: no '$FORK' remote in the tap. Add your homebrew-cask fork, e.g.:"
   echo "  git -C \"$TAP\" remote add $FORK git@github.com:<you>/homebrew-cask.git"
@@ -498,7 +548,11 @@ read_app(){ APP_NAME="$(basename "$1")"
 inspect(){ RECEIPT=""; LABELS=""; MAU=""
   case "$ARTIFACT" in
     zip) rm -rf "$W/x"; mkdir "$W/x"; ditto -xk "$DL" "$W/x"; read_app "$(find "$W/x" -maxdepth 3 -name '*.app' | head -1)";;
-    dmg) hdiutil detach /tmp/ck-vol >/dev/null 2>&1 || true; hdiutil attach "$DL" -nobrowse -mountpoint /tmp/ck-vol >/dev/null
+    dmg) hdiutil detach /tmp/ck-vol >/dev/null 2>&1 || true
+         # `yes |` auto-accepts any embedded software license agreement (SLA) so a
+         # licensed dmg (e.g. AKVIS) mounts unattended instead of prompting "Agree Y/N?".
+         # (`brew install` already auto-agrees; this is only for our own inspect mount.)
+         yes | hdiutil attach "$DL" -nobrowse -noverify -noautoopen -mountpoint /tmp/ck-vol >/dev/null 2>&1 || true
          read_app "$(find /tmp/ck-vol -maxdepth 1 -name '*.app' | head -1)"; hdiutil detach /tmp/ck-vol >/dev/null 2>&1 || true;;
     pkg) rm -rf "$W/x"; pkgutil --expand-full "$DL" "$W/x"
          RECEIPT="$(grep -rhoE 'identifier="[^"]+"' "$W/x" 2>/dev/null | grep -iv autoupdate | head -1 | sed -E 's/.*"([^"]+)".*/\1/')"
