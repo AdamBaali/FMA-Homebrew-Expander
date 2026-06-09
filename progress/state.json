@@ -1,7 +1,7 @@
 {
   "project": "FMA no-homebrew-cask sourcing + cask authoring",
   "updated": "2026-06-09",
-  "phase": "0 complete (repo set up); Phase 1 not yet started",
+  "phase": "Phase 2 in progress \u2014 github_tag batch authored (14 rows)",
   "canonical_paths": {
     "master_list": "data/master-list.csv",
     "worklist": "data/unsourced-worklist.csv",
@@ -16,12 +16,13 @@
     "total": 533,
     "sourced": 192,
     "unsourced": 341,
-    "registry_ready": 118,
+    "registry_ready": 111,
     "eligible_low_confidence": 1,
-    "review_or_ineligible": 6,
+    "review_or_ineligible": 13,
     "autopkg_needs_installer_type": 67,
-    "in_registry": 0,
-    "dryrun_clean": 0
+    "in_registry": 14,
+    "dryrun_clean": 0,
+    "eligible_remaining_to_author": 97
   },
   "sourcing_cursor": {
     "next_worklist_index": 0,
@@ -34,8 +35,12 @@
     "gh and autopkg are not installed (gh is only needed at submit time; autopkg is optional for sourcing)."
   ],
   "notes": [
-    "Phase 1 (source the 341 unsourced apps) has NOT started yet — awaiting go-ahead and any further skills the user is providing.",
-    "67 AutoPkg-sourced rows have source_class/source_detail but no installer_type/fma_eligible — classify these (resolve the recipe's download type) as part of Phase 2 prep; most should become eligible.",
-    "Do NOT submit. The deliverable is a filled, DRYRUN-clean scripts/cask-master.sh; the user opens the homebrew-cask PRs and Fleet FRs."
+    "github_tag batch (14) authored into scripts/cask-master.sh and statically verified (repo, tag via release redirect, single mac asset, {v} templating, no formula/cask collision) \u2014 NOT yet DRYRUN'd (needs your Mac).",
+    "Excluded from github batch: dockutil/mist-cli/container/jupyterlab (homebrew-core formula collision), obs-studio/nextcloud-desktop-client (duplicate existing casks obs/nextcloud), homebrew (bogus) -> marked review/no.",
+    "Arch-split github apps pending source=custom: apache-netbeans-15, microsoft-powershell, visualz.",
+    "67 AutoPkg rows still need installer_type/fma_eligible classification.",
+    "Next: author remaining eligible by source_class -> {'direct': 58, 'unknown': 5, 'github': 3, 'sparkle/feed': 7, 'dynamic-scrape': 23, 'msft': 1}",
+    "Phase 1 cold-sourcing of the 341 not yet started.",
+    "Do NOT submit; deliverable is the filled script for the user to DRYRUN + run on macOS."
   ]
 }

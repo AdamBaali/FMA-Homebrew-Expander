@@ -13,7 +13,7 @@ adobe-remote-update-manager,Adobe Remote Update Manager,https://appcatalog.cloud
 adobe-uninstaller,Adobe Uninstaller,https://appcatalog.cloud/apps/adobe-uninstaller,autopkg,,,,dynamic-scrape,deploymenttools.acp.adobeoobe.com,,,,,,autopkg-sourced-format-tbd,high
 agenda,Agenda,https://appcatalog.cloud/apps/agenda,web-research,,dmg,yes,direct,agenda.com,,,,,,web-sourced,med
 air,Air,https://appcatalog.cloud/apps/air,autopkg,,,,sparkle/feed,plugins.jetbrains.com,,,,,,autopkg-sourced-format-tbd,high
-airbattery,Airbattery,https://appcatalog.cloud/apps/airbattery,web-research,,zip,yes,github,lihaoyun6/AirBattery,,,,,,web-sourced,high
+airbattery,AirBattery,https://appcatalog.cloud/apps/airbattery,web-research,,dmg,yes,github,lihaoyun6/AirBattery,github_latest,,,,,in-registry,high
 aircall-workspace,Aircall Workspace,https://appcatalog.cloud/apps/aircall-workspace,autopkg,,,,dynamic-scrape,electron.aircall.io,,,,,,autopkg-sourced-format-tbd,high
 airradar,Airradar,https://appcatalog.cloud/apps/airradar,web-research,,dmg,yes,direct,koingosw.com,,,,,,web-sourced,med
 airtime,Airtime,https://appcatalog.cloud/apps/airtime,autopkg,,,,dynamic-scrape,updates.airtimetools.com,,,,,,autopkg-sourced-format-tbd,high
@@ -32,7 +32,7 @@ amazon-corretto-8,Amazon Corretto 8,https://appcatalog.cloud/apps/amazon-corrett
 amnesia,Amnesia,https://appcatalog.cloud/apps/amnesia,,,,,,,,,,,,manual-research,
 anaconda-navigator,Anaconda Navigator,https://appcatalog.cloud/apps/anaconda-navigator,installomator,anaconda,pkg,yes,direct,repo.anaconda.com,"$( awk -F'-' '{print $2}' <<< ""$archiveName"" )",Z5788K4JT7,com.anaconda.io,"( ""Anaconda-Navigator.app"" )",,installomator-eligible,high
 anka,Anka,https://appcatalog.cloud/apps/anka,web-research,,pkg,yes,direct,veertu.com/downloads/anka-virtualization-latest,,,,,,web-sourced,high
-apache-netbeans-15,Apache Netbeans 15,https://appcatalog.cloud/apps/apache-netbeans-15,installomator,apachenetbeans,pkg,yes,github,,"$(curl -sLI ""https://github.com/Friends-of-Apache-NetBeans/netbeans-installers/releases/latest"" | grep -i ""^location"" | tr ""/"" ""\n"" | tail -1 | sed -E 's/v([0-9]+).*/\1/')",44YNN9Q525,,,,installomator-eligible,high
+apache-netbeans-15,Apache Netbeans 15,https://appcatalog.cloud/apps/apache-netbeans-15,installomator,apachenetbeans,pkg,yes,github,Friends-of-Apache-NetBeans/netbeans-installers,"$(curl -sLI ""https://github.com/Friends-of-Apache-NetBeans/netbeans-installers/releases/latest"" | grep -i ""^location"" | tr ""/"" ""\n"" | tail -1 | sed -E 's/v([0-9]+).*/\1/')",44YNN9Q525,,,,arch-split: source=custom pending,high
 api-utility,Api Utility,https://appcatalog.cloud/apps/api-utility,,,,,,,,,,,,manual-research,
 app-cleaner-and-uninstaller,App Cleaner And Uninstaller,https://appcatalog.cloud/apps/app-cleaner-and-uninstaller,installomator,appcleaner,zip,yes,sparkle/feed,freemacsoft.net,"$(curl -fsL ""https://freemacsoft.net/appcleaner/Updates.xml"" | xpath '//rss/channel/item[last()]/enclosure/@sparkle:shortVersionString' 2>/dev/null  | cut -d '""' -f 2)",X85ZX835W9,,,,installomator-eligible,high
 appcode,Appcode,https://appcatalog.cloud/apps/appcode,autopkg,,,,dynamic-scrape,,,,,,,autopkg-sourced-format-tbd,high
@@ -53,7 +53,7 @@ azul-zulu-jdk-21,Azul Zulu Jdk 21,https://appcatalog.cloud/apps/azul-zulu-jdk-21
 azul-zulu-jdk-22,Azul Zulu Jdk 22,https://appcatalog.cloud/apps/azul-zulu-jdk-22,,,,,,,,,,,,manual-research,
 azul-zulu-jdk-24,Azul Zulu Jdk 24,https://appcatalog.cloud/apps/azul-zulu-jdk-24,,,,,,,,,,,,manual-research,
 azul-zulu-jdk-8,Azul Zulu Jdk 8,https://appcatalog.cloud/apps/azul-zulu-jdk-8,installomator,zulujdk8,pkgInDmg,yes-nested,dynamic-scrape,cdn.azul.com,"$(echo ""$downloadURL"" | cut -d ""-"" -f 1 | sed -e ""s/.*zulu//"" | sed 's/jdk//') ",TDTHCUPYFR,com.azulsystems.zulu.8,,,installomator-nested-verify,high
-backgrounds,Backgrounds,https://appcatalog.cloud/apps/backgrounds,installomator,backgrounds,pkg,yes,github,,"""$(versionFromGit SAP backgrounds)""",7R5ZEU67FQ,,,,installomator-eligible,high
+backgrounds,Backgrounds,https://appcatalog.cloud/apps/backgrounds,installomator,backgrounds,pkg,yes,github,SAP/backgrounds,"""$(versionFromGit SAP backgrounds)""",7R5ZEU67FQ,,,,in-registry,high
 bananotate,Bananotate,https://appcatalog.cloud/apps/bananotate,,,,,,,,,,,,manual-research,
 barcode-producer,Barcode Producer,https://appcatalog.cloud/apps/barcode-producer,,,,,,,,,,,,manual-research,
 barcode-studio,Barcode Studio,https://appcatalog.cloud/apps/barcode-studio,,,,,,,,,,,,manual-research,
@@ -102,7 +102,7 @@ comic-life-4,Comic Life 4,https://appcatalog.cloud/apps/comic-life-4,autopkg,,,,
 computer,Computer,https://appcatalog.cloud/apps/computer,,,,,,,,,,,,manual-research,
 connectmenow4,Connectmenow4,https://appcatalog.cloud/apps/connectmenow4,,,,,,,,,,,,manual-research,
 conniepad,Conniepad,https://appcatalog.cloud/apps/conniepad,,,,,,,,,,,,manual-research,
-container,Container,https://appcatalog.cloud/apps/container,installomator,container,pkg,yes,github,,"""$(versionFromGit apple container)""",UPBK2H6LZM,,,,installomator-eligible,high
+container,Container,https://appcatalog.cloud/apps/container,installomator,container,pkg,review,github,apple/container,"""$(versionFromGit apple container)""",UPBK2H6LZM,,,,review: homebrew-core formula collision; apple CLI runtime,high
 corelcad,Corelcad,https://appcatalog.cloud/apps/corelcad,,,,,,,,,,,yes,manual-research,
 cotypist,Cotypist,https://appcatalog.cloud/apps/cotypist,,,,,,,,,,,,manual-research,
 cricut-design-space,Cricut Design Space,https://appcatalog.cloud/apps/cricut-design-space,installomator,cricutdesignspace,dmg,yes,dynamic-scrape,apis.cricut.com,"$(getJSONValue ""$cricutVersionJSON"" ""rolloutVersion"")",25627ZFVT7,,,yes,installomator-eligible,high
@@ -124,7 +124,7 @@ dinoxcope,Dinoxcope,https://appcatalog.cloud/apps/dinoxcope,autopkg,,,,dynamic-s
 disk-space-analyzer,Disk Space Analyzer,https://appcatalog.cloud/apps/disk-space-analyzer,,,,,,,,,,,,manual-research,
 displaylink-manager,Displaylink Manager,https://appcatalog.cloud/apps/displaylink-manager,installomator,displaylinkmanager,pkg,yes,dynamic-scrape,www.synaptics.com$(curl,$(curl -sfL https://www.synaptics.com/products/displaylink-graphics/downloads/macos | grep -o 'DisplayLink%20Manager%20Graphics%20Connectivity[0-9.]*-Release' | head -1 | sed 's/DisplayLink%20Manager%20Graphics%20Connectivity//' | sed 's/-Release//'),73YQY62QM3,,,,installomator-eligible,high
 docker,Docker,https://appcatalog.cloud/apps/docker,installomator,docker,dmg,yes,direct,desktop.docker.com,"$( curl -fs ""https://desktop.docker.com/mac/main/arm64/appcast.xml"" | xpath '(//rss/channel/item/enclosure/@sparkle:shortVersionString)[last()]' 2>/dev/null | cut -d '""' -f2 )",9BNSXJN65R,,"( ""Docker Desktop"" )",,installomator-eligible,high
-dockutil,Dockutil,https://appcatalog.cloud/apps/dockutil,installomator,dockutil,pkg,yes,github,,"$(versionFromGit ""kcrawford"" ""dockutil"")",Z5J8CJBUWC,dockutil.cli.tool,( NONE ),,installomator-eligible,high
+dockutil,Dockutil,https://appcatalog.cloud/apps/dockutil,installomator,dockutil,pkg,review,github,kcrawford/dockutil,"$(versionFromGit ""kcrawford"" ""dockutil"")",Z5J8CJBUWC,dockutil.cli.tool,( NONE ),,review: homebrew-core formula collision (brew install dockutil),high
 doctolib,Doctolib,https://appcatalog.cloud/apps/doctolib,installomator,doctolib,dmg,yes,direct,ddv-install.doctolib.fr,"""""",84K7XVJ72Q,,,,installomator-eligible,high
 docusign-edit,Docusign Edit,https://appcatalog.cloud/apps/docusign-edit,,,,,,,,,,,,manual-research,
 dragonframe-2024,Dragonframe 2024,https://appcatalog.cloud/apps/dragonframe-2024,installomator,dragonframe2024,pkg,yes,direct,www.dragonframe.com,"$(curl -s -A ""User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/15.1 Safari/605.1.15"" https://www.dragonframe.com/downloads/ | grep -o 'Dragonframe_2024\.[0-9]\+\.[0-9]\+\.pkg' | sed -E 's/Dragonframe_//; s/\.pkg$//' | head -n 1)",PG7SM8SD8M,,,yes,installomator-eligible,high
@@ -141,14 +141,14 @@ eclipse-ide-for-scout-developers,Eclipse Ide For Scout Developers,https://appcat
 editready,Editready,https://appcatalog.cloud/apps/editready,,,,,,,,,,,,manual-research,
 egnyte-connect,Egnyte Connect,https://appcatalog.cloud/apps/egnyte-connect,autopkg,,,,sparkle/feed,egnyte-cdn.egnyte.com,,,,,,autopkg-sourced-format-tbd,high
 egnyte-desktop-app-core,Egnyte Desktop App Core,https://appcatalog.cloud/apps/egnyte-desktop-app-core,autopkg,,,,dynamic-scrape,egnyte-cdn.egnyte.com,,,,,,autopkg-sourced-format-tbd,high
-elevate24,Elevate24,https://appcatalog.cloud/apps/elevate24,installomator,elevate24,pkg,yes,github,,"""$(versionFromGit Jigsaw24 Elevate24)""",BVDW99KYDU,,,,installomator-eligible,high
+elevate24,Elevate24,https://appcatalog.cloud/apps/elevate24,installomator,elevate24,pkg,yes,github,Jigsaw24/Elevate24,"""$(versionFromGit Jigsaw24 Elevate24)""",BVDW99KYDU,,,,in-registry,high
 elytra,Elytra,https://appcatalog.cloud/apps/elytra,,,,,,,,,,,,manual-research,
 enreachcontact,Enreachcontact,https://appcatalog.cloud/apps/enreachcontact,,,,,,,,,,,,manual-research,
 eon-timer,Eon Timer,https://appcatalog.cloud/apps/eon-timer,,,,,,,,,,,,manual-research,
 eparaksts,Eparaksts,https://appcatalog.cloud/apps/eparaksts,,,,,,,,,,,,manual-research,
 epos-connect,Epos Connect,https://appcatalog.cloud/apps/epos-connect,installomator,eposconnect,pkg,yes,dynamic-scrape,www.eposaudio.com,"$(echo ""$downloadURL"" | sed -E 's/.*_([0-9.]*).pkg/\1/' | cut -d ""."" -f4)",8956A7Y69J,,,,installomator-eligible,high
 escape-medical-viewer,Escape Medical Viewer,https://appcatalog.cloud/apps/escape-medical-viewer,,,,,,,,,,,,manual-research,
-escrow-buddy,Escrow Buddy,https://appcatalog.cloud/apps/escrow-buddy,installomator,escrowbuddy,pkg,yes,github,,$(versionFromGit macadmins escrow-buddy ),T4SK8ZXCXG,com.netflix.Escrow-Buddy,,,installomator-eligible,high
+escrow-buddy,Escrow Buddy,https://appcatalog.cloud/apps/escrow-buddy,installomator,escrowbuddy,pkg,yes,github,macadmins/escrow-buddy,$(versionFromGit macadmins escrow-buddy ),T4SK8ZXCXG,com.netflix.Escrow-Buddy,,,in-registry,high
 everweb,Everweb,https://appcatalog.cloud/apps/everweb,installomator,everweb,dmg,yes,direct,www.ragesw.com,"$(curl -fs https://www.everwebapp.com/change-log/index.html | grep -oE ""[0-9]+\.[0-9]+\.[0-9]+"" | head -n 1)",A95T4TFRZ2,,,,installomator-eligible,high
 exiftool,Exiftool,https://appcatalog.cloud/apps/exiftool,autopkg,,,,dynamic-scrape,exiftool.org,,,,,,autopkg-sourced-format-tbd,high
 farmerswife,Farmerswife,https://appcatalog.cloud/apps/farmerswife,,,,,,,,,,,,manual-research,
@@ -191,7 +191,7 @@ guardian-browser,Guardian Browser,https://appcatalog.cloud/apps/guardian-browser
 haiku-animator,Haiku Animator,https://appcatalog.cloud/apps/haiku-animator,,,,,,,,,,,,manual-research,
 hide-icons,Hide Icons,https://appcatalog.cloud/apps/hide-icons,autopkg,,,,github,com-entonos/Hide-Icons,,,,,,autopkg-sourced-format-tbd,high
 hintview,Hintview,https://appcatalog.cloud/apps/hintview,,,,,,,,,,,,manual-research,
-homebrew,Homebrew,https://appcatalog.cloud/apps/homebrew,installomator,homebrew,pkg,yes,github,,"""$(versionFromGit Homebrew brew)""",927JGANW46,sh.brew.homebrew,,,installomator-eligible,high
+homebrew,Homebrew,https://appcatalog.cloud/apps/homebrew,installomator,homebrew,pkg,no,github,Homebrew/brew,"""$(versionFromGit Homebrew brew)""",927JGANW46,sh.brew.homebrew,,,"review: bogus: Homebrew itself, not a cask",high
 horse,Horse,https://appcatalog.cloud/apps/horse,,,,,,,,,,,,manual-research,
 houdahgeo,Houdahgeo,https://appcatalog.cloud/apps/houdahgeo,autopkg,,,,sparkle/feed,www.houdah.com,,,,,,autopkg-sourced-format-tbd,high
 httpie,Httpie,https://appcatalog.cloud/apps/httpie,,,,,,,,,,,,manual-research,
@@ -206,7 +206,7 @@ ib-eassessment-player,Ib Eassessment Player,https://appcatalog.cloud/apps/ib-eas
 ibm-data-shift,Ibm Data Shift,https://appcatalog.cloud/apps/ibm-data-shift,,,,,,,,,,,,manual-research,
 ibm-spss-statistics,Ibm Spss Statistics,https://appcatalog.cloud/apps/ibm-spss-statistics,,,,,,,,,,,,manual-research,
 iboostup,Iboostup,https://appcatalog.cloud/apps/iboostup,,,,,,,,,,,,manual-research,
-icons,Icons,https://appcatalog.cloud/apps/icons,installomator,icons,pkg,yes,github,,$(versionFromGit SAP macOS-icon-generator ),7R5ZEU67FQ,,,,installomator-eligible,high
+icons,Icons,https://appcatalog.cloud/apps/icons,installomator,icons,pkg,yes,github,SAP/macOS-icon-generator,$(versionFromGit SAP macOS-icon-generator ),7R5ZEU67FQ,,,,in-registry,high
 identity,Identity,https://appcatalog.cloud/apps/identity,,,,,,,,,,,,manual-research,
 identity-enterprise,Identity Enterprise,https://appcatalog.cloud/apps/identity-enterprise,,,,,,,,,,,,manual-research,
 imanage-work-desktop,Imanage Work Desktop,https://appcatalog.cloud/apps/imanage-work-desktop,autopkg,,,,sparkle/feed,updates.imanage.com,,,,,,autopkg-sourced-format-tbd,high
@@ -232,21 +232,21 @@ jamf-connect-configuration,Jamf Connect Configuration,https://appcatalog.cloud/a
 jamf-connect-login,Jamf Connect Login,https://appcatalog.cloud/apps/jamf-connect-login,installomator,jamfconnectlogin,pkgInDmg,yes-nested,direct,files.jamfconnect.com,"$(curl -fsIL ""${downloadURL}"" | grep ""x-amz-meta-version"" | grep -o ""[0-9.].*[0-9.].*[0-9]"")",483DWKW443,com.jamf.connect.login,,,installomator-nested-verify,high
 jamf-environment-test,Jamf Environment Test,https://appcatalog.cloud/apps/jamf-environment-test,,,,,,,,,,,,manual-research,
 jamf-framework-redeploy,Jamf Framework Redeploy,https://appcatalog.cloud/apps/jamf-framework-redeploy,,,,,,,,,,,,manual-research,
-jamf-pppc-utility,Jamf Pppc Utility,https://appcatalog.cloud/apps/jamf-pppc-utility,installomator,jamfpppcutility,zip,yes,github,,$(versionFromGit jamf PPPC-Utility),483DWKW443,,,,installomator-eligible,high
-jamf-printer-manager,Jamf Printer Manager,https://appcatalog.cloud/apps/jamf-printer-manager,installomator,jamfprintermanager,zip,yes,github,,"""$(versionFromGit jamf jamf-printer-manager)""",483DWKW443,,,,installomator-eligible,high
+jamf-pppc-utility,PPPC Utility,https://appcatalog.cloud/apps/jamf-pppc-utility,installomator,jamfpppcutility,zip,yes,github,jamf/PPPC-Utility,$(versionFromGit jamf PPPC-Utility),483DWKW443,,,,in-registry,high
+jamf-printer-manager,Jamf Printer Manager,https://appcatalog.cloud/apps/jamf-printer-manager,installomator,jamfprintermanager,zip,yes,github,jamf/jamf-printer-manager,"""$(versionFromGit jamf jamf-printer-manager)""",483DWKW443,,,,in-registry,high
 jamf-protect-ulf-uploader,Jamf Protect Ulf Uploader,https://appcatalog.cloud/apps/jamf-protect-ulf-uploader,,,,,,,,,,,,manual-research,
 jamf-prune,Jamf Prune,https://appcatalog.cloud/apps/jamf-prune,,,,,,,,,,,,manual-research,
-jamf-reenroller,Jamf Reenroller,https://appcatalog.cloud/apps/jamf-reenroller,installomator,jamfreenroller,zip,yes,github,,,PS2F6S478M,,,,installomator-eligible,high
+jamf-reenroller,ReEnroller,https://appcatalog.cloud/apps/jamf-reenroller,installomator,jamfreenroller,zip,yes,github,jamf/ReEnroller,github_latest,PS2F6S478M,,,,in-registry,high
 jamf-replicator,Jamf Replicator,https://appcatalog.cloud/apps/jamf-replicator,autopkg,,,,github,jamf/Replicator,,,,,,autopkg-sourced-format-tbd,high
 jamf-sync,Jamf Sync,https://appcatalog.cloud/apps/jamf-sync,autopkg,,,,github,jamf/JamfSync,,,,,,autopkg-sourced-format-tbd,high
-jamfcheck,Jamfcheck,https://appcatalog.cloud/apps/jamfcheck,installomator,jamfcheck,dmg,yes,github,,"""$(versionFromGit txhaflaire JamfCheck)""",CLQKFNPCCP,,,,installomator-eligible,high
+jamfcheck,JamfCheck,https://appcatalog.cloud/apps/jamfcheck,installomator,jamfcheck,dmg,yes,github,txhaflaire/JamfCheck,"""$(versionFromGit txhaflaire JamfCheck)""",CLQKFNPCCP,,,,in-registry,high
 jamfdash,Jamfdash,https://appcatalog.cloud/apps/jamfdash,,,,,,,,,,,,manual-research,
 jamfhelper-constructor,Jamfhelper Constructor,https://appcatalog.cloud/apps/jamfhelper-constructor,,,,,,,,,,,,manual-research,
 jane-reader,Jane Reader,https://appcatalog.cloud/apps/jane-reader,,,,,,,,,,,,manual-research,
 joan-configurator,Joan Configurator,https://appcatalog.cloud/apps/joan-configurator,autopkg,,,,dynamic-scrape,,,,,,,autopkg-sourced-format-tbd,high
 joy,Joy,https://appcatalog.cloud/apps/joy,,,,,,,,,,,,manual-research,
 jpegmini-pro,Jpegmini Pro,https://appcatalog.cloud/apps/jpegmini-pro,,,,,,,,,,,,manual-research,
-jupyterlab,Jupyterlab,https://appcatalog.cloud/apps/jupyterlab,installomator,jupyterlab,dmg,yes,github,,"""$(versionFromGit jupyterlab jupyterlab-desktop)""",2YJ64GUAVW,,,,installomator-eligible,high
+jupyterlab,Jupyterlab,https://appcatalog.cloud/apps/jupyterlab,installomator,jupyterlab,dmg,review,github,jupyterlab/jupyterlab-desktop,"""$(versionFromGit jupyterlab jupyterlab-desktop)""",2YJ64GUAVW,,,,review: formula collision + arch-split; needs token jupyterlab-desktop + custom,high
 keeper-secrets-manager-cli,Keeper Secrets Manager Cli,https://appcatalog.cloud/apps/keeper-secrets-manager-cli,,,,,,,,,,,,manual-research,
 keepnotes,Keepnotes,https://appcatalog.cloud/apps/keepnotes,,,,,,,,,,,,manual-research,
 kelvin,Kelvin,https://appcatalog.cloud/apps/kelvin,,,,,,,,,,,,manual-research,
@@ -277,7 +277,7 @@ maglr,Maglr,https://appcatalog.cloud/apps/maglr,,,,,,,,,,,,manual-research,
 mailvault,Mailvault,https://appcatalog.cloud/apps/mailvault,autopkg,,,,github,GraphicMeat/mail-vault-app,,,,,,autopkg-sourced-format-tbd,high
 mamp-pro,Mamp Pro,https://appcatalog.cloud/apps/mamp-pro,,,,,,,,,,,,manual-research,
 mana-security,Mana Security,https://appcatalog.cloud/apps/mana-security,,,,,,,,,,,,manual-research,
-managed-app-schema-builder,Managed App Schema Builder,https://appcatalog.cloud/apps/managed-app-schema-builder,installomator,managedappschemabuilder,zip,yes,github,,"""$(versionFromGit BIG-RAT Managed-App-Schema-Builder)""",PS2F6S478M,,,,installomator-eligible,high
+managed-app-schema-builder,Managed App Schema Builder,https://appcatalog.cloud/apps/managed-app-schema-builder,installomator,managedappschemabuilder,zip,yes,github,BIG-RAT/Managed-App-Schema-Builder,"""$(versionFromGit BIG-RAT Managed-App-Schema-Builder)""",PS2F6S478M,,,,in-registry,high
 manycam,Manycam,https://appcatalog.cloud/apps/manycam,,,,,,,,,,,,manual-research,
 masv,Masv,https://appcatalog.cloud/apps/masv,installomator,masv,dmg,yes,direct,dl.massive.io,$(curl -fsL 'https://dl.massive.io/latest-mac.yml' | grep 'version:' | awk '{print $NF }'),VHKX7RCAY7,,,,installomator-eligible,high
 maxon-cinema-4d-2026,Maxon Cinema 4D 2026,https://appcatalog.cloud/apps/maxon-cinema-4d-2026,,,,,,,,,,,yes,manual-research,
@@ -291,16 +291,16 @@ microsoft-365-license-removal-tool,Microsoft 365 License Removal Tool,https://ap
 microsoft-advertising-editor,Microsoft Advertising Editor,https://appcatalog.cloud/apps/microsoft-advertising-editor,autopkg,,,,dynamic-scrape,,,,,,,autopkg-sourced-format-tbd,high
 microsoft-company-portal,Microsoft Company Portal,https://appcatalog.cloud/apps/microsoft-company-portal,installomator,microsoftcompanyportal,pkg,yes,sparkle/feed,,"$(curl -fsL $MAUSource | xmllint --xpath '//array/dict[1]/key[text()=""Update Version""]/following-sibling::string[1]/text()' - 2>/dev/null)",UBF8T346G9,,,,installomator-eligible,high
 microsoft-defender,Microsoft Defender,https://appcatalog.cloud/apps/microsoft-defender,autopkg,,,,dynamic-scrape,,,,,,,autopkg-sourced-format-tbd,high
-microsoft-powershell,Microsoft Powershell,https://appcatalog.cloud/apps/microsoft-powershell,installomator,microsoftpowershell,pkg,yes,github,,$(versionFromGit PowerShell PowerShell ),UBF8T346G9,,,,installomator-eligible,high
+microsoft-powershell,Microsoft Powershell,https://appcatalog.cloud/apps/microsoft-powershell,installomator,microsoftpowershell,pkg,yes,github,PowerShell/PowerShell,$(versionFromGit PowerShell PowerShell ),UBF8T346G9,,,,arch-split: source=custom pending,high
 microsoft-skype-for-business,Microsoft Skype For Business,https://appcatalog.cloud/apps/microsoft-skype-for-business,installomator,microsoftskypeforbusiness,pkg,yes,msft,go.microsoft.com,"$(curl -fsIL ""$downloadURL"" | grep -i location: | sed -E 's/.*\/[a-zA-Z]*-([0-9.]*)\..*/\1/g')",UBF8T346G9,,,,installomator-eligible,high
 mimiq,Mimiq,https://appcatalog.cloud/apps/mimiq,,,,,,,,,,,,manual-research,
 mindview-9,Mindview 9,https://appcatalog.cloud/apps/mindview-9,autopkg,,,,dynamic-scrape,link.matchware.com,,,,,,autopkg-sourced-format-tbd,high
 minimoon,Minimoon,https://appcatalog.cloud/apps/minimoon,,,,,,,,,,,,manual-research,
 mirrormask,Mirrormask,https://appcatalog.cloud/apps/mirrormask,,,,,,,,,,,,manual-research,
-mist-cli,Mist Cli,https://appcatalog.cloud/apps/mist-cli,installomator,mist-cli,pkg,yes,github,,"$(versionFromGit ""ninxsoft"" ""mist-cli"")",7K3HVCLV7Z,com.ninxsoft.pkg.mist-cli,( NONE ),,installomator-eligible,high
+mist-cli,Mist Cli,https://appcatalog.cloud/apps/mist-cli,installomator,mist-cli,pkg,review,github,ninxsoft/mist-cli,"$(versionFromGit ""ninxsoft"" ""mist-cli"")",7K3HVCLV7Z,com.ninxsoft.pkg.mist-cli,( NONE ),,review: homebrew-core formula collision (brew install mist-cli),high
 mister-horse-product-manager,Mister Horse Product Manager,https://appcatalog.cloud/apps/mister-horse-product-manager,,,,,,,,,,,,manual-research,
 mixpad,Mixpad,https://appcatalog.cloud/apps/mixpad,,,,,,,,,,,,manual-research,
-mobile-to-local,Mobile To Local,https://appcatalog.cloud/apps/mobile-to-local,installomator,mobiletolocal,zip,yes,github,,"""$(versionFromGit BIG-RAT mobile_to_local)""",PS2F6S478M,,,,installomator-eligible,high
+mobile-to-local,Mobile to Local,https://appcatalog.cloud/apps/mobile-to-local,installomator,mobiletolocal,zip,yes,github,BIG-RAT/mobile_to_local,"""$(versionFromGit BIG-RAT mobile_to_local)""",PS2F6S478M,,,,in-registry,high
 modalfilemanager,Modalfilemanager,https://appcatalog.cloud/apps/modalfilemanager,,,,,,,,,,,,manual-research,
 monotype-connect,Monotype Connect,https://appcatalog.cloud/apps/monotype-connect,,,,,,,,,,,,manual-research,
 monsterwriter,Monsterwriter,https://appcatalog.cloud/apps/monsterwriter,,,,,,,,,,,,manual-research,
@@ -322,7 +322,7 @@ net-90,Net 90,https://appcatalog.cloud/apps/net-90,,,,,,,,,,,,manual-research,
 netbird,Netbird,https://appcatalog.cloud/apps/netbird,,,,,,,,,,,,manual-research,
 network-share-mounter,Network Share Mounter,https://appcatalog.cloud/apps/network-share-mounter,installomator,networksharemounter,pkg,yes,dynamic-scrape,gitlab.rrze.fau.de,$(curl -sfL https://gitlab.rrze.fau.de/api/v4/projects/506/releases | grep -o 'release-[0-9]\+\.[0-9]\+\.[0-9]\+' | grep -o '[0-9]\+\.[0-9]\+\.[0-9]\+' | head -n 1),C8F68RFW4L,de.fau.rrze.NetworkShareMounter,,,installomator-eligible,high
 nextai-translator,Nextai Translator,https://appcatalog.cloud/apps/nextai-translator,,,,,,,,,,,,manual-research,
-nextcloud-desktop-client,Nextcloud Desktop Client,https://appcatalog.cloud/apps/nextcloud-desktop-client,installomator,nextcloud,pkg,yes,github,,$(versionFromGit nextcloud-releases desktop),NKUJUXUJ3B,,,,installomator-eligible,high
+nextcloud-desktop-client,Nextcloud Desktop Client,https://appcatalog.cloud/apps/nextcloud-desktop-client,installomator,nextcloud,pkg,review,github,nextcloud-releases/desktop,$(versionFromGit nextcloud-releases desktop),NKUJUXUJ3B,,,,review: duplicate of existing cask 'nextcloud',high
 nextpad,Nextpad,https://appcatalog.cloud/apps/nextpad,,,,,,,,,,,,manual-research,
 nightowl,Nightowl,https://appcatalog.cloud/apps/nightowl,autopkg,,,,sparkle/feed,darkmenu.s3.amazonaws.com,,,,,,autopkg-sourced-format-tbd,high
 nirvana,Nirvana,https://appcatalog.cloud/apps/nirvana,,,,,,,,,,,,manual-research,
@@ -334,7 +334,7 @@ nvivo-14,Nvivo 14,https://appcatalog.cloud/apps/nvivo-14,installomator,nvivo14,d
 nvivo-15,Nvivo 15,https://appcatalog.cloud/apps/nvivo-15,installomator,nvivo15,dmg,yes,direct,download.qsrinternational.com,"$(curl -fsIL ""${downloadURL}"" | grep -i ""^location"" | awk '{print $2}' | awk -F'/' '{ print $6 }' | cut -d ""."" -f1-3)",8F4S7H8S59,,"( NVivo NVivoHelper ""Nvivo 15"" )",yes,installomator-eligible,high
 obd-auto-doctor,Obd Auto Doctor,https://appcatalog.cloud/apps/obd-auto-doctor,,,,,,,,,,,,manual-research,
 object-info,Object Info,https://appcatalog.cloud/apps/object-info,,,,,,,,,,,,manual-research,
-obs-studio,Obs Studio,https://appcatalog.cloud/apps/obs-studio,installomator,obs,dmg,yes,github,,$(versionFromGit obsproject obs-studio ),2MMRE5MTB8,,,,installomator-eligible,high
+obs-studio,Obs Studio,https://appcatalog.cloud/apps/obs-studio,installomator,obs,dmg,review,github,obsproject/obs-studio,$(versionFromGit obsproject obs-studio ),2MMRE5MTB8,,,,review: duplicate of existing cask 'obs',high
 offshoot,Offshoot,https://appcatalog.cloud/apps/offshoot,,,,,,,,,,,,manual-research,
 okiocam-snapshot-and-recorder,Okiocam Snapshot And Recorder,https://appcatalog.cloud/apps/okiocam-snapshot-and-recorder,,,,,,,,,,,,manual-research,
 ollamaspring,Ollamaspring,https://appcatalog.cloud/apps/ollamaspring,,,,,,,,,,,,manual-research,
@@ -365,7 +365,7 @@ peazip,Peazip,https://appcatalog.cloud/apps/peazip,,,,,,,,,,,,manual-research,
 pgmagic,Pgmagic,https://appcatalog.cloud/apps/pgmagic,,,,,,,,,,,,manual-research,
 photos-workbench,Photos Workbench,https://appcatalog.cloud/apps/photos-workbench,,,,,,,,,,,,manual-research,
 phraseexpress,Phraseexpress,https://appcatalog.cloud/apps/phraseexpress,autopkg,,,,dynamic-scrape,www.phraseexpress.com,,,,,,autopkg-sourced-format-tbd,high
-pique,Pique,https://appcatalog.cloud/apps/pique,installomator,pique,pkg,yes,github,,$(versionFromGit macadmins pique ),T4SK8ZXCXG,io.macadmins.Pique,,,installomator-eligible,high
+pique,Pique,https://appcatalog.cloud/apps/pique,installomator,pique,pkg,yes,github,macadmins/pique,$(versionFromGit macadmins pique ),T4SK8ZXCXG,io.macadmins.Pique,,,in-registry,high
 pix,Pix,https://appcatalog.cloud/apps/pix,,,,,,,,,,,,manual-research,
 pix-3,Pix 3,https://appcatalog.cloud/apps/pix-3,autopkg,,,,dynamic-scrape,,,,,,,autopkg-sourced-format-tbd,high
 pixillion,Pixillion,https://appcatalog.cloud/apps/pixillion,,,,,,,,,,,,manual-research,
@@ -456,7 +456,7 @@ supercorners,Supercorners,https://appcatalog.cloud/apps/supercorners,,,,,,,,,,,,
 surfdrive,Surfdrive,https://appcatalog.cloud/apps/surfdrive,installomator,surfdrive,pkg,yes,dynamic-scrape,servicedesk.surf.nl,"$(curl -fs https://servicedesk.surf.nl/wiki/spaces/WIKI/pages/74225443/Desktop+client+login|grep -Eo ""(http|https)://[a-zA-Z0-9./?=_%:-]*"" | grep pkg | grep arm |cut -d -f2)",4AP2STM4H5,,"( ""surfdrive"" )",,installomator-eligible,high
 swiftcord,Swiftcord,https://appcatalog.cloud/apps/swiftcord,,,,,,,,,,,,manual-research,
 swiftguard,Swiftguard,https://appcatalog.cloud/apps/swiftguard,,,,,,,,,,,,manual-research,
-sym-helper,Sym Helper,https://appcatalog.cloud/apps/sym-helper,installomator,symhelper,zip,yes,github,,"""$(versionFromGit setup-your-mac SYM-Helper)""",PS2F6S478M,,,,installomator-eligible,high
+sym-helper,SYM-Helper,https://appcatalog.cloud/apps/sym-helper,installomator,symhelper,zip,yes,github,setup-your-mac/SYM-Helper,"""$(versionFromGit setup-your-mac SYM-Helper)""",PS2F6S478M,,,,in-registry,high
 synology-active-backup-for-business-agent,Synology Active Backup For Business Agent,https://appcatalog.cloud/apps/synology-active-backup-for-business-agent,installomator,synologyactivebackupforbusinessagent,pkgInDmg,yes-nested,dynamic-scrape,archive.synology.com,"$(curl -sf https://archive.synology.com/download/Utility/ActiveBackupBusinessAgent | grep -m 1 /download/Utility/ActiveBackupBusinessAgent/ | sed ""s|.*>\(.*\)<.*|\\1|"" | sed ""s#.*-\(\)#\1#"")",X85BAK35Y4,com.synology.activebackup-agent,,,installomator-nested-verify,high
 synology-drive-client,Synology Drive Client,https://appcatalog.cloud/apps/synology-drive-client,installomator,synologydriveclient,pkgInDmg,yes-nested,direct,global.download.synology.com,"""$( echo $appFullVersion | sed ""s|.*-\(\)|\\1|"" )""",X85BAK35Y4,,,,installomator-nested-verify,high
 talkdesk,Talkdesk,https://appcatalog.cloud/apps/talkdesk,,,,,,,,,,,,manual-research,
@@ -485,7 +485,7 @@ universal-type-client,Universal Type Client,https://appcatalog.cloud/apps/univer
 upaste,Upaste,https://appcatalog.cloud/apps/upaste,,,,,,,,,,,,manual-research,
 usb-network-gate,Usb Network Gate,https://appcatalog.cloud/apps/usb-network-gate,,,,,,,,,,,,manual-research,
 usher,Usher,https://appcatalog.cloud/apps/usher,autopkg,,,,sparkle/feed,manytricks.com,,,,,,autopkg-sourced-format-tbd,high
-utiluti,Utiluti,https://appcatalog.cloud/apps/utiluti,installomator,utiluti,pkg,yes,github,,"$(versionFromGit ""scriptingosx"" ""utiluti"")",JME5BW3F3R,com.scriptingosx.utiluti,( NONE ),,installomator-eligible,high
+utiluti,utiluti,https://appcatalog.cloud/apps/utiluti,installomator,utiluti,pkg,yes,github,scriptingosx/utiluti,"$(versionFromGit ""scriptingosx"" ""utiluti"")",JME5BW3F3R,com.scriptingosx.utiluti,( NONE ),,in-registry,high
 utm-coordinate-converter,Utm Coordinate Converter,https://appcatalog.cloud/apps/utm-coordinate-converter,,,,,,,,,,,,manual-research,
 vagon,Vagon,https://appcatalog.cloud/apps/vagon,,,,,,,,,,,,manual-research,
 vectoraster,Vectoraster,https://appcatalog.cloud/apps/vectoraster,,,,,,,,,,,,manual-research,
@@ -497,7 +497,7 @@ vidmore-player,Vidmore Player,https://appcatalog.cloud/apps/vidmore-player,,,,,,
 vidmore-screen-recorder,Vidmore Screen Recorder,https://appcatalog.cloud/apps/vidmore-screen-recorder,,,,,,,,,,,,manual-research,
 vidmore-video-enhancer,Vidmore Video Enhancer,https://appcatalog.cloud/apps/vidmore-video-enhancer,,,,,,,,,,,,manual-research,
 viper-ftp,Viper Ftp,https://appcatalog.cloud/apps/viper-ftp,,,,,,,,,,,,manual-research,
-visualz,Visualz,https://appcatalog.cloud/apps/visualz,installomator,visualz,dmg,yes,github,,"""$(versionFromGit madchops1 visualz-releases)""",6RLU6426R3,,,,installomator-eligible,high
+visualz,Visualz,https://appcatalog.cloud/apps/visualz,installomator,visualz,dmg,yes,github,madchops1/visualz-releases,"""$(versionFromGit madchops1 visualz-releases)""",6RLU6426R3,,,,arch-split: source=custom pending,high
 vivi,Vivi,https://appcatalog.cloud/apps/vivi,installomator,vivi,pkg,yes,dynamic-scrape,api.vivi.io,"$(curl -fsIL https://api.vivi.io/mac | grep -i ""^location"" | awk ""{print $2}"" | sed -E ""s/.*\/[a-zA-Z]*-([0-9.]*)\..*/\1/g"")",3NRCUJ8TJC,au.com.viviaustralia.mac,,,installomator-eligible,high
 vocal,Vocal,https://appcatalog.cloud/apps/vocal,,,,,,,,,,,,manual-research,
 voiceedge,Voiceedge,https://appcatalog.cloud/apps/voiceedge,,,,,,,,,,,,manual-research,

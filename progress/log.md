@@ -20,3 +20,16 @@
 - Phase 1 has **not** started — awaiting the go-ahead and any further skills.
 
 `sourced 192/533 | in-registry 0 | dryrun-clean 0 | needs-me: remaining skills + a macOS host for DRYRUN (or confirm you'll run DRYRUN on your Mac), then say "go" for Phase 1`
+
+## 2026-06-09 — Phase 2: github_tag batch (14 authored)
+
+- Resolved all 24 GitHub-class eligible apps deterministically (repo from Installomator
+  `downloadURLFromGit`, tag via `releases/latest` redirect, assets via `expanded_assets`).
+- Authored **14** clean single-asset `github_tag` rows into `scripts/cask-master.sh`
+  (statically verified; **not** DRYRUN'd — needs a Mac).
+- Excluded: `dockutil`,`mist-cli`,`container`,`jupyterlab` (homebrew-core formula collision);
+  `obs-studio`,`nextcloud-desktop-client` (duplicate existing casks); `homebrew` (bogus) → review/no.
+- Arch-split pending custom: `apache-netbeans-15`,`microsoft-powershell`,`visualz`.
+- Fixed `airbattery` installer_type zip→dmg (master-list error); filled GitHub repos into `source_detail`.
+
+`sourced 192/533 | in-registry 14 | dryrun-clean 0 | needs-me: DRYRUN the 14 on your Mac; then I continue with electron/msft/direct batches + the 341`

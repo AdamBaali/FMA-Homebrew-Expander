@@ -106,6 +106,22 @@ read -r -d '' REGISTRY <<'TABLE' || true
 
 # ---- your apps below ----
 
+# ---- github_tag batch (auto-generated; verify on Mac with DRYRUN) ----
+airbattery | AirBattery | Monitors battery levels of nearby Apple and Bluetooth devices | dmg | github_tag | https://github.com/lihaoyun6/AirBattery | repo=lihaoyun6/AirBattery;asset=AirBattery_v{v}.dmg
+backgrounds | Backgrounds | Sets the desktop picture from a configuration profile | pkg | github_tag | https://github.com/SAP/backgrounds | repo=SAP/backgrounds;asset=Backgrounds_{v}.pkg
+elevate24 | Elevate24 | Manages privileged access requests with monitoring and reporting | pkg | github_tag | https://github.com/Jigsaw24/Elevate24 | repo=Jigsaw24/Elevate24;asset=Elevate24-{v}.pkg
+escrow-buddy | Escrow Buddy | Escrows FileVault recovery keys at the login window | pkg | github_tag | https://github.com/macadmins/escrow-buddy | repo=macadmins/escrow-buddy;asset=Escrow.Buddy-{v}.pkg
+icons | Icons | Generates icon image sets from a single source image | pkg | github_tag | https://github.com/SAP/macOS-icon-generator | repo=SAP/macOS-icon-generator;asset=Icons_{v}.pkg
+jamf-pppc-utility | PPPC Utility | Builds privacy preferences policy control profiles | zip | github_tag | https://github.com/jamf/PPPC-Utility | repo=jamf/PPPC-Utility;asset=PPPC-Utility.zip
+jamf-printer-manager | Jamf Printer Manager | Configures and deploys printers to managed devices | zip | github_tag | https://github.com/jamf/jamf-printer-manager | repo=jamf/jamf-printer-manager;asset=Jamf.Printer.Manager.zip
+jamf-reenroller | ReEnroller | Re-enrolls devices into a management server | zip | github_tag | https://github.com/jamf/ReEnroller | repo=jamf/ReEnroller;asset=ReEnroller.zip
+jamfcheck | JamfCheck | Audits Jamf Pro settings for security misconfigurations | dmg | github_tag | https://github.com/txhaflaire/JamfCheck | repo=txhaflaire/JamfCheck;asset=JamfCheck.dmg
+managed-app-schema-builder | Managed App Schema Builder | Builds managed app configuration schemas | zip | github_tag | https://github.com/BIG-RAT/Managed-App-Schema-Builder | repo=BIG-RAT/Managed-App-Schema-Builder;asset=Managed.App.Schema.Builder.zip
+mobile-to-local | Mobile to Local | Converts mobile accounts to local user accounts | zip | github_tag | https://github.com/BIG-RAT/mobile_to_local | repo=BIG-RAT/mobile_to_local;asset=Mobile.to.Local.zip
+pique | Pique | Quick Look previews with syntax highlighting for configuration files | pkg | github_tag | https://github.com/macadmins/pique | repo=macadmins/pique;asset=Pique-{v}.pkg
+sym-helper | SYM-Helper | Generates deployment scripts for the Setup Your Mac workflow | zip | github_tag | https://github.com/setup-your-mac/SYM-Helper | repo=setup-your-mac/SYM-Helper;asset=SYM-Helper.zip
+utiluti | utiluti | Command-line tool to manage default apps and URL handlers | pkg | github_tag | https://github.com/scriptingosx/utiluti | repo=scriptingosx/utiluti;asset=utiluti-{v}.pkg
+
 TABLE
 
 # ----------------------------------------------------------------------------

@@ -1,11 +1,6 @@
 # Readiness — registry & review/ineligible
 
-This is the Phase 3 deliverable table. It will hold **every registry app** (token, source type,
-DRYRUN result) once Phase 2 fills `scripts/cask-master.sh`, plus the apps marked review/ineligible
-with the reason. Right now the registry is empty (Phase 1/2 not yet run), so this records the known
-baseline only.
-
-_Last updated: 2026-06-09 (Phase 0)._
+_Last updated: 2026-06-09 (Phase 2 — github_tag batch)._
 
 ## Summary
 
@@ -13,35 +8,57 @@ _Last updated: 2026-06-09 (Phase 0)._
 |---|---|
 | Total apps | 533 |
 | Sourced | 192 |
-| Unsourced (worklist to do) | 341 |
-| Registry-ready (eligible & high/med confidence) | 118 |
-| Eligible but low-confidence (verify first) | 1 |
-| Review / ineligible | 6 |
+| Eligible (yes/yes-nested & high/med) | 111 |
+| **In REGISTRY (authored)** | **14** |
+| Eligible remaining to author | 97 |
+| Review / ineligible | 13 |
 | AutoPkg rows needing installer-type classification | 67 |
-| **In REGISTRY** | **0** (Phase 2 pending) |
-| **DRYRUN-clean** | **0** (needs macOS) |
+| **DRYRUN-clean** | **0** (requires macOS) |
 
-## Registry apps (token | source | DRYRUN)
+Remaining eligible by source_class: `{'direct': 58, 'unknown': 5, 'github': 3, 'sparkle/feed': 7, 'dynamic-scrape': 23, 'msft': 1}`
 
-_None yet — populated in Phase 2 as `scripts/cask-master.sh` REGISTRY rows are added and DRYRUN-validated on a Mac._
+## Registry apps (token | source | artifact | DRYRUN)
 
-| token | source type | artifact | DRYRUN result |
+All statically verified (repo + latest-release redirect + single macOS asset + `{v}` templating + no token collision). **Not yet DRYRUN-validated** — run `DRYRUN=1 bash scripts/cask-master.sh` on a Mac.
+
+| token | source | artifact | DRYRUN result |
 |---|---|---|---|
-| _(pending)_ | | | |
+| `airbattery` | github_tag | dmg | ⏳ pending (run DRYRUN on Mac) |
+| `backgrounds` | github_tag | pkg | ⏳ pending (run DRYRUN on Mac) |
+| `elevate24` | github_tag | pkg | ⏳ pending (run DRYRUN on Mac) |
+| `escrow-buddy` | github_tag | pkg | ⏳ pending (run DRYRUN on Mac) |
+| `icons` | github_tag | pkg | ⏳ pending (run DRYRUN on Mac) |
+| `jamf-pppc-utility` | github_tag | zip | ⏳ pending (run DRYRUN on Mac) |
+| `jamf-printer-manager` | github_tag | zip | ⏳ pending (run DRYRUN on Mac) |
+| `jamf-reenroller` | github_tag | zip | ⏳ pending (run DRYRUN on Mac) |
+| `jamfcheck` | github_tag | dmg | ⏳ pending (run DRYRUN on Mac) |
+| `managed-app-schema-builder` | github_tag | zip | ⏳ pending (run DRYRUN on Mac) |
+| `mobile-to-local` | github_tag | zip | ⏳ pending (run DRYRUN on Mac) |
+| `pique` | github_tag | pkg | ⏳ pending (run DRYRUN on Mac) |
+| `sym-helper` | github_tag | zip | ⏳ pending (run DRYRUN on Mac) |
+| `utiluti` | github_tag | pkg | ⏳ pending (run DRYRUN on Mac) |
+
+> Note: `pique` is a beta-only release (`0.1.0b5`) — fine for a documented exception, flag at PR time.
 
 ## Review / ineligible (do not author)
 
 | token | verdict | reason |
 |---|---|---|
-| `2do` | no | Mac App Store only (`com.guidedways.TodoMac`) — no direct download |
-| `acronis-cyber-protect-connect-client` | review | vendor portal (acronis.com / Nulana Remotix); confirm a direct installer |
-| `adobe-acrobat` | review | Creative Cloud / enterprise distribution; not a plain versioned download |
-| `adobe-dynamic-media-classic` | review | Adobe enterprise / Scene7; gated |
-| `appgate-sdp` | review | portal-gated download (appgate.com) |
-| `atera-agent` | review | console-gated agent (atera.com) — per-tenant installer |
+| `2do` | no | Mac App Store only (com.guidedways.TodoMac) |
+| `acronis-cyber-protect-connect-client` | review | vendor portal (acronis.com / Nulana Remotix) |
+| `adobe-acrobat` | review | Creative Cloud / enterprise distribution |
+| `adobe-dynamic-media-classic` | review | Adobe enterprise / Scene7, gated |
+| `appgate-sdp` | review | portal-gated download |
+| `atera-agent` | review | console-gated per-tenant agent |
+| `container` | review | homebrew-core formula collision; apple CLI runtime |
+| `dockutil` | review | homebrew-core formula collision (brew install dockutil) |
+| `homebrew` | no | bogus: Homebrew itself, not a cask |
+| `jupyterlab` | review | formula collision + arch-split; needs token jupyterlab-desktop + custom |
+| `mist-cli` | review | homebrew-core formula collision (brew install mist-cli) |
+| `nextcloud-desktop-client` | review | duplicate of existing cask 'nextcloud' |
+| `obs-studio` | review | duplicate of existing cask 'obs' |
 
-## Eligible but low-confidence (verify before authoring)
+## Arch-split GitHub apps — pending `source=custom`
 
-| token | type | source | note |
-|---|---|---|---|
-| `adobe-acrobat-cleaner-tool` | dmg | direct (adobe.com) | standalone cleaner; confirm the live versioned URL before adding to the registry |
+Two-architecture downloads (`github_tag` is single-asset only): `apache-netbeans-15` (also version-pin naming), `microsoft-powershell`, `visualz`. Author later as custom resolver/writer.
+
