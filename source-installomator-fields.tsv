@@ -1,0 +1,109 @@
+-e installomator_label	installer_type	downloadURL	appNewVersion	expectedTeamID	packageID	blockingProcesses
+amazoncorretto11jdk	pkg					
+amazoncorretto17jdk	pkg					
+amazoncorretto21jdk	pkg					
+amazoncorretto22jdk	pkg					
+amazoncorretto8jdk	pkg					
+anaconda	pkg	"https://repo.anaconda.com/archive/$archiveName"	$( awk -F'-' '{print $2}' <<< "$archiveName" )	Z5788K4JT7	com.anaconda.io	( "Anaconda-Navigator.app" )
+apachenetbeans	pkg	"$(downloadURLFromGit Friends-of-Apache-NetBeans netbeans-installers)"	$(curl -sLI "https://github.com/Friends-of-Apache-NetBeans/netbeans-installers/releases/latest" | grep -i "^location" | tr "/" "\n" | tail -1 | sed -E 's/v([0-9]+).*/\1/')	44YNN9Q525		
+appcleaner	zip	$(curl -fs https://freemacsoft.net/appcleaner/Updates.xml | xpath '//rss/channel/item[last()]/enclosure/@url' 2>/dev/null | tr " " "\n" | sort | tail -1 | cut -d '"' -f 2)	$(curl -fsL "https://freemacsoft.net/appcleaner/Updates.xml" | xpath '//rss/channel/item[last()]/enclosure/@sparkle:shortVersionString' 2>/dev/null  | cut -d '"' -f 2)	X85ZX835W9		
+atlassiancompanion	dmg	$(curl -fsL https://confluence.atlassian.com/display/DOC/Install+Atlassian+Companion | sed -nE 's/.*(https:.*\.dmg)\".*/\1/p')	$(getJSONValue "$(curl -fsL https://update-nucleus.atlassian.com/Atlassian-Companion/291cb34fe2296e5fb82b83a04704c9b4/darwin/x64/RELEASES.json)" "currentRelease" )	UPXU4CQZ5P		
+automounter	dmg	"https://www.pixeleyes.co.nz/automounter/AutoMounter.dmg"	"$( curl -fs https://www.pixeleyes.co.nz/automounter/version )"	UKWABN4MGL		
+awscli2	pkg	"https://awscli.amazonaws.com/AWSCLIV2.pkg"	$( curl -fs "https://raw.githubusercontent.com/aws/aws-cli/v2/CHANGELOG.rst" | grep -i "CHANGELOG" -a4 | grep "[0-9.]" )	94KV3E626L	com.amazon.aws.cli2	
+backgrounds	pkg	"$(downloadURLFromGit SAP backgrounds)"	"$(versionFromGit SAP backgrounds)"	7R5ZEU67FQ		
+beamstudio	dmg	"$( curl -s "https://id.flux3dp.com/api/check-update?key=beamstudio-stable" | tr '"' '\n' | grep -m1 dmg )"	"$( echo "$downloadURL" | cut -d '+' -f 3 | cut -d '.' -f 1-3 )"	4Y92JWKV94		
+brosix	pkg	"https://www.brosix.com/downloads/builds/official/Brosix.pkg"	""	TA6P23NW8H		
+cakebrew	zip	$(curl -fsL "https://www.cakebrew.com/appcast/profileInfo.php" | xpath '//rss/channel/item[1]/enclosure/@url' 2>/dev/null  | cut -d '"' -f 2)	$( curl -fsL "https://www.cakebrew.com/appcast/profileInfo.php" | xpath '//rss/channel/item[1]/enclosure/@sparkle:shortVersionString' 2>/dev/null | cut -d '"' -f 2 )	R85D3K8ATT		
+captureone	dmg	$(echo "${captureoneSparkle}" | xmllint --xpath "string(//item[1]/enclosure/@url)" - 2>/dev/null)	$(echo "${downloadURL}" | sed -E 's/.*Mac\.([0-9.]+)\.dmg/\1/')	5WTDB5F65L		
+catoclient	pkg	"https://clientdownload.catonetworks.com/public/clients/CatoClient.pkg"	$(curl -Ls -o /dev/null -w %{url_effective} "${downloadURL}" | sed -E 's/.*\/([0-9.]*)\/.*/\1/g' | awk -F '.' '{print $1 "." $2 "." $3}')	CKGSB8CH43		( "CatoClient" "CatoClientExtension" )
+cloudya	appInDmgInZip	"$(curl -fsL https://www.nfon.com/de/service/downloads | grep -i -E -o "https://cdn.cloudya.com/Cloudya-[.0-9]+-mac.zip")"	"$(curl -fsL https://www.nfon.com/de/service/downloads | grep -i -E -o "Cloudya Desktop App MAC [0-9.]*" | sed 's/^.*\ \([^ ]\{0,7\}\)$/\1/g' | head -n1)"	X26F74J8TH		
+code42	pkgInDmg	"https://download-preservation.code42.com/installs/agent/latest-mac.dmg"		9YV9435DHD		( NONE )
+container	pkg	"$(downloadURLFromGit apple container)"	"$(versionFromGit apple container)"	UPBK2H6LZM		
+cricutdesignspace	dmg	$(getJSONValue $(curl  -fsL "https://apis.cricut.com/desktopdownload/InstallerFile?shard=a&operatingSystem=osxnative&fileName=CricutDesignSpace-Install-v${appNewVersion}.dmg") "result")	$(getJSONValue "$cricutVersionJSON" "rolloutVersion")	25627ZFVT7		
+daylite	zip	"https://www.marketcircle.com/downloads/latest-daylite"	"$(curl -fs https://www.marketcircle.com/appcasts/daylite.xml | xpath '(//rss/channel/item/enclosure/@sparkle:shortVersionString)[1]' 2>/dev/null | cut -d '"' -f 2)"	GR26KTJYTV		
+dedoose	dmg	"https://downloads.dedoose.com/dedoose-app-releases/Dedoose-Mac.dmg"	$(curl -fsI https://downloads.dedoose.com/dedoose-app-releases/Dedoose-Mac.dmg | grep -i "^content-disposition:" | grep -o "v[0-9]\{1,\}\.[0-9]\{1,\}\.[0-9]\{1,\}" | sed 's/^v//')	9U74Q6K62X		
+depnotify	pkg	"https://files.jamfconnect.com/DEPNotify.pkg"		VRPY9KHGX6		
+windsurf	dmg	"$(curl -fsL "https://docs.devin.ai/desktop/releases" | grep -Eo 'https://[^"\]*-darwin-arm64-[0-9.]+\.dmg' | head -n 1)"	"$(basename "$downloadURL" .dmg | awk -F- '{print $NF}')"	83Z2LHX6XW		
+displaylinkmanager	pkg	"https://www.synaptics.com$(curl -sfL "https://www.synaptics.com${productPage}" | grep -o '/sites/default/files/exe_files/[^"]*\.pkg' | head -1)"	$(curl -sfL https://www.synaptics.com/products/displaylink-graphics/downloads/macos | grep -o 'DisplayLink%20Manager%20Graphics%20Connectivity[0-9.]*-Release' | head -1 | sed 's/DisplayLink%20Manager%20Graphics%20Connectivity//' | sed 's/-Release//')	73YQY62QM3		
+docker	dmg	"https://desktop.docker.com/mac/stable/arm64/Docker.dmg"	$( curl -fs "https://desktop.docker.com/mac/main/arm64/appcast.xml" | xpath '(//rss/channel/item/enclosure/@sparkle:shortVersionString)[last()]' 2>/dev/null | cut -d '"' -f2 )	9BNSXJN65R		( "Docker Desktop" )
+dockutil	pkg	$(downloadURLFromGit "kcrawford" "dockutil")	$(versionFromGit "kcrawford" "dockutil")	Z5J8CJBUWC	dockutil.cli.tool	( NONE )
+doctolib	dmg	"https://ddv-install.doctolib.fr/DoctolibProDesktop-latest-arm64.dmg"	""	84K7XVJ72Q		
+dragonframe2024	pkg	"https://www.dragonframe.com/download/Dragonframe_${appNewVersion}.pkg"	$(curl -s -A "User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/15.1 Safari/605.1.15" https://www.dragonframe.com/downloads/ | grep -o 'Dragonframe_2024\.[0-9]\+\.[0-9]\+\.pkg' | sed -E 's/Dragonframe_//; s/\.pkg$//' | head -n 1)	PG7SM8SD8M		
+dragonframe2025	pkg	"https://www.dragonframe.com/download/Dragonframe_${appNewVersion}.pkg"	$(curl -s -A "User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/15.1 Safari/605.1.15" https://www.dragonframe.com/downloads/ | grep -o 'Dragonframe [0-9]\+\.[0-9]\+\.[0-9]\+' | sed 's/Dragonframe //' | head -n 1)	PG7SM8SD8M		
+dragonframe5	pkg	"$( curl -s "https://www.dragonframe.com/downloads/" $curlOptions | tr '"' '\n' | grep -m1 "_5.*pkg" )"	"$( echo "$downloadURL" | cut -d '_' -f 2 | cut -d '.' -f 1-3 )"	PG7SM8SD8M	com.dzed.Dragonframe5	
+dstny	dmg	"https://soft.dstny.se/dstny_mac.dmg"		5RLWBLKGL2		
+elevate24	pkg	"$(downloadURLFromGit Jigsaw24 Elevate24)"	"$(versionFromGit Jigsaw24 Elevate24)"	BVDW99KYDU		
+eposconnect	pkg	$(curl -fs "https://www.eposaudio.com/en/dk/software/epos-connect" | tr '"' "\n" | grep -o "^https://www.eposaudio.*.pkg$")	$(echo "$downloadURL" | sed -E 's/.*_([0-9.]*).pkg/\1/' | cut -d "." -f4)	8956A7Y69J		
+escrowbuddy	pkg	$(downloadURLFromGit macadmins escrow-buddy )	$(versionFromGit macadmins escrow-buddy )	T4SK8ZXCXG	com.netflix.Escrow-Buddy	
+everweb	dmg	"https://www.ragesw.com/downloads/everweb/everweb.dmg"	$(curl -fs https://www.everwebapp.com/change-log/index.html | grep -oE "[0-9]+\.[0-9]+\.[0-9]+" | head -n 1)	A95T4TFRZ2		
+finaldraft12	appInDmgInZip	"https://www.finaldraft.com"	$(echo $downloadURL | cut -d 't' -f5 | cut -f1 -d "M")	7XUZ8R5736		
+finaldraft13	appInDmgInZip	"https://www.finaldraft.com$(curl -fs "https://www.finaldraft.com/support/install-final-draft/install-final-draft-13-macintosh/" | xmllint --html --format - 2>/dev/null | grep -o "/downloads/finaldraft.*.zip" | head -n 1)"	$(echo $downloadURL | cut -d 't' -f5 | cut -f1 -d "M")	7XUZ8R5736		
+flowjo	dmg	"$(curl -fs "https://www.flowjo.com/flowjo/download" | grep -i -o -E "https.*\.dmg" | grep -m 1 'arm64')"	$(echo "${downloadURL}" | cut -d "-" -f2 )	C79HU5AD9V		
+grammarly	dmg	"https://download-mac.grammarly.com/Grammarly.dmg"		W8F64X92K3	com.grammarly.ProjectLlama	
+grasshopper	dmg	"https://dl.grasshopper.com/Grasshopper.dmg"		KD6L2PTK2Q		
+guardianbrowser	dmg	"https://production-archimedes-secure-browser-artifacts.s3.amazonaws.com/latest/mac-x64/guardian-browser-x64.dmg"		7TCATJSU2Y		
+homebrew	pkg	"$(downloadURLFromGit Homebrew brew)"	"$(versionFromGit Homebrew brew)"	927JGANW46	sh.brew.homebrew	
+huddly	dmg	"https://app.huddly.com/download/latest/osx"	"$(curl -fsIL "${downloadURL}" | grep -i '^content-disposition' | sed -E 's/.*-([0-9]+\.[0-9]+\.[0-9]+)-.*/\1/g')"	J659R47HZT		
+hudlsportscode	appInDmgInZip	"https://sportscode64-updates.s3.amazonaws.com/PublicReleaseDmgs/HudlSportscode-$appNewVersion.dmg.zip"	$(curl -fs https://www.hudl.com/downloads/elite | grep -A 1 "Download Hudl Sportscode" | grep -o -e "[0-9.]*")	4M6T2C723P		
+hudlstudio	dmg	"https://studio-releases.s3.amazonaws.com/Studio-$appNewVersion.dmg"	$(curl -fs https://www.hudl.com/downloads/elite | grep -A 1 "Download Studio" | grep -o -e "[0-9.]*")	2YLQ7PASUE		
+icons	pkg	$(downloadURLFromGit SAP macOS-icon-generator )	$(versionFromGit SAP macOS-icon-generator )	7R5ZEU67FQ		
+ipswupdater	zip	$(getJSONValue "$ipswupdaterVersions" "[0].url")	$(getJSONValue "$ipswupdaterVersions" "[0].version")	YRW6NUGA63		
+jamfcheck	dmg	"$(downloadURLFromGit txhaflaire JamfCheck)"	"$(versionFromGit txhaflaire JamfCheck)"	CLQKFNPCCP		
+jamfconnectconfiguration	dmg	"https://files.jamfconnect.com/JamfConnect.dmg"	$(curl -fsIL "${downloadURL}" | grep "x-amz-meta-version" | grep -o "[0-9.].*[0-9.].*[0-9]")	483DWKW443		
+jamfconnectlogin	pkgInDmg	"https://files.jamfconnect.com/JamfConnect.dmg"	$(curl -fsIL "${downloadURL}" | grep "x-amz-meta-version" | grep -o "[0-9.].*[0-9.].*[0-9]")	483DWKW443	com.jamf.connect.login	
+jamfpppcutility	zip	$(downloadURLFromGit jamf PPPC-Utility)	$(versionFromGit jamf PPPC-Utility)	483DWKW443		
+jamfprintermanager	zip	"$(downloadURLFromGit jamf jamf-printer-manager)"	"$(versionFromGit jamf jamf-printer-manager)"	483DWKW443		
+jamfreenroller	zip	$(downloadURLFromGit jamf ReEnroller)		PS2F6S478M		
+jupyterlab	dmg	"$(downloadURLFromGit jupyterlab jupyterlab-desktop)"	"$(versionFromGit jupyterlab jupyterlab-desktop)"	2YJ64GUAVW		
+lgcalibrationstudio	pkgInZip	"https://gscs-b2c.lge.com/downloadFile?fileId=$fileID"	$(curl -sf "$releaseURL" | grep -m 1 "\[Mac\] LG Calibration Studio - version " | sed -E 's/.*\[Mac\] LG Calibration Studio - version ([^<]+)<\/p>.*/\1/')	5SKT5H4CPQ		
+lucidlink	pkg	"https://www.lucidlink.com/download/latest/osx/stable"	$(curl -fsIL -H "Referer: https://www.lucidlink.com/download/latest/osx/stable" "$downloadURL" | awk 'BEGIN{IGNORECASE=1}/^location:/{gsub("\r",""); print $2}' | tail -n 1 | sed -E 's|.*/lucid-([0-9]+(\.[0-9]+)+)\.pkg$|\1|')	Y4KMJPU2B4		
+lunadisplay	dmg	"https://downloads.astropad.com/luna/mac/latest"	$(curl -sI "${downloadURL}" | grep -o -E 'location:.*$' | grep -o -E '\d+\.\d+\.\d+\.\d+')	8356ZZ8Y5K		
+managedappschemabuilder	zip	"$(downloadURLFromGit BIG-RAT Managed-App-Schema-Builder)"	"$(versionFromGit BIG-RAT Managed-App-Schema-Builder)"	PS2F6S478M		
+masv	dmg	"https://dl.massive.io/MASV.dmg"	$(curl -fsL 'https://dl.massive.io/latest-mac.yml' | grep 'version:' | awk '{print $NF }')	VHKX7RCAY7		
+mestrenova	dmg	"https://mestrelab.com/downloads/mnova/mac/MestReNova-$mestrenovaDownloadVersion.dmg"	$(echo "$mestrenovaDownloadVersion" | cut -d '-' -f1)	DH5EKRR34H		
+microsoftcompanyportal	pkg	$(curl -fsL $MAUSource | xmllint --xpath '//array/dict[1]/key[text()="Location"]/following-sibling::string[1]/text()' - | sed 's/-Upgrade/-Installer/' 2>/dev/null)	$(curl -fsL $MAUSource | xmllint --xpath '//array/dict[1]/key[text()="Update Version"]/following-sibling::string[1]/text()' - 2>/dev/null)	UBF8T346G9		
+microsoftpowershell	pkg	$(downloadURLFromGit PowerShell PowerShell )	$(versionFromGit PowerShell PowerShell )	UBF8T346G9		
+microsoftskypeforbusiness	pkg	"https://go.microsoft.com/fwlink/?linkid=832978"	$(curl -fsIL "$downloadURL" | grep -i location: | sed -E 's/.*\/[a-zA-Z]*-([0-9.]*)\..*/\1/g')	UBF8T346G9		
+mist-cli	pkg	$(downloadURLFromGit "ninxsoft" "mist-cli")	$(versionFromGit "ninxsoft" "mist-cli")	7K3HVCLV7Z	com.ninxsoft.pkg.mist-cli	( NONE )
+mobiletolocal	zip	"$(downloadURLFromGit BIG-RAT mobile_to_local)"	"$(versionFromGit BIG-RAT mobile_to_local)"	PS2F6S478M		
+networksharemounter	pkg	$(curl -sfL "https://gitlab.rrze.fau.de/api/v4/projects/506/releases/release-$appNewVersion/assets/links/" | grep -Eo '(http|https)://[a-zA-Z0-9./?=_%:-]*.pkg' | head -n 1)	$(curl -sfL https://gitlab.rrze.fau.de/api/v4/projects/506/releases | grep -o 'release-[0-9]\+\.[0-9]\+\.[0-9]\+' | grep -o '[0-9]\+\.[0-9]\+\.[0-9]\+' | head -n 1)	C8F68RFW4L	de.fau.rrze.NetworkShareMounter	
+nextcloud	pkg	$(downloadURLFromGit nextcloud-releases desktop)	$(versionFromGit nextcloud-releases desktop)	NKUJUXUJ3B		
+nodejs	pkg	"https://nodejs.org/dist/latest/node-$(curl -s -L https://nodejs.org/dist/latest/ | sed -nE 's|.*>node-(.*)\.pkg</a>.*|\1|p').pkg"	$(curl -s -L https://nodejs.org/dist/latest/ | sed -nE 's|.*>node-(.*)\.pkg</a>.*|\1|p')	HX7739G8FX		
+nvivo14	dmg	"https://download.qsrinternational.com/Software/NVivo14forMac/NVivo.dmg"	$(curl -fsIL "${downloadURL}" | grep -i "^location" | awk '{print $2}' | awk -F'/' '{ print $6 }' | cut -d "." -f1-3)	8F4S7H8S59		( NVivo NVivoHelper "Nvivo 14" )
+nvivo15	dmg	"https://download.qsrinternational.com/Software/NVivo15forMac/NVivo15.dmg"	$(curl -fsIL "${downloadURL}" | grep -i "^location" | awk '{print $2}' | awk -F'/' '{ print $6 }' | cut -d "." -f1-3)	8F4S7H8S59		( NVivo NVivoHelper "Nvivo 15" )
+obs	dmg	$(downloadURLFromGit obsproject obs-studio )	$(versionFromGit obsproject obs-studio )	2MMRE5MTB8		
+onscreencontrol	pkgInZip	"https://lmu.lge.com/ExternalService/onscreencontrol/mac/2.0/${downloadFile}"	$(echo $downloadFile | grep -o '[0-9].[0-9][0-9]')	5SKT5H4CPQ	com.LGSI.OnScreen-Control	
+particulars	pkg	"https://particulars.app/_downloads/Particulars-latest.pkg"	$(curl -fsI "${downloadURL}" | grep -i location | grep -oE "[0-9]+\.[0-9]+")	2Z25XDNP2X	net.glencode.Particulars	( NONE )
+pique	pkg	$(downloadURLFromGit macadmins pique )	$(versionFromGit macadmins pique )	T4SK8ZXCXG	io.macadmins.Pique	
+plantronicshub	pkgInDmg	"https://www.poly.com/content/dam/www/software/PlantronicsHubInstaller.dmg"	$(curl -fs "https://www.poly.com/in/en/support/knowledge-base/kb-article-page?lang=en_US&urlName=Hub-Release-Notes&type=Product_Information__kav" | grep -o "(*.*<span>)" | head -1 | cut -d "(" -f2 | sed 's/\<\/span\>//g' | cut -d "<" -f1)	SKWK2Q7JJV		
+polleverywhere	dmg	"https://polleverywhere-app.s3.amazonaws.com/mac-stable/$appNewVersion/pollev.dmg"	$(curl -fsL https://www.polleverywhere.com/app/releases/mac | grep h3 --max-count 1 | awk '{ gsub(/<\/?h3>/, ""); print }')	W48F3X5M8W		
+projectplace	dmg	"https://service.projectplace.com/client_apps/desktop/Projectplace-for-mac.dmg"		8333HW99E8		
+rhino7	dmg	$(echo "$sparkleFeed" | xpath '(//rss/channel/item/enclosure/@url)[1]' 2>/dev/null | cut -d '"' -f 2)	$(echo "$sparkleFeed" | xpath '(//rss/channel/item/enclosure/@sparkle:shortVersionString[1]' 2>/dev/null | cut -d '"' -f 2 | cut -d ' ' -f 1)	D6XDM4N99E		
+rhino8	dmg	$(echo "$sparkleFeed" | xpath '(//rss/channel/item/enclosure/@url)[1]' 2>/dev/null | cut -d '"' -f 2)	$(echo "$sparkleFeed" | xpath '(//rss/channel/item/enclosure/@sparkle:shortVersionString)[1]' 2>/dev/null | cut -d '"' -f 2 | cut -d ' ' -f 1)	D6XDM4N99E		
+screencloudplayer	dmg	$(curl -fs "https://screencloud.com/download" | sed -n 's/^.*"url":"\(https.*\.dmg\)".*$/\1/p')	$( echo $downloadURL | sed -e 's/.*\/ScreenCloud.*\-\([0-9.]*\)\.dmg/\1/g' )	3C4F953K6P		
+signiantapp	dmg	"https://updates.signiant.com/signiant_app/$(curl -fs "https://updates.signiant.com/signiant_app/signiant-app-info-mac.json" | grep -o '"file": *"[^"]*"' | awk -F '"' '{print $4}')"	"$(echo $downloadURL | sed -E 's/.*Signiant_App_([0-9]+(\.[0-9]+)*)\.dmg/\1/')"	U6ZZ4QLU4Q		
+sketchupviewer	dmg	"$(curl -Lfs https://www.sketchup.com/en/sketchup-viewer/downloads | grep -o 'https://download.sketchup.com/SketchUpViewer[0-9\-]*.dmg')"		J8PVMCY7KL		
+soundly	dmg	"https://storage.googleapis.com/soundlyapp/Soundly.dmg"		67Y6N7VTDG		
+splashtopsos	dmg	"https://download.splashtop.com/sos/SplashtopSOS.dmg"		CPQQ3AW49Y		
+strongdm	dmg	"https://app.strongdm.com/downloads/client/darwin"	$(curl -fsLIXGET "https://app.strongdm.com/downloads/client/darwin" | grep -i "^content-disposition" | sed -e 's/.*filename\=\"SDM\-\(.*\)\.dmg\".*/\1/')	W5HSYBBJGA		( "SDM" )
+surfdrive	pkg	$(curl -fs https://servicedesk.surf.nl/wiki/spaces/WIKI/pages/74225443/Desktop+client+login|grep -Eo "(http|https)://[a-zA-Z0-9./?=_%:-]*" | grep pkg | grep arm64)	$(curl -fs https://servicedesk.surf.nl/wiki/spaces/WIKI/pages/74225443/Desktop+client+login|grep -Eo "(http|https)://[a-zA-Z0-9./?=_%:-]*" | grep pkg | grep arm |cut -d -f2)	4AP2STM4H5		( "surfdrive" )
+symhelper	zip	"$(downloadURLFromGit setup-your-mac SYM-Helper)"	"$(versionFromGit setup-your-mac SYM-Helper)"	PS2F6S478M		
+synologyactivebackupforbusinessagent	pkgInDmg	$(appVersion=`curl -sf https://archive.synology.com/download/Utility/ActiveBackupBusinessAgent | grep -m 1 /download/Utility/ActiveBackupBusinessAgent/ | sed "s|.*>\(.*\)<.*|\\1|"` && appShortVersion=`sed 's#.*-\(\)#\1#' <<< $appVersion` && echo https://global.download.synology.com/download/Utility/ActiveBackupBusinessAgent/"$appVersion"/Mac/x86_64/Synology%20Active%20Backup%20for%20Business%20Agent-"$appVersion".dmg)	$(curl -sf https://archive.synology.com/download/Utility/ActiveBackupBusinessAgent | grep -m 1 /download/Utility/ActiveBackupBusinessAgent/ | sed "s|.*>\(.*\)<.*|\\1|" | sed "s#.*-\(\)#\1#")	X85BAK35Y4	com.synology.activebackup-agent	
+synologydriveclient	pkgInDmg	"https://global.download.synology.com/download/Utility/SynologyDriveClient/$appFullVersion/Mac/Installer/synology-drive-client-$appNewVersion.dmg"	"$( echo $appFullVersion | sed "s|.*-\(\)|\\1|" )"	X85BAK35Y4		
+teamwire	dmg	"https://desktop.teamwire.eu/download.php?platform=darwinArm64"	$(curl -fsI $downloadURL | grep -i 'Location' | cut -d ' ' -f2 | sed 's|.*dist/v\([^/]*\).*|\1|')	2JCSJ44B3U	eu.teamwire.app	
+things	zip	"https://culturedcode.com/things/download/"		JLMPQHK86H		
+trint	zip	"https://desktopapp.trint.com/latest/darwin/arm64/Trint.zip"	$(getJSONValue "$(curl -fsL https://desktopapp.trint.com/updates/darwin/arm64/RELEASES.json)" "currentRelease" )	4SN3PJXHG2		
+ultracompare	dmg	"https://downloads.ultraedit.com/main/uc/mac/UltraCompare.dmg"	""	2T4C9Y59FF		
+universaltypeclient	pkgInZip	https://bin.extensis.com/$( curl -fs https://www.extensis.com/support/universal-type-server-7/ | grep -o "UTC-[0-9].*M.zip" )	$(echo "$downloadURL" | awk -F'UTC-' '{split($2, a, "-M"); print a[1]}' | tr '-' '.')	J6MMHGD9D6		
+utiluti	pkg	$(downloadURLFromGit "scriptingosx" "utiluti")	$(versionFromGit "scriptingosx" "utiluti")	JME5BW3F3R	com.scriptingosx.utiluti	( NONE )
+visualz	dmg	"$(downloadURLFromGit madchops1 visualz-releases)"	"$(versionFromGit madchops1 visualz-releases)"	6RLU6426R3		
+vivi	pkg	$(curl -sf https://api.vivi.io/mac | grep -o '<a .*href=.*>' | sed -e 's/<a /\n<a /g' | sed -e 's/<a .*href=['"'"'"]//' -e 's/["'"'"'].*$//' -e '/^$/ d')	$(curl -fsIL https://api.vivi.io/mac | grep -i "^location" | awk "{print $2}" | sed -E "s/.*\/[a-zA-Z]*-([0-9.]*)\..*/\1/g")	3NRCUJ8TJC	au.com.viviaustralia.mac	
+vonagebusiness	dmg	"https://vbc-downloads.vonage.com/mac/VonageBusinessSetup.dmg"	$(curl -fs "https://s3.amazonaws.com/vbcdesktop.vonage.com/prod/mac/latest-mac.yml" | grep -i version | cut -w -f2)	E37FZSUGQP		
+workbrew	pkg	"https://console.workbrew.com/downloads/macos"	"$(curl -sIL https://console.workbrew.com/downloads/macos | grep -i "^content-disposition:" | grep -o '[0-9]\+\.[0-9]\+\.[0-9]\+')"	676JW3JDLF		
+xink	pkg	"https://downloads.xink.io/macos/pkg"	$(curl -fs "https://downloads.xink.io/macos/appcast" | xpath '(//rss/channel/item/enclosure/@sparkle:version)[1]' 2>/dev/null | head -1 | cut -d '"' -f 2)	F287823HVS	com.emailsignature.Xink	
+zerotier	pkg	"https://download.zerotier.com/dist/ZeroTier%20One.pkg"	$(versionFromGit zerotier ZeroTierOne )	8ZD9JUCZ4V	com.zerotier.pkg.ZeroTierOne	
+zohoworkdrivegenie	dmg	"https://www.zoho.com/workdrive/downloads/edit-tool/Zoho_WorkDrive_Genie.dmg"		TZ824L8Y37		
+zulujdk11	pkgInDmg	https://cdn.azul.com/zulu/bin/$(curl -fs "https://cdn.azul.com/zulu/bin/" | grep -Eio '">zulu11.*ca-jdk11.*x64.dmg(.*)' | cut -c3- | sed 's/<\/a>//' | sed -E 's/([0-9.]*)M//' | awk '{print $2 $1}' | sort | cut -c11- | tail -1)	$(echo "$downloadURL" | cut -d "-" -f 1 | sed -e "s/.*zulu//") # Cannot be compared to anything	TDTHCUPYFR	com.azulsystems.zulu.11	
+zulujdk17	pkgInDmg	https://cdn.azul.com/zulu/bin/$(curl -fs "https://cdn.azul.com/zulu/bin/" | grep -Eio '">zulu17.*ca-jdk17.*x64.dmg(.*)' | cut -c3- | sed 's/<\/a>//' | sed -E 's/([0-9.]*)M//' | awk '{print $2 $1}' | sort | cut -c11- | tail -1)	$(echo "$downloadURL" | cut -d "-" -f 1 | sed -e "s/.*zulu//") # Cannot be compared to anything	TDTHCUPYFR	com.azulsystems.zulu.17	
+zulujdk21	pkgInDmg	https://cdn.azul.com/zulu/bin/$(curl -fs "https://cdn.azul.com/zulu/bin/" | grep -Eio '">zulu21.*ca-jdk21.*x64.dmg(.*)' | cut -c3- | sed 's/<\/a><\/td>//' | sed -E 's/([0-9.]*)M//' | awk '{print $2 $1}' | sort -V | tail -1)	$(echo "$downloadURL" | cut -d "-" -f 1 | sed -e "s/.*zulu//" | sed 's/jdk//') 	TDTHCUPYFR	com.azulsystems.zulu.21	
+zulujdk8	pkgInDmg	https://cdn.azul.com/zulu/bin/$(curl -fs "https://cdn.azul.com/zulu/bin/" | grep -Eio '">zulu8.*ca-jdk8.*x64.dmg(.*)' | cut -c3- | sed 's/<\/a><\/td>//' | sed -E 's/([0-9.]*)M//' | awk '{print $2 $1}' | sort -V | tail -1)	$(echo "$downloadURL" | cut -d "-" -f 1 | sed -e "s/.*zulu//" | sed 's/jdk//') 	TDTHCUPYFR	com.azulsystems.zulu.8	
