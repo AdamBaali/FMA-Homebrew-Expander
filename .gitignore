@@ -14,11 +14,5 @@ __pycache__/
 /tmp/caskwork/
 caskwork/
 
-# Transient per-chunk sourcing/authoring scratch — consolidated into progress/sourced/*-results.tsv
-# and folded into master-list.csv / cask-master.sh when a run completes, so they aren't tracked.
-progress/sourced/in-*.tsv
-progress/sourced/out-*.tsv
-progress/sourced/funcs-*.sh
-
 # Local-only Claude settings (keep shared skills tracked; ignore personal settings)
 .claude/settings.local.json

@@ -11,7 +11,7 @@ Homebrew Cask.
 
 ## Status
 
-**533 / 533 sourced · 318 authored into the registry** — one `bash scripts/cask-master.sh` run now authors them all. Per-app status is in [`progress/readiness.md`](progress/readiness.md); the `bucket` column of `data/master-list.csv` is the authoritative per-app verdict.
+**533 / 533 sourced · 318 authored into the registry** — one `bash scripts/cask-master.sh` run now authors them all. The `bucket` column of [`data/master-list.csv`](data/master-list.csv) is the authoritative per-app verdict; [`NOT-ADDED.md`](NOT-ADDED.md) lists every app that isn't shipped, grouped by reason.
 
 | Bucket | Count |
 |---|---|
@@ -20,12 +20,14 @@ Homebrew Cask.
 | &nbsp;&nbsp;↳ via built-in source types | 240 |
 | &nbsp;&nbsp;↳ via custom `resolve_`/`write_cask_` resolvers | 78 |
 | 🛠️ Needs a custom resolver | **0** |
-| 🚫 Review / ineligible | **214** |
-| DRYRUN-clean | 0 _(validated on macOS by the maintainer)_ |
+| 🚫 Not eligible / not sourced | **215** |
 
-Authored by source type: `github_tag 71 · direct 55 · direct_latest 69 · custom 78 · direct_arch 18 · github_arch 11 · electron 9 · direct_header 4 · msft_cdn 2 · github_compound 1`. The 69 `direct_latest` rows are `version :latest` + `sha256 :no_check` (prune at DRYRUN); the 78 custom-resolver apps are flagged in `readiness.md` for closer DRYRUN review.
+Authored by source type: `github_tag 71 · direct 55 · direct_latest 69 · custom 78 · direct_arch 18 · github_arch 11 · electron 9 · direct_header 4 · msft_cdn 2 · github_compound 1`. The 69 `direct_latest` rows are `version :latest` + `sha256 :no_check`.
 
-> Counts above are generated from the script's REGISTRY + `master-list.csv` (see `progress/state.json`) — regenerate after edits to avoid drift.
+> A full macOS dry run validated the 318 authored casks. Of those, a chunk are blocked by
+> Homebrew **core** policy (not notable / not notarized / archived) and can't merge as-is — they're
+> listed under section 2 of [`NOT-ADDED.md`](NOT-ADDED.md). Counts are derived from the script's
+> REGISTRY + `master-list.csv`; regenerate after edits to avoid drift.
 
 ## Layout
 
@@ -34,13 +36,10 @@ Authored by source type: `github_tag 71 · direct 55 · direct_latest 69 · cust
 ├── scripts/
 │   └── cask-master.sh            # the deliverable: batch cask authoring + PR/FR harness
 ├── data/
-│   └── master-list.csv           # one row per app — source of truth + per-app status (`bucket` column)
+│   └── master-list.csv           # one row per app — source of truth + per-app verdict (`bucket` column)
 ├── .claude/skills/
 │   └── homebrew-cask-author/     # the cask-authoring skill (drives the script; auto-loaded by Claude Code)
-├── progress/
-│   ├── readiness.md              # ★ per-app status: added / not-added + why
-│   ├── custom-todo.md            # verified facts for the apps still needing a custom resolver
-│   └── state.json                # counts
+├── NOT-ADDED.md                  # apps not shipped, grouped by reason
 ├── .gitignore
 └── README.md
 ```
