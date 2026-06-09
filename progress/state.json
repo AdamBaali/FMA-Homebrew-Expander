@@ -4,13 +4,10 @@
   "phase": "Phase 2 authoring \u2014 batch D (AutoPkg-pending) done",
   "canonical_paths": {
     "master_list": "data/master-list.csv",
-    "worklist": "data/unsourced-worklist.csv",
-    "autopkg_index": "sources/source-autopkg-index.tsv",
-    "installomator_fields": "sources/source-installomator-fields.tsv",
-    "installomator_slug_map": "sources/installomator-slug-to-label.tsv",
     "script": "scripts/cask-master.sh",
     "skill": ".claude/skills/homebrew-cask-author/SKILL.md",
-    "sourced_chunks": "progress/sourced/"
+    "readiness": "progress/readiness.md",
+    "custom_todo": "progress/custom-todo.md"
   },
   "counts": {
     "total": 533,
@@ -24,19 +21,14 @@
     "eligible_remaining_to_author": 36,
     "custom_resolver_todo": 84
   },
-  "sourcing_cursor": {
-    "phase1_chunks_total": 18,
-    "phase1_chunks_done": 18,
-    "next_chunk": null
-  },
   "blockers": [
     "brew + the homebrew-cask tap are unavailable on this Linux container, and cask audit is macOS-only, so Phase 2 DRYRUN validation (brew style + brew audit) must run on a Mac.",
     "gh and autopkg are not installed (gh is only needed at submit time; autopkg is optional for sourcing)."
   ],
   "notes": [
-    "ADDED 234 to registry; NOT-ADDED 84 need custom resolvers (categorized in readiness.md), 214 review/ineligible.",
-    "cask-master.sh sudo: SUDO_NOPASSWD=1 (default) prompts once then writes a temp /etc/sudoers.d drop-in auto-removed on exit (no per-install prompts). SUDO_NOPASSWD=0 = keep-timestamp-warm only.",
-    "readiness.md is the per-app revisit doc: Added / needs-resolver (by why) / review-ineligible (with reason).",
-    "Do NOT submit; DRYRUN + run cask-master.sh on macOS."
+    "Slimmed repo: removed docs/ (HANDOFF, MASTER-PROMPT), sources/ lookups, progress/log.md, sourced/*-results.tsv, empty worklist \u2014 all recoverable from git history.",
+    "Deliverable = scripts/cask-master.sh; per-app status in progress/readiness.md; custom-resolver facts in progress/custom-todo.md.",
+    "cask-master.sh sudo: one prompt -> temp passwordless drop-in auto-removed on exit (SUDO_NOPASSWD=0 to opt out).",
+    "Do NOT submit; DRYRUN + run on macOS."
   ]
 }
