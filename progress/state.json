@@ -1,7 +1,7 @@
 {
   "project": "FMA no-homebrew-cask sourcing + cask authoring",
   "updated": "2026-06-09",
-  "phase": "Phase 2 authoring \u2014 batch C done; custom backlog now bespoke-only",
+  "phase": "Phase 2 authoring \u2014 batch D (AutoPkg-pending) done",
   "canonical_paths": {
     "master_list": "data/master-list.csv",
     "worklist": "data/unsourced-worklist.csv",
@@ -17,12 +17,12 @@
     "sourced": 533,
     "unsourced": 0,
     "registry_ready": 79,
-    "review_or_ineligible": 196,
-    "autopkg_needs_installer_type": 58,
-    "in_registry": 204,
+    "review_or_ineligible": 214,
+    "autopkg_needs_installer_type": 0,
+    "in_registry": 234,
     "dryrun_clean": 0,
     "eligible_remaining_to_author": 36,
-    "custom_resolver_todo": 74
+    "custom_resolver_todo": 84
   },
   "sourcing_cursor": {
     "phase1_chunks_total": 18,
@@ -34,10 +34,9 @@
     "gh and autopkg are not installed (gh is only needed at submit time; autopkg is optional for sourcing)."
   ],
   "notes": [
-    "204 registry rows ({'github_tag': 70, 'direct': 42, 'electron': 7, 'msft_cdn': 2, 'github_compound': 1, 'github_arch': 11, 'direct_latest': 56, 'direct_arch': 15}); 74 bespoke custom; 58 AutoPkg-pending; 196 review/ineligible.",
-    "Batches B+C converted ~74 customs -> rows (mostly direct_latest/direct_arch). Remaining custom are genuinely bespoke (need hand-written resolve_/write_cask_).",
-    "quilt token renamed -> quilt-app (homebrew-core formula collision).",
-    "Next: research the 58 AutoPkg-pending (sparkle/scrape) -> rows; then bespoke customs.",
+    "234 registry rows ({'github_tag': 71, 'direct': 54, 'electron': 9, 'msft_cdn': 2, 'github_compound': 1, 'github_arch': 11, 'direct_latest': 68, 'direct_arch': 18}); 84 bespoke custom; 214 review/ineligible; AutoPkg-pending now 0.",
+    "Batch D resolved the 58 AutoPkg-pending: 30 rows, ~11 custom, ~15 review/ineligible. Renames: goto->goto-desktop, air->air-flow; exiftool->review (formula); jamf-compliance-editor->custom (version skew).",
+    "Remaining to author: the bespoke custom backlog (per-app resolve_/write_cask_).",
     "Each batch: push claude/author-waveN -> PR -> squash-merge to main."
   ]
 }
