@@ -11,17 +11,21 @@ Homebrew Cask.
 
 ## Status
 
-**533 / 533 sourced · 234 authored into the registry.** Per-app status — what's added, what isn't,
-and **why** — is in **[`progress/readiness.md`](progress/readiness.md)**.
+**533 / 533 sourced · 318 authored into the registry** — one `bash scripts/cask-master.sh` run now authors them all. Per-app status is in [`progress/readiness.md`](progress/readiness.md); the `bucket` column of `data/master-list.csv` is the authoritative per-app verdict.
 
 | Bucket | Count |
 |---|---|
-| ✅ Added to `cask-master.sh` | **234** |
-| 🛠️ Needs a custom resolver (verified download; facts in `custom-todo.md`) | 84 |
-| 🚫 Review / ineligible (gated, duplicate, unversioned, discontinued, MAS-only) | 214 |
+| Total apps | **533** |
+| ✅ Authored in `cask-master.sh` | **318** |
+| &nbsp;&nbsp;↳ via built-in source types | 240 |
+| &nbsp;&nbsp;↳ via custom `resolve_`/`write_cask_` resolvers | 78 |
+| 🛠️ Needs a custom resolver | **0** |
+| 🚫 Review / ineligible | **214** |
+| DRYRUN-clean | 0 _(validated on macOS by the maintainer)_ |
 
-68 of the authored rows are `version :latest` + `sha256 :no_check` (Homebrew discourages these for
-new casks) — prune/upgrade them at DRYRUN; all flagged in `readiness.md`.
+Authored by source type: `github_tag 71 · direct 55 · direct_latest 69 · custom 78 · direct_arch 18 · github_arch 11 · electron 9 · direct_header 4 · msft_cdn 2 · github_compound 1`. The 69 `direct_latest` rows are `version :latest` + `sha256 :no_check` (prune at DRYRUN); the 78 custom-resolver apps are flagged in `readiness.md` for closer DRYRUN review.
+
+> Counts above are generated from the script's REGISTRY + `master-list.csv` (see `progress/state.json`) — regenerate after edits to avoid drift.
 
 ## Layout
 

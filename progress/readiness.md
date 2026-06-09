@@ -1,279 +1,35 @@
 # Readiness — what's added, what isn't, and why
 
-_Last updated: 2026-06-09. The single source of per-app status; revisit the **Not added** sections later._
+_Generated from `scripts/cask-master.sh` (REGISTRY) + `data/master-list.csv`. Regenerate after edits to avoid drift._
 
 ## Summary
 
-| Bucket | Count | Meaning |
-|---|---|---|
-| **Added** to `cask-master.sh` | **234** | ready to `DRYRUN=1 bash scripts/cask-master.sh` on a Mac |
-| **Not added — needs custom resolver** | **84** | verified download, but URL/version doesn't fit a built-in source type |
-| **Not added — review** | **196** | gated / login / paid / unversioned / unverifiable |
-| **Not added — ineligible** | **18** | no FMA-eligible artifact (Mac App Store only, discontinued, `.tar.bz2`, duplicate of existing cask) |
-| Total | 533 | (sourced 533) |
+| Bucket | Count |
+|---|---|
+| Total apps | 533 |
+| Sourced | 533 |
+| **Authored in cask-master.sh** | **318** |
+| &nbsp;&nbsp;↳ via built-in source types | 240 |
+| &nbsp;&nbsp;↳ via custom resolver functions | 78 |
+| Needs a custom resolver (remaining) | 0 |
+| Review | 196 |
+| Ineligible | 18 |
+| Other (low-confidence, verify) | 1 |
+| DRYRUN-clean | 0 (requires macOS) |
 
-> `direct_latest` rows in the registry are `version :latest` + `sha256 :no_check` — Homebrew discourages these for new casks, so review/prune them at DRYRUN.
+Authored by source type: `{'github_tag': 71, 'direct': 55, 'electron': 9, 'msft_cdn': 2, 'github_compound': 1, 'github_arch': 11, 'direct_latest': 69, 'direct_arch': 18, 'custom': 78, 'direct_header': 4}`
 
-## ✅ Added — in the registry (234)
+Everything sourced is now in the script — a single `DRYRUN=1 bash scripts/cask-master.sh` on a Mac writes+audits all of them. `direct_latest` rows are `:no_check` (prune at DRYRUN).
 
-| token | source | artifact |
-|---|---|---|
-| `airbattery` | github_tag | dmg |
-| `backgrounds` | github_tag | pkg |
-| `elevate24` | github_tag | pkg |
-| `escrow-buddy` | github_tag | pkg |
-| `icons` | github_tag | pkg |
-| `jamf-pppc-utility` | github_tag | zip |
-| `jamf-printer-manager` | github_tag | zip |
-| `jamf-reenroller` | github_tag | zip |
-| `jamfcheck` | github_tag | dmg |
-| `managed-app-schema-builder` | github_tag | zip |
-| `mobile-to-local` | github_tag | zip |
-| `pique` | github_tag | pkg |
-| `sym-helper` | github_tag | zip |
-| `utiluti` | github_tag | pkg |
-| `airradar` | direct | dmg |
-| `akvis-airbrush` | direct | dmg |
-| `akvis-artifact-remover-ai` | direct | dmg |
-| `akvis-frames` | direct | dmg |
-| `alarm-clock-pro` | direct | dmg |
-| `alivecolors` | direct | dmg |
-| `atlassian-companion` | direct | zip |
-| `automounter` | direct | dmg |
-| `aws-cli` | direct | pkg |
-| `brosix` | direct | pkg |
-| `cakebrew` | direct | zip |
-| `dragonframe-2024` | direct | pkg |
-| `dragonframe-2025` | direct | pkg |
-| `dragonframe-5` | direct | pkg |
-| `grammarly` | direct | dmg |
-| `hudl-studio` | direct | dmg |
-| `lucidlink` | direct | pkg |
-| `luna-display` | direct | dmg |
-| `masv` | electron | dmg |
-| `mestrenova` | direct | dmg |
-| `microsoft-skype-for-business` | msft_cdn | pkg |
-| `network-share-mounter` | direct | pkg |
-| `nodejs` | direct | pkg |
-| `particulars` | direct | pkg |
-| `poll-everywhere` | direct | dmg |
-| `screencloud-player` | electron | dmg |
-| `signiant-app` | direct | dmg |
-| `things` | direct | zip |
-| `vonage-business` | electron | dmg |
-| `achico` | github_tag | zip |
-| `api-utility` | github_tag | zip |
-| `barcode-producer` | direct | zip |
-| `bartranslate` | github_tag | zip |
-| `boring-notch` | github_tag | dmg |
-| `brewmate` | github_tag | dmg |
-| `caesium-image-compressor` | github_tag | dmg |
-| `chromebuddy` | github_tag | zip |
-| `close-desktop` | github_tag | dmg |
-| `cloudtalk-phone` | electron | dmg |
-| `corelcad` | direct | dmg |
-| `cronica` | github_tag | zip |
-| `desktop-icon-manager` | github_tag | zip |
-| `dictation-daddy` | github_tag | dmg |
-| `dropnote` | github_tag | zip |
-| `figura` | github_tag | zip |
-| `fivenotes` | direct | zip |
-| `freeter` | electron | dmg |
-| `fuzzlecheck-4` | direct | dmg |
-| `haiku-animator` | github_tag | dmg |
-| `hue` | electron | zip |
-| `ibm-data-shift` | github_compound | zip |
-| `impulso` | github_tag | zip |
-| `insight` | direct | dmg |
-| `jamf-actions` | github_tag | zip |
-| `jamf-aftermath` | github_tag | pkg |
-| `jamf-cloud-package-replicator` | github_tag | zip |
-| `jamf-environment-test` | github_tag | zip |
-| `jamf-framework-redeploy` | github_tag | zip |
-| `jamf-protect-ulf-uploader` | github_tag | zip |
-| `jamf-prune` | github_tag | zip |
-| `jamfdash` | github_tag | pkg |
-| `jamfhelper-constructor` | github_tag | zip |
-| `logoer` | github_tag | dmg |
-| `lucidlink-classic` | direct | pkg |
-| `maccleanse` | direct | dmg |
-| `microsoft-365-license-removal-tool` | msft_cdn | pkg |
-| `modalfilemanager` | github_tag | zip |
-| `monsterwriter` | github_tag | dmg |
-| `mut` | github_tag | zip |
-| `mymedia` | github_tag | dmg |
-| `namo` | direct | dmg |
-| `nextpad` | github_tag | dmg |
-| `noteey` | github_tag | dmg |
-| `obd-auto-doctor` | direct | dmg |
-| `object-info` | github_tag | zip |
-| `ollamaspring` | github_tag | zip |
-| `photos-workbench` | direct | dmg |
-| `psso-utility` | github_tag | pkg |
-| `quickrecorder` | github_tag | dmg |
-| `relagit` | electron | dmg |
-| `remote-utilities-agent` | direct | zip |
-| `remote-utilities-viewer` | direct | dmg |
-| `renameninja` | direct | zip |
-| `reqres` | github_tag | dmg |
-| `root3-support-app` | github_tag | pkg |
-| `rumpus` | direct | dmg |
-| `scrutiny` | direct | dmg |
-| `squirreldisk` | github_tag | dmg |
-| `supercorners` | github_tag | zip |
-| `swiftcord` | github_tag | zip |
-| `textream` | github_tag | dmg |
-| `vocal` | github_tag | zip |
-| `watchflower` | github_tag | zip |
-| `window-glue` | github_tag | dmg |
-| `wondershare-mockitt` | direct | dmg |
-| `wudpecker` | github_tag | dmg |
-| `blink-eye` | github_arch | dmg |
-| `chatkit` | github_arch | dmg |
-| `droppoint` | github_arch | dmg |
-| `file-architect` | github_arch | dmg |
-| `peazip` | github_arch | dmg |
-| `smotrite` | github_arch | dmg |
-| `sniffnet` | github_arch | dmg |
-| `spacesuit` | github_arch | dmg |
-| `swiftguard` | github_arch | dmg |
-| `time-machine-inspector` | github_arch | dmg |
-| `visualz` | github_arch | dmg |
-| `nextai-translator` | github_tag | dmg |
-| `battery-toolkit` | github_tag | zip |
-| `hide-icons` | github_tag | zip |
-| `jamf-cli` | github_tag | pkg |
-| `jamf-replicator` | github_tag | zip |
-| `jamf-sync` | github_tag | zip |
-| `mailvault` | github_tag | dmg |
-| `sapmachine-manager` | github_tag | pkg |
-| `script2pkg` | github_tag | pkg |
-| `arclite-pro` | direct_latest | dmg |
-| `beam-studio` | direct_arch | dmg |
-| `boundary` | direct_arch | dmg |
-| `buhontfs` | direct_latest | dmg |
-| `canister` | direct_latest | dmg |
-| `cascable-pro-webcam` | direct_latest | zip |
-| `cisco-audio-device` | direct_latest | pkg |
-| `connectmenow4` | direct_arch | dmg |
-| `cotypist` | direct_latest | dmg |
-| `cursor-teleporter` | direct | zip |
-| `dialpad-meetings` | direct_arch | dmg |
-| `disk-space-analyzer` | direct_latest | dmg |
-| `dropnotch` | direct_latest | dmg |
-| `editready` | direct_latest | dmg |
-| `everweb` | direct_latest | dmg |
-| `filemail` | direct_latest | dmg |
-| `fileminutes` | direct_latest | dmg |
-| `flashpeak-slimjet` | direct_arch | dmg |
-| `flexihub` | direct_latest | dmg |
-| `flowjo` | direct_arch | dmg |
-| `focusee` | direct_latest | dmg |
-| `folge` | direct_arch | dmg |
-| `global-secure-access-client` | direct_latest | pkg |
-| `grasshopper` | direct_latest | dmg |
-| `horse` | direct_arch | zip |
-| `iboostup` | direct_latest | dmg |
-| `imymac-pdf-compressor` | direct_latest | dmg |
-| `imymac-video-converter` | direct_latest | dmg |
-| `integrity-plus` | direct_latest | dmg |
-| `integrity-pro` | direct_latest | dmg |
-| `iperius-remote` | direct_latest | dmg |
-| `iphone-backup-extractor` | direct_latest | dmg |
-| `istatistica-pro` | direct_latest | dmg |
-| `jane-reader` | direct_arch | dmg |
-| `later` | direct_latest | dmg |
-| `lingvanex-translator` | direct_latest | dmg |
-| `mac-linguist` | direct_latest | dmg |
-| `macuncle-eml-viewer` | direct_latest | dmg |
-| `minimoon` | direct_latest | dmg |
-| `mixpad` | direct_latest | zip |
-| `mxmarkedit` | direct_latest | zip |
-| `my-picturemaxx-5` | direct_latest | dmg |
-| `offshoot` | direct_latest | dmg |
-| `ondesoft-spotify-converter` | direct_latest | dmg |
-| `otter` | direct_latest | dmg |
-| `patch-desktop` | direct_latest | pkg |
-| `patternodes` | direct_latest | dmg |
-| `pdfsail` | direct_latest | dmg |
-| `pixillion` | direct_latest | zip |
-| `print-window` | direct_latest | dmg |
-| `pulseway` | direct_latest | dmg |
-| `quilt-app` | direct_latest | dmg |
-| `rumplet` | direct_latest | zip |
-| `screenflow-hal-audio-driver` | direct_latest | pkg |
-| `shokz-connect` | direct_latest | dmg |
-| `station` | github_tag | zip |
-| `substage` | direct_latest | dmg |
-| `teamwire` | direct_arch | dmg |
-| `tinyweb` | direct_latest | dmg |
-| `trace` | direct_latest | dmg |
-| `trident` | direct_arch | dmg |
-| `trint` | direct_arch | zip |
-| `tweeten` | github_tag | zip |
-| `usb-network-gate` | direct_latest | dmg |
-| `utm-coordinate-converter` | direct_arch | dmg |
-| `vagon` | direct_arch | dmg |
-| `vectoraster` | direct_latest | dmg |
-| `vectorstyler` | direct_arch | dmg |
-| `videoproc-vlogger` | direct_latest | dmg |
-| `vidmore-player` | direct_latest | dmg |
-| `vidmore-screen-recorder` | direct_latest | zip |
-| `vidmore-video-enhancer` | direct_latest | dmg |
-| `viper-ftp` | direct_latest | dmg |
-| `xnresize` | direct_latest | dmg |
-| `1piece` | direct | zip |
-| `accents` | direct_latest | zip |
-| `air-flow` | direct_arch | zip |
-| `aircall-workspace` | direct_arch | pkg |
-| `airtime` | direct_latest | dmg |
-| `amazon-appstream-20` | direct_latest | pkg |
-| `appcode` | direct_arch | dmg |
-| `arcade` | direct | dmg |
-| `changes` | github_tag | zip |
-| `dinoxcope` | direct_latest | dmg |
-| `flinto` | direct | dmg |
-| `folder-tidy` | direct | dmg |
-| `fontagent` | direct_latest | dmg |
-| `goto-desktop` | electron | dmg |
-| `grab2text` | direct_latest | dmg |
-| `houdahgeo` | direct | zip |
-| `ledger-live` | electron | dmg |
-| `microsoft-advertising-editor` | direct_latest | dmg |
-| `mindview-9` | direct_latest | dmg |
-| `movie-magic-budgeting` | direct_latest | dmg |
-| `nightowl` | direct | zip |
-| `phraseexpress` | direct_latest | dmg |
-| `sidebar` | direct | dmg |
-| `soundq` | direct | pkg |
-| `startup-manager-pro` | direct | dmg |
-| `tembo-2` | direct | zip |
-| `tembo-3` | direct | zip |
-| `textsoap` | direct_latest | dmg |
-| `typewhisper` | direct | dmg |
-| `vernier-graphical-analysis` | direct_latest | dmg |
+## Custom-resolver apps (78) — verify these closely at DRYRUN
 
-## 🛠️ Not added — needs a custom resolver (84)
+Authored via per-app `resolve_`/`write_cask_` in the script (header-only versions, per-release hash/build URLs, arch-split pkg, nested containers, version transforms). Facts in [`custom-todo.md`](custom-todo.md).
 
-Each has a verified download + version (facts in [`custom-todo.md`](custom-todo.md) and `sourced/*-results.tsv`), but needs a hand-written `resolve_<tfn>`/`write_cask_<tfn>` — best authored on a Mac where `DRYRUN` validates each. Grouped by **why**:
+`barcode-studio, bimcollab-zoom, buhocleaner, capture-one, cato-client, cloudya, code42, comic-life-4, conniepad, cricut-design-space, daylite, delighted, dell-display-peripheral-manager, deskrest, displaylink-manager, eclipse-ide-for-embedded-cc-developers, eclipse-ide-for-scout-developers, final-draft-12, final-draft-13, flashprint-5, foldr, fotomagico, frameio-transfer, growly-glucose, guardian-browser, huddly, hudl-sportscode, huggingchat-mac, imanage-work-desktop, ipsw-updater, jamf-compliance-editor, jamf-connect-configuration, jamf-connect-login, joan-configurator, jpegmini-pro, keeper-secrets-manager-cli, lg-calibration-studio, macos-instantview, mamp-pro, maxon-cinema-4d-2026, medialab-connect, microsoft-company-portal, microsoft-powershell, mimiq, mister-horse-product-manager, monotype-connect, multiviewer-for-f1, netbird, noor, nvivo-14, nvivo-15, okiocam-snapshot-and-recorder, origami-3, poly-lens-desktop, postlab, praxislive, prisma-access-browser, setup-manager, sforzando, shellhistory, slido-for-powerpoint, smart-mirror-app, snapgene, soundfield-by-rode, spyder-x-elite, spyder-x-pro, starface, strongdm, studio-viewer, synology-active-backup-for-business-agent, synology-drive-client, universal-type-client, usher, windsurf, wonderpen, workbrew, xmlmind, zaxconvert`
 
-**version only in redirect/header (:header_match)** (32): `bimcollab-zoom`, `cato-client`, `code42`, `comic-life-4`, `daylite`, `dedoose`, `eclipse-ide-for-embedded-cc-developers`, `eclipse-ide-for-scout-developers`, `huddly`, `jamf-connect-configuration`, `jamf-connect-login`, `joan-configurator`, `lg-calibration-studio`, `mersive-solstice`, `mister-horse-product-manager`, `monotype-connect`, `noor`, `nvivo-14`, `nvivo-15`, `onemenu`, `optisigns-digital-signage`, `origami-3`, `sforzando`, `slido-for-powerpoint`, `smart-mirror-app`, `snapgene`, `spyder-x-elite`, `spyder-x-pro`, `strongdm`, `studio-viewer`, `vivi`, `workbrew`
+## Not added — review / ineligible (214)
 
-**arch-split .pkg (needs arch var + per-arch sha)** (10): `barcode-studio`, `foldr`, `mamp-pro`, `microsoft-powershell`, `netbird`, `poly-lens-desktop`, `praxislive`, `prisma-access-browser`, `synology-active-backup-for-business-agent`, `synology-drive-client`
-
-**build-in-filename / tag-version skew** (10): `buhocleaner`, `conniepad`, `deskrest`, `fotomagico`, `guardian-browser`, `jamf-compliance-editor`, `jpegmini-pro`, `postlab`, `setup-manager`, `shellhistory`
-
-**per-release hash/token in URL** (9): `capture-one`, `dell-display-peripheral-manager`, `frameio-transfer`, `medialab-connect`, `microsoft-company-portal`, `multiviewer-for-f1`, `soundfield-by-rode`, `starface`, `windsurf`
-
-**other — see custom-todo.md** (9): `cricut-design-space`, `delighted`, `depnotify`, `displaylink-manager`, `huggingchat-mac`, `keeper-secrets-manager-cli`, `macos-instantview`, `mimiq`, `wonderpen`
-
-**nested container (pkg/app-in-zip/dmg)** (8): `cloudya`, `final-draft-12`, `final-draft-13`, `flashprint-5`, `hudl-sportscode`, `imanage-work-desktop`, `okiocam-snapshot-and-recorder`, `zaxconvert`
-
-**string-transform version (dots->_/-/none)** (6): `growly-glucose`, `ipsw-updater`, `maxon-cinema-4d-2026`, `universal-type-client`, `usher`, `xmlmind`
-
-## 🚫 Not added — review / ineligible (214)
-
-Why each can't be a cask (revisit if a vendor adds a public versioned download):
+Why each can't be a cask (revisit if a vendor adds a public versioned download); per-app reason in the `bucket` column of [`../data/master-list.csv`](../data/master-list.csv):
 
 | token | verdict | reason |
 |---|---|---|
