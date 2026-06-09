@@ -42,6 +42,9 @@
 #   FILE_FR=0         author the cask PR but skip the Fleet FR (default 1)
 #   CUSTOMER_LABEL="customer-x"   extra label on the Fleet FR (else add by hand)
 #   FORK=fork         name of your fork's git remote in the tap (default "fork")
+#   SUDO_NOPASSWD=0   don't write a temp passwordless-sudo drop-in; just keep the
+#                     sudo timestamp warm (default 1 = one prompt, then no re-prompts;
+#                     the temp /etc/sudoers.d entry is auto-removed when the run ends)
 #
 # ------------------------- REGISTRY FORMAT -----------------------------------
 # Pipe-delimited, one row per app. Whitespace around each field is trimmed.
@@ -1171,19 +1174,44 @@ done <<< "$REGISTRY"
 [ "${#ROWS[@]}" -gt 0 ] || { echo "Registry is empty. Add app rows to the REGISTRY block, then re-run."; exit 0; }
 
 # ----------------------------------------------------------------------------
-# Prime sudo if any pkg / msft_cdn app is in scope (pkg installs need it)
+# Sudo: ask ONCE, then cache for the entire run so per-app install/uninstall/zap
+# never re-prompt. pkg installs (and pkg uninstall/zap) shell out to sudo many
+# times; a short system timestamp_timeout (or tty_tickets) defeats the classic
+# "keep the timestamp warm" trick and you get prompted on every step. So by
+# default we prompt once and install a TEMPORARY passwordless sudoers drop-in
+# for the current user, removed automatically when the run ends (even on Ctrl-C).
+#   SUDO_NOPASSWD=1 (default): one prompt -> temp /etc/sudoers.d entry -> zero
+#                              further prompts; auto-removed on exit.
+#   SUDO_NOPASSWD=0          : don't touch sudoers — just keep the credential
+#                              timestamp warm (may re-prompt if the OS expires it).
 # ----------------------------------------------------------------------------
+SUDO_NOPASSWD="${SUDO_NOPASSWD:-1}"
 NEED_SUDO=0
 for line in "${ROWS[@]}"; do
   IFS='|' read -r _t _n _d a s _rest <<< "$line"
   a="$(trim "$a")"; s="$(trim "$s")"
-  [ "$a" = pkg ] || [ "$s" = msft_cdn ] && NEED_SUDO=1
+  { [ "$a" = pkg ] || [ "$s" = msft_cdn ]; } && NEED_SUDO=1
 done
+SUDOERS_FILE=""
+cleanup_sudo(){ [ -n "${SUDOERS_FILE:-}" ] && sudo rm -f "$SUDOERS_FILE" 2>/dev/null; [ -n "${SUDO_PID:-}" ] && kill "$SUDO_PID" 2>/dev/null; }
 if [ "$DRYRUN" != 1 ] && [ "$NEED_SUDO" = 1 ]; then
-  echo "Priming sudo (pkg installs need it)…"
-  sudo -v || { echo "sudo is required for pkg installs"; exit 1; }
-  ( while true; do sudo -n true; sleep 50; kill -0 "$$" 2>/dev/null || exit; done ) 2>/dev/null & SUDO_PID=$!
-  trap '[ -n "${SUDO_PID:-}" ] && kill "$SUDO_PID" 2>/dev/null' EXIT
+  echo "Priming sudo once — enter your password a single time; it's cached for the whole run."
+  sudo -v || { echo "sudo is required for pkg installs/uninstalls"; exit 1; }
+  trap cleanup_sudo EXIT INT TERM
+  if [ "$SUDO_NOPASSWD" = 1 ]; then
+    SUDOERS_FILE="/etc/sudoers.d/cask-master-$$"
+    if printf '%s ALL=(ALL) NOPASSWD: ALL\n' "$(id -un)" | sudo tee "$SUDOERS_FILE" >/dev/null 2>&1 \
+       && sudo chmod 440 "$SUDOERS_FILE" 2>/dev/null \
+       && sudo visudo -cf "$SUDOERS_FILE" >/dev/null 2>&1; then
+      echo "  ✓ passwordless sudo enabled for THIS run only ($SUDOERS_FILE; auto-removed on exit)."
+    else
+      sudo rm -f "$SUDOERS_FILE" 2>/dev/null; SUDOERS_FILE=""
+      echo "  (couldn't install a temp sudoers drop-in — keeping the sudo timestamp warm instead.)"
+      ( while true; do sudo -n true 2>/dev/null; sleep 30; kill -0 "$$" 2>/dev/null || exit; done ) & SUDO_PID=$!
+    fi
+  else
+    ( while true; do sudo -n true 2>/dev/null; sleep 30; kill -0 "$$" 2>/dev/null || exit; done ) & SUDO_PID=$!
+  fi
 fi
 
 # ----------------------------------------------------------------------------

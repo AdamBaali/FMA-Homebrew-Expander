@@ -34,9 +34,9 @@
     "gh and autopkg are not installed (gh is only needed at submit time; autopkg is optional for sourcing)."
   ],
   "notes": [
-    "234 registry rows ({'github_tag': 71, 'direct': 54, 'electron': 9, 'msft_cdn': 2, 'github_compound': 1, 'github_arch': 11, 'direct_latest': 68, 'direct_arch': 18}); 84 bespoke custom; 214 review/ineligible; AutoPkg-pending now 0.",
-    "Batch D resolved the 58 AutoPkg-pending: 30 rows, ~11 custom, ~15 review/ineligible. Renames: goto->goto-desktop, air->air-flow; exiftool->review (formula); jamf-compliance-editor->custom (version skew).",
-    "Remaining to author: the bespoke custom backlog (per-app resolve_/write_cask_).",
-    "Each batch: push claude/author-waveN -> PR -> squash-merge to main."
+    "ADDED 234 to registry; NOT-ADDED 84 need custom resolvers (categorized in readiness.md), 214 review/ineligible.",
+    "cask-master.sh sudo: SUDO_NOPASSWD=1 (default) prompts once then writes a temp /etc/sudoers.d drop-in auto-removed on exit (no per-install prompts). SUDO_NOPASSWD=0 = keep-timestamp-warm only.",
+    "readiness.md is the per-app revisit doc: Added / needs-resolver (by why) / review-ineligible (with reason).",
+    "Do NOT submit; DRYRUN + run cask-master.sh on macOS."
   ]
 }
