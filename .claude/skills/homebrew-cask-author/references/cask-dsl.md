@@ -17,14 +17,30 @@ Stanza-by-stanza, with the patterns that matter for passing audit/CI. Authoritat
 
 ## version + sha256
 - `version "1.2.3"` — exact upstream version.
-- `sha256 "…"` — of the exact file at `url`. Use `:no_check` only for `version :latest` casks
-  (rare; avoid for normal apps).
+- `sha256 "…"` — of the exact file at `url`.
+- **`sha256 :no_check` is required whenever the `url` has no `#{version}` in it** (a stable
+  "latest" download such as `https://vendor.com/app/download/app.dmg`). Audit error:
+  `Use sha256 :no_check when URL is unversioned`. This is **independent of the `version` stanza**:
+  you can — and for Fleet should — keep a real `version "1.2.3"` (resolved + tracked by a
+  `livecheck`) alongside `sha256 :no_check`. You do **not** need `version :latest`. Only drop to
+  `version :latest` when the version is also genuinely unknowable. Many vendors (Koingo, AKVIS,
+  etc.) serve a fixed `app.dmg` URL but publish the version on a product page → pin the version,
+  add a `:page_match` livecheck, and use `:no_check`.
 
 ## url
 - Interpolate the version: `url "https://v.example/App-#{version}.pkg"`.
-- `verified:` is required when the host/path isn't an obvious match for the cask token. Set it to
-  the shortest stable prefix that proves provenance, e.g.
+- `verified:` is required only when the download host's **registrable domain (eTLD+1) differs from
+  the homepage's** — set it to the shortest stable prefix that proves provenance, e.g.
   `url "https://cdn.example/x/App-#{version}.pkg", verified: "cdn.example/"`.
+  - **A subdomain of the homepage domain does NOT need `verified:`.** `static.culturedcode.com`
+    vs homepage `culturedcode.com` share the registrable domain `culturedcode.com` → adding
+    `verified:` triggers audit error *"the 'verified' parameter … is unnecessary"*. Compare the
+    last two domain labels, not the full host. (`release.screen.cloud` vs `screencloud.com` →
+    `screen.cloud` ≠ `screencloud.com` → verified **is** needed; S3/CloudFront hosts like
+    `*.s3.amazonaws.com` / `*.cloudfront.net` almost always need it.)
+  - The `verified:` string must be a real **prefix of the resolved URL** (host + `/`). `www.x.com/`
+    when the URL host is `x.com` fails *"Verified URL … does not match URL …"* — derive it from the
+    actual download host, not the brand domain.
 - **version.csv** splits a compound version when the URL needs two numbers (e.g. a marketing
   version *and* a build):
   ```ruby
@@ -72,6 +88,24 @@ livecheck do
 end
 ```
 
+### The `version` stanza MUST equal what livecheck returns (capture group 1)
+The #1 cause of `Version 'X' differs from 'Y' retrieved by livecheck` audit failures. Homebrew
+livecheck runs the regex with Ruby `String#scan` and takes **capture group 1** when the regex has
+a group, else the **whole match**. So the static `version` you write must equal *that*:
+
+- **A regex with a literal prefix returns group 1, not the whole match.** `regex(/Version (\d+(?:\.\d+)+)/)`
+  on `"Version 8.0"` → livecheck returns `8.0`. If you authored `version "Version 8.0"` (e.g. by
+  taking the whole `grep -o` match), it mismatches. When extracting the version yourself, take the
+  **capture group**, not the whole match — mirror `scan().first`.
+- **`[0-9]+(\.[0-9]+)+` is a trap.** Its only group is the *last* `.N`, so livecheck returns `.0`,
+  not `8.0`. Wrap the whole version as group 1 and make inner groups non-capturing:
+  **`([0-9]+(?:\.[0-9]+)+)`**. Always write the regex so group 1 is the *entire* version string.
+- **Beta/build suffixes** (`0.1.0b5`): the default `:github_latest` regex stops at the first
+  non-numeric and returns `0.1.0`. Supply a custom regex that captures the suffix, e.g.
+  `regex(/^v?(\d+(?:\.\d+)+(?:b\d+)?)$/i)` with a `:github_latest do |json, regex| … end` block.
+- A static `version` with **no** livecheck triggers `differs from '' retrieved by livecheck`
+  under `--new`. Every versioned cask needs a working livecheck source.
+
 ## depends_on
 - **`depends_on macos:` — required for macOS-only casks; use a BARE symbol** for a minimum:
   `depends_on macos: :big_sur` (= Big Sur or newer). `">= :big_sur"` is rewritten by the
@@ -79,8 +113,17 @@ end
   schedule Linux runners that fail "macOS is required for this software". Symbols: `:big_sur`,
   `:monterey`, `:ventura`, `:sonoma`, `:sequoia`, `:tahoe`. Read the real floor from the app's
   `LSMinimumSystemVersion`; a conservative floor is acceptable if unknown.
-- `depends_on arch: :arm64` (Apple-silicon-only) or `:x86_64`. For an x86_64 app, add a
-  `caveats { requires_rosetta }` instead of blocking arm64, if it runs under Rosetta.
+- `depends_on arch: :arm64` (Apple-silicon-only) or `:x86_64`.
+- **Intel-only artifact ⇒ `caveats { requires_rosetta }` is mandatory** (not optional). Audit fails
+  with *"At least one artifact requires Rosetta 2 but this is not indicated by the caveats!"*.
+  Detect it by inspecting the bundle's Mach-O: `lipo -archs Contents/MacOS/<CFBundleExecutable>` —
+  if it lists `x86_64` (or `i386`) with no `arm64`, add the caveat. `caveats` is the **last**
+  stanza, after `zap`:
+  ```ruby
+  caveats do
+    requires_rosetta
+  end
+  ```
 - `depends_on cask: "other-cask"` — declares another cask as a dependency (installed first). Note:
   this is **not** how shared updaters like Microsoft AutoUpdate are handled — see Shared updaters.
 
