@@ -59,15 +59,15 @@ barcode-producer,Barcode Producer,https://appcatalog.cloud/apps/barcode-producer
 barcode-studio,Barcode Studio,https://appcatalog.cloud/apps/barcode-studio,web-research,,pkgInZip,yes,vendor,https://www.tec-it.com/download/Unix/Mac-OS/bcstudio-17.2.0.32089-mac-12.0-arm64.pkg.zip,custom,,,,,custom: needs resolver,high
 bartranslate,Bartranslate,https://appcatalog.cloud/apps/bartranslate,web-research,,zip,yes,github,repo=ThijmenDam/BarTranslate;asset=BarTranslate.app.zip,github_tag,,,,,in-registry,high
 batchphoto,Batchphoto,https://appcatalog.cloud/apps/batchphoto,web-research,,,review,,,,,,,,review: Direct dmg http(s)://www.batchphoto.com/download/batchphoto.dmg returns 403 Forbidden even,high
-battery-toolkit,Battery Toolkit,https://appcatalog.cloud/apps/battery-toolkit,autopkg,,,,github,mhaeuser/Battery-Toolkit,,,,,,autopkg-sourced-format-tbd,high
+battery-toolkit,Battery Toolkit,https://appcatalog.cloud/apps/battery-toolkit,autopkg,,zip,yes,github,github.com/mhaeuser/Battery-Toolkit,github_tag,,,,,in-registry,high
 beam-studio,Beam Studio,https://appcatalog.cloud/apps/beam-studio,installomator,beamstudio,dmg,yes,dynamic-scrape,id.flux3dp.com,"""$( echo ""$downloadURL"" | cut -d '+' -f 3 | cut -d '.' -f 1-3 )""",4Y92JWKV94,,,,custom: needs resolver,high
 bimcollab-zoom,Bimcollab Zoom,https://appcatalog.cloud/apps/bimcollab-zoom,web-research,,dmg,yes,vendor,https://bimcollab.com/download/ZOOM/MAC,custom,,,,,custom: needs resolver,high
 bitcomet,Bitcomet,https://appcatalog.cloud/apps/bitcomet,web-research,,,review,,,,,,,,"review: No stable/derivable public versioned URL. Official macOS download (current v2.20.0, BitCom",med
-blink-eye,Blink Eye,https://appcatalog.cloud/apps/blink-eye,web-research,,dmg,yes,vendor,https://github.com/nomandhoni-cs/blink-eye/releases/download/v2.7.6/Blink.Eye_2.7.6_aarch6,custom,,,,,custom: needs resolver,high
+blink-eye,Blink Eye,https://appcatalog.cloud/apps/blink-eye,web-research,,dmg,yes,github,github.com/nomandhoni-cs/blink-eye,github_arch,,,,,in-registry,high
 boring-notch,Boring Notch,https://appcatalog.cloud/apps/boring-notch,web-research,,dmg,yes,github,repo=TheBoredTeam/boring.notch;asset=boringNotch.dmg,github_tag,,,,,in-registry,high
 boundary,Boundary,https://appcatalog.cloud/apps/boundary,web-research,,dmg,yes,vendor,https://releases.hashicorp.com/boundary-desktop/2.6.0/boundary-desktop_2.6.0_darwin_arm64.,custom,,,,,custom: needs resolver,high
 boxshot-5,Boxshot 5,https://appcatalog.cloud/apps/boxshot-5,web-research,,,no,,,,,,,,ineligible: Commercial paid app (Appsforlife). Download links route through account portal id.appsforl,
-brackets,Brackets,https://appcatalog.cloud/apps/brackets,autopkg,,,,github,brackets-cont/brackets,,,,,,autopkg-sourced-format-tbd,high
+brackets,Brackets,https://appcatalog.cloud/apps/brackets,autopkg,,,review,github,brackets-cont/brackets,,,,,,review: discontinued (Adobe ended Brackets 2021); GitHub release has no macOS asset,high
 brewer-x,Brewer X,https://appcatalog.cloud/apps/brewer-x,web-research,,,no,,,,,,,,"ineligible: Paid app ($29 one-time, Panini House). Download gated behind purchase at panini.house/brew",
 brewmate,Brewmate,https://appcatalog.cloud/apps/brewmate,web-research,,dmg,yes,github,repo=romankurnovskii/BrewMate;asset=BrewMate-{v}-universal.dmg,github_tag,,,,,in-registry,high
 brosix,Brosix,https://appcatalog.cloud/apps/brosix,installomator,brosix,pkg,yes,direct,www.brosix.com,"""""",TA6P23NW8H,,,,in-registry,high
@@ -82,7 +82,7 @@ catalog,Catalog,https://appcatalog.cloud/apps/catalog,web-research,,,review,,,,,
 catalyst-browse,Catalyst Browse,https://appcatalog.cloud/apps/catalyst-browse,autopkg,,,,dynamic-scrape,support.d-imaging.sony.co.jp,,,,,,autopkg-sourced-format-tbd,high
 cato-client,Cato Client,https://appcatalog.cloud/apps/cato-client,installomator,catoclient,pkg,yes,direct,clientdownload.catonetworks.com,"$(curl -Ls -o /dev/null -w %{url_effective} ""${downloadURL}"" | sed -E 's/.*\/([0-9.]*)\/.*/\1/g' | awk -F '.' '{print $1 ""."" $2 ""."" $3}')",CKGSB8CH43,,"( ""CatoClient"" ""CatoClientExtension"" )",yes,custom: needs resolver,high
 changes,Changes,https://appcatalog.cloud/apps/changes,autopkg,,,,sparkle/feed,bitbq_changes.s3.amazonaws.com,,,,,,autopkg-sourced-format-tbd,high
-chatkit,Chatkit,https://appcatalog.cloud/apps/chatkit,web-research,,dmg,yes,vendor,https://github.com/egoist/chatkit-releases/releases/download/v0.2.16/ChatKit_0.2.16_aarch6,custom,,,,,custom: needs resolver,high
+chatkit,ChatKit,https://appcatalog.cloud/apps/chatkit,web-research,,dmg,yes,github,github.com/egoist/chatkit-releases,github_arch,,,,,in-registry,high
 chromebuddy,Chromebuddy,https://appcatalog.cloud/apps/chromebuddy,web-research,,zip,yes,github,repo=AndreyGr/ChromeBuddy;asset=ChromeBuddy.zip,github_tag,,,,,in-registry,med
 cisco-audio-device,Cisco Audio Device,https://appcatalog.cloud/apps/cisco-audio-device,web-research,,pkg,yes,vendor,https://www.cisco.com/c/dam/en/us/td/docs/collaboration/webex_centers/Collaboration-Help/T,custom,,,,,custom: needs resolver,med
 cisco-umbrella-roaming-client,Cisco Umbrella Roaming Client,https://appcatalog.cloud/apps/cisco-umbrella-roaming-client,web-research,,,no,,,,,,,,ineligible: Standalone Umbrella Roaming Client is discontinued/superseded by Cisco Secure Client; macO,
@@ -132,7 +132,7 @@ dragonframe-2025,Dragonframe 2025,https://appcatalog.cloud/apps/dragonframe-2025
 dragonframe-5,Dragonframe 5,https://appcatalog.cloud/apps/dragonframe-5,installomator,dragonframe5,pkg,yes,dynamic-scrape,www.dragonframe.com,"""$( echo ""$downloadURL"" | cut -d '_' -f 2 | cut -d '.' -f 1-3 )""",PG7SM8SD8M,com.dzed.Dragonframe5,,yes,in-registry,high
 dropnotch,Dropnotch,https://appcatalog.cloud/apps/dropnotch,web-research,,dmg,yes,vendor,https://junebytes.com/downloads/DropNotch.dmg,custom,,,,,custom: needs resolver,high
 dropnote,Dropnote,https://appcatalog.cloud/apps/dropnote,web-research,,zip,yes,github,repo=bastian-js/dropnote;asset=DropNote.zip,github_tag,,,,,in-registry,high
-droppoint,Droppoint,https://appcatalog.cloud/apps/droppoint,web-research,,dmg,yes,vendor,https://github.com/GameGodS3/DropPoint/releases/download/v1.2.1/DropPoint-1.2.1-arm64-Appl,custom,,,,,custom: needs resolver,high
+droppoint,DropPoint,https://appcatalog.cloud/apps/droppoint,web-research,,dmg,yes,github,github.com/GameGodS3/DropPoint,github_arch,,,,,in-registry,high
 dstny,Dstny,https://appcatalog.cloud/apps/dstny,installomator,dstny,dmg,review,direct,soft.dstny.se,,5RLWBLKGL2,,,,review: https://soft.dstny.se/dstny_mac.dmg = HTTP 200 application/octet-stream but URL ,high
 eclipse-ide-for-embedded-cc-developers,Eclipse Ide For Embedded Cc Developers,https://appcatalog.cloud/apps/eclipse-ide-for-embedded-cc-developers,web-research,,dmg,yes,vendor,https://www.eclipse.org/downloads/download.php?file=/technology/epp/downloads/release/2026,custom,,,,,custom: needs resolver,high
 eclipse-ide-for-enterprise-java-and-web-developers,Eclipse Ide For Enterprise Java And Web Developers,https://appcatalog.cloud/apps/eclipse-ide-for-enterprise-java-and-web-developers,web-research,,,review,,,,,,,,"review: Duplicate: cask ""eclipse-jee"" already exists (formulae.brew.sh/api/cask/eclipse-jee.json =",high
@@ -153,7 +153,7 @@ everweb,Everweb,https://appcatalog.cloud/apps/everweb,installomator,everweb,dmg,
 exiftool,Exiftool,https://appcatalog.cloud/apps/exiftool,autopkg,,,,dynamic-scrape,exiftool.org,,,,,,autopkg-sourced-format-tbd,high
 farmerswife,Farmerswife,https://appcatalog.cloud/apps/farmerswife,web-research,,,review,,,,,,,,review: Portal-gated. farmerswife Desktop Client (bundle com.farmerswife.client) installers are se,high
 figura,Figura,https://appcatalog.cloud/apps/figura,web-research,,zip,yes,github,repo=nuance-dev/figura;asset=Figura.app.zip,github_tag,,,,,in-registry,high
-file-architect,File Architect,https://appcatalog.cloud/apps/file-architect,web-research,,dmg,yes,vendor,https://github.com/filearchitect/app/releases/download/v0.11.22/filearchitect_0.11.22_darw,custom,,,,,custom: needs resolver,high
+file-architect,File Architect,https://appcatalog.cloud/apps/file-architect,web-research,,dmg,yes,github,github.com/filearchitect/app,github_arch,,,,,in-registry,high
 filemail,Filemail,https://appcatalog.cloud/apps/filemail,web-research,,dmg,yes,vendor,https://www.filemail.com/link.ashx?id=1123,custom,,,,,custom: needs resolver,high
 fileminutes,Fileminutes,https://appcatalog.cloud/apps/fileminutes,web-research,,dmg,yes,vendor,https://www.fileminutes.com/downloads/FileMinutes.dmg,custom,,,,,custom: needs resolver,med
 filezilla,Filezilla,https://appcatalog.cloud/apps/filezilla,autopkg,,,,dynamic-scrape,filezilla-project.org,,,,,,autopkg-sourced-format-tbd,high
@@ -189,7 +189,7 @@ grasshopper,Grasshopper,https://appcatalog.cloud/apps/grasshopper,installomator,
 growly-glucose,Growly Glucose,https://appcatalog.cloud/apps/growly-glucose,web-research,,dmg,yes,vendor,https://www.growlybird.com/downloads/glucose_111.dmg,custom,,,,,custom: needs resolver,high
 guardian-browser,Guardian Browser,https://appcatalog.cloud/apps/guardian-browser,installomator,guardianbrowser,dmg,yes,direct,production-archimedes-secure-browser-artifacts.s3.amazonaws.com,,7TCATJSU2Y,,,,custom: needs resolver,high
 haiku-animator,Haiku Animator,https://appcatalog.cloud/apps/haiku-animator,web-research,,dmg,yes,github,repo=HaikuTeam/animator;asset=Haiku-{v}.dmg,github_tag,,,,,in-registry,high
-hide-icons,Hide Icons,https://appcatalog.cloud/apps/hide-icons,autopkg,,,,github,com-entonos/Hide-Icons,,,,,,autopkg-sourced-format-tbd,high
+hide-icons,Hide Icons,https://appcatalog.cloud/apps/hide-icons,autopkg,,zip,yes,github,github.com/com-entonos/Hide-Icons,github_tag,,,,,in-registry,high
 hintview,Hintview,https://appcatalog.cloud/apps/hintview,web-research,,,review,,https://hint.userweb.mwn.de/hint/hintview.html,,,,,,review: The HINT Project (Martin Ruckert) HINT viewer. Official page https://hint.userweb.mwn.de/h,high
 homebrew,Homebrew,https://appcatalog.cloud/apps/homebrew,installomator,homebrew,pkg,no,github,Homebrew/brew,"""$(versionFromGit Homebrew brew)""",927JGANW46,sh.brew.homebrew,,,"review: bogus: Homebrew itself, not a cask",high
 horse,Horse,https://appcatalog.cloud/apps/horse,web-research,,zip,yes,vendor,https://carrots.browser.horse/download/darwin-arm64,custom,,,,,custom: needs resolver,high
@@ -225,7 +225,7 @@ istat-menu,Istat Menu,https://appcatalog.cloud/apps/istat-menu,web-research,,,re
 istatistica-pro,Istatistica Pro,https://appcatalog.cloud/apps/istatistica-pro,web-research,,dmg,yes,vendor,https://www.imagetasks.com/istatistica/pro/download-pro/iStatisticaProTrial.dmg,custom,,,,,custom: needs resolver,high
 jamf-actions,Jamf Actions,https://appcatalog.cloud/apps/jamf-actions,web-research,,zip,yes,github,repo=Jamf-Concepts/actions;asset=Jamf.Actions.zip,github_tag,,,,,in-registry,high
 jamf-aftermath,Jamf Aftermath,https://appcatalog.cloud/apps/jamf-aftermath,web-research,,pkg,yes,github,repo=jamf/aftermath;asset=aftermath-{v}.pkg,github_tag,,,,,in-registry,high
-jamf-cli,Jamf Cli,https://appcatalog.cloud/apps/jamf-cli,autopkg,,,,github,Jamf-Concepts/jamf-cli,,,,,,autopkg-sourced-format-tbd,high
+jamf-cli,Jamf CLI,https://appcatalog.cloud/apps/jamf-cli,autopkg,,pkg,yes,github,github.com/Jamf-Concepts/jamf-cli,github_tag,,,,,in-registry,high
 jamf-cloud-package-replicator,Jamf Cloud Package Replicator,https://appcatalog.cloud/apps/jamf-cloud-package-replicator,web-research,,zip,yes,github,repo=BIG-RAT/jamfcpr;asset=jamfcpr.zip,github_tag,,,,,in-registry,high
 jamf-compliance-editor,Jamf Compliance Editor,https://appcatalog.cloud/apps/jamf-compliance-editor,autopkg,,,,github,Jamf-Concepts/jamf-compliance-editor,,,,,,autopkg-sourced-format-tbd,high
 jamf-connect-configuration,Jamf Connect Configuration,https://appcatalog.cloud/apps/jamf-connect-configuration,installomator,jamfconnectconfiguration,dmg,yes,direct,files.jamfconnect.com,"$(curl -fsIL ""${downloadURL}"" | grep ""x-amz-meta-version"" | grep -o ""[0-9.].*[0-9.].*[0-9]"")",483DWKW443,,,,custom: needs resolver,high
@@ -237,8 +237,8 @@ jamf-printer-manager,Jamf Printer Manager,https://appcatalog.cloud/apps/jamf-pri
 jamf-protect-ulf-uploader,Jamf Protect Ulf Uploader,https://appcatalog.cloud/apps/jamf-protect-ulf-uploader,web-research,,zip,yes,github,repo=red5coder/jamf-protect-ulf-uploader;asset=Jamf.Protect.ULF.Uploader.app.zip,github_tag,,,,,in-registry,high
 jamf-prune,Jamf Prune,https://appcatalog.cloud/apps/jamf-prune,web-research,,zip,yes,github,repo=BIG-RAT/Prune;asset=Prune.zip,github_tag,,,,,in-registry,high
 jamf-reenroller,ReEnroller,https://appcatalog.cloud/apps/jamf-reenroller,installomator,jamfreenroller,zip,yes,github,jamf/ReEnroller,github_latest,PS2F6S478M,,,,in-registry,high
-jamf-replicator,Jamf Replicator,https://appcatalog.cloud/apps/jamf-replicator,autopkg,,,,github,jamf/Replicator,,,,,,autopkg-sourced-format-tbd,high
-jamf-sync,Jamf Sync,https://appcatalog.cloud/apps/jamf-sync,autopkg,,,,github,jamf/JamfSync,,,,,,autopkg-sourced-format-tbd,high
+jamf-replicator,Jamf Replicator,https://appcatalog.cloud/apps/jamf-replicator,autopkg,,zip,yes,github,github.com/jamf/Replicator,github_tag,,,,,in-registry,high
+jamf-sync,Jamf Sync,https://appcatalog.cloud/apps/jamf-sync,autopkg,,zip,yes,github,github.com/jamf/JamfSync,github_tag,,,,,in-registry,high
 jamfcheck,JamfCheck,https://appcatalog.cloud/apps/jamfcheck,installomator,jamfcheck,dmg,yes,github,txhaflaire/JamfCheck,"""$(versionFromGit txhaflaire JamfCheck)""",CLQKFNPCCP,,,,in-registry,high
 jamfdash,Jamfdash,https://appcatalog.cloud/apps/jamfdash,web-research,,pkg,yes,github,repo=DevliegereM/JamfDash;asset=JamfDash_v{v}.pkg,github_tag,,,,,in-registry,high
 jamfhelper-constructor,Jamfhelper Constructor,https://appcatalog.cloud/apps/jamfhelper-constructor,web-research,,zip,yes,github,repo=BIG-RAT/jhc;asset=jhc.zip,github_tag,,,,,in-registry,high
@@ -274,7 +274,7 @@ macgpt,Macgpt,https://appcatalog.cloud/apps/macgpt,web-research,,,review,,https:
 macos-instantview,Macos Instantview,https://appcatalog.cloud/apps/macos-instantview,web-research,,dmg,yes,vendor,https://www.siliconmotion.com/downloads/macOS_InstantView_V3.24R0004.dmg,custom,,,,,custom: needs resolver,high
 macuncle-eml-viewer,Macuncle Eml Viewer,https://appcatalog.cloud/apps/macuncle-eml-viewer,web-research,,dmg,yes,vendor,https://www.macuncle.com/dl/macuncle-eml-viewer.dmg,custom,,,,,custom: needs resolver,high
 maglr,Maglr,https://appcatalog.cloud/apps/maglr,web-research,,,review,,https://apps.apple.com/us/app/maglr-presenter/id1485586751,,,,,,review: Maglr Presenter desktop app is distributed via Mac App Store (https://apps.apple.com/us/ap,low
-mailvault,Mailvault,https://appcatalog.cloud/apps/mailvault,autopkg,,,,github,GraphicMeat/mail-vault-app,,,,,,autopkg-sourced-format-tbd,high
+mailvault,MailVault,https://appcatalog.cloud/apps/mailvault,autopkg,,dmg,yes,github,github.com/GraphicMeat/mail-vault-app,github_tag,,,,,in-registry,high
 mamp-pro,Mamp Pro,https://appcatalog.cloud/apps/mamp-pro,web-research,,pkg,yes,vendor,https://downloads.mamp.info/MAMP-PRO/macOS/MAMP-PRO/MAMP-MAMP-PRO-7.4-Apple-chip.pkg,custom,,,,,custom: needs resolver,high
 mana-security,Mana Security,https://appcatalog.cloud/apps/mana-security,web-research,,,no,,,,,,,,ineligible: Mana Security (com.manasecurity.mana). GitHub repo manasecurity/mana-security-app latest r,
 managed-app-schema-builder,Managed App Schema Builder,https://appcatalog.cloud/apps/managed-app-schema-builder,installomator,managedappschemabuilder,zip,yes,github,BIG-RAT/Managed-App-Schema-Builder,"""$(versionFromGit BIG-RAT Managed-App-Schema-Builder)""",PS2F6S478M,,,,in-registry,high
@@ -321,7 +321,7 @@ net-80,Net 80,https://appcatalog.cloud/apps/net-80,web-research,,,review,,https:
 net-90,Net 90,https://appcatalog.cloud/apps/net-90,web-research,,,review,,https://formulae.brew.sh/api/cask/dotnet-sdk@9.json,,,,,,"review: Duplicate. ""Net 90"" = .NET SDK 9.0 (Microsoft, dev UBF8T346G9). Cask already exists: https",high
 netbird,Netbird,https://appcatalog.cloud/apps/netbird,web-research,,pkg,yes,vendor,https://github.com/netbirdio/netbird/releases/download/v0.72.2/netbird_0.72.2_darwin_arm64,custom,,,,,custom: needs resolver,high
 network-share-mounter,Network Share Mounter,https://appcatalog.cloud/apps/network-share-mounter,installomator,networksharemounter,pkg,yes,dynamic-scrape,gitlab.rrze.fau.de,$(curl -sfL https://gitlab.rrze.fau.de/api/v4/projects/506/releases | grep -o 'release-[0-9]\+\.[0-9]\+\.[0-9]\+' | grep -o '[0-9]\+\.[0-9]\+\.[0-9]\+' | head -n 1),C8F68RFW4L,de.fau.rrze.NetworkShareMounter,,,in-registry,high
-nextai-translator,Nextai Translator,https://appcatalog.cloud/apps/nextai-translator,web-research,,dmg,yes,vendor,https://github.com/nextai-translator/nextai-translator/releases/download/v0.6.20/NextAI.Tr,custom,,,,,custom: needs resolver,high
+nextai-translator,NextAI Translator,https://appcatalog.cloud/apps/nextai-translator,web-research,,dmg,yes,github,github.com/nextai-translator/nextai-translator,github_tag,,,,,in-registry,high
 nextcloud-desktop-client,Nextcloud Desktop Client,https://appcatalog.cloud/apps/nextcloud-desktop-client,installomator,nextcloud,pkg,review,github,nextcloud-releases/desktop,$(versionFromGit nextcloud-releases desktop),NKUJUXUJ3B,,,,review: duplicate of existing cask 'nextcloud',high
 nextpad,Nextpad,https://appcatalog.cloud/apps/nextpad,web-research,,dmg,yes,github,repo=nextpad-plus-plus/nextpad-plus-plus-macos;asset=Nextpad++v{v}.dmg,github_tag,,,,,in-registry,high
 nightowl,Nightowl,https://appcatalog.cloud/apps/nightowl,autopkg,,,,sparkle/feed,darkmenu.s3.amazonaws.com,,,,,,autopkg-sourced-format-tbd,high
@@ -361,7 +361,7 @@ patch-desktop,Patch Desktop,https://appcatalog.cloud/apps/patch-desktop,web-rese
 patternodes,Patternodes,https://appcatalog.cloud/apps/patternodes,web-research,,dmg,yes,vendor,https://www.lostminds.com/downloads/patternodes3.dmg,custom,,,,,custom: needs resolver,high
 pdfsail,Pdfsail,https://appcatalog.cloud/apps/pdfsail,web-research,,dmg,yes,vendor,https://download.pdfsail.com/OfficeSuite/PDFSailMac/PDFsail_mac_Desktop%20Installer.dmg,custom,,,,,custom: needs resolver,high
 peakto,Peakto,https://appcatalog.cloud/apps/peakto,web-research,,,review,,,,,,,,"review: Account/purchase-gated. Peakto (Cyme photo organizer, bundle io.cyme.Peakto, dev 7PS8QUM93",high
-peazip,Peazip,https://appcatalog.cloud/apps/peazip,web-research,,dmg,yes,vendor,https://github.com/peazip/PeaZip/releases/download/11.1.0/peazip-11.1.0.DARWIN.aarch64.dmg,custom,,,,,custom: needs resolver,high
+peazip,PeaZip,https://appcatalog.cloud/apps/peazip,web-research,,dmg,yes,github,github.com/peazip/PeaZip,github_arch,,,,,in-registry,high
 pgmagic,Pgmagic,https://appcatalog.cloud/apps/pgmagic,web-research,,,review,,,,,,,,"review: Purchase-gated. pgMagic (natural-language Postgres client, bundle xyz.hill.pgMagic, dev 2L",high
 photos-workbench,Photos Workbench,https://appcatalog.cloud/apps/photos-workbench,web-research,,dmg,yes,direct,https://www.houdah.com/photosWorkbench/download_assets/Photos_Workbench_{v}.dmg,direct,,,,,in-registry,high
 phraseexpress,Phraseexpress,https://appcatalog.cloud/apps/phraseexpress,autopkg,,,,dynamic-scrape,www.phraseexpress.com,,,,,,autopkg-sourced-format-tbd,high
@@ -399,14 +399,14 @@ root3-support-app,Root3 Support App,https://appcatalog.cloud/apps/root3-support-
 rstudio-desktop,Rstudio Desktop,https://appcatalog.cloud/apps/rstudio-desktop,web-research,,,review,,https://formulae.brew.sh/api/cask/rstudio.json,,,,,,"review: Duplicate: cask ""rstudio"" already exists (https://formulae.brew.sh/api/cask/rstudio.json -",high
 rumplet,Rumplet,https://appcatalog.cloud/apps/rumplet,web-research,,zip,yes,vendor,https://www.maxum.com/DownloadPackages/Rumplet.zip,custom,,,,,custom: needs resolver,high
 rumpus,Rumpus,https://appcatalog.cloud/apps/rumpus,web-research,,dmg,yes,direct,https://www.maxum.com/DownloadPackages/Rumpus-{v}.dmg,direct,,,,,in-registry,high
-sapmachine-manager,Sapmachine Manager,https://appcatalog.cloud/apps/sapmachine-manager,autopkg,,,,github,sap/sapmachine-manager-for-macos,,,,,,autopkg-sourced-format-tbd,high
+sapmachine-manager,SapMachine Manager,https://appcatalog.cloud/apps/sapmachine-manager,autopkg,,pkg,yes,github,github.com/sap/sapmachine-manager-for-macos,github_tag,,,,,in-registry,high
 scratch-link,Scratch Link,https://appcatalog.cloud/apps/scratch-link,web-research,,,no,,,,,,,,"ineligible: Now Mac App Store only. github.com/LLK/scratch-link (scratchfoundation) has NO releases (""",
 screen-share,Screen Share,https://appcatalog.cloud/apps/screen-share,web-research,,,review,,,,,,,,review: ND (cn.com.nd.pmcast) classroom screen-sharing app. No official vendor download page or pu,med
 screencloud-player,Screencloud Player,https://appcatalog.cloud/apps/screencloud-player,installomator,screencloudplayer,dmg,yes,dynamic-scrape,screencloud.com,$( echo $downloadURL | sed -e 's/.*\/ScreenCloud.*\-\([0-9.]*\)\.dmg/\1/g' ),3C4F953K6P,,,,in-registry,high
 screenflow-hal-audio-driver,Screenflow Hal Audio Driver,https://appcatalog.cloud/apps/screenflow-hal-audio-driver,web-research,,pkgInZip,yes,vendor,https://www.telestream.net/download-files/screenflow/InstallTelestreamAudioCapture.pkg.zip,custom,,,,,custom: needs resolver,med
 screenml,Screenml,https://appcatalog.cloud/apps/screenml,web-research,,,review,,,,,,,,review: screenml.com is Cloudflare bot-gated: returns HTTP 503/410 to curl and to browser-UA fetch,low
 scribe-desktop,Scribe Desktop,https://appcatalog.cloud/apps/scribe-desktop,autopkg,,,,sparkle/feed,colony-labs-public.s3.us-east-2.amazonaws.com,,,,,,autopkg-sourced-format-tbd,high
-script2pkg,Script2Pkg,https://appcatalog.cloud/apps/script2pkg,autopkg,,,,github,sap/script-to-package-tool-for-macos,,,,,,autopkg-sourced-format-tbd,high
+script2pkg,Script2Pkg,https://appcatalog.cloud/apps/script2pkg,autopkg,,pkg,yes,github,github.com/sap/script-to-package-tool-for-macos,github_tag,,,,,in-registry,high
 scrutiny,Scrutiny,https://appcatalog.cloud/apps/scrutiny,web-research,,dmg,yes,direct,https://peacockmedia.software/mac/scrutiny/scrutiny.dmg,direct,,,,,in-registry,med
 setup-checklist,Setup Checklist,https://appcatalog.cloud/apps/setup-checklist,web-research,,,review,,,,,,,,review: Jamf-Concepts/setup-checklist (github) ships ONLY beta releases — latest tag v0.4.0beta (a,high
 setup-manager,Setup Manager,https://appcatalog.cloud/apps/setup-manager,web-research,,pkg,yes,vendor,https://github.com/jamf/Setup-Manager/releases/download/v1.4.5/Setup.Manager-1.4.5-646.pkg,custom,,,,,custom: needs resolver,high
@@ -426,14 +426,14 @@ skopos-agent,Skopos Agent,https://appcatalog.cloud/apps/skopos-agent,web-researc
 sleeve,Sleeve,https://appcatalog.cloud/apps/sleeve,web-research,,,review,,,,,,,,review: Replay Software Sleeve 3. Two channels: Mac App Store (apps.apple.com/app/id1606145041) an,high
 slido-for-powerpoint,Slido For Powerpoint,https://appcatalog.cloud/apps/slido-for-powerpoint,web-research,,dmg,yes,vendor,https://download.slido.com/slido-for-mac/updates/SlidoForMac_r3325.dmg,custom,,,,,custom: needs resolver,high
 smart-mirror-app,Smart Mirror App,https://appcatalog.cloud/apps/smart-mirror-app,web-research,,pkg,yes,vendor,https://downloads.smarttech.com/software/smartmirror/4_49/mac/SMART_Mirror_App_2.49.1.5057,custom,,,,,custom: needs resolver,high
-smotrite,Smotrite,https://appcatalog.cloud/apps/smotrite,web-research,,dmg,yes,vendor,https://github.com/Lukentui/smotrite-app/releases/download/v1.1.0/Smotrite-Mac-arm64-1.1.0,custom,,,,,custom: needs resolver,high
+smotrite,Smotrite,https://appcatalog.cloud/apps/smotrite,web-research,,dmg,yes,github,github.com/Lukentui/smotrite-app,github_arch,,,,,in-registry,high
 smugmug,Smugmug,https://appcatalog.cloud/apps/smugmug,web-research,,,review,,,,,,,,review: Help-center-gated / no public versioned URL. SmugMug macOS Uploader (bundle com.smugmug.Sm,med
 snapgene,Snapgene,https://appcatalog.cloud/apps/snapgene,autopkg,,,,dynamic-scrape,www.snapgene.com,,,,,,autopkg-sourced-format-tbd,high
-sniffnet,Sniffnet,https://appcatalog.cloud/apps/sniffnet,web-research,,dmg,yes,vendor,https://github.com/GyulyVGC/sniffnet/releases/download/v1.5.0/Sniffnet_macOS_Intel.dmg,custom,,,,,custom: needs resolver,high
+sniffnet,Sniffnet,https://appcatalog.cloud/apps/sniffnet,web-research,,dmg,yes,github,github.com/GyulyVGC/sniffnet,github_arch,,,,,in-registry,high
 soundfield-by-rode,Soundfield By Rode,https://appcatalog.cloud/apps/soundfield-by-rode,web-research,,pkgInZip,yes,vendor,https://edge.rode.com/zip/page/1890/modules/5329/SoundFieldByRODE_MAC_ver1.0.2.pkg.zip,custom,,,,,custom: needs resolver,high
 soundly,Soundly,https://appcatalog.cloud/apps/soundly,installomator,soundly,dmg,review,direct,storage.googleapis.com,,67Y6N7VTDG,,,,review: Only an unversioned always-latest dmg: https://storage.googleapis.com/soundlyapp,high
 soundq,Soundq,https://appcatalog.cloud/apps/soundq,autopkg,,,,dynamic-scrape,www.prosoundeffects.com,,,,,,autopkg-sourced-format-tbd,high
-spacesuit,Spacesuit,https://appcatalog.cloud/apps/spacesuit,web-research,,dmg,yes,vendor,https://github.com/lightmode-laboratories/spacesuit/releases/download/v1.20.0/Spacesuit-ar,custom,,,,,custom: needs resolver,high
+spacesuit,Spacesuit,https://appcatalog.cloud/apps/spacesuit,web-research,,dmg,yes,github,github.com/lightmode-laboratories/spacesuit,github_arch,,,,,in-registry,high
 spark-desktop,Spark Desktop,https://appcatalog.cloud/apps/spark-desktop,autopkg,,,,dynamic-scrape,sparkmailapp.com,,,,,,autopkg-sourced-format-tbd,high
 speediness,Speediness,https://appcatalog.cloud/apps/speediness,web-research,,,review,,https://apps.apple.com/us/app/speediness/id1596706466?mt=12,,,,,,review: Mac App Store only. Speediness by Sindre Sorhus (bundle com.sindresorhus.Speediness) ships,high
 splashtop-sos,Splashtop Sos,https://appcatalog.cloud/apps/splashtop-sos,installomator,splashtopsos,dmg,review,direct,download.splashtop.com,,CPQQ3AW49Y,,,,review: Only an unversioned always-latest dmg: https://download.splashtop.com/sos/Splash,high
@@ -455,7 +455,7 @@ supercharge,Supercharge,https://appcatalog.cloud/apps/supercharge,web-research,,
 supercorners,Supercorners,https://appcatalog.cloud/apps/supercorners,web-research,,zip,yes,github,repo=daniyalmaster693/SuperCorners;asset=SuperCorners.zip,github_tag,,,,,in-registry,high
 surfdrive,Surfdrive,https://appcatalog.cloud/apps/surfdrive,installomator,surfdrive,pkg,review,dynamic-scrape,servicedesk.surf.nl,"$(curl -fs https://servicedesk.surf.nl/wiki/spaces/WIKI/pages/74225443/Desktop+client+login|grep -Eo ""(http|https)://[a-zA-Z0-9./?=_%:-]*"" | grep pkg | grep arm |cut -d -f2)",4AP2STM4H5,,"( ""surfdrive"" )",,review: Gated. Installomator source page (servicedesk.surf.nl/wiki/.../74225443) is logi,high
 swiftcord,Swiftcord,https://appcatalog.cloud/apps/swiftcord,web-research,,zip,yes,github,repo=SwiftcordApp/Swiftcord;asset=Swiftcord.zip,github_tag,,,,,in-registry,high
-swiftguard,Swiftguard,https://appcatalog.cloud/apps/swiftguard,web-research,,dmg,yes,vendor,https://github.com/Lennolium/swiftGuard/releases/download/v0.0.2/swiftGuard.dmg,custom,,,,,custom: needs resolver,high
+swiftguard,swiftGuard,https://appcatalog.cloud/apps/swiftguard,web-research,,dmg,yes,github,github.com/Lennolium/swiftGuard,github_arch,,,,,in-registry,high
 sym-helper,SYM-Helper,https://appcatalog.cloud/apps/sym-helper,installomator,symhelper,zip,yes,github,setup-your-mac/SYM-Helper,"""$(versionFromGit setup-your-mac SYM-Helper)""",PS2F6S478M,,,,in-registry,high
 synology-active-backup-for-business-agent,Synology Active Backup For Business Agent,https://appcatalog.cloud/apps/synology-active-backup-for-business-agent,installomator,synologyactivebackupforbusinessagent,pkgInDmg,yes-nested,dynamic-scrape,archive.synology.com,"$(curl -sf https://archive.synology.com/download/Utility/ActiveBackupBusinessAgent | grep -m 1 /download/Utility/ActiveBackupBusinessAgent/ | sed ""s|.*>\(.*\)<.*|\\1|"" | sed ""s#.*-\(\)#\1#"")",X85BAK35Y4,com.synology.activebackup-agent,,,custom: needs resolver,high
 synology-drive-client,Synology Drive Client,https://appcatalog.cloud/apps/synology-drive-client,installomator,synologydriveclient,pkgInDmg,yes-nested,direct,global.download.synology.com,"""$( echo $appFullVersion | sed ""s|.*-\(\)|\\1|"" )""",X85BAK35Y4,,,,custom: needs resolver,high
@@ -470,7 +470,7 @@ textream,Textream,https://appcatalog.cloud/apps/textream,web-research,,dmg,yes,g
 textsoap,Textsoap,https://appcatalog.cloud/apps/textsoap,autopkg,,,,dynamic-scrape,unmarked.s3.amazonaws.com,,,,,,autopkg-sourced-format-tbd,high
 things,Things,https://appcatalog.cloud/apps/things,installomator,things,zip,yes,direct,culturedcode.com,,JLMPQHK86H,,,,in-registry,high
 tigervnc-viewer,Tigervnc Viewer,https://appcatalog.cloud/apps/tigervnc-viewer,web-research,,,review,,,,,,,,review: Duplicate: a cask 'tigervnc' already exists (formulae.brew.sh/api/cask/tigervnc.json = HTT,high
-time-machine-inspector,Time Machine Inspector,https://appcatalog.cloud/apps/time-machine-inspector,web-research,,dmg,yes,vendor,https://github.com/probablykasper/time-machine-inspector/releases/download/v1.2.1/Time.Mac,custom,,,,,custom: needs resolver,high
+time-machine-inspector,Time Machine Inspector,https://appcatalog.cloud/apps/time-machine-inspector,web-research,,dmg,yes,github,github.com/probablykasper/time-machine-inspector,github_arch,,,,,in-registry,high
 timebuzzer,Timebuzzer,https://appcatalog.cloud/apps/timebuzzer,web-research,,,review,,https://timebuzzer.com/get/timeBuzzer.dmg,,,,,,review: timeBuzzer requires a paid account/login to use (my.timebuzzer.com; 15-day trial). Downloa,low
 tinyweb,Tinyweb,https://appcatalog.cloud/apps/tinyweb,web-research,,dmg,yes,vendor,https://tinyweb.so/release/osx/tinyweb_latest,custom,,,,,custom: needs resolver,high
 trace,Trace,https://appcatalog.cloud/apps/trace,web-research,,dmg,yes,vendor,https://trace.argio.ch/download/Trace.dmg,custom,,,,,custom: needs resolver,high
@@ -497,7 +497,7 @@ vidmore-player,Vidmore Player,https://appcatalog.cloud/apps/vidmore-player,web-r
 vidmore-screen-recorder,Vidmore Screen Recorder,https://appcatalog.cloud/apps/vidmore-screen-recorder,web-research,,zip,yes,vendor,https://download.vidmore.com/mac/screen-recorder.zip,custom,,,,,custom: needs resolver,high
 vidmore-video-enhancer,Vidmore Video Enhancer,https://appcatalog.cloud/apps/vidmore-video-enhancer,web-research,,dmg,yes,vendor,https://download.vidmore.com/mac/video-enhancer.dmg,custom,,,,,custom: needs resolver,high
 viper-ftp,Viper Ftp,https://appcatalog.cloud/apps/viper-ftp,web-research,,dmg,yes,vendor,https://naarakstudio.com/download/ViperFTP.dmg,custom,,,,,custom: needs resolver,high
-visualz,Visualz,https://appcatalog.cloud/apps/visualz,installomator,visualz,dmg,yes,github,madchops1/visualz-releases,"""$(versionFromGit madchops1 visualz-releases)""",6RLU6426R3,,,,custom: needs resolver,high
+visualz,Visualz,https://appcatalog.cloud/apps/visualz,installomator,visualz,dmg,yes,github,github.com/madchops1/visualz-releases,github_arch,6RLU6426R3,,,,in-registry,high
 vivi,Vivi,https://appcatalog.cloud/apps/vivi,installomator,vivi,pkg,yes,dynamic-scrape,api.vivi.io,"$(curl -fsIL https://api.vivi.io/mac | grep -i ""^location"" | awk ""{print $2}"" | sed -E ""s/.*\/[a-zA-Z]*-([0-9.]*)\..*/\1/g"")",3NRCUJ8TJC,au.com.viviaustralia.mac,,,custom: needs resolver,high
 vocal,Vocal,https://appcatalog.cloud/apps/vocal,web-research,,zip,yes,github,repo=nuance-dev/vocal;asset=Vocal.app.zip,github_tag,,,,,in-registry,high
 voiceedge,Voiceedge,https://appcatalog.cloud/apps/voiceedge,web-research,,,review,,,,,,,,review: Comcast Business VoiceEdge desktop app: distribution is gated behind a Comcast Business ac,high

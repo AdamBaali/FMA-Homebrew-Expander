@@ -72,3 +72,11 @@
 - Registry now 110 rows; sourced 532/533; unsourced 1 remain.
 
 `sourced 532/533 | in-registry 110 | custom 159 | review/inelig 195 | unsourced 1 | dryrun-clean 0`
+
+## 2026-06-09 — Author batch A: GitHub arch-split + single-asset (+20 rows)
+
+- Added `github_arch` source handler (on_arm/on_intel, dmg/zip).
+- Authored 11 arch-split + 1 single (nextai-translator) custom GitHub apps + 8 AutoPkg-github apps = 20 rows. brackets -> review (discontinued, no mac asset).
+- Registry now 130 rows.
+
+`sourced 533/533 | in-registry 130 | custom 148 | autopkg-pending 58 | review/inelig 196 | dryrun-clean 0`

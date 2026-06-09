@@ -1,7 +1,7 @@
 {
   "project": "FMA no-homebrew-cask sourcing + cask authoring",
   "updated": "2026-06-09",
-  "phase": "Phase 1 COMPLETE \u2014 all 341 cold-sourced; 533/533 triaged",
+  "phase": "Phase 2 authoring \u2014 batch A (GitHub arch-split + single) done",
   "canonical_paths": {
     "master_list": "data/master-list.csv",
     "worklist": "data/unsourced-worklist.csv",
@@ -17,12 +17,12 @@
     "sourced": 533,
     "unsourced": 0,
     "registry_ready": 79,
-    "review_or_ineligible": 195,
-    "autopkg_needs_installer_type": 67,
-    "in_registry": 110,
+    "review_or_ineligible": 196,
+    "autopkg_needs_installer_type": 58,
+    "in_registry": 130,
     "dryrun_clean": 0,
     "eligible_remaining_to_author": 36,
-    "custom_resolver_todo": 160
+    "custom_resolver_todo": 148
   },
   "sourcing_cursor": {
     "phase1_chunks_total": 18,
@@ -34,9 +34,10 @@
     "gh and autopkg are not installed (gh is only needed at submit time; autopkg is optional for sourcing)."
   ],
   "notes": [
-    "PHASE 1 DONE: 110 registry rows; 159 custom to-do; 195 review/ineligible; 1 unsourced left; 67 AutoPkg pending classification.",
-    "Next: (a) classify the AutoPkg-pending rows, (b) author the custom resolvers on a Mac, (c) DRYRUN the whole registry on macOS.",
-    "Each wave pushed via claude/phase1-waveN -> PR -> squash-merge to main; README+docs+artifacts updated every push.",
+    "130 registry rows authored; 148 custom to-do; 58 AutoPkg pending; 196 review/ineligible.",
+    "Added github_arch source handler to cask-master.sh (arch-split GitHub dmg/zip via on_arm/on_intel).",
+    "Authoring sourced backlog into the registry in batches. Next: direct_latest (~56), electron (~26), direct_arch (~10) handlers + AutoPkg sparkle/scrape.",
+    "Each batch: push claude/author-waveN -> PR -> squash-merge to main; README+docs+artifacts updated.",
     "Do NOT submit; deliverable is the filled script for DRYRUN + run on macOS."
   ]
 }
