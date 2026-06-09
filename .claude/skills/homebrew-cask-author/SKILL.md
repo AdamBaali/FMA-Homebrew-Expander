@@ -1,6 +1,6 @@
 ---
 name: homebrew-cask-author
-description: Author and submit a new Homebrew Cask to Homebrew/homebrew-cask for a macOS app, end to end, as one runnable script. Research the app's download URL, version, sha256, bundle identifier, pkg receipt, minimum macOS, and uninstall/zap behavior (from the vendor, Installomator, AutoPkg, Munki, and existing casks); write the cask DSL; validate with brew style, brew audit, and a real install and uninstall on a Mac; push the branch and open the PR with the current checklist and an honest AI-usage disclosure; then file the matching Fleet-maintained-app feature request linking the PR. The script writes a summary to paste back so failures can be fixed. Use whenever someone wants to add an app to Homebrew Cask or Fleet-maintained apps, write, fix, or validate a cask .rb file, or resolve cask CI errors (OSDependsOn, leftover launch jobs, shared Microsoft AutoUpdate, redundant verified, unversioned sha256, token conflicts, homepage or livecheck failures). Trigger even on brief asks like 'add this app to Homebrew'.
+description: Author and submit a new Homebrew Cask to Homebrew/homebrew-cask for a macOS app, end to end, as one runnable script. Research the app's download URL, version, sha256, bundle identifier, pkg receipt, minimum macOS, and uninstall/zap behavior (from the vendor, Installomator, AutoPkg, Munki, and existing casks); write the cask DSL; validate with brew style, brew audit, and a real install and uninstall on a Mac; push the branch and open the PR with the current checklist and an honest AI-usage disclosure; then file the matching Fleet-maintained-app feature request linking the PR. Use whenever someone wants to add an app to Homebrew Cask or Fleet-maintained apps, write, fix, or validate a cask .rb file, or resolve cask CI errors (OSDependsOn, leftover launch jobs, shared Microsoft AutoUpdate, redundant verified, unversioned sha256, token conflicts, homepage or livecheck failures). Trigger even on brief asks like 'add this app to Homebrew'.
 ---
 
 # Authoring a Homebrew Cask (one-shot)
@@ -44,6 +44,22 @@ derived **by the script** from the real download, so you don't need them up fron
 
 If the app's cask **already exists** in homebrew-cask, there's no PR to open: skip straight to the
 Fleet FR (use the `fleet-maintained-app-request` skill / the FR block in `references/end-to-end.md`).
+
+### Eligibility pre-flight — check BEFORE authoring (saves wasted work)
+Two homebrew-cask **core** gates can't be fixed from the cask side, and across a real batch they
+account for a large share of failures (in one 144-app run, ~53 were blocked this way). Triage first:
+- **Notarization.** The artifact must be signed + Apple-notarized. Spot-check the downloaded app:
+  `codesign -dvv <app>` showing `adhoc`/`linker-signed` or `TeamIdentifier=not set` ⇒ **not
+  notarizable into core.** Common for open-source/indie macOS apps (even popular ones).
+- **Notability.** A `github.com` download URL requires the repo to clear ≥75★ **or** ≥30 forks
+  **or** ≥30 watchers. Below that ⇒ blocked (`gh api repos/OWNER/REPO`). A **non-GitHub** vendor
+  download URL sidesteps this gate — prefer one if it exists.
+- Also: **archived** repos and tokens that **conflict with a homebrew/core formula** or **contain a
+  reserved word** (e.g. `desktop`) are rejected.
+
+If an app is blocked by any of these and there's no workaround, **skip it for core** (or route it to
+a Fleet-owned custom tap via the `fleet-maintained-app-request` custom-tap variant) rather than
+burning a full author+audit cycle on a cask that can't merge.
 
 ---
 

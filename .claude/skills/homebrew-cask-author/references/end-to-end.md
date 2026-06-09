@@ -100,8 +100,13 @@ mac_symbol(){ case "${1%%.*}" in
   14) echo sonoma;; 15) echo sequoia;; 16|26) echo tahoe;; *) echo big_sur;; esac; }
 read_app(){ APP_NAME="$(basename "$1")"
   BUNDLE_ID="$(/usr/libexec/PlistBuddy -c 'Print CFBundleIdentifier' "$1/Contents/Info.plist" 2>/dev/null)"
-  MINOS="$(/usr/libexec/PlistBuddy -c 'Print :LSMinimumSystemVersion' "$1/Contents/Info.plist" 2>/dev/null || echo 11)"; }
-inspect(){ RECEIPT=""; LABELS=""; MAU=""
+  MINOS="$(/usr/libexec/PlistBuddy -c 'Print :LSMinimumSystemVersion' "$1/Contents/Info.plist" 2>/dev/null || echo 11)"
+  # Intel-only artifact => write_cask must add `caveats { requires_rosetta }` (audit enforces it).
+  local exe bin; exe="$(/usr/libexec/PlistBuddy -c 'Print CFBundleExecutable' "$1/Contents/Info.plist" 2>/dev/null)"
+  bin="$1/Contents/MacOS/$exe"
+  if [ -n "$exe" ] && [ -f "$bin" ]; then case "$(lipo -archs "$bin" 2>/dev/null || file "$bin")" in
+    *arm64*) NEEDS_ROSETTA=0;; *x86_64*|*i386*) NEEDS_ROSETTA=1;; esac; fi; }
+inspect(){ RECEIPT=""; LABELS=""; MAU=""; NEEDS_ROSETTA=0
   case "$ARTIFACT" in
     zip) rm -rf "$W/x"; mkdir "$W/x"; ditto -xk "$DL" "$W/x"; read_app "$(find "$W/x" -maxdepth 3 -name '*.app' | head -1)";;
     dmg) hdiutil detach /tmp/ck-vol >/dev/null 2>&1 || true; hdiutil attach "$DL" -nobrowse -mountpoint /tmp/ck-vol >/dev/null
