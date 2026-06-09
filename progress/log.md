@@ -94,3 +94,11 @@
 - quilt -> quilt-app (formula collision). Registry now 204 rows.
 
 `in-registry 204 | custom 74 | autopkg-pending 58 | review/inelig 196 | dryrun-clean 0`
+
+## 2026-06-09 — Author batch D: AutoPkg-pending resolved (+30 rows)
+
+- Resolved the 58 AutoPkg-pending (sparkle/scrape): 30 rows, 10 custom, 15 review, 3 ineligible.
+- Renames: goto->goto-desktop, air->air-flow. exiftool->review (formula collision); jamf-compliance-editor->custom (tag/asset skew).
+- Registry now 234 rows; AutoPkg-pending now 0.
+
+`in-registry 234 | custom 84 | review/inelig 214 | autopkg-pending 0 | dryrun-clean 0`
