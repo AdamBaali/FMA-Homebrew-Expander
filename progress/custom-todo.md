@@ -160,3 +160,34 @@ Cold-sourced; verified live download + version. Author as `resolve_<tfn>`/`write
 | `station` | zip | Real app-in-zip verified (HTTP 200, 229MB) via GitHub release + Electron feed: https://github.com/getstation/desktop-app/releases/download/v3.3.0/Station.zip (feed https://github.com/getstation/desktop-app/releases/download/v3.3.0/latest-ma |
 | `studio-viewer` | dmg | Real dmg verified (HTTP 200, 76MB, apple disk image): https://cdn-my.esko.com/downloads/Public/Free/Latest/Studio_Viewer_26_03.dmg ; version 26.03 (filename uses 26_03). Free Esko 3D packaging viewer, public download (no login). Stable redi |
 | `substage` | dmg | Real dmg verified (HTTP 200, 6.9MB, apple-diskimage): https://assets.selkie.design/substage/download/latest/Substage.dmg (homepage https://selkie.design/substage/ , 200). Paid app ($39.99 BYOK / subscription, also on Setapp) but this trial  |
+
+## Phase 1 — wave 4 custom resolvers (20)
+
+| slug | type | verified facts |
+|---|---|---|
+| `swiftguard` | dmg | Arch-split dmg (non-electron) -> custom. Verified intel https://github.com/Lennolium/swiftGuard/releases/download/v0.0.2/swiftGuard.dmg (200, 40.5MB) + arm https://github.com/Lennolium/swiftGuard/releases/download/v0.0.2/swiftGuard_arm64.dm |
+| `time-machine-inspector` | dmg | Arch-split dmg (Tauri, non-electron) -> custom. Verified arm https://github.com/probablykasper/time-machine-inspector/releases/download/v1.2.1/Time.Machine.Inspector_1.2.1_aarch64.dmg (200, 3.5MB) + x64 .../Time.Machine.Inspector_1.2.1_x64. |
+| `tinyweb` | dmg | version :latest (build-numbered redirect) -> custom. https://tinyweb.so/release/osx/tinyweb_latest 302-redirects to https://files.tinyweb.so/macos/46/TinyWeb.dmg (verified HTTP 200, 7.3MB, application/x-apple-diskimage). Build number (46) i |
+| `trace` | dmg | Static unversioned download -> custom. Verified https://trace.argio.ch/download/Trace.dmg (HTTP 200, 14.7MB, application/octet-stream) - works with or without the ?v= cache-buster. Current version 1.2.2-27 (shown only as a ?v= query param,  |
+| `trident` | dmg | Arch-split, public but UNVERSIONED CDN dmgs -> custom. Verified Apple Silicon https://downloads.zohocdn.com/trident/mac/apple/Trident.dmg (200, application/x-apple-diskimage) + Intel https://downloads.zohocdn.com/trident/mac/intel/Trident.d |
+| `tweeten` | zip | Electron, INTEL-ONLY -> custom (doesn't fit the universal/arm+intel electron spec). Verified https://github.com/MehediH/Tweeten/releases/download/v5.5.0/tweeten-darwin-x64.zip (HTTP 200, 212MB); release ships latest-mac.yml + latest.yml. Ve |
+| `usb-network-gate` | dmg | Live versioned dmg (unversioned filename): https://cdn.electronic.us/products/usb-over-ethernet/mac/download/usb_network_gate.dmg (HTTP 200, 21283711 bytes, last-modified 2026-04-14). Version 11.0.1105 (Eltima/Electronic Team, bundle us.ele |
+| `utm-coordinate-converter` | dmg | Live versioned arch-split dmgs on Bitbucket (stable URLs 302 to signed S3): arm https://bitbucket.org/vewert/ewert-technologies/downloads/ucc_2.0.4.2_aarch64.dmg ; intel https://bitbucket.org/vewert/ewert-technologies/downloads/ucc_2.0.4.2_ |
+| `vagon` | dmg | Live arch-split dmgs (unversioned filenames): arm64 https://app.vagon.io/apps/Vagon-arm64.dmg (200, 97774719 bytes) ; universal/intel https://app.vagon.io/apps/Vagon.dmg (200, 105282370 bytes). Electron app (bundle com.vagon.electron) but l |
+| `vectoraster` | dmg | Live dmg (unversioned filename): https://www.lostminds.com/downloads/vectoraster8.dmg (HTTP 200, content-disposition vectoraster8.dmg). Version 8.6.3 (2025-11-18, Lost Minds, bundle com.lostminds.Vectoraster, macOS 10.15+). Custom: URL has  |
+| `vectorstyler` | dmg | Live arch-split dmgs (unversioned filenames): arm https://www.vectorstyler.com/product/vectorstyler_m1.dmg (200, 80634964 bytes) ; intel https://www.vectorstyler.com/product/vectorstyler_intel.dmg ; universal https://www.vectorstyler.com/pr |
+| `videoproc-vlogger` | dmg | Live dmg (unversioned filename): https://www.videoproc.com/download/videoproc-vlogger.dmg (HTTP 200, 147371057 bytes, last-modified 2026-05-11). Free video editor, version 1.4 (Digiarty, bundle com.digiarty.videoprocvlog). Custom: URL carri |
+| `vidmore-player` | dmg | Live dmg (unversioned filename): https://download.vidmore.com/mac/vidmore-player.dmg (HTTP 200, 42433557 bytes, last-modified 2026-01-27). Vidmore Player (Blu-ray/media player), latest ~1.x (bundle com..vidmore-player per appcatalog; vendor |
+| `vidmore-screen-recorder` | zip | Live zip (unversioned filename): https://download.vidmore.com/mac/screen-recorder.zip (HTTP 200, 3842905 bytes, last-modified 2025-07-17). Vidmore Screen Recorder (bundle com.vidmore.vidmore-screen-recorder). Custom: URL has no version, JS- |
+| `vidmore-video-enhancer` | dmg | Live dmg (unversioned filename): https://download.vidmore.com/mac/video-enhancer.dmg (HTTP 200, 163729256 bytes). Vidmore Video Enhancer (bundle com.vidmore.vidmore-video-enhancer). Custom: URL has no version, no scrapeable version page (ve |
+| `viper-ftp` | dmg | Live dmg (unversioned filename): https://naarakstudio.com/download/ViperFTP.dmg (HTTP 200, 23618877 bytes, last-modified 2026-06-07). Viper FTP 7.2 (2026-05-23, Naarak Studio, bundle com.naarak.ViperFTP, macOS 10.13+). Custom: URL carries n |
+| `wonderpen` | dmg | Verified versioned dmg: https://www.tominlab.com/to/get-file/cdn?file=WonderPen/desktop/3.1/WonderPen-v3.1.3.8431-mac-universal.dmg -> 302 -> https://file.tominlab.com/WonderPen/desktop/3.1/WonderPen-v3.1.3.8431-mac-universal.dmg (HTTP 200, |
+| `xmlmind` | dmg | Verified https://www.xmlmind.com/xmleditor/_download/xxe-perso-11_1_0.dmg (HTTP 200, 333MB apple-diskimage). XMLmind XML Editor Personal Edition version 11.1.0; livecheck https://www.xmlmind.com/xmleditor/download.shtml (regex xxe-perso-(\d |
+| `xnresize` | dmg | Verified https://download.xnview.com/XnResize-mac-x64.dmg (HTTP 200, 41MB apple-diskimage). Vendor page https://www.xnview.com/en/xnresize/ lists v1.11 but download URL is unversioned (XnResize-mac-x64.dmg, last-modified 2023-10-25). custom |
+| `zaxconvert` | zip | Verified https://zaxcom.com/wp-content/uploads/2025/08/Zaxconvert_6.68_PC_MAC-BETA.zip (HTTP 200, 5.5MB application/zip). version 6.68 (current build labeled BETA; also a 6.68 RECOVERY zip). custom: combined PC+MAC zip with the Mac app nest |
+
+## Phase 1 — straggler
+
+| slug | type | verified facts |
+|---|---|---|
+| `deskrest` | dmg | GitHub Marceeelll/DeskRest-releases tag v1.19.1 asset DeskRest.v1.19.1-153.dmg (build 153 in filename not in tag -> resolver must read actual asset name); version 1.19.1; universal dmg; paid 7-day trial but public download; livecheck :github_latest |
