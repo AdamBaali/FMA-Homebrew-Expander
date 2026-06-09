@@ -13,17 +13,17 @@ script and the `homebrew-cask-author` skill.
 
 ## Status
 
-**Progress: 381 / 533 sourced · 85 authored into the cask registry** — _updated as sourcing continues._
+**Progress: 476 / 533 sourced · 102 authored into the cask registry** — _updated as sourcing continues._
 
 | Bucket | Count |
 |---|---|
 | Total apps | **533** |
-| **Sourced** (real download resolved) | **381** |
-| &nbsp;&nbsp;↳ authored into `cask-master.sh` REGISTRY | **85** |
-| &nbsp;&nbsp;↳ custom resolver to-do (verified; needs `resolve_`/`write_cask_`) | 102 |
-| &nbsp;&nbsp;↳ review / ineligible (gated, duplicate, unversioned) | 126 |
+| **Sourced** (real download resolved) | **476** |
+| &nbsp;&nbsp;↳ authored into `cask-master.sh` REGISTRY | **102** |
+| &nbsp;&nbsp;↳ custom resolver to-do (verified; needs `resolve_`/`write_cask_`) | 139 |
+| &nbsp;&nbsp;↳ review / ineligible (gated, duplicate, unversioned) | 167 |
 | &nbsp;&nbsp;↳ AutoPkg rows pending installer-type classification | 67 |
-| **Unsourced** (Phase 1 backlog — sourcing in progress) | **152** |
+| **Unsourced** (Phase 1 backlog — sourcing in progress) | **57** |
 | DRYRUN-clean | 0 _(requires macOS — runs on the maintainer's Mac)_ |
 
 Live detail is in [`progress/`](progress/) — `state.json` (resumable cursor), `log.md`

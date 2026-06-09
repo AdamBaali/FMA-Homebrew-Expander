@@ -323,134 +323,134 @@ netbird,Netbird,https://appcatalog.cloud/apps/netbird,web-research,,pkg,yes,vend
 network-share-mounter,Network Share Mounter,https://appcatalog.cloud/apps/network-share-mounter,installomator,networksharemounter,pkg,yes,dynamic-scrape,gitlab.rrze.fau.de,$(curl -sfL https://gitlab.rrze.fau.de/api/v4/projects/506/releases | grep -o 'release-[0-9]\+\.[0-9]\+\.[0-9]\+' | grep -o '[0-9]\+\.[0-9]\+\.[0-9]\+' | head -n 1),C8F68RFW4L,de.fau.rrze.NetworkShareMounter,,,in-registry,high
 nextai-translator,Nextai Translator,https://appcatalog.cloud/apps/nextai-translator,web-research,,dmg,yes,vendor,https://github.com/nextai-translator/nextai-translator/releases/download/v0.6.20/NextAI.Tr,custom,,,,,custom: needs resolver,high
 nextcloud-desktop-client,Nextcloud Desktop Client,https://appcatalog.cloud/apps/nextcloud-desktop-client,installomator,nextcloud,pkg,review,github,nextcloud-releases/desktop,$(versionFromGit nextcloud-releases desktop),NKUJUXUJ3B,,,,review: duplicate of existing cask 'nextcloud',high
-nextpad,Nextpad,https://appcatalog.cloud/apps/nextpad,,,,,,,,,,,,manual-research,
+nextpad,Nextpad,https://appcatalog.cloud/apps/nextpad,web-research,,dmg,yes,github,repo=nextpad-plus-plus/nextpad-plus-plus-macos;asset=Nextpad++v{v}.dmg,github_tag,,,,,in-registry,high
 nightowl,Nightowl,https://appcatalog.cloud/apps/nightowl,autopkg,,,,sparkle/feed,darkmenu.s3.amazonaws.com,,,,,,autopkg-sourced-format-tbd,high
-nirvana,Nirvana,https://appcatalog.cloud/apps/nirvana,,,,,,,,,,,,manual-research,
+nirvana,Nirvana,https://appcatalog.cloud/apps/nirvana,web-research,,,review,,https://www.nirvanahq.com/downloads,,,,,,"review: Mac-App-Store-only. Nirvana (GTD to-do app, nirvanahq.com, bundle com.nirvanahq.desktop, d",high
 nodejs,Nodejs,https://appcatalog.cloud/apps/nodejs,installomator,nodejs,pkg,yes,dynamic-scrape,nodejs.org,$(curl -s -L https://nodejs.org/dist/latest/ | sed -nE 's|.*>node-(.*)\.pkg</a>.*|\1|p'),HX7739G8FX,,,,in-registry,high
-noor,Noor,https://appcatalog.cloud/apps/noor,,,,,,,,,,,,manual-research,
-noteey,Noteey,https://appcatalog.cloud/apps/noteey,,,,,,,,,,,,manual-research,
-ntfs-disk-by-omi,Ntfs Disk By Omi,https://appcatalog.cloud/apps/ntfs-disk-by-omi,,,,,,,,,,,,manual-research,
+noor,Noor,https://appcatalog.cloud/apps/noor,web-research,,dmg,yes,vendor,https://cdn.noor.to/noor-2-releases/Noor_1.10.0_aarch64.dmg,custom,,,,,custom: needs resolver,high
+noteey,Noteey,https://appcatalog.cloud/apps/noteey,web-research,,dmg,yes,github,repo=andyyoungm/muenzo;asset=Noteey-{v}.universal.dmg,github_tag,,,,,in-registry,high
+ntfs-disk-by-omi,Ntfs Disk By Omi,https://appcatalog.cloud/apps/ntfs-disk-by-omi,web-research,,,review,,https://apps.apple.com/us/app/ntfs-disk-by-omi-ntfs/id1585757563,,,,,,"review: Mac-App-Store-only. NTFS Disk by Omi (NTFS read/write utility by JingZhi He, bundle com.om",high
 nvivo-14,Nvivo 14,https://appcatalog.cloud/apps/nvivo-14,installomator,nvivo14,dmg,yes,direct,download.qsrinternational.com,"$(curl -fsIL ""${downloadURL}"" | grep -i ""^location"" | awk '{print $2}' | awk -F'/' '{ print $6 }' | cut -d ""."" -f1-3)",8F4S7H8S59,,"( NVivo NVivoHelper ""Nvivo 14"" )",yes,custom: needs resolver,high
 nvivo-15,Nvivo 15,https://appcatalog.cloud/apps/nvivo-15,installomator,nvivo15,dmg,yes,direct,download.qsrinternational.com,"$(curl -fsIL ""${downloadURL}"" | grep -i ""^location"" | awk '{print $2}' | awk -F'/' '{ print $6 }' | cut -d ""."" -f1-3)",8F4S7H8S59,,"( NVivo NVivoHelper ""Nvivo 15"" )",yes,custom: needs resolver,high
-obd-auto-doctor,Obd Auto Doctor,https://appcatalog.cloud/apps/obd-auto-doctor,,,,,,,,,,,,manual-research,
-object-info,Object Info,https://appcatalog.cloud/apps/object-info,,,,,,,,,,,,manual-research,
+obd-auto-doctor,Obd Auto Doctor,https://appcatalog.cloud/apps/obd-auto-doctor,web-research,,dmg,yes,direct,https://cdn2.obdautodoctor.com/release/obd-auto-doctor_{v}-l.dmg,direct,,,,,in-registry,high
+object-info,Object Info,https://appcatalog.cloud/apps/object-info,web-research,,zip,yes,github,repo=BIG-RAT/Object-Info;asset=Object.Info.zip,github_tag,,,,,in-registry,high
 obs-studio,Obs Studio,https://appcatalog.cloud/apps/obs-studio,installomator,obs,dmg,review,github,obsproject/obs-studio,$(versionFromGit obsproject obs-studio ),2MMRE5MTB8,,,,review: duplicate of existing cask 'obs',high
-offshoot,Offshoot,https://appcatalog.cloud/apps/offshoot,,,,,,,,,,,,manual-research,
-okiocam-snapshot-and-recorder,Okiocam Snapshot And Recorder,https://appcatalog.cloud/apps/okiocam-snapshot-and-recorder,,,,,,,,,,,,manual-research,
-ollamaspring,Ollamaspring,https://appcatalog.cloud/apps/ollamaspring,,,,,,,,,,,,manual-research,
-ondesoft-spotify-converter,Ondesoft Spotify Converter,https://appcatalog.cloud/apps/ondesoft-spotify-converter,,,,,,,,,,,,manual-research,
-onemenu,Onemenu,https://appcatalog.cloud/apps/onemenu,,,,,,,,,,,,manual-research,
+offshoot,Offshoot,https://appcatalog.cloud/apps/offshoot,web-research,,dmg,yes,vendor,https://updates.hedge.video/hedge/macos/latest/OffShoot.dmg,custom,,,,,custom: needs resolver,high
+okiocam-snapshot-and-recorder,Okiocam Snapshot And Recorder,https://appcatalog.cloud/apps/okiocam-snapshot-and-recorder,web-research,,dmgInZip,yes,vendor,https://okiolabs-downloads.s3.us-east-2.amazonaws.com/OKIOCAM+Snapshot+and+Recorder-1.0.17,custom,,,,,custom: needs resolver,high
+ollamaspring,Ollamaspring,https://appcatalog.cloud/apps/ollamaspring,web-research,,zip,yes,github,repo=CrazyNeil/Taify;asset=OllamaSpring.zip,github_tag,,,,,in-registry,high
+ondesoft-spotify-converter,Ondesoft Spotify Converter,https://appcatalog.cloud/apps/ondesoft-spotify-converter,web-research,,dmg,yes,vendor,https://dl.ondesoft.com/odspconverter_mac.dmg,custom,,,,,custom: needs resolver,high
+onemenu,Onemenu,https://appcatalog.cloud/apps/onemenu,web-research,,zip,yes,vendor,https://files.coffeebreak.software/products/one-menu/OneMenu-v26.10.2.zip,custom,,,,,custom: needs resolver,high
 onscreen-control,Onscreen Control,https://appcatalog.cloud/apps/onscreen-control,installomator,onscreencontrol,pkgInZip,review,direct,lmu.lge.com,$(echo $downloadFile | grep -o '[0-9].[0-9][0-9]'),5SKT5H4CPQ,com.LGSI.OnScreen-Control,,,review: REVIEW: broken. Installomator label 'onscreencontrol' is flagged broken (issue #,high
-openphone,Openphone,https://appcatalog.cloud/apps/openphone,,,,,,,,,,,,manual-research,
-optisigns-digital-signage,Optisigns Digital Signage,https://appcatalog.cloud/apps/optisigns-digital-signage,,,,,,,,,,,,manual-research,
-oracle-java-jdk-17,Oracle Java Jdk 17,https://appcatalog.cloud/apps/oracle-java-jdk-17,,,,,,,,,,,,manual-research,
-oracle-java-jdk-21,Oracle Java Jdk 21,https://appcatalog.cloud/apps/oracle-java-jdk-21,,,,,,,,,,,,manual-research,
-oracle-java-jdk-22,Oracle Java Jdk 22,https://appcatalog.cloud/apps/oracle-java-jdk-22,,,,,,,,,,,,manual-research,
-oracle-java-jdk-23,Oracle Java Jdk 23,https://appcatalog.cloud/apps/oracle-java-jdk-23,,,,,,,,,,,,manual-research,
-oracle-java-jdk-24,Oracle Java Jdk 24,https://appcatalog.cloud/apps/oracle-java-jdk-24,,,,,,,,,,,,manual-research,
-oracle-java-jdk-25,Oracle Java Jdk 25,https://appcatalog.cloud/apps/oracle-java-jdk-25,,,,,,,,,,,,manual-research,
-origami-3,Origami 3,https://appcatalog.cloud/apps/origami-3,,,,,,,,,,,,manual-research,
-otter,Otter,https://appcatalog.cloud/apps/otter,,,,,,,,,,,,manual-research,
-owasp-zap,Owasp Zap,https://appcatalog.cloud/apps/owasp-zap,,,,,,,,,,,,manual-research,
-padlet,Padlet,https://appcatalog.cloud/apps/padlet,,,,,,,,,,,,manual-research,
-palettebrain,Palettebrain,https://appcatalog.cloud/apps/palettebrain,,,,,,,,,,,,manual-research,
-pandasuite-studio,Pandasuite Studio,https://appcatalog.cloud/apps/pandasuite-studio,,,,,,,,,,,,manual-research,
+openphone,Openphone,https://appcatalog.cloud/apps/openphone,web-research,,,review,,,,,,,,"review: Cloudflare-gated / unverifiable. OpenPhone (rebranded ""Quo""), VoIP desktop client, bundle ",med
+optisigns-digital-signage,Optisigns Digital Signage,https://appcatalog.cloud/apps/optisigns-digital-signage,web-research,,dmg,yes,vendor,https://release.launch.optisigns.com/MacOS/OptiSigns,custom,,,,,custom: needs resolver,high
+oracle-java-jdk-17,Oracle Java Jdk 17,https://appcatalog.cloud/apps/oracle-java-jdk-17,web-research,,,review,,https://formulae.brew.sh/api/cask/oracle-jdk@17.json,,,,,,"review: Duplicate. ""Oracle Java JDK 17"" = Oracle JDK 17 LTS (bundle com.oracle.java.17.jdk, dev VB",high
+oracle-java-jdk-21,Oracle Java Jdk 21,https://appcatalog.cloud/apps/oracle-java-jdk-21,web-research,,,review,,https://formulae.brew.sh/api/cask/oracle-jdk@21.json,,,,,,"review: Duplicate. ""Oracle Java JDK 21"" = Oracle JDK 21 LTS (bundle com.oracle.java.21.jdk, dev VB",high
+oracle-java-jdk-22,Oracle Java Jdk 22,https://appcatalog.cloud/apps/oracle-java-jdk-22,web-research,,,review,,https://download.oracle.com/java/22/archive/jdk-22.0.2_macos-aarch64_bin.dmg,,,,,,"review: EOL non-LTS. Oracle JDK 22 (bundle com.oracle.java.22.jdk, dev VB5E2TV963). A real public ",high
+oracle-java-jdk-23,Oracle Java Jdk 23,https://appcatalog.cloud/apps/oracle-java-jdk-23,web-research,,,review,,https://download.oracle.com/java/23/archive/jdk-23.0.2_macos-aarch64_bin.dmg,,,,,,"review: EOL non-LTS. Oracle JDK 23 (bundle com.oracle.java.23.jdk, dev VB5E2TV963). Real public do",high
+oracle-java-jdk-24,Oracle Java Jdk 24,https://appcatalog.cloud/apps/oracle-java-jdk-24,web-research,,,review,,https://download.oracle.com/java/24/archive/jdk-24.0.2_macos-aarch64_bin.dmg,,,,,,"review: EOL non-LTS. Oracle JDK 24 (bundle com.oracle.java.24.jdk, dev VB5E2TV963). Real public do",high
+oracle-java-jdk-25,Oracle Java Jdk 25,https://appcatalog.cloud/apps/oracle-java-jdk-25,web-research,,,review,,https://formulae.brew.sh/api/cask/oracle-jdk@25.json,,,,,,"review: Duplicate. Slug = Oracle JDK 25 (bundle com.oracle.java.25.jdk, dev VB5E2TV963). Version-p",high
+origami-3,Origami 3,https://appcatalog.cloud/apps/origami-3,web-research,,dmg,yes,vendor,https://cdn4.appsforlife.com/origami/3/3.4.5/Origami3_ARM.dmg,custom,,,,,custom: needs resolver,high
+otter,Otter,https://appcatalog.cloud/apps/otter,web-research,,dmg,yes,vendor,https://assets.otter.ai/desktop-app/mac/production/integrationpage/otter_universal_latest.,custom,,,,,custom: needs resolver,high
+owasp-zap,Owasp Zap,https://appcatalog.cloud/apps/owasp-zap,web-research,,,review,,https://github.com/zaproxy/zaproxy/releases/download/v2.17.0/ZAP_2.17.0_aarch64.dmg,,,,,,"review: Duplicate. Slug = OWASP ZAP / Zed Attack Proxy (zaproxy.org, current v2.17.0, https://gith",high
+padlet,Padlet,https://appcatalog.cloud/apps/padlet,web-research,,,review,,,,,,,,"review: No public native download. Padlet (bundle com.wallwisher.padlet, dev MY6RRLM5WC) is a web ",high
+palettebrain,Palettebrain,https://appcatalog.cloud/apps/palettebrain,web-research,,,review,,,,,,,,"review: Purchase-gated. PaletteBrain (ChatGPT-for-macOS utility, palettebrain.com) requires buying",high
+pandasuite-studio,Pandasuite Studio,https://appcatalog.cloud/apps/pandasuite-studio,web-research,,,review,,https://pandasuite.com/dashboard/download-studio,,,,,,"review: Login-gated. PandaSuite Studio (no-code app builder, bundle com.pandasuite.studio, dev 2HL",high
 particulars,Particulars,https://appcatalog.cloud/apps/particulars,installomator,particulars,pkg,yes,direct,particulars.app,"$(curl -fsI ""${downloadURL}"" | grep -i location | grep -oE ""[0-9]+\.[0-9]+"")",2Z25XDNP2X,net.glencode.Particulars,( NONE ),,in-registry,high
 password-depot,Password Depot,https://appcatalog.cloud/apps/password-depot,autopkg,,,,dynamic-scrape,www.password-depot.de,,,,,,autopkg-sourced-format-tbd,high
-patch-desktop,Patch Desktop,https://appcatalog.cloud/apps/patch-desktop,,,,,,,,,,,,manual-research,
-patternodes,Patternodes,https://appcatalog.cloud/apps/patternodes,,,,,,,,,,,,manual-research,
-pdfsail,Pdfsail,https://appcatalog.cloud/apps/pdfsail,,,,,,,,,,,,manual-research,
-peakto,Peakto,https://appcatalog.cloud/apps/peakto,,,,,,,,,,,,manual-research,
-peazip,Peazip,https://appcatalog.cloud/apps/peazip,,,,,,,,,,,,manual-research,
-pgmagic,Pgmagic,https://appcatalog.cloud/apps/pgmagic,,,,,,,,,,,,manual-research,
-photos-workbench,Photos Workbench,https://appcatalog.cloud/apps/photos-workbench,,,,,,,,,,,,manual-research,
+patch-desktop,Patch Desktop,https://appcatalog.cloud/apps/patch-desktop,web-research,,pkg,yes,vendor,https://software.alectrona.com/patch-desktop/latest.pkg,custom,,,,,custom: needs resolver,high
+patternodes,Patternodes,https://appcatalog.cloud/apps/patternodes,web-research,,dmg,yes,vendor,https://www.lostminds.com/downloads/patternodes3.dmg,custom,,,,,custom: needs resolver,high
+pdfsail,Pdfsail,https://appcatalog.cloud/apps/pdfsail,web-research,,dmg,yes,vendor,https://download.pdfsail.com/OfficeSuite/PDFSailMac/PDFsail_mac_Desktop%20Installer.dmg,custom,,,,,custom: needs resolver,high
+peakto,Peakto,https://appcatalog.cloud/apps/peakto,web-research,,,review,,,,,,,,"review: Account/purchase-gated. Peakto (Cyme photo organizer, bundle io.cyme.Peakto, dev 7PS8QUM93",high
+peazip,Peazip,https://appcatalog.cloud/apps/peazip,web-research,,dmg,yes,vendor,https://github.com/peazip/PeaZip/releases/download/11.1.0/peazip-11.1.0.DARWIN.aarch64.dmg,custom,,,,,custom: needs resolver,high
+pgmagic,Pgmagic,https://appcatalog.cloud/apps/pgmagic,web-research,,,review,,,,,,,,"review: Purchase-gated. pgMagic (natural-language Postgres client, bundle xyz.hill.pgMagic, dev 2L",high
+photos-workbench,Photos Workbench,https://appcatalog.cloud/apps/photos-workbench,web-research,,dmg,yes,direct,https://www.houdah.com/photosWorkbench/download_assets/Photos_Workbench_{v}.dmg,direct,,,,,in-registry,high
 phraseexpress,Phraseexpress,https://appcatalog.cloud/apps/phraseexpress,autopkg,,,,dynamic-scrape,www.phraseexpress.com,,,,,,autopkg-sourced-format-tbd,high
 pique,Pique,https://appcatalog.cloud/apps/pique,installomator,pique,pkg,yes,github,macadmins/pique,$(versionFromGit macadmins pique ),T4SK8ZXCXG,io.macadmins.Pique,,,in-registry,high
-pix,Pix,https://appcatalog.cloud/apps/pix,,,,,,,,,,,,manual-research,
+pix,Pix,https://appcatalog.cloud/apps/pix,web-research,,,review,,,,,,,,"review: Gated. ""Pix"" = PIX System (bundle com.pixsystem.pixmac, dev 7D45HCDK89), a secure media-re",high
 pix-3,Pix 3,https://appcatalog.cloud/apps/pix-3,autopkg,,,,dynamic-scrape,,,,,,,autopkg-sourced-format-tbd,high
-pixillion,Pixillion,https://appcatalog.cloud/apps/pixillion,,,,,,,,,,,,manual-research,
+pixillion,Pixillion,https://appcatalog.cloud/apps/pixillion,web-research,,zip,yes,vendor,https://www.nchsoftware.com/imageconverter/pixillionmaci.zip,custom,,,,,custom: needs resolver,high
 plantronics-hub,Plantronics Hub,https://appcatalog.cloud/apps/plantronics-hub,installomator,plantronicshub,pkgInDmg,review,direct,www.poly.com,"$(curl -fs ""https://www.poly.com/in/en/support/knowledge-base/kb-article-page?lang=en_US&urlName=Hub-Release-Notes&type=Product_Information__kav"" | grep -o ""(*.*<span>)"" | head -1 | cut -d ""("" -f2 | sed 's/\<\/span\>//g' | cut -d ""<"" -f1)",SKWK2Q7JJV,,,,review: REVIEW: discontinued. https://www.poly.com/content/dam/www/software/PlantronicsH,high
 poll-everywhere,Poll Everywhere,https://appcatalog.cloud/apps/poll-everywhere,installomator,polleverywhere,dmg,yes,direct,polleverywhere-app.s3.amazonaws.com,"$(curl -fsL https://www.polleverywhere.com/app/releases/mac | grep h3 --max-count 1 | awk '{ gsub(/<\/?h3>/, """"); print }')",W48F3X5M8W,,,,in-registry,high
-poly-lens-desktop,Poly Lens Desktop,https://appcatalog.cloud/apps/poly-lens-desktop,,,,,,,,,,,,manual-research,
-postlab,Postlab,https://appcatalog.cloud/apps/postlab,,,,,,,,,,,,manual-research,
-powermymac,Powermymac,https://appcatalog.cloud/apps/powermymac,,,,,,,,,,,,manual-research,
-praxislive,Praxislive,https://appcatalog.cloud/apps/praxislive,,,,,,,,,,,,manual-research,
-prelude-operator,Prelude Operator,https://appcatalog.cloud/apps/prelude-operator,,,,,,,,,,,,manual-research,
-print-window,Print Window,https://appcatalog.cloud/apps/print-window,,,,,,,,,,,,manual-research,
+poly-lens-desktop,Poly Lens Desktop,https://appcatalog.cloud/apps/poly-lens-desktop,web-research,,pkgInDmg,yes,vendor,https://swupdate.lens.poly.com/lens-desktop-mac/2.3.1.1775/2.3.1.1775/LensDesktop-2.3.1.17,custom,,,,,custom: needs resolver,high
+postlab,Postlab,https://appcatalog.cloud/apps/postlab,web-research,,dmg,yes,vendor,https://updates.hedge.video/postlab/macos/updates/production/PostLab_20260429104609_v26.1.,custom,,,,,custom: needs resolver,high
+powermymac,Powermymac,https://appcatalog.cloud/apps/powermymac,web-research,,,no,,,,,,,,"ineligible: PUA/adware. PowerMyMac (iMyMac ""Mac cleaner""). Widely classified as a Potentially Unwanted",
+praxislive,Praxislive,https://appcatalog.cloud/apps/praxislive,web-research,,pkg,yes,vendor,https://github.com/codelerity/praxislive-installers/releases/download/v6.6.0-build1/Praxis,custom,,,,,custom: needs resolver,high
+prelude-operator,Prelude Operator,https://appcatalog.cloud/apps/prelude-operator,web-research,,,review,,https://api.preludesecurity.com/download/install/detect.pkg,,,,,,review: No public versioned desktop download. Prelude pivoted to Prelude Security/Detect; the Oper,med
+print-window,Print Window,https://appcatalog.cloud/apps/print-window,web-research,,dmg,yes,vendor,http://www.printwindowapp.com/software/printwindow.dmg,custom,,,,,custom: needs resolver,med
 prisma-access-browser,Prisma Access Browser,https://appcatalog.cloud/apps/prisma-access-browser,autopkg,,,,sparkle/feed,release-manager.us.gs.talon-sec.com,,,,,yes,autopkg-sourced-format-tbd,high
 projectplace,Projectplace,https://appcatalog.cloud/apps/projectplace,installomator,projectplace,dmg,review,direct,service.projectplace.com,,8333HW99E8,,,,"review: REVIEW: unversioned, no livecheck. https://service.projectplace.com/client_apps/",high
-psso-utility,Psso Utility,https://appcatalog.cloud/apps/psso-utility,,,,,,,,,,,,manual-research,
-pulseway,Pulseway,https://appcatalog.cloud/apps/pulseway,,,,,,,,,,,,manual-research,
+psso-utility,Psso Utility,https://appcatalog.cloud/apps/psso-utility,web-research,,pkg,yes,github,repo=jamf-concepts/psso-utility;asset=PSSOUtility.pkg,github_tag,,,,,in-registry,high
+pulseway,Pulseway,https://appcatalog.cloud/apps/pulseway,web-research,,dmg,yes,vendor,https://pulseway.s3.us-east-1.amazonaws.com/website/downloads/Pulseway.dmg,custom,,,,,custom: needs resolver,med
 python-3,Python 3,https://appcatalog.cloud/apps/python-3,autopkg,,,,dynamic-scrape,www.python.org,,,,,,autopkg-sourced-format-tbd,high
-quickrecorder,Quickrecorder,https://appcatalog.cloud/apps/quickrecorder,,,,,,,,,,,,manual-research,
-quilt,Quilt,https://appcatalog.cloud/apps/quilt,,,,,,,,,,,,manual-research,
-r-remote,R Remote,https://appcatalog.cloud/apps/r-remote,,,,,,,,,,,,manual-research,
-receipts-space,Receipts Space,https://appcatalog.cloud/apps/receipts-space,,,,,,,,,,,,manual-research,
-relagit,Relagit,https://appcatalog.cloud/apps/relagit,,,,,,,,,,,,manual-research,
-remote-utilities-agent,Remote Utilities Agent,https://appcatalog.cloud/apps/remote-utilities-agent,,,,,,,,,,,,manual-research,
-remote-utilities-viewer,Remote Utilities Viewer,https://appcatalog.cloud/apps/remote-utilities-viewer,,,,,,,,,,,,manual-research,
-renameninja,Renameninja,https://appcatalog.cloud/apps/renameninja,,,,,,,,,,,,manual-research,
-reqres,Reqres,https://appcatalog.cloud/apps/reqres,,,,,,,,,,,,manual-research,
-responsivelyapp,Responsivelyapp,https://appcatalog.cloud/apps/responsivelyapp,,,,,,,,,,,,manual-research,
+quickrecorder,Quickrecorder,https://appcatalog.cloud/apps/quickrecorder,web-research,,dmg,yes,github,repo=lihaoyun6/QuickRecorder;asset=QuickRecorder_v{v}.dmg,github_tag,,,,,in-registry,high
+quilt,Quilt,https://appcatalog.cloud/apps/quilt,web-research,,dmg,yes,vendor,https://github.com/shubhamshah02/Quilt/releases/download/prod/Quilt.Installer.dmg,custom,,,,,custom: needs resolver,high
+r-remote,R Remote,https://appcatalog.cloud/apps/r-remote,web-research,,,review,,https://www.yamaha.com/files/download/software/2/2360452/r_remote600_mac.zip,,,,,,review: Yamaha Pro Audio R Remote V6.0.0 (free). Download is EULA/session-gated: the page-listed l,med
+receipts-space,Receipts Space,https://appcatalog.cloud/apps/receipts-space,web-research,,,review,,,,,,,,"review: ""Receipts Space"" (Dirk Holtwick, bundle de.holtwick.mac.homebrew.Receipts2, MAS id16049777",med
+relagit,Relagit,https://appcatalog.cloud/apps/relagit,web-research,,dmg,yes,direct,https://github.com/relagit/relagit/releases/latest/download/latest-mac.yml,electron,,,,,in-registry,high
+remote-utilities-agent,Remote Utilities Agent,https://appcatalog.cloud/apps/remote-utilities-agent,web-research,,zip,yes,direct,https://www.remoteutilities.com/download/agent{v}.zip,direct,,,,,in-registry,med
+remote-utilities-viewer,Remote Utilities Viewer,https://appcatalog.cloud/apps/remote-utilities-viewer,web-research,,dmg,yes,direct,https://www.remoteutilities.com/download/viewer{v}.dmg,direct,,,,,in-registry,med
+renameninja,Renameninja,https://appcatalog.cloud/apps/renameninja,web-research,,zip,yes,direct,https://loshadki.app/renameninja/releases/RenameNinja-{v}.app.zip,direct,,,,,in-registry,high
+reqres,Reqres,https://appcatalog.cloud/apps/reqres,web-research,,dmg,yes,github,repo=OloApps/ReqRes;asset=ReqRes-{v}.dmg,github_tag,,,,,in-registry,high
+responsivelyapp,Responsivelyapp,https://appcatalog.cloud/apps/responsivelyapp,web-research,,,review,,https://formulae.brew.sh/api/cask/responsively.json,,,,,,"review: Duplicate: cask ""responsively"" already exists (https://formulae.brew.sh/api/cask/responsiv",high
 rhino-7,Rhino 7,https://appcatalog.cloud/apps/rhino-7,installomator,rhino7,dmg,review,sparkle/feed,,"$(echo ""$sparkleFeed"" | xpath '(//rss/channel/item/enclosure/@sparkle:shortVersionString[1]' 2>/dev/null | cut -d '""' -f 2 | cut -d ' ' -f 1)",D6XDM4N99E,,,yes,"review: REVIEW: paid, gated. Rhino is commercial (McNeel). No public unauthenticated ver",high
 rhino-8,Rhino 8,https://appcatalog.cloud/apps/rhino-8,installomator,rhino8,dmg,review,sparkle/feed,,"$(echo ""$sparkleFeed"" | xpath '(//rss/channel/item/enclosure/@sparkle:shortVersionString)[1]' 2>/dev/null | cut -d '""' -f 2 | cut -d ' ' -f 1)",D6XDM4N99E,,,yes,"review: REVIEW: paid, gated. Same as rhino-7: commercial McNeel app, download behind com",high
-rocketsim,Rocketsim,https://appcatalog.cloud/apps/rocketsim,,,,,,,,,,,,manual-research,
-root3-support-app,Root3 Support App,https://appcatalog.cloud/apps/root3-support-app,,,,,,,,,,,,manual-research,
-rstudio-desktop,Rstudio Desktop,https://appcatalog.cloud/apps/rstudio-desktop,,,,,,,,,,,,manual-research,
-rumplet,Rumplet,https://appcatalog.cloud/apps/rumplet,,,,,,,,,,,,manual-research,
-rumpus,Rumpus,https://appcatalog.cloud/apps/rumpus,,,,,,,,,,,,manual-research,
+rocketsim,Rocketsim,https://appcatalog.cloud/apps/rocketsim,web-research,,,review,,https://apps.apple.com/us/app/rocketsim-for-xcode-simulator/id1504940162,,,,,,"review: Mac App Store only (RocketSim for Xcode Simulator, https://apps.apple.com/us/app/rocketsim",high
+root3-support-app,Root3 Support App,https://appcatalog.cloud/apps/root3-support-app,web-research,,pkg,yes,github,repo=root3nl/SupportApp;asset=Support.{v}.pkg,github_tag,,,,,in-registry,high
+rstudio-desktop,Rstudio Desktop,https://appcatalog.cloud/apps/rstudio-desktop,web-research,,,review,,https://formulae.brew.sh/api/cask/rstudio.json,,,,,,"review: Duplicate: cask ""rstudio"" already exists (https://formulae.brew.sh/api/cask/rstudio.json -",high
+rumplet,Rumplet,https://appcatalog.cloud/apps/rumplet,web-research,,zip,yes,vendor,https://www.maxum.com/DownloadPackages/Rumplet.zip,custom,,,,,custom: needs resolver,high
+rumpus,Rumpus,https://appcatalog.cloud/apps/rumpus,web-research,,dmg,yes,direct,https://www.maxum.com/DownloadPackages/Rumpus-{v}.dmg,direct,,,,,in-registry,high
 sapmachine-manager,Sapmachine Manager,https://appcatalog.cloud/apps/sapmachine-manager,autopkg,,,,github,sap/sapmachine-manager-for-macos,,,,,,autopkg-sourced-format-tbd,high
-scratch-link,Scratch Link,https://appcatalog.cloud/apps/scratch-link,,,,,,,,,,,,manual-research,
-screen-share,Screen Share,https://appcatalog.cloud/apps/screen-share,,,,,,,,,,,,manual-research,
+scratch-link,Scratch Link,https://appcatalog.cloud/apps/scratch-link,web-research,,,no,,,,,,,,"ineligible: Now Mac App Store only. github.com/LLK/scratch-link (scratchfoundation) has NO releases (""",
+screen-share,Screen Share,https://appcatalog.cloud/apps/screen-share,web-research,,,review,,,,,,,,review: ND (cn.com.nd.pmcast) classroom screen-sharing app. No official vendor download page or pu,med
 screencloud-player,Screencloud Player,https://appcatalog.cloud/apps/screencloud-player,installomator,screencloudplayer,dmg,yes,dynamic-scrape,screencloud.com,$( echo $downloadURL | sed -e 's/.*\/ScreenCloud.*\-\([0-9.]*\)\.dmg/\1/g' ),3C4F953K6P,,,,in-registry,high
-screenflow-hal-audio-driver,Screenflow Hal Audio Driver,https://appcatalog.cloud/apps/screenflow-hal-audio-driver,,,,,,,,,,,,manual-research,
-screenml,Screenml,https://appcatalog.cloud/apps/screenml,,,,,,,,,,,,manual-research,
+screenflow-hal-audio-driver,Screenflow Hal Audio Driver,https://appcatalog.cloud/apps/screenflow-hal-audio-driver,web-research,,pkgInZip,yes,vendor,https://www.telestream.net/download-files/screenflow/InstallTelestreamAudioCapture.pkg.zip,custom,,,,,custom: needs resolver,med
+screenml,Screenml,https://appcatalog.cloud/apps/screenml,web-research,,,review,,,,,,,,review: screenml.com is Cloudflare bot-gated: returns HTTP 503/410 to curl and to browser-UA fetch,low
 scribe-desktop,Scribe Desktop,https://appcatalog.cloud/apps/scribe-desktop,autopkg,,,,sparkle/feed,colony-labs-public.s3.us-east-2.amazonaws.com,,,,,,autopkg-sourced-format-tbd,high
 script2pkg,Script2Pkg,https://appcatalog.cloud/apps/script2pkg,autopkg,,,,github,sap/script-to-package-tool-for-macos,,,,,,autopkg-sourced-format-tbd,high
-scrutiny,Scrutiny,https://appcatalog.cloud/apps/scrutiny,,,,,,,,,,,,manual-research,
-setup-checklist,Setup Checklist,https://appcatalog.cloud/apps/setup-checklist,,,,,,,,,,,,manual-research,
-setup-manager,Setup Manager,https://appcatalog.cloud/apps/setup-manager,,,,,,,,,,,,manual-research,
-sforzando,Sforzando,https://appcatalog.cloud/apps/sforzando,,,,,,,,,,,,manual-research,
-shellhistory,Shellhistory,https://appcatalog.cloud/apps/shellhistory,,,,,,,,,,,,manual-research,
-shellleap,Shellleap,https://appcatalog.cloud/apps/shellleap,,,,,,,,,,,,manual-research,
-shells,Shells,https://appcatalog.cloud/apps/shells,,,,,,,,,,,,manual-research,
-shokz-connect,Shokz Connect,https://appcatalog.cloud/apps/shokz-connect,,,,,,,,,,,,manual-research,
-shortcut-bar,Shortcut Bar,https://appcatalog.cloud/apps/shortcut-bar,,,,,,,,,,,,manual-research,
+scrutiny,Scrutiny,https://appcatalog.cloud/apps/scrutiny,web-research,,dmg,yes,direct,https://peacockmedia.software/mac/scrutiny/scrutiny.dmg,direct,,,,,in-registry,med
+setup-checklist,Setup Checklist,https://appcatalog.cloud/apps/setup-checklist,web-research,,,review,,,,,,,,review: Jamf-Concepts/setup-checklist (github) ships ONLY beta releases — latest tag v0.4.0beta (a,high
+setup-manager,Setup Manager,https://appcatalog.cloud/apps/setup-manager,web-research,,pkg,yes,vendor,https://github.com/jamf/Setup-Manager/releases/download/v1.4.5/Setup.Manager-1.4.5-646.pkg,custom,,,,,custom: needs resolver,high
+sforzando,Sforzando,https://appcatalog.cloud/apps/sforzando,web-research,,dmg,yes,vendor,https://s3.amazonaws.com/sforzando/MAC_sforzando_v1.982.dmg,custom,,,,,custom: needs resolver,med
+shellhistory,Shellhistory,https://appcatalog.cloud/apps/shellhistory,web-research,,zip,yes,vendor,https://loshadki.app/shellhistory/releases/ShellHistory-3.1.app.zip,custom,,,,,custom: needs resolver,high
+shellleap,Shellleap,https://appcatalog.cloud/apps/shellleap,web-research,,,review,,,,,,,,"review: No official website found (shellleap.com/.app/.dev/.io all resolve to nothing — HTTP 000),",high
+shells,Shells,https://appcatalog.cloud/apps/shells,web-research,,,review,,,,,,,,review: Shells.com Desktop-as-a-Service. The Mac client is a thin streaming client for a paid clou,med
+shokz-connect,Shokz Connect,https://appcatalog.cloud/apps/shokz-connect,web-research,,pkgInDmg,yes,vendor,https://appcdn.shokz.com/shokz-connect/latest/Shokz-Connect-latest-mac.dmg,custom,,,,,custom: needs resolver,med
+shortcut-bar,Shortcut Bar,https://appcatalog.cloud/apps/shortcut-bar,web-research,,,no,,,,,,,,"ineligible: Mac App Store only — Shortcut Bar - Instant Access, FIPLAB Ltd, apps.apple.com/app/id11488",
 sidebar,Sidebar,https://appcatalog.cloud/apps/sidebar,autopkg,,,,sparkle/feed,download.sidebarapp.net,,,,,,autopkg-sourced-format-tbd,high
 signiant-app,Signiant App,https://appcatalog.cloud/apps/signiant-app,installomator,signiantapp,dmg,yes,dynamic-scrape,updates.signiant.com,"""$(echo $downloadURL | sed -E 's/.*Signiant_App_([0-9]+(\.[0-9]+)*)\.dmg/\1/')""",U6ZZ4QLU4Q,,,,in-registry,high
-sketchup-pro-2021,Sketchup Pro 2021,https://appcatalog.cloud/apps/sketchup-pro-2021,,,,,,,,,,,yes,manual-research,
-sketchup-pro-2022,Sketchup Pro 2022,https://appcatalog.cloud/apps/sketchup-pro-2022,,,,,,,,,,,yes,manual-research,
-sketchup-pro-2023,Sketchup Pro 2023,https://appcatalog.cloud/apps/sketchup-pro-2023,,,,,,,,,,,yes,manual-research,
+sketchup-pro-2021,Sketchup Pro 2021,https://appcatalog.cloud/apps/sketchup-pro-2021,web-research,,,review,,,,,,,yes,review: Trimble SketchUp. Official download page (sketchup.trimble.com/en/download/all) only offer,high
+sketchup-pro-2022,Sketchup Pro 2022,https://appcatalog.cloud/apps/sketchup-pro-2022,web-research,,,review,,,,,,,yes,review: Trimble SketchUp. Official download page only offers 2026/2025/2024; 2022 is a superseded ,high
+sketchup-pro-2023,Sketchup Pro 2023,https://appcatalog.cloud/apps/sketchup-pro-2023,web-research,,,review,,,,,,,yes,review: Trimble SketchUp. Official download page only offers 2026/2025/2024; 2023 is a superseded ,high
 sketchup-viewer,Sketchup Viewer,https://appcatalog.cloud/apps/sketchup-viewer,installomator,sketchupviewer,dmg,no,dynamic-scrape,www.sketchup.com,,J8PVMCY7KL,,,,"ineligible: SketchUp Viewer for Desktop discontinued; ""Beginning April 22, 2025, SketchUp Vi",high
-skopos-agent,Skopos Agent,https://appcatalog.cloud/apps/skopos-agent,,,,,,,,,,,,manual-research,
-sleeve,Sleeve,https://appcatalog.cloud/apps/sleeve,,,,,,,,,,,,manual-research,
-slido-for-powerpoint,Slido For Powerpoint,https://appcatalog.cloud/apps/slido-for-powerpoint,,,,,,,,,,,,manual-research,
-smart-mirror-app,Smart Mirror App,https://appcatalog.cloud/apps/smart-mirror-app,,,,,,,,,,,,manual-research,
-smotrite,Smotrite,https://appcatalog.cloud/apps/smotrite,,,,,,,,,,,,manual-research,
-smugmug,Smugmug,https://appcatalog.cloud/apps/smugmug,,,,,,,,,,,,manual-research,
+skopos-agent,Skopos Agent,https://appcatalog.cloud/apps/skopos-agent,web-research,,,review,,,,,,,,review: Skopos / Lupasafe (skoposlab.eu) cyber-risk endpoint agent. The agent is downloaded from t,high
+sleeve,Sleeve,https://appcatalog.cloud/apps/sleeve,web-research,,,review,,,,,,,,review: Replay Software Sleeve 3. Two channels: Mac App Store (apps.apple.com/app/id1606145041) an,high
+slido-for-powerpoint,Slido For Powerpoint,https://appcatalog.cloud/apps/slido-for-powerpoint,web-research,,dmg,yes,vendor,https://download.slido.com/slido-for-mac/updates/SlidoForMac_r3325.dmg,custom,,,,,custom: needs resolver,high
+smart-mirror-app,Smart Mirror App,https://appcatalog.cloud/apps/smart-mirror-app,web-research,,pkg,yes,vendor,https://downloads.smarttech.com/software/smartmirror/4_49/mac/SMART_Mirror_App_2.49.1.5057,custom,,,,,custom: needs resolver,high
+smotrite,Smotrite,https://appcatalog.cloud/apps/smotrite,web-research,,dmg,yes,vendor,https://github.com/Lukentui/smotrite-app/releases/download/v1.1.0/Smotrite-Mac-arm64-1.1.0,custom,,,,,custom: needs resolver,high
+smugmug,Smugmug,https://appcatalog.cloud/apps/smugmug,web-research,,,review,,,,,,,,review: Help-center-gated / no public versioned URL. SmugMug macOS Uploader (bundle com.smugmug.Sm,med
 snapgene,Snapgene,https://appcatalog.cloud/apps/snapgene,autopkg,,,,dynamic-scrape,www.snapgene.com,,,,,,autopkg-sourced-format-tbd,high
-sniffnet,Sniffnet,https://appcatalog.cloud/apps/sniffnet,,,,,,,,,,,,manual-research,
-soundfield-by-rode,Soundfield By Rode,https://appcatalog.cloud/apps/soundfield-by-rode,,,,,,,,,,,,manual-research,
+sniffnet,Sniffnet,https://appcatalog.cloud/apps/sniffnet,web-research,,dmg,yes,vendor,https://github.com/GyulyVGC/sniffnet/releases/download/v1.5.0/Sniffnet_macOS_Intel.dmg,custom,,,,,custom: needs resolver,high
+soundfield-by-rode,Soundfield By Rode,https://appcatalog.cloud/apps/soundfield-by-rode,web-research,,pkgInZip,yes,vendor,https://edge.rode.com/zip/page/1890/modules/5329/SoundFieldByRODE_MAC_ver1.0.2.pkg.zip,custom,,,,,custom: needs resolver,high
 soundly,Soundly,https://appcatalog.cloud/apps/soundly,installomator,soundly,dmg,review,direct,storage.googleapis.com,,67Y6N7VTDG,,,,review: Only an unversioned always-latest dmg: https://storage.googleapis.com/soundlyapp,high
 soundq,Soundq,https://appcatalog.cloud/apps/soundq,autopkg,,,,dynamic-scrape,www.prosoundeffects.com,,,,,,autopkg-sourced-format-tbd,high
-spacesuit,Spacesuit,https://appcatalog.cloud/apps/spacesuit,,,,,,,,,,,,manual-research,
+spacesuit,Spacesuit,https://appcatalog.cloud/apps/spacesuit,web-research,,dmg,yes,vendor,https://github.com/lightmode-laboratories/spacesuit/releases/download/v1.20.0/Spacesuit-ar,custom,,,,,custom: needs resolver,high
 spark-desktop,Spark Desktop,https://appcatalog.cloud/apps/spark-desktop,autopkg,,,,dynamic-scrape,sparkmailapp.com,,,,,,autopkg-sourced-format-tbd,high
-speediness,Speediness,https://appcatalog.cloud/apps/speediness,,,,,,,,,,,,manual-research,
+speediness,Speediness,https://appcatalog.cloud/apps/speediness,web-research,,,review,,https://apps.apple.com/us/app/speediness/id1596706466?mt=12,,,,,,review: Mac App Store only. Speediness by Sindre Sorhus (bundle com.sindresorhus.Speediness) ships,high
 splashtop-sos,Splashtop Sos,https://appcatalog.cloud/apps/splashtop-sos,installomator,splashtopsos,dmg,review,direct,download.splashtop.com,,CPQQ3AW49Y,,,,review: Only an unversioned always-latest dmg: https://download.splashtop.com/sos/Splash,high
-spyder-x-elite,Spyder X Elite,https://appcatalog.cloud/apps/spyder-x-elite,,,,,,,,,,,,manual-research,
-spyder-x-pro,Spyder X Pro,https://appcatalog.cloud/apps/spyder-x-pro,,,,,,,,,,,,manual-research,
-squirreldisk,Squirreldisk,https://appcatalog.cloud/apps/squirreldisk,,,,,,,,,,,,manual-research,
-starface,Starface,https://appcatalog.cloud/apps/starface,,,,,,,,,,,,manual-research,
+spyder-x-elite,Spyder X Elite,https://appcatalog.cloud/apps/spyder-x-elite,web-research,,pkgInZip,yes,vendor,https://cdn.datacolor.com/spyder/SpyderXElite_6.3.pkg.zip,custom,,,,,custom: needs resolver,high
+spyder-x-pro,Spyder X Pro,https://appcatalog.cloud/apps/spyder-x-pro,web-research,,pkgInZip,yes,vendor,https://cdn.datacolor.com/spyder/SpyderXPro_6.3.pkg.zip,custom,,,,,custom: needs resolver,high
+squirreldisk,Squirreldisk,https://appcatalog.cloud/apps/squirreldisk,web-research,,dmg,yes,github,repo=adileo/squirreldisk;asset=SquirrelDisk_{v}_x64.dmg,github_tag,,,,,in-registry,high
+starface,Starface,https://appcatalog.cloud/apps/starface,web-research,,dmg,yes,vendor,https://www.starface-cdn.de/starface/clients/mac/STARFACE_10.0.0_1789_d191cf7.dmg,custom,,,,,custom: needs resolver,high
 startup-manager-pro,Startup Manager Pro,https://appcatalog.cloud/apps/startup-manager-pro,autopkg,,,,sparkle/feed,startupmanager.appmac.fr,,,,,,autopkg-sourced-format-tbd,high
-station,Station,https://appcatalog.cloud/apps/station,,,,,,,,,,,,manual-research,
-statusbuddy,Statusbuddy,https://appcatalog.cloud/apps/statusbuddy,,,,,,,,,,,,manual-research,
+station,Station,https://appcatalog.cloud/apps/station,web-research,,zip,yes,vendor,https://github.com/getstation/desktop-app/releases/download/v3.3.0/Station.zip,custom,,,,,custom: needs resolver,med
+statusbuddy,Statusbuddy,https://appcatalog.cloud/apps/statusbuddy,web-research,,,review,,,,,,,,"review: Gumroad/TestFlight-gated, no public versioned URL. StatusBuddy by Guilherme Rambo (insideg",high
 stream-deck,Stream Deck,https://appcatalog.cloud/apps/stream-deck,autopkg,,,,dynamic-scrape,gc-updates.elgato.com,,,,,,autopkg-sourced-format-tbd,high
-streamline,Streamline,https://appcatalog.cloud/apps/streamline,,,,,,,,,,,,manual-research,
+streamline,Streamline,https://appcatalog.cloud/apps/streamline,web-research,,,review,,https://home.streamlinehq.com/plugins/download,,,,,,"review: JS-gated, no public versioned URL. Streamline desktop app (Webalys, bundle com.webalys.str",med
 strongdm,Strongdm,https://appcatalog.cloud/apps/strongdm,installomator,strongdm,dmg,yes,direct,app.strongdm.com,"$(curl -fsLIXGET ""https://app.strongdm.com/downloads/client/darwin"" | grep -i ""^content-disposition"" | sed -e 's/.*filename\=\""SDM\-\(.*\)\.dmg\"".*/\1/')",W5HSYBBJGA,,"( ""SDM"" )",,custom: needs resolver,high
-studies,Studies,https://appcatalog.cloud/apps/studies,,,,,,,,,,,,manual-research,
-studio-viewer,Studio Viewer,https://appcatalog.cloud/apps/studio-viewer,,,,,,,,,,,,manual-research,
-substage,Substage,https://appcatalog.cloud/apps/substage,,,,,,,,,,,,manual-research,
-supavdo,Supavdo,https://appcatalog.cloud/apps/supavdo,,,,,,,,,,,,manual-research,
+studies,Studies,https://appcatalog.cloud/apps/studies,web-research,,,review,,https://apps.apple.com/us/app/studies-flashcards-for-serious/id986066259,,,,,,"review: Mac App Store only. Studies (Mental Faculty, bundle com.mentalfaculty.studies.mac) is sold",high
+studio-viewer,Studio Viewer,https://appcatalog.cloud/apps/studio-viewer,web-research,,dmg,yes,vendor,https://cdn-my.esko.com/downloads/Public/Free/Latest/Studio_Viewer_26_03.dmg,custom,,,,,custom: needs resolver,high
+substage,Substage,https://appcatalog.cloud/apps/substage,web-research,,dmg,yes,vendor,https://assets.selkie.design/substage/download/latest/Substage.dmg,custom,,,,,custom: needs resolver,high
+supavdo,Supavdo,https://appcatalog.cloud/apps/supavdo,web-research,,,no,,,,,,,,"ineligible: Domain dead. SupaVdo (bundle com.supavdo.SupaVdo, dev id PM83B39XB9). supavdo.com and www.",
 supercharge,Supercharge,https://appcatalog.cloud/apps/supercharge,,,,,,,,,,,,manual-research,
 supercorners,Supercorners,https://appcatalog.cloud/apps/supercorners,,,,,,,,,,,,manual-research,
 surfdrive,Surfdrive,https://appcatalog.cloud/apps/surfdrive,installomator,surfdrive,pkg,review,dynamic-scrape,servicedesk.surf.nl,"$(curl -fs https://servicedesk.surf.nl/wiki/spaces/WIKI/pages/74225443/Desktop+client+login|grep -Eo ""(http|https)://[a-zA-Z0-9./?=_%:-]*"" | grep pkg | grep arm |cut -d -f2)",4AP2STM4H5,,"( ""surfdrive"" )",,review: Gated. Installomator source page (servicedesk.surf.nl/wiki/.../74225443) is logi,high
