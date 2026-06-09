@@ -1,7 +1,7 @@
 {
   "project": "FMA no-homebrew-cask sourcing + cask authoring",
   "updated": "2026-06-09",
-  "phase": "Phase 1 in progress \u2014 wave 1 done (chunks 1-5)",
+  "phase": "Phase 1 in progress \u2014 wave 2 done (chunks 1-10)",
   "canonical_paths": {
     "master_list": "data/master-list.csv",
     "worklist": "data/unsourced-worklist.csv",
@@ -14,29 +14,29 @@
   },
   "counts": {
     "total": 533,
-    "sourced": 286,
-    "unsourced": 247,
+    "sourced": 381,
+    "unsourced": 152,
     "registry_ready": 79,
-    "review_or_ineligible": 88,
+    "review_or_ineligible": 126,
     "autopkg_needs_installer_type": 67,
-    "in_registry": 62,
+    "in_registry": 85,
     "dryrun_clean": 0,
     "eligible_remaining_to_author": 36,
-    "custom_resolver_todo": 68
+    "custom_resolver_todo": 102
   },
   "sourcing_cursor": {
     "phase1_chunks_total": 18,
-    "phase1_chunks_done": 5,
-    "next_chunk": 6
+    "phase1_chunks_done": 10,
+    "next_chunk": 11
   },
   "blockers": [
     "brew + the homebrew-cask tap are unavailable on this Linux container, and cask audit is macOS-only, so Phase 2 DRYRUN validation (brew style + brew audit) must run on a Mac.",
     "gh and autopkg are not installed (gh is only needed at submit time; autopkg is optional for sourcing)."
   ],
   "notes": [
-    "62 registry rows authored; 68 custom to-do (progress/custom-todo.md); 88 review/ineligible.",
-    "Phase 1 cold-sourcing the 341: wave 1 (chunks 1-5, 94 apps) done -> 19 row, 32 custom, 36 review, 7 ineligible. 247 unsourced remain (chunks 6-18).",
-    "Pushing to main via GitHub API (push_files) \u2014 git proxy blocks direct main pushes.",
-    "Do NOT submit; deliverable is the filled script for the user to DRYRUN + run on macOS."
+    "85 registry rows; 102 custom to-do; 126 review/ineligible.",
+    "Phase 1: waves 1-2 done (chunks 1-10, 189 apps). 152 unsourced remain (chunks 11-18).",
+    "Each wave: push claude/phase1-waveN -> PR -> squash-merge to main via API; docs+README+artifacts updated every push.",
+    "Do NOT submit; deliverable is the filled script for DRYRUN + run on macOS."
   ]
 }
