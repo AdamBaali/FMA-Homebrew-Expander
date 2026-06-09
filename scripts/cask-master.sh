@@ -228,6 +228,28 @@ window-glue | Window Glue | Glues two windows together so they move and resize a
 wondershare-mockitt | Wondershare Mockitt | Online prototyping and UI/UX design and collaboration platform | dmg | direct | https://mockitt.com/download.html | url=https://cdn-us.modao.cc/desktop/{v}/mockitt-mac-{v}.dmg;vers=https://mockitt.com/download.html;vregex=mockitt-mac-(\d+(?:\.\d+)+)\.dmg
 wudpecker | Wudpecker | AI meeting assistant that records calls and writes tailored notes | dmg | github_tag | https://github.com/wudpecker/mac-updates | repo=wudpecker/mac-updates;asset=Wudpecker.dmg
 
+# ---- author batch A: GitHub arch-split + single-asset (verify on Mac with DRYRUN) ----
+blink-eye | Blink Eye | Minimalist eye-care break reminder to reduce eye strain | dmg | github_arch | https://github.com/nomandhoni-cs/blink-eye | repo=nomandhoni-cs/blink-eye;arm=Blink.Eye_{v}_aarch64.dmg;intel=Blink.Eye_{v}_x64.dmg
+chatkit | ChatKit | Native desktop client for AI chat assistants | dmg | github_arch | https://github.com/egoist/chatkit-releases | repo=egoist/chatkit-releases;arm=ChatKit_{v}_aarch64.dmg;intel=ChatKit_{v}_x64.dmg
+droppoint | DropPoint | Drag-and-drop shelf for staging files before transfer | dmg | github_arch | https://github.com/GameGodS3/DropPoint | repo=GameGodS3/DropPoint;arm=DropPoint-{v}-arm64-Apple-Silicon.dmg;intel=DropPoint-{v}.dmg
+file-architect | File Architect | Builds folder structures from a plain-text outline | dmg | github_arch | https://github.com/filearchitect/app | repo=filearchitect/app;arm=filearchitect_{v}_darwin-aarch64.dmg;intel=filearchitect_{v}_darwin-x86_64.dmg
+peazip | PeaZip | Archive manager supporting many compression formats | dmg | github_arch | https://github.com/peazip/PeaZip | repo=peazip/PeaZip;arm=peazip-{v}.DARWIN.aarch64.dmg;intel=peazip-{v}.DARWIN.x86_64.dmg
+smotrite | Smotrite | Plays IPTV channels and online video streams | dmg | github_arch | https://github.com/Lukentui/smotrite-app | repo=Lukentui/smotrite-app;arm=Smotrite-Mac-arm64-{v}-Installer.dmg;intel=Smotrite-Mac-x64-{v}-Installer.dmg
+sniffnet | Sniffnet | Monitors network traffic and inspects connections | dmg | github_arch | https://github.com/GyulyVGC/sniffnet | repo=GyulyVGC/sniffnet;arm=Sniffnet_macOS_AppleSilicon.dmg;intel=Sniffnet_macOS_Intel.dmg
+spacesuit | Spacesuit | Routes opened links to chosen browser profiles | dmg | github_arch | https://github.com/lightmode-laboratories/spacesuit | repo=lightmode-laboratories/spacesuit;arm=Spacesuit-arm64.dmg;intel=Spacesuit-x64.dmg
+swiftguard | swiftGuard | Alerts on unauthorized USB and Thunderbolt access | dmg | github_arch | https://github.com/Lennolium/swiftGuard | repo=Lennolium/swiftGuard;arm=swiftGuard_arm64.dmg;intel=swiftGuard.dmg
+time-machine-inspector | Time Machine Inspector | Inspects Time Machine backup contents and sizes | dmg | github_arch | https://github.com/probablykasper/time-machine-inspector | repo=probablykasper/time-machine-inspector;arm=Time.Machine.Inspector_{v}_aarch64.dmg;intel=Time.Machine.Inspector_{v}_x64.dmg
+visualz | Visualz | Lighting and visualization design for live events | dmg | github_arch | https://github.com/madchops1/visualz-releases | repo=madchops1/visualz-releases;arm=Visualz-{v}-arm64.dmg;intel=Visualz-{v}-x64.dmg
+nextai-translator | NextAI Translator | Translates text with AI models from the menu bar | dmg | github_tag | https://github.com/nextai-translator/nextai-translator | repo=nextai-translator/nextai-translator;asset=NextAI.Translator_{v}_aarch64.dmg
+battery-toolkit | Battery Toolkit | Controls battery charging to extend battery lifespan | zip | github_tag | https://github.com/mhaeuser/Battery-Toolkit | repo=mhaeuser/Battery-Toolkit;asset=Battery-Toolkit-{v}.zip
+hide-icons | Hide Icons | Hides desktop icons with a menu bar toggle | zip | github_tag | https://github.com/com-entonos/Hide-Icons | repo=com-entonos/Hide-Icons;asset=HideIcons{v}.zip
+jamf-cli | Jamf CLI | Command-line interface for the Jamf Pro API | pkg | github_tag | https://github.com/Jamf-Concepts/jamf-cli | repo=Jamf-Concepts/jamf-cli;asset=jamf-cli-{v}.pkg
+jamf-replicator | Jamf Replicator | Copies Jamf Pro objects between servers | zip | github_tag | https://github.com/jamf/Replicator | repo=jamf/Replicator;asset=Replicator.zip
+jamf-sync | Jamf Sync | Syncs packages between Jamf Pro distribution points | zip | github_tag | https://github.com/jamf/JamfSync | repo=jamf/JamfSync;asset=Jamf.Sync.app.zip
+mailvault | MailVault | Archives and backs up email into a local vault | dmg | github_tag | https://github.com/GraphicMeat/mail-vault-app | repo=GraphicMeat/mail-vault-app;asset=MailVault-v{v}.dmg
+sapmachine-manager | SapMachine Manager | Installs and manages SapMachine JDK versions | pkg | github_tag | https://github.com/sap/sapmachine-manager-for-macos | repo=sap/sapmachine-manager-for-macos;asset=SapMachine_Manager_{v}.pkg
+script2pkg | Script2Pkg | Wraps shell scripts into installer packages | pkg | github_tag | https://github.com/sap/script-to-package-tool-for-macos | repo=sap/script-to-package-tool-for-macos;asset=Script2Pkg_{v}.pkg
+
 TABLE
 
 # ----------------------------------------------------------------------------
@@ -390,10 +412,59 @@ _resolve_direct(){
   else die "direct: provide version= or vers=+vregex="; fi
   VERSION="$v"; URL="$(sub_dl "${SP[url]}")"; curl -fL "$URL" -o "$DL"; }
 
+# arch-split GitHub release: two assets (arm + intel), dmg/zip only. {v}=version in
+# asset names; on_arm/on_intel carry the per-arch sha+url; livecheck = :github_latest.
+_resolve_github_arch(){
+  get_github_tag "${SP[repo]}"; [ -n "$TAG" ] || die "github_arch: no latest tag for ${SP[repo]}"
+  case "$TAG" in [vV][0-9]*) VERSION="${TAG#?}";; *) VERSION="$TAG";; esac
+  local VI='#{version}'; TAGI="${TAG/$VERSION/$VI}"
+  URL="https://github.com/${SP[repo]}/releases/download/$TAG/$(sub_dl "${SP[arm]}")"
+  curl -fL "$URL" -o "$DL"
+  curl -fL "https://github.com/${SP[repo]}/releases/download/$TAG/$(sub_dl "${SP[intel]}")" -o "$W/dl-x64" \
+    && SHA_X64="$(shasum -a 256 "$W/dl-x64" | awk '{print $1}')" || die "github_arch: intel asset download failed"; }
+
+write_github_arch(){
+  local repo="${SP[repo]}" zapblock="" armurl intelurl
+  case "$ARTIFACT" in zip|dmg) : ;; *) die "github_arch writer: only zip/dmg supported (got '$ARTIFACT')";; esac
+  armurl="https://github.com/$repo/releases/download/$TAGI/$(sub_cask "${SP[arm]}")"
+  intelurl="https://github.com/$repo/releases/download/$TAGI/$(sub_cask "${SP[intel]}")"
+  [ -n "$BUNDLE_ID" ] && zapblock="
+$(zap_for "$BUNDLE_ID")"
+  cat > "$CASK" <<RB
+cask "$TOKEN" do
+  version "$VERSION"
+
+  on_arm do
+    sha256 "$SHA"
+    url "$armurl"
+  end
+  on_intel do
+    sha256 "$SHA_X64"
+    url "$intelurl"
+  end
+
+  name "$NAME"
+  desc "$DESC"
+  homepage "$HOMEPAGE"
+
+  livecheck do
+    url :url
+    strategy :github_latest
+  end
+
+  depends_on macos: :$SYM
+
+  app "$APP_NAME"
+$zapblock
+end
+RB
+}
+
 resolve(){
   if declare -F "resolve_$TFN" >/dev/null; then "resolve_$TFN"; return $?; fi
   case "$SOURCE" in
     github_tag)      _resolve_github_tag;;
+    github_arch)     _resolve_github_arch;;
     github_compound) _resolve_github_compound;;
     electron)        _resolve_electron;;
     msft_cdn)        _resolve_msft;;
@@ -663,6 +734,7 @@ write_cask(){
   if declare -F "write_cask_$TFN" >/dev/null; then "write_cask_$TFN"; return $?; fi
   case "$SOURCE" in
     github_tag|github_compound) write_github;;
+    github_arch) write_github_arch;;
     electron) write_electron;;
     msft_cdn) write_msft;;
     direct)   write_direct;;
