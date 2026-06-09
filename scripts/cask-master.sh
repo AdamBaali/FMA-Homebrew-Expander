@@ -460,6 +460,114 @@ end
 RB
 }
 
+# unversioned "latest" download: version :latest + sha256 :no_check. Homebrew discourages this for
+# new casks (no upstream version to track) — used only where the vendor offers no versioned URL.
+_resolve_direct_latest(){ VERSION="latest"; URL="$(sub_dl "${SP[url]}")"; curl -fL "$URL" -o "$DL"; }
+write_direct_latest(){
+  local url_cask="${SP[url]}" verified="" hp_host dl_host zapblock="" uninstall=""
+  hp_host="$(printf '%s' "$HOMEPAGE" | sed -E 's#^https?://([^/]+).*#\1#')"
+  dl_host="$(printf '%s' "$url_cask" | sed -E 's#^https?://([^/]+).*#\1#')"
+  [ "$hp_host" != "$dl_host" ] && verified=",
+      verified: \"$dl_host/\""
+  [ -n "$BUNDLE_ID" ] && zapblock="
+$(zap_for "$BUNDLE_ID")"
+  case "$ARTIFACT" in
+    pkg)
+      if [ -n "$LABELS" ]; then local arr; arr="$(printf '"%s", ' $LABELS | sed 's/, $//')"
+        uninstall="uninstall launchctl: [$arr],
+            pkgutil:   \"$RECEIPT\""
+      else uninstall="uninstall pkgutil: \"$RECEIPT\""; fi
+      cat > "$CASK" <<RB
+cask "$TOKEN" do
+  version :latest
+  sha256 :no_check
+
+  url "$url_cask"$verified
+  name "$NAME"
+  desc "$DESC"
+  homepage "$HOMEPAGE"
+
+  depends_on macos: :$SYM
+
+  pkg "$(basename "${URL%%\?*}")"
+
+  $uninstall
+$zapblock
+end
+RB
+    ;;
+    zip|dmg)
+      cat > "$CASK" <<RB
+cask "$TOKEN" do
+  version :latest
+  sha256 :no_check
+
+  url "$url_cask"$verified
+  name "$NAME"
+  desc "$DESC"
+  homepage "$HOMEPAGE"
+
+  depends_on macos: :$SYM
+
+  app "$APP_NAME"
+$zapblock
+end
+RB
+    ;;
+    *) die "direct_latest writer: unsupported artifact '$ARTIFACT'";;
+  esac; }
+
+# arch-split direct download (two URLs). Versioned via vers/vregex (or version=), else :latest.
+_resolve_direct_arch(){
+  if [ -n "${SP[version]:-}" ]; then VERSION="${SP[version]}"
+  elif [ -n "${SP[vers]:-}" ]; then VERSION="$(curl -fsSL "${SP[vers]}" | grep -oiE "${SP[vregex]}" | head -1)"; [ -n "$VERSION" ] || die "direct_arch: vregex matched nothing at ${SP[vers]}"
+  else VERSION="latest"; fi
+  URL="$(sub_dl "${SP[arm]}")"; curl -fL "$URL" -o "$DL"
+  curl -fL "$(sub_dl "${SP[intel]}")" -o "$W/dl-x64" && SHA_X64="$(shasum -a 256 "$W/dl-x64" | awk '{print $1}')" || die "direct_arch: intel download failed"; }
+write_direct_arch(){
+  local armurl intelurl zapblock="" verified="" hp_host dl_host verline armsha intelsha lc=""
+  armurl="$(sub_cask "${SP[arm]}")"; intelurl="$(sub_cask "${SP[intel]}")"
+  hp_host="$(printf '%s' "$HOMEPAGE" | sed -E 's#^https?://([^/]+).*#\1#')"
+  dl_host="$(printf '%s' "$armurl" | sed -E 's#^https?://([^/]+).*#\1#')"
+  [ "$hp_host" != "$dl_host" ] && verified=",
+        verified: \"$dl_host/\""
+  if [ "$VERSION" = latest ]; then verline="version :latest"; armsha="sha256 :no_check"; intelsha="sha256 :no_check"
+  else verline="version \"$VERSION\""; armsha="sha256 \"$SHA\""; intelsha="sha256 \"$SHA_X64\""
+    [ -n "${SP[vers]:-}" ] && lc="
+  livecheck do
+    url \"${SP[vers]}\"
+    regex(/${SP[vregex]}/i)
+    strategy :page_match
+  end"
+  fi
+  [ -n "$BUNDLE_ID" ] && zapblock="
+$(zap_for "$BUNDLE_ID")"
+  case "$ARTIFACT" in zip|dmg) : ;; *) die "direct_arch writer: only zip/dmg (got '$ARTIFACT')";; esac
+  cat > "$CASK" <<RB
+cask "$TOKEN" do
+  $verline
+
+  on_arm do
+    $armsha
+    url "$armurl"$verified
+  end
+  on_intel do
+    $intelsha
+    url "$intelurl"$verified
+  end
+
+  name "$NAME"
+  desc "$DESC"
+  homepage "$HOMEPAGE"$lc
+
+  depends_on macos: :$SYM
+
+  app "$APP_NAME"
+$zapblock
+end
+RB
+}
+
 resolve(){
   if declare -F "resolve_$TFN" >/dev/null; then "resolve_$TFN"; return $?; fi
   case "$SOURCE" in
@@ -469,6 +577,8 @@ resolve(){
     electron)        _resolve_electron;;
     msft_cdn)        _resolve_msft;;
     direct)          _resolve_direct;;
+    direct_latest)   _resolve_direct_latest;;
+    direct_arch)     _resolve_direct_arch;;
     custom)          die "source=custom but no resolve_$TFN defined";;
     *) die "unknown source '$SOURCE' for $TOKEN";;
   esac; }
@@ -738,6 +848,8 @@ write_cask(){
     electron) write_electron;;
     msft_cdn) write_msft;;
     direct)   write_direct;;
+    direct_latest) write_direct_latest;;
+    direct_arch) write_direct_arch;;
     custom)   die "source=custom but no write_cask_$TFN defined";;
     *) die "unknown source '$SOURCE'";;
   esac; }
