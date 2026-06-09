@@ -1,7 +1,7 @@
 {
   "project": "FMA no-homebrew-cask sourcing + cask authoring",
   "updated": "2026-06-09",
-  "phase": "Phase 2 \u2014 43 registry rows; 36 custom resolvers pending; all 192 sourced apps triaged",
+  "phase": "Phase 1 in progress \u2014 wave 1 done (chunks 1-5)",
   "canonical_paths": {
     "master_list": "data/master-list.csv",
     "worklist": "data/unsourced-worklist.csv",
@@ -14,32 +14,29 @@
   },
   "counts": {
     "total": 533,
-    "sourced": 192,
-    "unsourced": 341,
+    "sourced": 286,
+    "unsourced": 247,
     "registry_ready": 79,
-    "review_or_ineligible": 45,
+    "review_or_ineligible": 88,
     "autopkg_needs_installer_type": 67,
-    "in_registry": 43,
+    "in_registry": 62,
     "dryrun_clean": 0,
     "eligible_remaining_to_author": 36,
-    "custom_resolver_todo": 36
+    "custom_resolver_todo": 68
   },
   "sourcing_cursor": {
-    "next_worklist_index": 0,
-    "chunk_size": 20,
-    "chunks_total": 18,
-    "chunks_done": 0
+    "phase1_chunks_total": 18,
+    "phase1_chunks_done": 5,
+    "next_chunk": 6
   },
   "blockers": [
     "brew + the homebrew-cask tap are unavailable on this Linux container, and cask audit is macOS-only, so Phase 2 DRYRUN validation (brew style + brew audit) must run on a Mac.",
     "gh and autopkg are not installed (gh is only needed at submit time; autopkg is optional for sourcing)."
   ],
   "notes": [
-    "43 registry rows authored (14 github_tag + 29 direct/electron/msft). Statically verified, NOT DRYRUN'd \u2014 run DRYRUN=1 bash scripts/cask-master.sh on a Mac.",
-    "36 apps need custom resolve_/write_cask_ functions (facts in progress/custom-todo.md): arch-split non-electron, nested installers, hash-in-URL, header-only version, version:latest.",
-    "Triaged to review as duplicates of existing casks: docker(=docker-desktop), anaconda-navigator(=anaconda), anka(=anka-virtualization), app-cleaner-and-uninstaller(=app-cleaner), apache-netbeans-15(=netbeans), JDKs(=zulu@/corretto@), zerotier(=zerotier-one), obs-studio(=obs), nextcloud-desktop-client(=nextcloud).",
-    "DRYRUN watch-list in progress/readiness.md (bare-version direct rows need livecheck; vonage filename space; skype EOL).",
-    "Phase 1 cold-sourcing of the 341 unsourced apps NOT yet started.",
+    "62 registry rows authored; 68 custom to-do (progress/custom-todo.md); 88 review/ineligible.",
+    "Phase 1 cold-sourcing the 341: wave 1 (chunks 1-5, 94 apps) done -> 19 row, 32 custom, 36 review, 7 ineligible. 247 unsourced remain (chunks 6-18).",
+    "Pushing to main via GitHub API (push_files) \u2014 git proxy blocks direct main pushes.",
     "Do NOT submit; deliverable is the filled script for the user to DRYRUN + run on macOS."
   ]
 }

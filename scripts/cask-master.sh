@@ -153,6 +153,27 @@ signiant-app | Signiant App | Accelerated large file transfer client for Media S
 things | Things | Personal task manager and to-do list organizer | zip | direct | https://culturedcode.com/things/ | url=https://static.culturedcode.com/things/Things3.zip;vers=https://culturedcode.com/things/mac/help/releasenotes/;vregex=[0-9]+(\.[0-9]+)+
 vonage-business | Vonage Business | Calling, messaging, and meetings for unified communications | dmg | electron | https://businesssupport.vonage.com/ | feed=https://s3.amazonaws.com/vbcdesktop.vonage.com/prod/mac/latest-mac.yml;universal=Vonage Business-{v}-universal
 
+# ---- Phase 1 wave 1 (cold-sourced; verify on Mac with DRYRUN) ----
+achico | Achico | Compresses images, PDFs, and videos while preserving quality | zip | github_tag | https://github.com/nuance-dev/achico | repo=nuance-dev/achico;asset=Achico.app.zip
+api-utility | API Utility | Command-line tool to work with Jamf Pro APIs and manage secrets | zip | github_tag | https://github.com/Jamf-Concepts/apiutil | repo=Jamf-Concepts/apiutil;asset=API.Utility.zip
+barcode-producer | Barcode Producer | Designs and generates retail barcodes and labels with vector export | zip | direct | https://www.barcodeproducer.com | url=https://download.barcodeproducer.com/Barcode-Producer-{v}.zip;vers=https://r.barcodeproducer.com/app/download_mac/;vregex=[0-9]+(\.[0-9]+)+
+bartranslate | BarTranslate | Menu bar translator widget powered by Google Translate | zip | github_tag | https://github.com/ThijmenDam/BarTranslate | repo=ThijmenDam/BarTranslate;asset=BarTranslate.app.zip
+boring-notch | Boring Notch | Turns the notch into a music control center with visualizer and controls | dmg | github_tag | https://github.com/TheBoredTeam/boring.notch | repo=TheBoredTeam/boring.notch;asset=boringNotch.dmg
+brewmate | BrewMate | GUI to search, install, and uninstall Homebrew casks | dmg | github_tag | https://github.com/romankurnovskii/BrewMate | repo=romankurnovskii/BrewMate;asset=BrewMate-{v}-universal.dmg
+caesium-image-compressor | Caesium Image Compressor | Compresses JPG, PNG, WebP, and TIFF images while preserving quality | dmg | github_tag | https://github.com/Lymphatus/caesium-image-compressor | repo=Lymphatus/caesium-image-compressor;asset=caesium-image-compressor-{v}-macos.dmg
+chromebuddy | ChromeBuddy | Opens external links in the frontmost Chrome window | zip | github_tag | https://github.com/AndreyGr/ChromeBuddy | repo=AndreyGr/ChromeBuddy;asset=ChromeBuddy.zip
+close-desktop | Close | Sales CRM with built-in calling, SMS, and email | dmg | github_tag | https://github.com/closeio/closeio-desktop-releases | repo=closeio/closeio-desktop-releases;asset=Close-{v}.dmg
+cloudtalk-phone | CloudTalk Phone | Call center client for making and receiving business calls | dmg | electron | https://www.cloudtalk.io/ | feed=https://cloudtalk-phone-distribution.s3.amazonaws.com/latest-mac.yml;universal=CloudTalk-Phone-{v}-mac
+corelcad | CorelCAD | Drafting and 3D CAD tool compatible with DWG files | dmg | direct | https://www.corel.com/en/free-trials/ | url=https://www.corel.com/akdlm/6763/downloads/free/trials/CorelCAD/2023/CorelCAD2023.dmg;version=2023
+cronica | Cronica | Watchlist and reminders for movies and TV shows | zip | github_tag | https://github.com/eggerco/cronica | repo=eggerco/cronica;asset=Cronica.app.zip
+desktop-icon-manager | Desktop Icon Manager | Saves and restores desktop and Finder icon positions | zip | github_tag | https://github.com/com-entonos/Desktop-Icon-Manager | repo=com-entonos/Desktop-Icon-Manager;asset=DesktopIconManager{v}.zip
+dictation-daddy | Dictation Daddy | Speech-to-text dictation tool that types into any app | dmg | github_tag | https://github.com/rahulbansal16/DictationDaddy | repo=rahulbansal16/DictationDaddy;asset=Dictation-Daddy-mac.dmg
+dropnote | DropNote | Quick notes in the menu bar with tabbed and autosaved entries | zip | github_tag | https://github.com/bastian-js/dropnote | repo=bastian-js/dropnote;asset=DropNote.zip
+figura | Figura | Removes image backgrounds locally with on-device processing | zip | github_tag | https://github.com/nuance-dev/figura | repo=nuance-dev/figura;asset=Figura.app.zip
+fivenotes | FiveNotes | Menu bar notepad with five quick Markdown notes always at hand | zip | direct | https://www.apptorium.com/fivenotes | url=https://www.apptorium.com/public/products/fivenotes/releases/FiveNotes-{v}.zip;vers=https://www.apptorium.com/updates/fivenotes;vregex=FiveNotes-([0-9]+(?:\.[0-9]+)+)\.zip
+freeter | Freeter | Organizer that gathers apps, files, and notes per project and workflow | dmg | electron | https://freeter.io | feed=https://github.com/FreeterApp/Freeter/releases/latest/download/latest-mac.yml;arm=Freeter-{v}-mac-arm64;intel=Freeter-{v}-mac-x64
+fuzzlecheck-4 | Fuzzlecheck 4 | Plans film and video shoots with scheduling and call sheets | dmg | direct | https://www.fuzzlecheck.com/index/US/index.html | url=https://fuz4downloads.fuzzlecheck.com/fuz_mac_setup_{v}.dmg;version=4.8.0
+
 TABLE
 
 # ----------------------------------------------------------------------------

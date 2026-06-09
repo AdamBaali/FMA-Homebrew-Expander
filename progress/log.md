@@ -42,3 +42,12 @@
 - 36 apps need custom resolvers (facts in progress/custom-todo.md).
 
 `sourced 192/533 | in-registry 43 | dryrun-clean 0 | custom-todo 36 | needs-me: DRYRUN on Mac; Phase 1 (341) pending`
+
+## 2026-06-09 — Phase 1 wave 1 (chunks 1-5, 94 apps)
+
+- 5 parallel subagents cold-sourced 94 of the 341 unsourced apps.
+- Triage: 19 row (authored), 32 custom (resolver to-do), 36 review, 7 ineligible.
+- Registry now 62 rows; sourced 286/533; unsourced 247 remain.
+- Reclassified azul-zulu-jdk-22/24 custom->review (non-LTS; zulu cask tracks latest).
+
+`sourced 286/533 | in-registry 62 | custom 68 | review/inelig 88 | unsourced 247 | dryrun-clean 0`
