@@ -199,6 +199,25 @@ mut | MUT | Bulk-update inventory records, groups, and prestage scope in Jamf Pr
 mymedia | MyMedia | Browse and play a local movie and TV library with artwork and tracking | dmg | github_tag | https://github.com/photangralenphie/MyMedia | repo=photangralenphie/MyMedia;asset=MyMedia-v{v}.dmg
 namo | NAMO | Runs a local DNS server with host names that resolve to your current IP | dmg | direct | https://www.mamp.info/namo/en/ | url=https://downloads.mamp.info/NAMO/releases/mac/NAMO-{v}.dmg;vers=https://www.mamp.info/namo/en/;vregex=NAMO-(\d+\.\d+-\d+)\.dmg
 
+# ---- Phase 1 wave 3 (cold-sourced; verify on Mac with DRYRUN) ----
+nextpad | Nextpad++ | Native port of the Notepad++ source code editor with Scintilla engine | dmg | github_tag | https://github.com/nextpad-plus-plus/nextpad-plus-plus-macos | repo=nextpad-plus-plus/nextpad-plus-plus-macos;asset=Nextpad++v{v}.dmg
+noteey | Noteey | Visual note-taking app with an infinite canvas for text, images, and PDFs | dmg | github_tag | https://github.com/andyyoungm/muenzo | repo=andyyoungm/muenzo;asset=Noteey-{v}.universal.dmg
+obd-auto-doctor | OBD Auto Doctor | Reads vehicle diagnostics and sensor data from an OBD-II adapter | dmg | direct | https://www.obdautodoctor.com/ | url=https://cdn2.obdautodoctor.com/release/obd-auto-doctor_{v}-l.dmg;vers=https://www.obdautodoctor.com/download/;vregex=obd-auto-doctor_(\d+(?:\.\d+)+)-l\.dmg
+object-info | Object Info | Summarizes how Jamf Pro objects like groups, policies, and profiles relate | zip | github_tag | https://github.com/BIG-RAT/Object-Info | repo=BIG-RAT/Object-Info;asset=Object.Info.zip
+ollamaspring | OllamaSpring | Chat client for running and managing local Ollama language models | zip | github_tag | https://github.com/CrazyNeil/Taify | repo=CrazyNeil/Taify;asset=OllamaSpring.zip
+photos-workbench | Photos Workbench | Organize, rate, and compare photos in the Apple Photos library | dmg | direct | https://www.houdah.com/photosWorkbench/ | url=https://www.houdah.com/photosWorkbench/download_assets/Photos_Workbench_{v}.dmg;vers=https://www.houdah.com/photosWorkbench/download.html;vregex=Photos_Workbench_(\d+(?:\.\d+)+)\.dmg
+psso-utility | PSSO Utility | Inspects and monitors Platform Single Sign-On status | pkg | github_tag | https://github.com/jamf-concepts/psso-utility | repo=jamf-concepts/psso-utility;asset=PSSOUtility.pkg
+quickrecorder | QuickRecorder | Lightweight screen recorder based on ScreenCaptureKit | dmg | github_tag | https://github.com/lihaoyun6/QuickRecorder | repo=lihaoyun6/QuickRecorder;asset=QuickRecorder_v{v}.dmg
+relagit | RelaGit | Graphical Git client for developers | dmg | electron | https://rela.dev/ | feed=https://github.com/relagit/relagit/releases/latest/download/latest-mac.yml;arm=RelaGit-mac-arm64;intel=RelaGit-mac-x64
+remote-utilities-agent | Remote Utilities Agent | Attended remote support module that runs without installation | zip | direct | https://www.remoteutilities.com/ | url=https://www.remoteutilities.com/download/agent{v}.zip;vers=https://www.remoteutilities.com/download/mac.php;vregex=agent(\d+\.\d+\.\d+\.b\d+)\.zip
+remote-utilities-viewer | Remote Utilities Viewer | Operator console to connect to and control remote computers | dmg | direct | https://www.remoteutilities.com/ | url=https://www.remoteutilities.com/download/viewer{v}.dmg;vers=https://www.remoteutilities.com/download/mac.php;vregex=viewer(\d+\.\d+\.\d+\.b\d+)\.dmg
+renameninja | RenameNinja | Batch file renamer using regular expressions and JavaScript | zip | direct | https://loshadki.app/renameninja/ | url=https://loshadki.app/renameninja/releases/RenameNinja-{v}.app.zip;vers=https://loshadki.app/renameninja/;vregex=RenameNinja-(\d+(?:\.\d+)+)\.app\.zip
+reqres | ReqRes | Web debugging proxy to capture and modify HTTP traffic | dmg | github_tag | https://github.com/OloApps/ReqRes | repo=OloApps/ReqRes;asset=ReqRes-{v}.dmg
+root3-support-app | Root3 Support App | Menu bar app for user and helpdesk self-service support | pkg | github_tag | https://github.com/root3nl/SupportApp | repo=root3nl/SupportApp;asset=Support.{v}.pkg
+rumpus | Rumpus | File transfer server supporting FTP, FTPS, WebDAV, and SFTP | dmg | direct | https://www.maxum.com/Rumpus/ | url=https://www.maxum.com/DownloadPackages/Rumpus-{v}.dmg;vers=https://www.maxum.com/Rumpus/Download/;vregex=Rumpus-([0-9]+(?:\.[0-9]+)+)\.dmg
+scrutiny | Scrutiny | Website link checker, SEO auditor, and XML sitemap generator | dmg | direct | https://peacockmedia.software/mac/scrutiny/ | url=https://peacockmedia.software/mac/scrutiny/scrutiny.dmg;version=12.12.2;vers=https://peacockmedia.software/mac/scrutiny/;vregex=v([0-9]+(?:\.[0-9]+)+)
+squirreldisk | SquirrelDisk | Disk usage analyzer that visualizes large files with a sunburst chart | dmg | github_tag | https://github.com/adileo/squirreldisk | repo=adileo/squirreldisk;asset=SquirrelDisk_{v}_x64.dmg
+
 TABLE
 
 # ----------------------------------------------------------------------------

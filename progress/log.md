@@ -58,3 +58,10 @@
 - Registry now 85 rows; sourced 381/533; unsourced 152 remain.
 
 `sourced 381/533 | in-registry 85 | custom 102 | review/inelig 126 | unsourced 152 | dryrun-clean 0`
+
+## 2026-06-09 — Phase 1 wave 3 (chunks 11-15, 95 apps)
+
+- 5 subagents cold-sourced 95 apps. Triage: 17 row, 37 custom, 37 review, 4 ineligible.
+- Registry now 102 rows; sourced 476/533; unsourced 57 remain.
+
+`sourced 476/533 | in-registry 102 | custom 139 | review/inelig 167 | unsourced 57 | dryrun-clean 0`
