@@ -34,23 +34,31 @@ Live detail in [`progress/`](progress/) — `state.json`, `log.md`, `readiness.m
 
 ```
 .
-├── data/                         # the working lists (extend in place)
-│   ├── master-list.csv           #   533 rows, one per app — the source of truth
-│   └── unsourced-worklist.csv    #   the 341 still to source
-├── sources/                      # raw lookup tables mined from Mac-admin tooling
-│   ├── source-autopkg-index.tsv  #   ~7,500 app→source mappings (primary lookup)
+├── data/
+│   ├── master-list.csv           # 533 rows, one per app — the source of truth (status in `bucket`)
+│   └── unsourced-worklist.csv    # the sourcing to-do — now empty (all 533 sourced)
+├── sources/                      # raw lookup tables mined from Mac-admin tooling (static inputs)
+│   ├── source-autopkg-index.tsv  #   ~7,500 app→source mappings
 │   ├── source-installomator-fields.tsv
 │   └── installomator-slug-to-label.tsv
 ├── scripts/
-│   └── cask-master.sh            # batch cask authoring + PR/FR harness (run DRYRUN first)
+│   └── cask-master.sh            # batch cask authoring + PR/FR harness (DRYRUN first; one sudo prompt)
 ├── .claude/skills/               # project skills, auto-discovered by Claude Code
-│   └── homebrew-cask-author/     #   research → author → validate → PR → Fleet FR
-├── progress/                     # resumable state + logs + readiness table
-│   ├── state.json  log.md  readiness.md
-│   └── sourced/                  #   per-chunk sourcing output
+│   ├── README.md                 #   which skills live here + status
+│   └── homebrew-cask-author/     #   the cask-authoring skill: SKILL.md + references/
+├── progress/                     # live status, logs, and sourcing provenance
+│   ├── readiness.md              #   ★ per-app status: added / not-added + why (the revisit doc)
+│   ├── custom-todo.md            #   the 84 apps needing a custom resolver, with verified facts
+│   ├── state.json                #   resumable counts/cursor
+│   ├── log.md                    #   append-only run history
+│   └── sourced/                  #   sourcing provenance (one row per app, with notes)
+│       ├── phase1-results.tsv    #     the 341 cold-sourced (web research)
+│       ├── phase2-results.tsv    #     the 192 Installomator/AutoPkg-seeded
+│       └── autopkg-results.tsv   #     the 58 AutoPkg-pending resolved
 ├── docs/
-│   ├── HANDOFF.md                # original handoff bundle (provenance, status, column spec)
+│   ├── HANDOFF.md                # original handoff bundle (provenance, column spec)
 │   └── MASTER-PROMPT.md          # the operative workflow spec (Phases 0–3)
+├── .gitignore
 └── README.md
 ```
 
