@@ -33,13 +33,30 @@
 #      or one app at a time:  ONLY="filezilla" DRYRUN=1 bash cask-master.sh
 #   3) Run for real:  bash cask-master.sh
 #   4) For any app that failed, open /tmp/caskwork/<token>/report.md and paste
-#      it back for a targeted fix.
+#      it back for a targeted fix. A tab-separated rollup of every app lands at
+#      /tmp/caskwork/results.tsv, and the script exits non-zero if any app failed.
 #
 # ------------------------------ FLAGS ----------------------------------------
 #   DRYRUN=1          preview only (no install/push/PR/FR)
 #   ONLY="a b c"      run only these tokens (space-separated)
 #   LIMIT=N           run at most N apps from the registry
 #   STOP_ON_FAIL=1    halt the whole batch on the first app that fails (default 0)
+#   JOBS=N            prefetch (resolve + download) up to N apps ahead in parallel
+#                     (default 4; 0 = fully serial). Only built-in source types
+#                     prefetch — custom resolvers always resolve serially. Disk
+#                     stays bounded: at most N downloads are on disk at once.
+#   KEEP=1            keep each app's download + extracted tree after it finishes
+#                     (default 0 = delete them so a 300-app run can't fill the disk;
+#                     reports/logs are always kept)
+#   SKIP_PASSED=1     skip apps that already passed in a previous run (same CASKWORK
+#                     dir): success/skipped always count; a dryrun pass counts only
+#                     when running DRYRUN=1 again (default 0)
+#   START_AT=token    skip registry rows until this token (resume an interrupted run)
+#   LIVECHECK=0       skip the per-app `brew livecheck` (info-only; faster iteration)
+#   CASKWORK=dir      work/report dir (default /tmp/caskwork — macOS wipes /tmp on
+#                     reboot; set e.g. ~/caskwork to persist results across reboots)
+#   CHECK=1           don't run anything; report registry vs data/master-list.csv
+#                     drift (informational) and exit
 #   STRICT=0          drop --strict from audit (default 1 = CI parity)
 #   ZAP=0             skip the reinstall + zap test (default 1)
 #   FRESH=0           keep an existing open PR instead of force-refreshing (default 1)
@@ -496,14 +513,48 @@ export GIT_PAGER=cat HOMEBREW_NO_INSTALL_FROM_API=1 HOMEBREW_NO_AUTO_UPDATE=1 HO
 DRYRUN="${DRYRUN:-0}"; FORK="${FORK:-fork}"; FILE_FR="${FILE_FR:-1}"; CUSTOMER_LABEL="${CUSTOMER_LABEL:-}"
 FRESH="${FRESH:-1}"; STRICT="${STRICT:-1}"; ZAP="${ZAP:-1}"
 ONLY="${ONLY:-}"; LIMIT="${LIMIT:-}"; STOP_ON_FAIL="${STOP_ON_FAIL:-0}"
+JOBS="${JOBS:-4}"; KEEP="${KEEP:-0}"; SKIP_PASSED="${SKIP_PASSED:-0}"; START_AT="${START_AT:-}"
+LIVECHECK="${LIVECHECK:-1}"; CHECK="${CHECK:-0}"
 AUTHOR_NAME="${AUTHOR_NAME:-AdamBaali}"; AUTHOR_EMAIL="${AUTHOR_EMAIL:-adam@mpc.ad}"
 [ "$STRICT" = 1 ] && SFLAG="--strict" || SFLAG=""
 if [ "$STRICT" = 1 ]; then AUDIT_DESC="--strict --online --new"; else AUDIT_DESC="--online --new"; fi
 if [ "$ZAP" = 1 ]; then TESTED="installed, reinstalled, uninstalled, and zapped"; VERIFIED="the artifact, a clean uninstall, an idempotent reinstall, and the zap stanza paths"; else TESTED="installed and uninstalled"; VERIFIED="the artifact and uninstall"; fi
 DISCLOSURE="AI (Claude) assisted in creating this PR: it researched the download URL, version, bundle identifier, minimum macOS, and pkg receipt, and drafted the cask DSL. I reviewed the result, ran brew style --fix and brew audit --cask $AUDIT_DESC with no offenses or errors, and $TESTED the cask locally on macOS to verify $VERIFIED."
-ROOT=/tmp/caskwork; mkdir -p "$ROOT"; MASTER="$ROOT/MASTER-summary.md"
+ROOT="${CASKWORK:-/tmp/caskwork}"; mkdir -p "$ROOT"
+MASTER="$ROOT/MASTER-summary.md"; RESULTS="$ROOT/results.tsv"
 
 trim(){ local s="$1"; s="${s#"${s%%[![:space:]]*}"}"; s="${s%"${s##*[![:space:]]}"}"; printf '%s' "$s"; }
+
+# Every download/scrape goes through curl; bounded retries so one transient
+# network blip doesn't fail an app (HTTP 4xx aren't retried; -f still fails them).
+curl(){ command curl --connect-timeout 20 --retry 3 "$@"; }
+
+# ----------------------------------------------------------------------------
+# CHECK=1 — registry vs data/master-list.csv drift report (no brew/gh needed).
+# Informational: tokens renamed in the CSV bucket text ("token goto-desktop")
+# are matched; anything else listed is drift (or a deliberate multi-version
+# variant like dragonframe-2024/2025) — eyeball it and fix whichever side is stale.
+# ----------------------------------------------------------------------------
+if [ "$CHECK" = 1 ]; then
+  CSV="$(cd "$(dirname "$0")/.." 2>/dev/null && pwd)/data/master-list.csv"
+  [ -f "$CSV" ] || { echo "CHECK: $CSV not found (run from the repo checkout)"; exit 1; }
+  RT="$(mktemp)"; CT="$(mktemp)"
+  while IFS= read -r _l; do
+    case "$(trim "$_l")" in ""|\#*) continue;; esac
+    IFS='|' read -r _t _rest <<< "$_l"; printf '%s\n' "$(trim "$_t")"
+  done <<< "$REGISTRY" | sort -u > "$RT"
+  FL="$(mktemp)"; awk -F',' 'NR>1 && $15 ~ /^"?in-registry/' "$CSV" > "$FL"
+  # a bucket like "in-registry (token goto-desktop)" means the slug was renamed:
+  # count the renamed token, not the original slug
+  { awk -F',' '$15 !~ /token / {print $1}' "$FL"; grep -oE 'token [a-z0-9@.+-]+' "$FL" | awk '{print $2}'; } \
+    | sort -u > "$CT"; rm -f "$FL"
+  echo "Registry tokens: $(wc -l < "$RT" | tr -d ' ')   CSV in-registry slugs (incl. renames): $(wc -l < "$CT" | tr -d ' ')"
+  echo; echo "-- in REGISTRY but not in-registry in the CSV:"
+  comm -23 "$RT" "$CT" | sed 's/^/   /' || true
+  echo; echo "-- in-registry in the CSV but missing from the REGISTRY:"
+  comm -13 "$RT" "$CT" | sed 's/^/   /' || true
+  rm -f "$RT" "$CT"; exit 0
+fi
 
 # ----------------------------------------------------------------------------
 # Prerequisites (checked once)
@@ -4657,7 +4708,7 @@ run_one(){
   set -uo pipefail
   STAGE=init; STATUS=incomplete
   VERSION=""; URL=""; SHA=""; SHA_X64=""; BUNDLE_ID=""; MINOS=""; SYM=""; RECEIPT=""; LABELS=""; MAU=""
-  STYLE_OUT=""; AUDIT=""; LIVECHECK=""; PR=""; FR=""; REFUSED=""; AUTOFIX=""; APP_NAME=""
+  STYLE_OUT=""; AUDIT=""; LIVECHECK_OUT=""; PR=""; FR=""; REFUSED=""; AUTOFIX=""; APP_NAME=""
   MS_REAL=""; MS_URLT=""; DH_URLT=""; TAG=""; TAGI=""
   S="$W/summary.txt"; REPORT="$W/report.md"; : > "$S"
   local LETTER; LETTER="$(printf '%s' "$TOKEN" | cut -c1)"; CASK="$TAP/Casks/$LETTER/$TOKEN.rb"
@@ -4691,36 +4742,55 @@ prior closed PRs for token: ${REFUSED:-not checked}"
     sec "brew style (remaining after --fix)" "${STYLE_OUT:-(not run)}"
     sec "brew audit --cask $AUDIT_DESC" "${AUDIT:-(not run)}"
     sec "Auto-fixes applied (review these)" "${AUTOFIX:-none}"
-    sec "brew livecheck --cask (info only)" "${LIVECHECK:-(not run)}"
+    sec "brew livecheck --cask (info only)" "${LIVECHECK_OUT:-(not run)}"
     [ -f "$W/install.log" ]   && sec "brew install --cask"   "$(cat "$W/install.log")"
     [ -f "$W/uninstall.log" ] && sec "brew uninstall --cask" "$(cat "$W/uninstall.log")"
     [ -f "$W/install2.log" ]  && sec "brew install --cask (reinstall / idempotency)" "$(cat "$W/install2.log")"
     [ -f "$W/zap.log" ]       && sec "brew uninstall --zap --cask" "$(cat "$W/zap.log")"
     sec "git" "$(git -C "$TAP" status -s 2>/dev/null; echo '--- last commit ---'; git -C "$TAP" log --oneline -1 2>/dev/null)"
     sec "Progress log" "$(cat "$S")"
+    if [ "$DRYRUN" = 1 ] && [ -f "$CASK" ]; then
+      # DRYRUN writes the cask untracked on $DEF (no branch): keep a copy in $W
+      # and remove it from the tap so the tap is left clean even on failure.
+      cp "$CASK" "$W/$TOKEN.rb" 2>/dev/null; rm -f "$CASK"
+    fi
     emit_result
     echo; echo "==== review bundle for $TOKEN ($STATUS) — full report at $REPORT ===="
   }
   die(){ STATUS="failed"; log "[$TOKEN] $1"; report; exit 1; }
 
   cd "$TAP" || { echo "cannot cd tap"; exit 1; }
-  STAGE="precheck"; git checkout -q "$DEF" 2>/dev/null; git pull -q --ff-only 2>/dev/null || true
+  STAGE="precheck"
   if brew info --cask "$TOKEN" >/dev/null 2>&1; then
     STATUS="skipped (cask exists upstream)"
     log "[$TOKEN] a cask already exists in homebrew-cask — skipping the PR. File a Fleet FR for the existing cask separately if needed."
     report; exit 0
   fi
   brew info --formula "$TOKEN" >/dev/null 2>&1 && log "[$TOKEN] WARNING: token collides with a homebrew-core formula — rename (e.g. ${TOKEN}-desktop) or audit will reject it"
-  git branch -D "add-$TOKEN" >/dev/null 2>&1 || true; git checkout -q -b "add-$TOKEN"
-  [ "$FRESH" = 1 ] && [ "$DRYRUN" != 1 ] && git push "$FORK" --delete "add-$TOKEN" >/dev/null 2>&1 || true
+  if [ "$DRYRUN" != 1 ]; then
+    # base was synced once before the batch; branch per app only on live runs
+    git checkout -q "$DEF" 2>/dev/null
+    git branch -D "add-$TOKEN" >/dev/null 2>&1 || true; git checkout -q -b "add-$TOKEN"
+    [ "$FRESH" = 1 ] && git push "$FORK" --delete "add-$TOKEN" >/dev/null 2>&1 || true
+  fi
 
-  STAGE="resolve";   resolve; [ -s "$DL" ] || die "download failed (resolve produced no file at \$DL)"
+  STAGE="resolve"
+  if [ -f "$W/resolved.env" ] && grep -q '^RESOLVED_OK=1' "$W/resolved.env"; then
+    . "$W/resolved.env"
+    log "[$TOKEN] using prefetched download (version ${VERSION:-?})"
+  else
+    [ -s "$W/prefetch.log" ] && log "[$TOKEN] prefetch did not complete ($W/prefetch.log) — resolving serially"
+    resolve
+  fi
+  [ -s "$DL" ] || die "download failed (resolve produced no file at \$DL)"
   STAGE="sha";       SHA="$(shasum -a 256 "$DL" | awk '{print $1}')"
   STAGE="inspect";   inspect
   STAGE="write";     write_cask; [ -f "$CASK" ] || die "write_cask did not create $CASK"; inject_rosetta
   STAGE="style";     brew style --fix "$TOKEN" >/dev/null 2>&1; STYLE_OUT="$(brew style "$TOKEN" 2>&1)"
   STAGE="audit";     AUDIT="$(brew audit --cask $SFLAG --online --new "$TOKEN" 2>&1)"
-  issues(){ printf '%s' "$STYLE_OUT" | grep -qE '[1-9][0-9]* offense' || printf '%s' "$AUDIT" | grep -qiE 'error|problem|fail'; }
+  # anchor on brew's real failure shapes ("Error:", "N problems in ...") so a
+  # token/desc containing words like "fail" can't false-positive the audit check
+  issues(){ printf '%s' "$STYLE_OUT" | grep -qE '[1-9][0-9]* offense' || printf '%s' "$AUDIT" | grep -qE '(^|[[:space:]])Error:|[1-9][0-9]* (problems?|errors?)'; }
   if issues; then
     log "[$TOKEN] style/audit reported issues — trying safe auto-fixes…"
     local pass=0
@@ -4733,8 +4803,10 @@ $STYLE_OUT" || { log "[$TOKEN] no further safe auto-fix applies (remaining issue
       pass=$((pass+1))
     done
   fi
-  STAGE="livecheck"; LIVECHECK="$(brew livecheck --cask "$TOKEN" 2>&1 || true)"
-  git add "$CASK"; git commit -q -m "Add $TOKEN (new cask)" 2>/dev/null || true
+  if [ "$LIVECHECK" = 1 ]; then
+    STAGE="livecheck"; LIVECHECK_OUT="$(brew livecheck --cask "$TOKEN" 2>&1 || true)"
+  fi
+  if [ "$DRYRUN" != 1 ]; then git add "$CASK"; git commit -q -m "Add $TOKEN (new cask)" 2>/dev/null || true; fi
   STAGE="audit"; issues && die "style/audit still failing after auto-fix — see report (auto-fixed: ${AUTOFIX:-none})"
   log "[$TOKEN] style + audit OK${AUTOFIX:+ (auto-fixed: $AUTOFIX)}"
 
@@ -4752,6 +4824,11 @@ $STYLE_OUT" || { log "[$TOKEN] no further safe auto-fix applies (remaining issue
     brew uninstall --zap --cask "$TOKEN" 2>&1 | tee "$W/zap.log" || { brew uninstall --force --cask "$TOKEN" >/dev/null 2>&1 || true; die "zap failed — fix zap stanza paths; no PR"; }
     if grep -q 'No zap stanza present' "$W/zap.log"; then log "[$TOKEN] reinstall + uninstall OK (cask has no zap stanza)"
     else log "[$TOKEN] reinstall + zap OK (zap stanza paths exercised)"; fi
+  fi
+  # drop brew's cached installer for this cask so a long live run can't fill the disk
+  if [ "$KEEP" != 1 ]; then
+    BC="$(brew --cache --cask "$TOKEN" 2>/dev/null || true)"
+    [ -n "$BC" ] && rm -f "$BC" 2>/dev/null
   fi
 
   STAGE="push"
@@ -4838,6 +4915,32 @@ done <<< "$REGISTRY"
 [ "${#ROWS[@]}" -gt 0 ] || { echo "Registry is empty. Add app rows to the REGISTRY block, then re-run."; exit 0; }
 
 # ----------------------------------------------------------------------------
+# Select the apps to run (ONLY / START_AT / LIMIT / SKIP_PASSED), parsed up front
+# so the sudo check and the prefetcher only consider what will actually run.
+# ----------------------------------------------------------------------------
+declare -a T_TOKEN=() T_NAME=() T_DESC=() T_ART=() T_SRC=() T_HP=() T_SPEC=()
+started=1; [ -n "$START_AT" ] && started=0
+nskip=0
+for line in "${ROWS[@]}"; do
+  IFS='|' read -r c1 c2 c3 c4 c5 c6 c7 <<< "$line"
+  tok="$(trim "$c1")"; [ -z "$tok" ] && continue
+  if [ -n "$ONLY" ]; then case " $ONLY " in *" $tok "*) ;; *) continue;; esac; fi
+  if [ "$started" = 0 ]; then [ "$tok" = "$START_AT" ] && started=1 || continue; fi
+  if [ "$SKIP_PASSED" = 1 ] && [ -f "$ROOT/$tok/result.env" ]; then
+    pst="$(grep '^STATUS=' "$ROOT/$tok/result.env" 2>/dev/null | cut -d= -f2-)"
+    case "$pst" in
+      success*|skipped*) nskip=$((nskip+1)); continue;;
+      dryrun*) if [ "$DRYRUN" = 1 ]; then nskip=$((nskip+1)); continue; fi;;
+    esac
+  fi
+  if [ -n "$LIMIT" ] && [ "${#T_TOKEN[@]}" -ge "$LIMIT" ]; then break; fi
+  T_TOKEN+=("$tok"); T_NAME+=("$(trim "$c2")"); T_DESC+=("$(trim "$c3")")
+  T_ART+=("$(trim "$c4")"); T_SRC+=("$(trim "$c5")"); T_HP+=("$(trim "$c6")"); T_SPEC+=("$(trim "$c7")")
+done
+[ "$nskip" -gt 0 ] && echo "SKIP_PASSED=1 — skipping $nskip app(s) that already passed (reports under $ROOT)."
+[ "${#T_TOKEN[@]}" -gt 0 ] || { echo "Nothing to run (ONLY/START_AT/LIMIT/SKIP_PASSED selected 0 apps)."; exit 0; }
+
+# ----------------------------------------------------------------------------
 # Sudo: ask ONCE, then cache for the entire run so per-app install/uninstall/zap
 # never re-prompt. pkg installs (and pkg uninstall/zap) shell out to sudo many
 # times; a short system timestamp_timeout (or tty_tickets) defeats the classic
@@ -4851,17 +4954,17 @@ done <<< "$REGISTRY"
 # ----------------------------------------------------------------------------
 SUDO_NOPASSWD="${SUDO_NOPASSWD:-1}"
 NEED_SUDO=0
-for line in "${ROWS[@]}"; do
-  IFS='|' read -r _t _n _d a s _rest <<< "$line"
-  a="$(trim "$a")"; s="$(trim "$s")"
-  { [ "$a" = pkg ] || [ "$s" = msft_cdn ]; } && NEED_SUDO=1
+for _i in "${!T_TOKEN[@]}"; do
+  { [ "${T_ART[$_i]}" = pkg ] || [ "${T_SRC[$_i]}" = msft_cdn ]; } && NEED_SUDO=1
 done
 SUDOERS_FILE=""
+declare -a PFPID=()
 cleanup_sudo(){ [ -n "${SUDOERS_FILE:-}" ] && sudo rm -f "$SUDOERS_FILE" 2>/dev/null; [ -n "${SUDO_PID:-}" ] && kill "$SUDO_PID" 2>/dev/null; }
+cleanup_run(){ local p; for p in "${PFPID[@]:-}"; do [ -n "$p" ] && [ "$p" != 0 ] && kill "$p" 2>/dev/null; done; cleanup_sudo; }
+trap cleanup_run EXIT INT TERM
 if [ "$DRYRUN" != 1 ] && [ "$NEED_SUDO" = 1 ]; then
   echo "Priming sudo once — enter your password a single time; it's cached for the whole run."
   sudo -v || { echo "sudo is required for pkg installs/uninstalls"; exit 1; }
-  trap cleanup_sudo EXIT INT TERM
   if [ "$SUDO_NOPASSWD" = 1 ]; then
     SUDOERS_FILE="/etc/sudoers.d/cask-master-$$"
     if printf '%s ALL=(ALL) NOPASSWD: ALL\n' "$(id -un)" | sudo tee "$SUDOERS_FILE" >/dev/null 2>&1 \
@@ -4879,44 +4982,107 @@ if [ "$DRYRUN" != 1 ] && [ "$NEED_SUDO" = 1 ]; then
 fi
 
 # ----------------------------------------------------------------------------
+# Sync the tap base ONCE (was per-app). DRYRUN never leaves $DEF; live runs
+# branch per app off this base.
+# ----------------------------------------------------------------------------
+git -C "$TAP" checkout -q "$DEF" 2>/dev/null || true
+git -C "$TAP" pull -q --ff-only 2>/dev/null || true
+
+# ----------------------------------------------------------------------------
+# Parallel prefetch: resolve + download up to JOBS apps ahead. Built-in source
+# types only — custom resolve_<tfn> functions may set extra variables their
+# writers need, so custom rows always resolve serially inside run_one. Each
+# prefetch runs in its own $W; disk stays bounded because the main loop deletes
+# each app's download as soon as the app finishes (unless KEEP=1).
+# ----------------------------------------------------------------------------
+PF_VARS="VERSION URL TAG TAGI SHA_X64 MS_REAL MS_URLT DH_URLT"
+start_prefetch(){
+  local i="$1" tok tfn
+  [ -n "${PFPID[$i]:-}" ] && return 0
+  tok="${T_TOKEN[$i]}"; tfn="${tok//-/_}"
+  case "${T_SRC[$i]}" in
+    github_tag|github_arch|github_compound|electron|msft_cdn|direct|direct_latest|direct_arch|direct_header) ;;
+    *) PFPID[$i]=0; return 0;;
+  esac
+  declare -F "resolve_$tfn" >/dev/null && { PFPID[$i]=0; return 0; }
+  (
+    TOKEN="$tok"; TFN="$tfn"; NAME="${T_NAME[$i]}"; ARTIFACT="${T_ART[$i]}"
+    SOURCE="${T_SRC[$i]}"; HOMEPAGE="${T_HP[$i]}"
+    W="$ROOT/$tok"; DL="$W/dl"
+    rm -rf "$W"; mkdir -p "$W"
+    exec >"$W/prefetch.log" 2>&1
+    die(){ echo "[$TOKEN] prefetch: $*"; exit 1; }
+    VERSION=""; URL=""; TAG=""; TAGI=""; SHA_X64=""; MS_REAL=""; MS_URLT=""; DH_URLT=""
+    parse_spec "${T_SPEC[$i]}"
+    if resolve && [ -s "$DL" ]; then
+      { for v in $PF_VARS; do printf '%s=%q\n' "$v" "${!v}"; done; echo "RESOLVED_OK=1"; } > "$W/resolved.env"
+    fi
+  ) & PFPID[$i]=$!
+}
+
+# ----------------------------------------------------------------------------
 # Run the batch
 # ----------------------------------------------------------------------------
-{ echo "# Master cask run — $(date)"; echo; echo "Mode: $([ "$DRYRUN" = 1 ] && echo DRYRUN || echo LIVE)  |  base: $DEF  |  fork: ${FORK_OWNER:-?}"; echo; } > "$MASTER"
-n=0
-for line in "${ROWS[@]}"; do
-  IFS='|' read -r c1 c2 c3 c4 c5 c6 c7 <<< "$line"
-  TOKEN="$(trim "$c1")"; NAME="$(trim "$c2")"; DESC="$(trim "$c3")"
-  ARTIFACT="$(trim "$c4")"; SOURCE="$(trim "$c5")"; HOMEPAGE="$(trim "$c6")"; SPEC="$(trim "$c7")"
-  [ -z "$TOKEN" ] && continue
-  if [ -n "$ONLY" ]; then case " $ONLY " in *" $TOKEN "*) ;; *) continue;; esac; fi
-  n=$((n+1)); if [ -n "$LIMIT" ] && [ "$n" -gt "$LIMIT" ]; then n=$((n-1)); break; fi
+NTOT="${#T_TOKEN[@]}"
+{ echo "# Master cask run — $(date)"; echo; echo "Mode: $([ "$DRYRUN" = 1 ] && echo DRYRUN || echo LIVE)  |  base: $DEF  |  fork: ${FORK_OWNER:-?}  |  apps: $NTOT  |  jobs: $JOBS"; echo; } > "$MASTER"
+printf 'token\tstatus\tstage\tversion\tpr\tfr\treport\n' > "$RESULTS"
+NFAIL=0; FAILED_TOKENS=""
+for i in "${!T_TOKEN[@]}"; do
+  if [ "$JOBS" -gt 0 ] 2>/dev/null; then
+    for (( j=i; j<i+JOBS && j<NTOT; j++ )); do start_prefetch "$j"; done
+    [ "${PFPID[$i]:-0}" != 0 ] && wait "${PFPID[$i]}" 2>/dev/null || true
+  fi
+  TOKEN="${T_TOKEN[$i]}"; NAME="${T_NAME[$i]}"; DESC="${T_DESC[$i]}"
+  ARTIFACT="${T_ART[$i]}"; SOURCE="${T_SRC[$i]}"; HOMEPAGE="${T_HP[$i]}"; SPEC="${T_SPEC[$i]}"
   TFN="${TOKEN//-/_}"
   parse_spec "$SPEC"
-  W="$ROOT/$TOKEN"; rm -rf "$W"; mkdir -p "$W"; DL="$W/dl"
+  W="$ROOT/$TOKEN"; DL="$W/dl"
+  # prefetched apps already have a fresh $W (made by the prefetch subshell)
+  if [ "${PFPID[$i]:-0}" = 0 ]; then rm -rf "$W"; mkdir -p "$W"; fi
+  n=$((i+1))
 
-  echo; echo "════ [$n] $TOKEN  ($NAME) — source=$SOURCE artifact=$ARTIFACT ════"
+  echo; echo "════ [$n/$NTOT] $TOKEN  ($NAME) — source=$SOURCE artifact=$ARTIFACT ════"
   ( run_one ); rc=$?
 
-  git -C "$TAP" checkout -q "$DEF" 2>/dev/null || true
-  git -C "$TAP" branch -D "add-$TOKEN" >/dev/null 2>&1 || true
+  if [ "$DRYRUN" != 1 ]; then
+    git -C "$TAP" checkout -q "$DEF" 2>/dev/null || true
+    git -C "$TAP" branch -D "add-$TOKEN" >/dev/null 2>&1 || true
+  fi
+  # disk hygiene: drop the download + extracted tree as soon as the app is done
+  # (reports/logs/casks in $W are kept). KEEP=1 keeps everything.
+  [ "$KEEP" = 1 ] || rm -rf "$W/dl" "$W/dl-x64" "$W/x"
 
-  st="?"; pr=""; fr=""
+  st="?"; stg="?"; ver=""; pr=""; fr=""
   if [ -f "$W/result.env" ]; then
     st="$(grep '^STATUS=' "$W/result.env" | cut -d= -f2-)"
+    stg="$(grep '^STAGE=' "$W/result.env" | cut -d= -f2-)"
+    ver="$(grep '^VERSION=' "$W/result.env" | cut -d= -f2-)"
     pr="$(grep '^PR=' "$W/result.env" | cut -d= -f2-)"
     fr="$(grep '^FR=' "$W/result.env" | cut -d= -f2-)"
   fi
+  printf '%s\t%s\t%s\t%s\t%s\t%s\t%s\n' "$TOKEN" "$st" "$stg" "$ver" "$pr" "$fr" "$W/report.md" >> "$RESULTS"
   printf -- '- **%s** — %s%s%s  _(report: %s)_\n' "$TOKEN" "$st" "${pr:+ — PR: $pr}" "${fr:+ — FR: $fr}" "$W/report.md" >> "$MASTER"
   echo "──── $TOKEN: $st ${pr:+| PR=$pr} ${fr:+| FR=$fr}"
+  case "$st" in success*|dryrun*|skipped*) ;; *) NFAIL=$((NFAIL+1)); FAILED_TOKENS+="$TOKEN ";; esac
 
   if [ "$rc" != 0 ] && [ "$STOP_ON_FAIL" = 1 ]; then
     echo "STOP_ON_FAIL=1 and $TOKEN did not succeed — stopping the batch."; break
   fi
 done
 
+{ echo; echo "## Totals"; echo
+  echo "- ran: $NTOT  |  failed: $NFAIL  |  results: $RESULTS"
+  if [ "$NFAIL" -gt 0 ]; then
+    echo; echo "## Failed (re-run just these: SKIP_PASSED=1, or ONLY=\"$(trim "$FAILED_TOKENS")\")"; echo
+    for t in $FAILED_TOKENS; do echo "- $t — $ROOT/$t/report.md"; done
+  fi; } >> "$MASTER"
+
 echo; echo "===================================================================="
 echo " MASTER SUMMARY — $MASTER"
 echo "===================================================================="
 cat "$MASTER"
 echo
-echo "For any app that failed, open /tmp/caskwork/<token>/report.md and paste it back for a targeted fix."
+echo "Machine-readable rollup: $RESULTS"
+echo "For any app that failed, open $ROOT/<token>/report.md and paste it back for a targeted fix."
+if [ "$NFAIL" -gt 0 ]; then exit 1; fi
+exit 0
