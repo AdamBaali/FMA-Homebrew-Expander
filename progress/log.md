@@ -87,3 +87,10 @@
 - Registry now 174 rows.
 
 `in-registry 174 | custom 104 | autopkg-pending 58 | review/inelig 196 | dryrun-clean 0`
+
+## 2026-06-09 — Author batch C (+30 rows)
+
+- Converted 30 of 53 wave-2 customs -> rows (direct_latest 22, direct_arch 6, github_tag 2). 23 remain bespoke.
+- quilt -> quilt-app (formula collision). Registry now 204 rows.
+
+`in-registry 204 | custom 74 | autopkg-pending 58 | review/inelig 196 | dryrun-clean 0`

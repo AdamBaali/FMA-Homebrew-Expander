@@ -1,7 +1,7 @@
 {
   "project": "FMA no-homebrew-cask sourcing + cask authoring",
   "updated": "2026-06-09",
-  "phase": "Phase 2 authoring \u2014 batch B (direct_latest/direct_arch) done",
+  "phase": "Phase 2 authoring \u2014 batch C done; custom backlog now bespoke-only",
   "canonical_paths": {
     "master_list": "data/master-list.csv",
     "worklist": "data/unsourced-worklist.csv",
@@ -19,10 +19,10 @@
     "registry_ready": 79,
     "review_or_ineligible": 196,
     "autopkg_needs_installer_type": 58,
-    "in_registry": 174,
+    "in_registry": 204,
     "dryrun_clean": 0,
     "eligible_remaining_to_author": 36,
-    "custom_resolver_todo": 104
+    "custom_resolver_todo": 74
   },
   "sourcing_cursor": {
     "phase1_chunks_total": 18,
@@ -34,9 +34,10 @@
     "gh and autopkg are not installed (gh is only needed at submit time; autopkg is optional for sourcing)."
   ],
   "notes": [
-    "174 registry rows authored ({'github_tag': 68, 'direct': 42, 'electron': 7, 'msft_cdn': 2, 'github_compound': 1, 'github_arch': 11, 'direct_latest': 34, 'direct_arch': 9}); 104 bespoke custom remain; 58 AutoPkg-pending; 196 review/ineligible.",
-    "Batch B: converted 44 customs -> direct_latest(34)/direct_arch(9)/direct(1) rows. 51 stay bespoke (header/hash/build-token/arch-pkg/nested).",
-    "direct_latest rows are version:latest + sha256:no_check (flagged). Next: AutoPkg-pending (58) research + bespoke customs.",
-    "Each batch: push claude/author-waveN -> PR -> squash-merge to main; README+docs updated."
+    "204 registry rows ({'github_tag': 70, 'direct': 42, 'electron': 7, 'msft_cdn': 2, 'github_compound': 1, 'github_arch': 11, 'direct_latest': 56, 'direct_arch': 15}); 74 bespoke custom; 58 AutoPkg-pending; 196 review/ineligible.",
+    "Batches B+C converted ~74 customs -> rows (mostly direct_latest/direct_arch). Remaining custom are genuinely bespoke (need hand-written resolve_/write_cask_).",
+    "quilt token renamed -> quilt-app (homebrew-core formula collision).",
+    "Next: research the 58 AutoPkg-pending (sparkle/scrape) -> rows; then bespoke customs.",
+    "Each batch: push claude/author-waveN -> PR -> squash-merge to main."
   ]
 }
