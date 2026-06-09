@@ -363,6 +363,92 @@ textsoap | TextSoap | Cleans up and reformats text with automated scrubbing rule
 typewhisper | TypeWhisper | On-device speech-to-text dictation that types into any app | dmg | direct | https://github.com/TypeWhisper/typewhisper-mac | url=https://github.com/TypeWhisper/typewhisper-mac/releases/download/v{v}/TypeWhisper-v{v}.dmg;vers=https://github.com/TypeWhisper/typewhisper-mac/releases;vregex=TypeWhisper-v(\d+\.\d+\.\d+)\.dmg
 vernier-graphical-analysis | Vernier Graphical Analysis | Collects and graphs data from Vernier sensors and probes | dmg | direct_latest | https://graphicalanalysis.app/ | url=https://software-releases.graphicalanalysis.com/ga/mac/release/latest/Vernier-Graphical-Analysis.dmg
 
+# ---- custom conversion: 78 source=custom (resolver fns below) + 6 handler rows ----
+barcode-studio | Barcode Studio | Generates 1D and 2D barcodes and exports them as images or vectors | pkg | custom | https://www.tec-it.com/en/product/barcode-software/barcode-maker/Default.aspx |
+bimcollab-zoom | BIMcollab Zoom | Reviews and coordinates BIM models and clash issues | dmg | custom | https://www.bimcollab.com/en/products/bimcollab-zoom |
+buhocleaner | BuhoCleaner | Cleans junk files and frees up disk space | dmg | custom | https://www.drbuho.com/buhocleaner |
+capture-one | Capture One | Edits and organizes raw photos with tethered capture | dmg | custom | https://www.captureone.com |
+cato-client | Cato Client | Connects devices to the Cato SASE cloud network | pkg | custom | https://www.catonetworks.com/sase |
+cloudya | Cloudya | Cloud telephony client for calls, chat, and meetings | zip | custom | https://www.nfon.com/en/products/cloudya |
+code42 | Code42 | Backs up endpoint data and detects insider risk | dmg | custom | https://www.crashplan.com |
+comic-life-4 | Comic Life 4 | Creates comics and photo stories from your own images | zip | custom | https://plasq.com/apps/comiclife/macwin/ |
+conniepad | Conniepad | Collaborative meeting notes that turn into organized minutes | dmg | custom | https://conniepad.com/ |
+cricut-design-space | Cricut Design Space | Designs projects and sends cut jobs to Cricut machines | dmg | custom | https://cricut.com/en-us/design-space |
+daylite | Daylite | CRM and productivity manager for small businesses | zip | custom | https://www.marketcircle.com/daylite/ |
+dedoose | Dedoose | Analyzes qualitative and mixed-methods research data | dmg | direct_header | https://www.dedoose.com | short=https://downloads.dedoose.com/dedoose-app-releases/Dedoose-Mac.dmg;regex=Dedoose-Mac-v(\d+(?:\.\d+)+)\.dmg
+delighted | DelightEd | Converts written text to spoken-word audio files | zip | custom | https://eclecticlight.co/delighted-podofyllin/ |
+dell-display-peripheral-manager | Dell Display Peripheral Manager | Adjusts settings for Dell monitors and connected peripherals | pkg | custom | https://www.dell.com/support/kbdoc/en-us/000201067/dell-display-and-peripheral-manager-for-macos |
+deskrest | DeskRest | Reminds you to take breaks to reduce eye and wrist strain | dmg | custom | https://github.com/Marceeelll/DeskRest-releases |
+displaylink-manager | Displaylink Manager | Drives external displays connected through DisplayLink docks | pkg | custom | https://www.synaptics.com/products/displaylink-graphics/downloads/macos |
+depnotify | Depnotify | Shows enrollment progress during automated device setup | pkg | direct_latest | https://github.com/jamf/DEPNotify | url=https://files.jamfconnect.com/DEPNotify.pkg
+eclipse-ide-for-embedded-cc-developers | Eclipse IDE for Embedded CC Developers | Eclipse IDE distribution for embedded C and C++ development | dmg | custom | https://www.eclipse.org/downloads/packages/ |
+eclipse-ide-for-scout-developers | Eclipse IDE for Scout Developers | Eclipse IDE distribution for building Scout business applications | dmg | custom | https://www.eclipse.org/downloads/packages/ |
+final-draft-12 | Final Draft 12 | Screenwriting tool for formatting and outlining scripts | dmg | custom | https://www.finaldraft.com |
+final-draft-13 | Final Draft 13 | Screenwriting tool for formatting and outlining scripts | dmg | custom | https://www.finaldraft.com |
+flashprint-5 | FlashPrint 5 | Slicer that prepares 3D models for FlashForge printers | pkg | custom | https://www.flashforge.com/pages/download-center |
+foldr | Foldr | Client for browsing and accessing Foldr file and resource shares | dmg | custom | https://foldr.com/ |
+fotomagico | FotoMagico | Builds slideshows from photos, video, and music | zip | custom | https://fotomagico.com/download/ |
+frameio-transfer | Frame.io Transfer | Uploads and downloads media files to and from Frame.io | dmg | custom | https://frame.io/transfer |
+growly-glucose | Growly Glucose | Tracks blood glucose readings, meals, and medication | dmg | custom | https://growlybird.com/glucose/ |
+guardian-browser | Guardian Browser | Locked-down browser for taking online proctored exams | dmg | custom | https://guardian.meazurelearning.com/ |
+huddly | Huddly | Configures and updates firmware for Huddly conference cameras | dmg | custom | https://www.huddly.com |
+hudl-sportscode | Hudl Sportscode | Tags and analyzes sports video for performance review | dmg | custom | https://www.hudl.com/downloads/elite |
+huggingchat-mac | HuggingChat | Chat client for Hugging Face conversational models | zip | custom | https://github.com/huggingface/chat-macOS |
+imanage-work-desktop | iManage Work Desktop | Connects to iManage Work document and email management | pkg | custom | https://docs.imanage.com/work-mac-help/10.4.1/en/ |
+ipsw-updater | IPSW Updater | Notifies when new IPSW firmware files are released | zip | custom | https://ipsw.app/ |
+jamf-compliance-editor | Jamf Compliance Editor | Builds and tailors security compliance baselines for devices | pkg | custom | https://github.com/Jamf-Concepts/jamf-compliance-editor |
+jamf-connect-configuration | Jamf Connect Configuration | Builds configuration profiles for Jamf Connect authentication | dmg | custom | https://www.jamf.com/products/jamf-connect/ |
+jamf-connect-login | Jamf Connect Login | Authenticates the login window against a cloud identity provider | pkg | custom | https://www.jamf.com/products/jamf-connect/ |
+joan-configurator | Joan Configurator | Configures Joan room and desk booking displays | dmg | custom | https://support.getjoan.com/knowledge/what-is-the-joan-configurator |
+jpegmini-pro | Jpegmini Pro | Reduces photo file size while preserving visual quality | dmg | custom | https://jpegmini.com/downloads/mac |
+keeper-secrets-manager-cli | Keeper Secrets Manager Cli | Command-line client for retrieving secrets from Keeper vaults | pkg | custom | https://github.com/Keeper-Security/secrets-manager |
+lg-calibration-studio | Lg Calibration Studio | Calibrates color on supported monitors | pkg | custom | https://www.lg.com/us/support/product/lg-34WK95U-W.AUS |
+macos-instantview | Macos Instantview | Display and file-transfer driver for Silicon Motion docking devices | dmg | custom | https://www.siliconmotion.com/events/instantview/ |
+mamp-pro | Mamp Pro | Manages local Apache, Nginx, PHP, and MySQL development servers | pkg | custom | https://www.mamp.info/en/mac/ |
+maxon-cinema-4d-2026 | Maxon Cinema 4D 2026 | Professional 3D modeling, animation, and rendering suite | dmg | custom | https://www.maxon.net/en/downloads/cinema-4d-2026-downloads |
+medialab-connect | Medialab Connect | Companion uploader for the MediaLab clinical content platform | dmg | custom | https://www.medialab.co/downloads/ |
+mersive-solstice | Mersive Solstice | Wireless screen sharing client for Solstice collaboration displays | dmg | direct_header | https://www.mersive.com/download/ | short=https://www.mersive.com/files/41693/;regex=SolsticeClient-(\d+(?:\.\d+)+)\.dmg
+microsoft-company-portal | Microsoft Company Portal | Enrolls devices and installs company apps via Intune | pkg | custom | https://learn.microsoft.com/en-us/mem/intune/apps/apps-company-portal-macos |
+microsoft-powershell | Microsoft Powershell | Cross-platform task automation shell and scripting language | pkg | custom | https://github.com/PowerShell/PowerShell |
+mimiq | Mimiq | Creates a virtual NDI camera from networked video sources | dmg | custom | https://hedge.co/products/mimiq |
+mister-horse-product-manager | Mister Horse Product Manager | Installs and updates Mister Horse animation presets and extensions | dmg | custom | https://misterhorse.com/product-manager |
+monotype-connect | Monotype Connect | Manages and syncs fonts from a Monotype subscription | dmg | custom | https://www.monotype.com/products/monotype-connect |
+multiviewer-for-f1 | Multiviewer For F1 | Watches multiple Formula 1 live timing and video feeds at once | dmg | custom | https://multiviewer.app |
+netbird | Netbird | WireGuard-based mesh VPN client for private networks | pkg | custom | https://github.com/netbirdio/netbird |
+noor | Noor | Native team chat for organized conversations and channels | dmg | custom | https://noor.to/ |
+nvivo-14 | NVivo 14 | Qualitative data analysis for coding and interpreting research | dmg | custom | https://lumivero.com/products/nvivo/ |
+nvivo-15 | NVivo 15 | Qualitative data analysis for coding and interpreting research | dmg | custom | https://lumivero.com/products/nvivo/ |
+okiocam-snapshot-and-recorder | OKIOCAM Snapshot and Recorder | Document-camera capture with snapshots and screen recording | zip | custom | https://www.okiolabs.com/apps-software-download/ |
+onemenu | OneMenu | All-in-one window manager with clipboard and system monitor menu bar | zip | direct | https://coffeebreak.software/one-menu/ | url=https://files.coffeebreak.software/products/one-menu/OneMenu-v{v}.zip;version=26.10.2
+optisigns-digital-signage | OptiSigns Digital Signage | Plays digital signage content on connected screens | dmg | direct_header | https://www.optisigns.com/ | short=https://links.optisigns.com/mac;regex=OptiSigns Digital Signage-(\d+(?:\.\d+)+)\.dmg
+origami-3 | Origami 3 | Designs packaging dielines and 3D mockups for print | dmg | custom | https://boxshot.com/origami/ |
+poly-lens-desktop | Poly Lens Desktop | Manages headsets, video bars, and room devices | pkg | custom | https://www.hp.com/us-en/poly/software-and-services/software/poly-lens/app.html |
+postlab | PostLab | Collaboration and version history for Final Cut and Premiere | dmg | custom | https://hedge.co/products/postlab |
+praxislive | PraxisLIVE | Visual live programming for media and generative art | pkg | custom | https://www.praxislive.org/ |
+prisma-access-browser | Prisma Access Browser | Secure enterprise browser with built-in access controls | pkg | custom | https://www.paloaltonetworks.com/sase/prisma-browser |
+setup-manager | Setup Manager | Automates first-run enrollment and setup workflows | pkg | custom | https://github.com/jamf/Setup-Manager |
+sforzando | sforzando | Sample player and synthesizer for SFZ instruments | dmg | custom | https://www.plogue.com/products/sforzando.html |
+shellhistory | ShellHistory | Searchable history of shell commands across sessions | zip | custom | https://loshadki.app/shellhistory/ |
+slido-for-powerpoint | Slido for PowerPoint | Live polls, quizzes, and Q&A inside presentations | dmg | custom | https://www.slido.com/powerpoint-polling |
+smart-mirror-app | SMART Mirror | Mirrors a screen to a SMART interactive display | pkg | custom | https://support.smarttech.com/docs/software/smart-mirror/en/downloads/mirror-apps/macos-iq3.cshtml |
+snapgene | SnapGene | Plans, visualizes, and documents molecular cloning and PCR | dmg | custom | https://www.snapgene.com/ |
+soundfield-by-rode | Soundfield By RODE | Ambisonic surround-sound plugin in AU, VST, and AAX formats | pkg | custom | https://rode.com/en-us/software/soundfield-by-rode |
+spyder-x-elite | Spyder X Elite | Calibrates displays and projectors for accurate color | pkg | custom | https://spyder-support.datacolor.com/hc/en-us/articles/4403402938514-Spyder-X-Elite-macOS |
+spyder-x-pro | Spyder X Pro | Calibrates displays and projectors for accurate color | pkg | custom | https://spyder-support.datacolor.com/hc/en-us/articles/4403402966546-Spyder-X-Pro-macOS |
+starface | Starface | Client for unified telephony, chat, and video calls | dmg | custom | https://knowledge.starface.de/pages/viewpage.action?pageId=46564694 |
+strongdm | StrongDM | Access proxy for databases, servers, clusters, and clouds | dmg | custom | https://www.strongdm.com |
+studio-viewer | Studio Viewer | Views 3D packaging and label designs from Esko workflows | dmg | custom | https://www.esko.com/en/support/free-software |
+synology-active-backup-for-business-agent | Synology Active Backup For Business Agent | Agent that backs up endpoints to a Synology NAS | pkg | custom | https://www.synology.com/en-global/dsm/feature/active_backup_business |
+synology-drive-client | Synology Drive Client | Syncs and shares files with a Synology NAS | pkg | custom | https://www.synology.com/en-global/dsm/feature/drive |
+universal-type-client | Universal Type Client | Font management client for organizing and activating typefaces | pkg | custom | https://www.extensis.com |
+usher | Usher | Organizes and plays your local and iTunes video library | dmg | custom | https://manytricks.com/usher/ |
+vivi | Vivi | Wireless screen mirroring and display control for classrooms | pkg | direct_header | https://vivi.io | short=https://api.vivi.io/mac;regex=Vivi-(\d+(?:\.\d+)+)\.pkg
+windsurf | Windsurf | Agentic IDE with AI code completion, chat, and refactoring | dmg | custom | https://windsurf.com |
+wonderpen | WonderPen | Distraction-free editor for long-form writing and notes | dmg | custom | https://www.tominlab.com/en/wonderpen/ |
+workbrew | Workbrew | Manages Homebrew deployments across an organization fleet | pkg | custom | https://workbrew.com |
+xmlmind | Xmlmind | Editor for DocBook, DITA, XHTML, and other XML documents | dmg | custom | https://www.xmlmind.com/xmleditor/download.shtml |
+zaxconvert | Zaxconvert | Converts Zaxcom audio recordings between file formats | zip | custom | https://zaxcom.com/support/downloads/ |
+
 TABLE
 
 # ----------------------------------------------------------------------------
@@ -1065,6 +1151,3409 @@ write_cask(){
 # ----------------------------------------------------------------------------
 # Per-app pipeline (runs in a subshell so a failure stops THIS app, not the run)
 # ----------------------------------------------------------------------------
+# ===== Custom per-app resolvers (auto-generated from the custom-conversion run) =====
+# resolve_<tfn> / write_cask_<tfn> for source=custom apps. Verify on a Mac with DRYRUN.
+
+#!/usr/bin/env bash
+###############################################################################
+# funcs-cc-chunk1.sh — custom resolve_/write_cask_ pairs for cc-chunk1 apps
+# that no built-in cask-master.sh SOURCE could express.
+#
+# Sourced by scripts/cask-master.sh (which defines $DL, $W, $CASK, $TOKEN,
+# $NAME, $DESC, $HOMEPAGE, $ARTIFACT and — after resolve+inspect — $VERSION,
+# $SHA, $SHA_X64, $APP_NAME, $RECEIPT, $BUNDLE_ID, $SYM, die(), shasum, etc.).
+# Each resolve_<tfn> sets VERSION + URL and downloads to "$DL"; arch-split also
+# downloads the intel file to "$W/dl-x64" and sets SHA_X64. Each write_cask_<tfn>
+# writes the cask to "$CASK". <tfn> = token with every '-' replaced by '_'.
+###############################################################################
+
+# ---------------------------------------------------------------------------
+# barcode-studio — arch-split, nested .pkg.zip, different min-macOS per arch,
+# build-stamped filename. arm64 = macOS 12+, intel = macOS 11+. (TEC-IT)
+# ---------------------------------------------------------------------------
+resolve_barcode_studio(){
+  VERSION="17.2.0.32089"
+  URL="https://www.tec-it.com/download/Unix/Mac-OS/bcstudio-${VERSION}-mac-12.0-arm64.pkg.zip"
+  curl -fL "$URL" -o "$DL"
+  curl -fL "https://www.tec-it.com/download/Unix/Mac-OS/bcstudio-${VERSION}-mac-11.0.pkg.zip" -o "$W/dl-x64" \
+    && SHA_X64="$(shasum -a 256 "$W/dl-x64" | awk '{print $1}')" || die "barcode-studio: intel download failed"
+}
+write_cask_barcode_studio(){ cat > "$CASK" <<RB
+cask "$TOKEN" do
+  version "$VERSION"
+
+  on_arm do
+    sha256 "$SHA"
+    url "https://www.tec-it.com/download/Unix/Mac-OS/bcstudio-#{version}-mac-12.0-arm64.pkg.zip"
+
+    depends_on macos: :monterey
+  end
+  on_intel do
+    sha256 "$SHA_X64"
+    url "https://www.tec-it.com/download/Unix/Mac-OS/bcstudio-#{version}-mac-11.0.pkg.zip"
+
+    depends_on macos: :big_sur
+  end
+
+  name "$NAME"
+  desc "$DESC"
+  homepage "$HOMEPAGE"
+
+  livecheck do
+    url "https://www.tec-it.com/en/download/barcode-studio/mac-os-x"
+    regex(%r{bcstudio[._-]v?(\d+(?:\.\d+)+)[._-]mac}i)
+    strategy :page_match
+  end
+
+  pkg "BarcodeStudioInstaller.pkg"
+
+  uninstall pkgutil: "com.tec-it.bcstudio"
+
+  zap trash: [
+    "~/Library/Caches/com.tec-it.bcstudio",
+    "~/Library/Preferences/com.tec-it.bcstudio.plist",
+  ]
+end
+RB
+}
+
+# ---------------------------------------------------------------------------
+# bimcollab-zoom — dmg behind a redirect; filename has spaces and a compound
+# "<major.minor> build <n>" version. version.csv "9.8,14".
+# ---------------------------------------------------------------------------
+resolve_bimcollab_zoom(){
+  local real
+  real="$(curl -sIL "https://bimcollab.com/download/ZOOM/MAC" | awk -F': ' 'tolower($1)=="location"{print $2}' | tail -1 | tr -d '\r')"
+  [ -n "$real" ] || die "bimcollab-zoom: no redirect from download page"
+  local fn vers build
+  fn="$(basename "${real%%\?*}" | python3 -c 'import sys,urllib.parse; print(urllib.parse.unquote(sys.stdin.read().strip()))' 2>/dev/null || basename "${real%%\?*}")"
+  vers="$(printf '%s' "$fn" | grep -oE '[0-9]+\.[0-9]+' | head -1)"
+  build="$(printf '%s' "$fn" | grep -oiE 'build[ ._-]?[0-9]+' | grep -oE '[0-9]+' | head -1)"
+  [ -n "$vers" ] && [ -n "$build" ] || die "bimcollab-zoom: could not parse version/build from $fn"
+  VERSION="$vers,$build"
+  URL="$real"; curl -fL "$URL" -o "$DL"
+}
+write_cask_bimcollab_zoom(){ cat > "$CASK" <<RB
+cask "$TOKEN" do
+  version "$VERSION"
+  sha256 "$SHA"
+
+  url "https://download.bimcollab.com/BIMcollab%20Zoom%20#{version.csv.first}%20build%20#{version.csv.second}.dmg",
+      verified: "download.bimcollab.com/"
+  name "$NAME"
+  desc "$DESC"
+  homepage "$HOMEPAGE"
+
+  livecheck do
+    url "https://bimcollab.com/download/ZOOM/MAC"
+    regex(%r{BIMcollab[%20A-Za-z]+(\d+(?:\.\d+)+)[%20A-Za-z]*build[%20]*(\d+)\.dmg}i)
+    strategy :header_match do |headers, regex|
+      next if headers["location"].blank?
+
+      match = headers["location"].match(regex)
+      next if match.blank?
+
+      "#{match[1]},#{match[2]}"
+    end
+  end
+
+  depends_on macos: :$SYM
+
+  app "$APP_NAME"
+$(zap_for "$BUNDLE_ID")
+end
+RB
+}
+
+# ---------------------------------------------------------------------------
+# buhocleaner — dmg filename embeds the BUILD (b256), marketing version comes
+# from the Sparkle appcast. version.csv "1.16.2,256". (Dr. Buho)
+# ---------------------------------------------------------------------------
+resolve_buhocleaner(){
+  local feed="https://drbuho.net/buhocleaner/appcast.xml" xml short build
+  xml="$(curl -fsSL "$feed")" || die "buhocleaner: appcast fetch failed"
+  short="$(printf '%s' "$xml" | grep -oE 'sparkle:shortVersionString="[^"]*"' | head -1 | grep -oE '[0-9]+(\.[0-9]+)+')"
+  build="$(printf '%s' "$xml" | grep -oE 'sparkle:version="[0-9]+"' | head -1 | grep -oE '[0-9]+')"
+  [ -n "$short" ] && [ -n "$build" ] || die "buhocleaner: could not read version/build from appcast"
+  VERSION="$short,$build"
+  URL="https://drbuho.net/buhocleaner/buhocleaner_b${build}.dmg"; curl -fL "$URL" -o "$DL"
+}
+write_cask_buhocleaner(){ cat > "$CASK" <<RB
+cask "$TOKEN" do
+  version "$VERSION"
+  sha256 "$SHA"
+
+  url "https://drbuho.net/buhocleaner/buhocleaner_b#{version.csv.second}.dmg",
+      verified: "drbuho.net/"
+  name "$NAME"
+  desc "$DESC"
+  homepage "$HOMEPAGE"
+
+  livecheck do
+    url "https://drbuho.net/buhocleaner/appcast.xml"
+    strategy :sparkle, &:short_version
+  end
+
+  depends_on macos: :$SYM
+
+  app "$APP_NAME"
+$(zap_for "$BUNDLE_ID")
+end
+RB
+}
+
+# ---------------------------------------------------------------------------
+# capture-one — versioned dmg, but the download URL carries a per-release hash
+# path segment (/d/mac/<hash>/) that is not derivable from the version.
+# Resolve the current enclosure from the Sparkle feed.
+# ---------------------------------------------------------------------------
+resolve_capture_one(){
+  local feed="https://www.captureone.com/update/capture-one-mac.xml" xml
+  xml="$(curl -fsSL "$feed")" || die "capture-one: appcast fetch failed"
+  URL="$(printf '%s' "$xml" | grep -oE 'url="https://downloads\.captureone\.pro/d/mac/[^"]*CaptureOne\.Mac\.[^"]*\.dmg"' | head -1 | sed -E 's/^url="//; s/"$//')"
+  [ -n "$URL" ] || die "capture-one: no dmg enclosure in appcast"
+  VERSION="$(basename "$URL" | grep -oE '[0-9]+(\.[0-9]+)+' | head -1)"
+  [ -n "$VERSION" ] || die "capture-one: could not parse version from $URL"
+  curl -fL "$URL" -o "$DL"
+}
+write_cask_capture_one(){ cat > "$CASK" <<RB
+cask "$TOKEN" do
+  version "$VERSION"
+  sha256 "$SHA"
+
+  url "https://downloads.captureone.pro/d/mac/5b34e26779686357603e50d52e700a0b4b946199/CaptureOne.Mac.#{version}.dmg",
+      verified: "downloads.captureone.pro/"
+  name "$NAME"
+  desc "$DESC"
+  homepage "$HOMEPAGE"
+
+  livecheck do
+    url "https://www.captureone.com/update/capture-one-mac.xml"
+    strategy :sparkle
+  end
+
+  depends_on macos: :$SYM
+
+  app "$APP_NAME"
+$(zap_for "$BUNDLE_ID")
+end
+RB
+}
+
+# ---------------------------------------------------------------------------
+# cato-client — pkg; version lives in a 301 redirect Location PATH segment
+# (not the filename, which is always CatoClient.pkg). header_match livecheck.
+# ---------------------------------------------------------------------------
+resolve_cato_client(){
+  local alias="https://clientdownload.catonetworks.com/public/clients/CatoClient.pkg" real
+  real="$(curl -sIL "$alias" | awk -F': ' 'tolower($1)=="location"{print $2}' | tail -1 | tr -d '\r')"
+  [ -n "$real" ] || die "cato-client: no redirect from $alias"
+  VERSION="$(printf '%s' "$real" | grep -oE '/[0-9]+(\.[0-9]+)+/' | head -1 | tr -d /)"
+  [ -n "$VERSION" ] || die "cato-client: could not parse version from $real"
+  URL="$real"; curl -fL "$URL" -o "$DL"
+}
+write_cask_cato_client(){ cat > "$CASK" <<RB
+cask "$TOKEN" do
+  version "$VERSION"
+  sha256 "$SHA"
+
+  url "https://clients.catonetworks.com/macos/#{version}/CatoClient.pkg",
+      verified: "clients.catonetworks.com/"
+  name "$NAME"
+  desc "$DESC"
+  homepage "$HOMEPAGE"
+
+  livecheck do
+    url "https://clientdownload.catonetworks.com/public/clients/CatoClient.pkg"
+    regex(%r{/macos/(\d+(?:\.\d+)+)/CatoClient\.pkg}i)
+    strategy :header_match
+  end
+
+  pkg "CatoClient.pkg"
+
+  uninstall pkgutil: "$RECEIPT"
+
+  zap trash: [
+    "~/Library/Caches/$BUNDLE_ID",
+    "~/Library/Preferences/$BUNDLE_ID.plist",
+  ]
+end
+RB
+}
+
+# ---------------------------------------------------------------------------
+# cloudya — appInDmgInZip: the .zip holds a .dmg that holds the .app. The
+# harness inspector cannot unwrap a dmg-in-zip, so resolve/write by hand.
+# URL is versioned (cloudya-<v>-mac.zip). (NFON)
+# ---------------------------------------------------------------------------
+resolve_cloudya(){
+  VERSION="2.2.0"
+  URL="https://cdn.cloudya.com/cloudya-${VERSION}-mac.zip"; curl -fL "$URL" -o "$DL"
+}
+write_cask_cloudya(){ cat > "$CASK" <<RB
+cask "$TOKEN" do
+  version "$VERSION"
+  sha256 "$SHA"
+
+  url "https://cdn.cloudya.com/cloudya-#{version}-mac.zip",
+      verified: "cdn.cloudya.com/"
+  name "$NAME"
+  desc "$DESC"
+  homepage "$HOMEPAGE"
+
+  livecheck do
+    url :url
+    regex(/cloudya[._-]v?(\d+(?:\.\d+)+)[._-]mac\.zip/i)
+    strategy :page_match
+  end
+
+  container nested: "cloudya-#{version}.dmg"
+
+  depends_on macos: :$SYM
+
+  app "Cloudya.app"
+
+  zap trash: [
+    "~/Library/Application Support/Cloudya",
+    "~/Library/Caches/com.nfon.cloudya",
+    "~/Library/Preferences/com.nfon.cloudya.plist",
+  ]
+end
+RB
+}
+
+# ---------------------------------------------------------------------------
+# code42 — pkgInDmg, x86_64-only build. The latest-mac.dmg alias 302-redirects
+# to a dmg whose filename embeds non-derivable build tokens; resolve via that
+# redirect (relative Location -> prepend host).
+# ---------------------------------------------------------------------------
+resolve_code42(){
+  local alias="https://download-preservation.code42.com/installs/agent/latest-mac.dmg" loc
+  loc="$(curl -sIL "$alias" | awk -F': ' 'tolower($1)=="location"{print $2}' | tail -1 | tr -d '\r')"
+  [ -n "$loc" ] || die "code42: no redirect from $alias"
+  case "$loc" in http*) URL="$loc";; /*) URL="https://download-preservation.code42.com$loc";; *) URL="https://download-preservation.code42.com/installs/agent/$loc";; esac
+  VERSION="$(printf '%s' "$URL" | grep -oE '/cloud/[0-9]+(\.[0-9]+)+/' | head -1 | grep -oE '[0-9]+(\.[0-9]+)+')"
+  [ -n "$VERSION" ] || die "code42: could not parse version from $URL"
+  curl -fL "$URL" -o "$DL"
+}
+write_cask_code42(){ cat > "$CASK" <<RB
+cask "$TOKEN" do
+  version "$VERSION"
+  sha256 "$SHA"
+
+  url "https://download-preservation.code42.com/installs/agent/cloud/#{version}/33/install/Code42_#{version}_15252000061260_33_Mac-x86-64.dmg",
+      verified: "download-preservation.code42.com/"
+  name "$NAME"
+  desc "$DESC"
+  homepage "$HOMEPAGE"
+
+  livecheck do
+    url "https://download-preservation.code42.com/installs/agent/latest-mac.dmg"
+    regex(%r{/cloud/(\d+(?:\.\d+)+)/}i)
+    strategy :header_match
+  end
+
+  depends_on arch: :x86_64
+  depends_on macos: :$SYM
+
+  pkg "Install Code42.pkg"
+
+  uninstall pkgutil: "$RECEIPT"
+
+  zap trash: [
+    "~/Library/Caches/$BUNDLE_ID",
+    "~/Library/Preferences/$BUNDLE_ID.plist",
+  ]
+end
+RB
+}
+
+# ---------------------------------------------------------------------------
+# comic-life-4 — zip; download URL embeds a year + marketing version + build
+# (/download/<year>/<ver>/ComicLife-Release-<ver>-<build>.zip). The live file
+# serves 4.2 build 521. version.csv "4.2,521". (plasq)
+# ---------------------------------------------------------------------------
+resolve_comic_life_4(){
+  local alias="https://plasq.com/downloads/comiclife4-mac" real fn ver build
+  real="$(curl -sIL "$alias" | awk -F': ' 'tolower($1)=="location"{print $2}' | tail -1 | tr -d '\r')"
+  [ -n "$real" ] || real="$alias"
+  fn="$(basename "${real%%\?*}")"
+  ver="$(printf '%s' "$fn" | grep -oE 'Release-[0-9]+(\.[0-9]+)+' | head -1 | grep -oE '[0-9]+(\.[0-9]+)+')"
+  build="$(printf '%s' "$fn" | grep -oE -- '-[0-9]+\.zip$' | grep -oE '[0-9]+')"
+  [ -n "$ver" ] && [ -n "$build" ] || die "comic-life-4: could not parse version/build from $fn"
+  VERSION="$ver,$build"
+  URL="$real"; curl -fL "$URL" -o "$DL"
+}
+write_cask_comic_life_4(){ cat > "$CASK" <<RB
+cask "$TOKEN" do
+  version "$VERSION"
+  sha256 "$SHA"
+
+  url "https://plasq.com/download/2026/#{version.csv.first}/ComicLife-Release-#{version.csv.first}-#{version.csv.second}.zip"
+  name "$NAME"
+  desc "$DESC"
+  homepage "$HOMEPAGE"
+
+  livecheck do
+    url "https://plasq.com/downloads/comiclife4-mac"
+    regex(%r{ComicLife-Release-(\d+(?:\.\d+)+)-(\d+)\.zip}i)
+    strategy :header_match do |headers, regex|
+      next if headers["location"].blank?
+
+      match = headers["location"].match(regex)
+      next if match.blank?
+
+      "#{match[1]},#{match[2]}"
+    end
+  end
+
+  depends_on macos: :$SYM
+
+  app "Comic Life 4.app"
+
+  zap trash: [
+    "~/Library/Caches/com.plasq.comiclife4",
+    "~/Library/Preferences/com.plasq.comiclife4.plist",
+  ]
+end
+RB
+}
+
+# ---------------------------------------------------------------------------
+# conniepad — dmg; filename has a space + a parenthesized build and a
+# cache-buster query, so there is no clean {v} template. page_match livecheck.
+# ---------------------------------------------------------------------------
+resolve_conniepad(){
+  local page href
+  page="$(curl -fsSL "https://conniepad.com/")" || die "conniepad: homepage fetch failed"
+  href="$(printf '%s' "$page" | grep -oE 'https://release-bucket\.confibuy\.au/conniepad/[^"'"'"' ]+\.dmg' | head -1)"
+  [ -n "$href" ] || die "conniepad: no dmg href on homepage"
+  VERSION="$(printf '%s' "$href" | python3 -c 'import sys,urllib.parse; print(urllib.parse.unquote(sys.stdin.read().strip()))' 2>/dev/null | grep -oE '[0-9]+(\.[0-9]+)+' | head -1)"
+  [ -n "$VERSION" ] || die "conniepad: could not parse version from $href"
+  URL="$href"; curl -fL "$URL" -o "$DL"
+}
+write_cask_conniepad(){ cat > "$CASK" <<RB
+cask "$TOKEN" do
+  version "$VERSION"
+  sha256 "$SHA"
+
+  url "https://release-bucket.confibuy.au/conniepad/ConniePad%20#{version}%20(692).dmg",
+      verified: "release-bucket.confibuy.au/"
+  name "$NAME"
+  desc "$DESC"
+  homepage "$HOMEPAGE"
+
+  livecheck do
+    url "https://conniepad.com/"
+    regex(%r{ConniePad[%20\s]+(\d+(?:\.\d+)+)[%20\s]}i)
+    strategy :page_match
+  end
+
+  depends_on macos: :$SYM
+
+  app "$APP_NAME"
+$(zap_for "$BUNDLE_ID")
+end
+RB
+}
+
+# ---------------------------------------------------------------------------
+# cricut-design-space — dmg behind a time-limited SIGNED CloudFront URL that
+# cannot be templated. Resolve version from the Cricut update JSON, then fetch
+# a fresh signed installer URL from the desktopdownload API.
+# ---------------------------------------------------------------------------
+resolve_cricut_design_space(){
+  VERSION="$(curl -fsSL 'https://apis.cricut.com/desktopdownload/UpdateJson?operatingSystem=osxnative&shard=a' 2>/dev/null \
+    | grep -oE '"rolloutVersion"[: ]*"[0-9.]+"' | head -1 | grep -oE '[0-9]+(\.[0-9]+)+')"
+  [ -n "$VERSION" ] || die "cricut: could not read rolloutVersion"
+  local signed
+  signed="$(curl -fsSL "https://apis.cricut.com/desktopdownload/InstallerFile?operatingSystem=osxnative&shard=a&fileName=CricutDesignSpace-Install-v${VERSION}.dmg" 2>/dev/null \
+    | grep -oE 'https://[^"]*CricutDesignSpace-Install\.dmg[^"]*' | head -1)"
+  [ -n "$signed" ] || signed="$(curl -sIL 'https://apis.cricut.com/desktopdownload/InstallerFile?operatingSystem=osxnative&shard=a' | awk -F': ' 'tolower($1)=="location"{print $2}' | tail -1 | tr -d '\r')"
+  [ -n "$signed" ] || die "cricut: could not obtain signed installer URL"
+  URL="$signed"; curl -fL "$URL" -o "$DL"
+}
+write_cask_cricut_design_space(){ cat > "$CASK" <<RB
+cask "$TOKEN" do
+  version "$VERSION"
+  sha256 "$SHA"
+
+  url "https://apis.cricut.com/desktopdownload/InstallerFile?operatingSystem=osxnative&shard=a&fileName=CricutDesignSpace-Install-v#{version}.dmg",
+      verified: "apis.cricut.com/"
+  name "$NAME"
+  desc "$DESC"
+  homepage "$HOMEPAGE"
+
+  livecheck do
+    url "https://apis.cricut.com/desktopdownload/UpdateJson?operatingSystem=osxnative&shard=a"
+    regex(/"rolloutVersion"[: ]*"(\d+(?:\.\d+)+)"/i)
+    strategy :page_match
+  end
+
+  depends_on macos: :$SYM
+
+  app "$APP_NAME"
+$(zap_for "$BUNDLE_ID")
+end
+RB
+}
+
+# ---------------------------------------------------------------------------
+# daylite — zip; the Sparkle enclosure URL embeds a build + date stamp
+# (.b20819.2026-05-26-0955) that is not derivable from the version. Resolve the
+# current enclosure straight from the appcast. (Marketcircle)
+# ---------------------------------------------------------------------------
+resolve_daylite(){
+  local feed="https://www.daylite.app/appcasts/daylite.xml" xml
+  xml="$(curl -fsSL "$feed")" || die "daylite: appcast fetch failed"
+  URL="$(printf '%s' "$xml" | grep -oE 'url="https://www\.daylite\.app/appcasts/releases/[^"]*\.zip"' | head -1 | sed -E 's/^url="//; s/"$//')"
+  [ -n "$URL" ] || die "daylite: no zip enclosure in appcast"
+  VERSION="$(printf '%s' "$xml" | grep -oE 'sparkle:shortVersionString="[^"]*"' | head -1 | grep -oE '[0-9]+(\.[0-9]+)+')"
+  [ -n "$VERSION" ] || VERSION="$(basename "$URL" | grep -oE '[0-9]+\.[0-9]+\.[0-9]+' | head -1)"
+  [ -n "$VERSION" ] || die "daylite: could not parse version"
+  curl -fL "$URL" -o "$DL"
+}
+write_cask_daylite(){ cat > "$CASK" <<RB
+cask "$TOKEN" do
+  version "$VERSION"
+  sha256 "$SHA"
+
+  url "https://www.marketcircle.com/downloads/latest-daylite"
+  name "$NAME"
+  desc "$DESC"
+  homepage "$HOMEPAGE"
+
+  livecheck do
+    url "https://www.daylite.app/appcasts/daylite.xml"
+    strategy :sparkle, &:short_version
+  end
+
+  depends_on macos: :$SYM
+
+  app "$APP_NAME"
+$(zap_for "$BUNDLE_ID")
+end
+RB
+}
+
+# ---------------------------------------------------------------------------
+# delighted — zip on a WordPress uploads path with a date folder and a
+# condensed version token ("delighted25" = 2.5); not templatable from version.
+# page_match the downloads page for the current href. (Eclectic Light Co.)
+# ---------------------------------------------------------------------------
+resolve_delighted(){
+  local page href
+  page="$(curl -fsSL "https://eclecticlight.co/downloads/")" || die "delighted: downloads page fetch failed"
+  href="$(printf '%s' "$page" | grep -oE 'https://eclecticlight\.co/wp-content/uploads/[0-9]{4}/[0-9]{2}/delighted[0-9]+\.zip' | head -1)"
+  [ -n "$href" ] || die "delighted: no delighted zip href on downloads page"
+  local tok
+  tok="$(basename "$href" .zip | grep -oE '[0-9]+$')"
+  [ -n "$tok" ] || die "delighted: could not parse version token from $href"
+  VERSION="${tok:0:1}.${tok:1}"
+  URL="$href"; curl -fL "$URL" -o "$DL"
+}
+write_cask_delighted(){ cat > "$CASK" <<RB
+cask "$TOKEN" do
+  version "$VERSION"
+  sha256 "$SHA"
+
+  url "https://eclecticlight.co/wp-content/uploads/2026/03/delighted#{version.major}#{version.minor}.zip"
+  name "$NAME"
+  desc "$DESC"
+  homepage "$HOMEPAGE"
+
+  livecheck do
+    url "https://eclecticlight.co/downloads/"
+    regex(%r{/delighted(\d)(\d+)\.zip}i)
+    strategy :page_match do |page, regex|
+      page.scan(regex).map { |m| "#{m[0]}.#{m[1]}" }
+    end
+  end
+
+  depends_on macos: :$SYM
+
+  app "$APP_NAME"
+$(zap_for "$BUNDLE_ID")
+end
+RB
+}
+
+# ---------------------------------------------------------------------------
+# dell-display-peripheral-manager — pkgInZip; the URL carries an opaque
+# per-release FOLDER id (not version-derived) and the host UA-gates non-browser
+# clients (curl -> 403; browser UA -> 200). Scrape the driver-details page for
+# the current zip href; download with a browser UA. (Dell DDPM)
+# ---------------------------------------------------------------------------
+resolve_dell_display_peripheral_manager(){
+  local ua="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.0 Safari/605.1.15"
+  local page href
+  page="$(curl -fsSL -A "$ua" "https://www.dell.com/support/home/en-us/drivers/driversdetails?driverid=0h874")" || die "ddpm: driver page fetch failed"
+  href="$(printf '%s' "$page" | grep -oE 'https://dl\.dell\.com/FOLDER[0-9A-Za-z]+/[0-9]+/DDPMv[0-9.]+\.zip' | head -1)"
+  [ -n "$href" ] || die "ddpm: no DDPM zip href on driver page"
+  VERSION="$(basename "$href" | grep -oE '[0-9]+(\.[0-9]+)+' | head -1)"
+  [ -n "$VERSION" ] || die "ddpm: could not parse version from $href"
+  URL="$href"; curl -fL -A "$ua" "$URL" -o "$DL"
+}
+write_cask_dell_display_peripheral_manager(){ cat > "$CASK" <<RB
+cask "$TOKEN" do
+  version "$VERSION"
+  sha256 "$SHA"
+
+  url "https://dl.dell.com/FOLDER09180078M/1/DDPMv#{version}.zip",
+      verified: "dl.dell.com/"
+  name "$NAME"
+  desc "$DESC"
+  homepage "$HOMEPAGE"
+
+  livecheck do
+    url "https://www.dell.com/support/home/en-us/drivers/driversdetails?driverid=0h874"
+    regex(/DDPMv(\d+(?:\.\d+)+)\.zip/i)
+    strategy :page_match
+  end
+
+  depends_on macos: :$SYM
+
+  pkg "DDPM_Installer.pkg"
+
+  uninstall pkgutil: "$RECEIPT"
+
+  zap trash: [
+    "~/Library/Caches/$BUNDLE_ID",
+    "~/Library/Preferences/$BUNDLE_ID.plist",
+  ]
+end
+RB
+}
+
+# ---------------------------------------------------------------------------
+# deskrest — GitHub release dmg whose asset filename carries a BUILD suffix
+# (DeskRest.v<ver>-<build>.dmg) that is absent from the tag, so a github_tag
+# asset template cannot reconstruct it. Read the real asset name off the
+# latest release. (Marceeelll/DeskRest-releases)
+# ---------------------------------------------------------------------------
+resolve_deskrest(){
+  local repo="Marceeelll/DeskRest-releases" tag asset
+  tag="$(curl -sI "https://github.com/$repo/releases/latest" | awk -F'/tag/' 'tolower($0)~/^location/{print $2}' | tr -d '\r')"
+  [ -n "$tag" ] || die "deskrest: no latest tag"
+  case "$tag" in [vV][0-9]*) VERSION="${tag#?}";; *) VERSION="$tag";; esac
+  asset="$(curl -fsSL "https://api.github.com/repos/$repo/releases/tags/$tag" 2>/dev/null \
+    | grep -oE '"browser_download_url": *"[^"]+\.dmg"' | head -1 | sed -E 's/.*"(https[^"]+)".*/\1/')"
+  [ -n "$asset" ] || asset="https://github.com/$repo/releases/download/$tag/DeskRest.${tag}-153.dmg"
+  URL="$asset"; curl -fL "$URL" -o "$DL"
+}
+write_cask_deskrest(){ cat > "$CASK" <<RB
+cask "$TOKEN" do
+  version "$VERSION"
+  sha256 "$SHA"
+
+  url "https://github.com/Marceeelll/DeskRest-releases/releases/download/v#{version}/DeskRest.v#{version}-153.dmg"
+  name "$NAME"
+  desc "$DESC"
+  homepage "$HOMEPAGE"
+
+  livecheck do
+    url :url
+    strategy :github_latest
+  end
+
+  depends_on macos: :$SYM
+
+  app "$APP_NAME"
+$(zap_for "$BUNDLE_ID")
+end
+RB
+}
+
+# ---------------------------------------------------------------------------
+# displaylink-manager — pkg; the URL path embeds a non-derivable year-month
+# folder (2026-05) and a space-laden filename, so it must be scraped from the
+# Synapt​ics product page. page_match for version. (DisplayLink)
+# ---------------------------------------------------------------------------
+resolve_displaylink_manager(){
+  local page href
+  page="$(curl -fsSL "https://www.synaptics.com/products/displaylink-graphics/downloads/macos")" || die "displaylink: product page fetch failed"
+  href="$(printf '%s' "$page" | grep -oiE 'https://[^"'"'"' ]*DisplayLink[^"'"'"' ]*\.pkg' | head -1)"
+  [ -n "$href" ] || die "displaylink: no pkg href on product page"
+  VERSION="$(printf '%s' "$href" | python3 -c 'import sys,urllib.parse; print(urllib.parse.unquote(sys.stdin.read().strip()))' 2>/dev/null | grep -oE 'Connectivity[0-9]+(\.[0-9]+)+' | grep -oE '[0-9]+(\.[0-9]+)+' | head -1)"
+  [ -n "$VERSION" ] || VERSION="$(printf '%s' "$href" | grep -oE '[0-9]+(\.[0-9]+)+' | tail -1)"
+  [ -n "$VERSION" ] || die "displaylink: could not parse version from $href"
+  URL="$href"; curl -fL "$URL" -o "$DL"
+}
+write_cask_displaylink_manager(){ cat > "$CASK" <<RB
+cask "$TOKEN" do
+  version "$VERSION"
+  sha256 "$SHA"
+
+  url "https://www.synaptics.com/sites/default/files/exe_files/2026-05/DisplayLink%20Manager%20Graphics%20Connectivity#{version}-EXE.pkg"
+  name "$NAME"
+  desc "$DESC"
+  homepage "$HOMEPAGE"
+
+  livecheck do
+    url "https://www.synaptics.com/products/displaylink-graphics/downloads/macos"
+    regex(%r{Connectivity[%20A-Za-z]*(\d+(?:\.\d+)+)[%20A-Za-z-]*EXE\.pkg}i)
+    strategy :page_match
+  end
+
+  depends_on macos: :$SYM
+
+  pkg "DisplayLink Manager Graphics Connectivity#{version}-EXE.pkg"
+
+  uninstall launchctl: "com.displaylink.useragent",
+            pkgutil:   "$RECEIPT"
+
+  zap trash: [
+    "~/Library/Caches/$BUNDLE_ID",
+    "~/Library/Preferences/$BUNDLE_ID.plist",
+  ]
+end
+RB
+}
+
+
+#!/usr/bin/env bash
+# ============================================================================
+# funcs-cc-chunk2.sh — CUSTOM resolve_/write_cask_ pairs for chunk2 apps that
+# do not fit any built-in cask-master.sh SOURCE row.
+#
+# Paste these into (or source them alongside) scripts/cask-master.sh. Each pair
+# is named resolve_<tfn> / write_cask_<tfn> where <tfn> is the cask token with
+# every '-' replaced by '_'. The harness calls resolve_<tfn> (must set VERSION
+# + URL and download to "$DL"), then computes "$SHA" from "$DL", runs inspect()
+# (sets APP_NAME / RECEIPT / BUNDLE_ID / SYM), then calls write_cask_<tfn>
+# (must write "$CASK"). Helpers used: zap_for, sub_cask. Harness vars used
+# literally: $TOKEN $NAME $DESC $HOMEPAGE $ARTIFACT $VERSION $SHA $SHA_X64
+# $APP_NAME $RECEIPT $BUNDLE_ID $SYM $W $DL $CASK.
+#
+# NESTED-CONTAINER pattern (dmg-in-zip / app-in-dmg-in-zip / pkg-in-zip):
+#   The harness inspector only unwraps ONE level, so it cannot read the bundle
+#   id / app name / pkg receipt out of a doubly-nested archive. These resolvers
+#   therefore download the OUTER archive (capturing its sha into OUTER_SHA, which
+#   is what the cask url points at), then unzip it and set "$DL" to the INNER
+#   dmg/pkg so the harness inspect() can read the real metadata. The writer then
+#   uses sha256 "$OUTER_SHA" (sha of the file at url) — $SHA (sha of the inner
+#   artifact) is intentionally unused for these.
+# ============================================================================
+
+# ---------------------------------------------------------------------------
+# eclipse-ide-for-embedded-cc-developers  (arch-split dmg, compound version)
+# Modeled 1:1 on the live eclipse-jee cask: arch aarch64/x86_64, compound
+# version "4.39,2026-03", mirror download.php url, shared org.eclipse.platform.ide
+# leftovers, livecheck reuses the eclipse-ide cask, depends_on_java caveat.
+# ---------------------------------------------------------------------------
+resolve_eclipse_ide_for_embedded_cc_developers(){
+  local rel="2026-03" ver="4.39" base
+  VERSION="$ver,$rel"
+  base="https://www.eclipse.org/downloads/download.php?file=/technology/epp/downloads/release/$rel/R"
+  URL="$base/eclipse-embedcpp-$rel-R-macosx-cocoa-aarch64.dmg&mirror_id=1"
+  curl -fL "$URL" -o "$DL"
+  curl -fL "$base/eclipse-embedcpp-$rel-R-macosx-cocoa-x86_64.dmg&mirror_id=1" -o "$W/dl-x64" \
+    && SHA_X64="$(shasum -a 256 "$W/dl-x64" | awk '{print $1}')" || die "eclipse-embedcpp: intel dmg download failed"
+}
+write_cask_eclipse_ide_for_embedded_cc_developers(){ cat > "$CASK" <<RB
+cask "$TOKEN" do
+  arch arm: "aarch64", intel: "x86_64"
+
+  version "$VERSION"
+  sha256 arm:   "$SHA",
+         intel: "$SHA_X64"
+
+  url "https://www.eclipse.org/downloads/download.php?file=/technology/epp/downloads/release/#{version.csv.second}/R/eclipse-embedcpp-#{version.csv.second}-R-macosx-cocoa-#{arch}.dmg&mirror_id=1"
+  name "$NAME"
+  desc "$DESC"
+  homepage "$HOMEPAGE"
+
+  livecheck do
+    cask "eclipse-ide"
+  end
+
+  depends_on macos: :big_sur
+
+  # Renamed to avoid conflict with other Eclipse.
+  app "Eclipse.app", target: "Eclipse Embedded CC.app"
+
+  zap trash: [
+    "~/Library/Caches/org.eclipse.platform.ide",
+    "~/Library/Cookies/org.eclipse.platform.ide.binarycookies",
+    "~/Library/Preferences/org.eclipse.platform.ide.plist",
+    "~/Library/Saved Application State/org.eclipse.platform.ide.savedState",
+  ]
+
+  caveats do
+    depends_on_java
+  end
+end
+RB
+}
+
+# ---------------------------------------------------------------------------
+# eclipse-ide-for-scout-developers  (arch-split dmg, compound version)
+# Same model as eclipse-jee / embedded-cc above; package id eclipse-scout.
+# ---------------------------------------------------------------------------
+resolve_eclipse_ide_for_scout_developers(){
+  local rel="2026-03" ver="4.39" base
+  VERSION="$ver,$rel"
+  base="https://www.eclipse.org/downloads/download.php?file=/technology/epp/downloads/release/$rel/R"
+  URL="$base/eclipse-scout-$rel-R-macosx-cocoa-aarch64.dmg&mirror_id=1"
+  curl -fL "$URL" -o "$DL"
+  curl -fL "$base/eclipse-scout-$rel-R-macosx-cocoa-x86_64.dmg&mirror_id=1" -o "$W/dl-x64" \
+    && SHA_X64="$(shasum -a 256 "$W/dl-x64" | awk '{print $1}')" || die "eclipse-scout: intel dmg download failed"
+}
+write_cask_eclipse_ide_for_scout_developers(){ cat > "$CASK" <<RB
+cask "$TOKEN" do
+  arch arm: "aarch64", intel: "x86_64"
+
+  version "$VERSION"
+  sha256 arm:   "$SHA",
+         intel: "$SHA_X64"
+
+  url "https://www.eclipse.org/downloads/download.php?file=/technology/epp/downloads/release/#{version.csv.second}/R/eclipse-scout-#{version.csv.second}-R-macosx-cocoa-#{arch}.dmg&mirror_id=1"
+  name "$NAME"
+  desc "$DESC"
+  homepage "$HOMEPAGE"
+
+  livecheck do
+    cask "eclipse-ide"
+  end
+
+  depends_on macos: :big_sur
+
+  # Renamed to avoid conflict with other Eclipse.
+  app "Eclipse.app", target: "Eclipse Scout.app"
+
+  zap trash: [
+    "~/Library/Caches/org.eclipse.platform.ide",
+    "~/Library/Cookies/org.eclipse.platform.ide.binarycookies",
+    "~/Library/Preferences/org.eclipse.platform.ide.plist",
+    "~/Library/Saved Application State/org.eclipse.platform.ide.savedState",
+  ]
+
+  caveats do
+    depends_on_java
+  end
+end
+RB
+}
+
+# ---------------------------------------------------------------------------
+# final-draft-12  (app-in-dmg-in-zip; filename strips dots: 12.0.11 -> 12011)
+# Outer zip finaldraft12011Mac.zip -> inner .dmg -> Final Draft.app.
+# DL = inner dmg (for inspect); cask sha = OUTER_SHA (sha of the zip at url).
+# url uses #{version.no_dots} to rebuild the dot-stripped filename token.
+# ---------------------------------------------------------------------------
+resolve_final_draft_12(){
+  VERSION="12.0.11"
+  URL="https://www.finaldraft.com/downloads/finaldraft12011Mac.zip"
+  curl -fL "$URL" -o "$DL" || die "final-draft-12: outer zip download failed"
+  OUTER_SHA="$(shasum -a 256 "$DL" | awk '{print $1}')"
+  rm -rf "$W/inner"; mkdir -p "$W/inner"; ditto -xk "$DL" "$W/inner" 2>/dev/null || unzip -oq "$DL" -d "$W/inner"
+  local inner; inner="$(find "$W/inner" -maxdepth 3 -type f -iname '*.dmg' ! -path '*__MACOSX*' | head -1)"
+  [ -n "$inner" ] || die "final-draft-12: no inner .dmg found in zip"
+  cp "$inner" "$DL"
+}
+write_cask_final_draft_12(){ cat > "$CASK" <<RB
+cask "$TOKEN" do
+  version "$VERSION"
+  sha256 "$OUTER_SHA"
+
+  url "https://www.finaldraft.com/downloads/finaldraft#{version.no_dots}Mac.zip",
+      verified: "finaldraft.com/"
+  name "$NAME"
+  desc "$DESC"
+  homepage "$HOMEPAGE"
+
+  livecheck do
+    url "https://www.finaldraft.com/support/install-final-draft/install-final-draft-12-macintosh/"
+    regex(/finaldraft(\d+)Mac\.zip/i)
+    strategy :page_match do |page, regex|
+      page.scan(regex).map { |m| m[0].chars.first(2).join + "." + m[0].chars[2] + "." + m[0].chars[3..].join }.max
+    end
+  end
+
+  depends_on macos: :big_sur
+
+  app "$APP_NAME"
+$(zap_for "$BUNDLE_ID")
+end
+RB
+}
+
+# ---------------------------------------------------------------------------
+# final-draft-13  (app-in-dmg-in-zip; 13.3.2 -> 1332; min macOS 12)
+# ---------------------------------------------------------------------------
+resolve_final_draft_13(){
+  VERSION="13.3.2"
+  URL="https://www.finaldraft.com/downloads/finaldraft1332Mac.zip"
+  curl -fL "$URL" -o "$DL" || die "final-draft-13: outer zip download failed"
+  OUTER_SHA="$(shasum -a 256 "$DL" | awk '{print $1}')"
+  rm -rf "$W/inner"; mkdir -p "$W/inner"; ditto -xk "$DL" "$W/inner" 2>/dev/null || unzip -oq "$DL" -d "$W/inner"
+  local inner; inner="$(find "$W/inner" -maxdepth 3 -type f -iname '*.dmg' ! -path '*__MACOSX*' | head -1)"
+  [ -n "$inner" ] || die "final-draft-13: no inner .dmg found in zip"
+  cp "$inner" "$DL"
+}
+write_cask_final_draft_13(){ cat > "$CASK" <<RB
+cask "$TOKEN" do
+  version "$VERSION"
+  sha256 "$OUTER_SHA"
+
+  url "https://www.finaldraft.com/downloads/finaldraft#{version.no_dots}Mac.zip",
+      verified: "finaldraft.com/"
+  name "$NAME"
+  desc "$DESC"
+  homepage "$HOMEPAGE"
+
+  livecheck do
+    url "https://www.finaldraft.com/support/install-final-draft/install-final-draft-13-macintosh/"
+    regex(/finaldraft(\d+)Mac\.zip/i)
+    strategy :page_match do |page, regex|
+      page.scan(regex).map { |m| m[0].chars.first(2).join + "." + m[0].chars[2] + "." + m[0].chars[3..].join }.max
+    end
+  end
+
+  depends_on macos: :monterey
+
+  app "$APP_NAME"
+$(zap_for "$BUNDLE_ID")
+end
+RB
+}
+
+# ---------------------------------------------------------------------------
+# flashprint-5  (pkg-in-zip; non-derivable "_mac (new)" suffix; EOL, pinned)
+# Outer versioned zip contains FlashPrint-5.8.7.pkg. DL = inner pkg (for the
+# receipt); cask sha = OUTER_SHA. The outer filename has URL-encoded spaces and
+# parens ("_mac (new)") that are not derivable from the version, so url is
+# fully literal and version is pinned (final FlashPrint 5 release; line is EOL).
+# ---------------------------------------------------------------------------
+resolve_flashprint_5(){
+  VERSION="5.8.7"
+  URL="https://flashforge-resource.oss-us-east-1.aliyuncs.com/FlashPrint_5.8.7/FlashPrint_5.8.7_mac%20%28new%29.zip"
+  curl -fL "$URL" -o "$DL" || die "flashprint-5: outer zip download failed"
+  OUTER_SHA="$(shasum -a 256 "$DL" | awk '{print $1}')"
+  rm -rf "$W/inner"; mkdir -p "$W/inner"; ditto -xk "$DL" "$W/inner" 2>/dev/null || unzip -oq "$DL" -d "$W/inner"
+  local inner; inner="$(find "$W/inner" -maxdepth 3 -type f -iname '*.pkg' ! -path '*__MACOSX*' | head -1)"
+  [ -n "$inner" ] || die "flashprint-5: no inner .pkg found in zip"
+  cp "$inner" "$DL"
+}
+write_cask_flashprint_5(){ cat > "$CASK" <<RB
+cask "$TOKEN" do
+  version "$VERSION"
+  sha256 "$OUTER_SHA"
+
+  url "https://flashforge-resource.oss-us-east-1.aliyuncs.com/FlashPrint_#{version}/FlashPrint_#{version}_mac%20%28new%29.zip",
+      verified: "flashforge-resource.oss-us-east-1.aliyuncs.com/"
+  name "$NAME"
+  desc "$DESC"
+  homepage "$HOMEPAGE"
+
+  livecheck do
+    url "https://www.flashforge.com/pages/download-center"
+    regex(/FlashPrint[._-]v?(\d+(?:\.\d+)+)/i)
+    strategy :page_match
+  end
+
+  depends_on macos: :big_sur
+
+  pkg "FlashPrint-#{version}.pkg"
+
+  uninstall pkgutil: "$RECEIPT"
+$(zap_for "$BUNDLE_ID")
+end
+RB
+}
+
+# ---------------------------------------------------------------------------
+# foldr  (dmg-in-zip; UNVERSIONED outer latest.zip -> version :latest)
+# Outer latest.zip holds foldr.<ver>.dmg. The only published macOS URL is the
+# unversioned "latest" alias with no version feed, so version :latest +
+# sha256 :no_check (the inner filename carries the version, but it is not in any
+# trackable URL/page). DL = inner dmg so inspect() reads the app name + bundle.
+# ---------------------------------------------------------------------------
+resolve_foldr(){
+  VERSION="latest"
+  URL="https://foldr-downloads-us.us-east-1.linodeobjects.com/clients/macos/latest.zip"
+  curl -fL "$URL" -o "$DL" || die "foldr: outer zip download failed"
+  rm -rf "$W/inner"; mkdir -p "$W/inner"; ditto -xk "$DL" "$W/inner" 2>/dev/null || unzip -oq "$DL" -d "$W/inner"
+  local inner; inner="$(find "$W/inner" -maxdepth 3 -type f -iname '*.dmg' ! -path '*__MACOSX*' | head -1)"
+  [ -n "$inner" ] || die "foldr: no inner .dmg found in zip"
+  cp "$inner" "$DL"
+}
+write_cask_foldr(){ cat > "$CASK" <<RB
+cask "$TOKEN" do
+  version :latest
+  sha256 :no_check
+
+  url "https://foldr-downloads-us.us-east-1.linodeobjects.com/clients/macos/latest.zip",
+      verified: "foldr-downloads-us.us-east-1.linodeobjects.com/"
+  name "$NAME"
+  desc "$DESC"
+  homepage "$HOMEPAGE"
+
+  depends_on macos: :big_sur
+
+  app "$APP_NAME"
+$(zap_for "$BUNDLE_ID")
+end
+RB
+}
+
+# ---------------------------------------------------------------------------
+# fotomagico  (app.zip; compound version+build with literal parens in filename)
+# FotoMagico-6.9.2-Boinx-(1016682).app.zip — version "6.9.2,1016682" via
+# version.csv; not nested, so DL = the zip and inspect() sets app + bundle.
+# ---------------------------------------------------------------------------
+resolve_fotomagico(){
+  VERSION="6.9.2,1016682"
+  URL="https://cdn.boinx.com/software/fotomagico/FotoMagico-6.9.2-Boinx-(1016682).app.zip"
+  curl -fL "$URL" -o "$DL" || die "fotomagico: zip download failed"
+}
+write_cask_fotomagico(){ cat > "$CASK" <<RB
+cask "$TOKEN" do
+  version "$VERSION"
+  sha256 "$SHA"
+
+  url "https://cdn.boinx.com/software/fotomagico/FotoMagico-#{version.csv.first}-Boinx-(#{version.csv.second}).app.zip",
+      verified: "cdn.boinx.com/"
+  name "$NAME"
+  desc "$DESC"
+  homepage "$HOMEPAGE"
+
+  livecheck do
+    url "https://fotomagico.com/download/"
+    regex(/FotoMagico[._-](\d+(?:\.\d+)+)[._-]Boinx[._-]\((\d+)\)\.app\.zip/i)
+    strategy :page_match do |page, regex|
+      match = page.match(regex)
+      next if match.blank?
+
+      "#{match[1]},#{match[2]}"
+    end
+  end
+
+  depends_on macos: :catalina
+
+  app "$APP_NAME"
+$(zap_for "$BUNDLE_ID")
+end
+RB
+}
+
+# ---------------------------------------------------------------------------
+# frameio-transfer  (arch-split dmg; hash-in-URL; no public version feed)
+# Public /latest/ dmgs behind a hash segment, no RELEASES/yml -> version :latest
+# + sha256 :no_check, on_arm/on_intel. Adobe Frame.io Transfer (Squirrel.Mac).
+# ---------------------------------------------------------------------------
+resolve_frameio_transfer(){
+  local h="6ab0c27d61d7cf8793b0357e6533ed81"
+  VERSION="latest"
+  URL="https://transferapp.frame.io/Frame.io-Transfer/$h/latest/darwin/arm64/Frame.io+Transfer.dmg"
+  curl -fL "$URL" -o "$DL" || die "frameio-transfer: arm dmg download failed"
+  curl -fL "https://transferapp.frame.io/Frame.io-Transfer/$h/latest/darwin/x64/Frame.io+Transfer.dmg" -o "$W/dl-x64" \
+    && SHA_X64="$(shasum -a 256 "$W/dl-x64" | awk '{print $1}')" || die "frameio-transfer: intel dmg download failed"
+}
+write_cask_frameio_transfer(){ cat > "$CASK" <<RB
+cask "$TOKEN" do
+  version :latest
+  sha256 :no_check
+
+  on_arm do
+    url "https://transferapp.frame.io/Frame.io-Transfer/6ab0c27d61d7cf8793b0357e6533ed81/latest/darwin/arm64/Frame.io+Transfer.dmg",
+        verified: "transferapp.frame.io/"
+  end
+  on_intel do
+    url "https://transferapp.frame.io/Frame.io-Transfer/6ab0c27d61d7cf8793b0357e6533ed81/latest/darwin/x64/Frame.io+Transfer.dmg",
+        verified: "transferapp.frame.io/"
+  end
+
+  name "$NAME"
+  desc "$DESC"
+  homepage "$HOMEPAGE"
+
+  auto_updates true
+  depends_on macos: :catalina
+
+  app "$APP_NAME"
+$(zap_for "$BUNDLE_ID")
+end
+RB
+}
+
+# ---------------------------------------------------------------------------
+# growly-glucose  (dmg; version encoded WITHOUT separators: 1.1.1 -> 111)
+# url rebuilds the token via #{version.no_dots}. DL = dmg, inspect sets bundle.
+# ---------------------------------------------------------------------------
+resolve_growly_glucose(){
+  VERSION="1.1.1"
+  URL="https://www.growlybird.com/downloads/glucose_111.dmg"
+  curl -fL "$URL" -o "$DL" || die "growly-glucose: dmg download failed"
+}
+write_cask_growly_glucose(){ cat > "$CASK" <<RB
+cask "$TOKEN" do
+  version "$VERSION"
+  sha256 "$SHA"
+
+  url "https://www.growlybird.com/downloads/glucose_#{version.no_dots}.dmg",
+      verified: "growlybird.com/"
+  name "$NAME"
+  desc "$DESC"
+  homepage "$HOMEPAGE"
+
+  livecheck do
+    url "https://growlybird.com/glucose/"
+    regex(/Version\s+(\d+(?:\.\d+)+)/i)
+    strategy :page_match
+  end
+
+  depends_on macos: :big_sur
+
+  app "$APP_NAME"
+$(zap_for "$BUNDLE_ID")
+end
+RB
+}
+
+# ---------------------------------------------------------------------------
+# guardian-browser  (arch-split; TWO per-arch latest-mac.yml feeds; unversioned dmgs)
+# electron template needs one feed + versioned filenames; this ships separate
+# arm/intel feeds and unversioned dmg names, so it is custom. Version read from
+# the arm feed; livecheck = :electron_builder on the arm feed.
+# ---------------------------------------------------------------------------
+resolve_guardian_browser(){
+  local armfeed="https://production-archimedes-secure-browser-artifacts.s3.amazonaws.com/latest/mac-arm64/latest-mac.yml"
+  local base="https://production-archimedes-secure-browser-artifacts.s3.amazonaws.com/latest"
+  VERSION="$(curl -fsSL "$armfeed" | awk -F': ' '/^version:/{print $2; exit}' | tr -d '\r ')"
+  [ -n "$VERSION" ] || die "guardian-browser: could not read version from arm feed"
+  URL="$base/mac-arm64/guardian-browser-arm64.dmg"
+  curl -fL "$URL" -o "$DL" || die "guardian-browser: arm dmg download failed"
+  curl -fL "$base/mac-x64/guardian-browser-x64.dmg" -o "$W/dl-x64" \
+    && SHA_X64="$(shasum -a 256 "$W/dl-x64" | awk '{print $1}')" || die "guardian-browser: intel dmg download failed"
+}
+write_cask_guardian_browser(){ cat > "$CASK" <<RB
+cask "$TOKEN" do
+  version "$VERSION"
+
+  on_arm do
+    sha256 "$SHA"
+    url "https://production-archimedes-secure-browser-artifacts.s3.amazonaws.com/latest/mac-arm64/guardian-browser-arm64.dmg",
+        verified: "production-archimedes-secure-browser-artifacts.s3.amazonaws.com/"
+  end
+  on_intel do
+    sha256 "$SHA_X64"
+    url "https://production-archimedes-secure-browser-artifacts.s3.amazonaws.com/latest/mac-x64/guardian-browser-x64.dmg",
+        verified: "production-archimedes-secure-browser-artifacts.s3.amazonaws.com/"
+  end
+
+  name "$NAME"
+  desc "$DESC"
+  homepage "$HOMEPAGE"
+
+  livecheck do
+    url "https://production-archimedes-secure-browser-artifacts.s3.amazonaws.com/latest/mac-arm64/latest-mac.yml"
+    strategy :electron_builder
+  end
+
+  auto_updates true
+  depends_on macos: :big_sur
+
+  app "$APP_NAME"
+$(zap_for "$BUNDLE_ID")
+end
+RB
+}
+
+# ---------------------------------------------------------------------------
+# huddly  (x64-only dmg; version ONLY in Content-Disposition; url unversioned)
+# The download endpoint is an unversioned /latest/ URL whose response sets
+# filename Huddly-<ver>-osx-x64.dmg. Version parsed from that header; url stays
+# the unversioned endpoint; livecheck = :header_match. x64 app -> requires_rosetta.
+# ---------------------------------------------------------------------------
+resolve_huddly(){
+  URL="https://app.huddly.com/download/latest/osx"
+  VERSION="$(curl -sIL "$URL" | grep -i '^content-disposition' | grep -oE '[0-9]+(\.[0-9]+)+' | head -1)"
+  [ -n "$VERSION" ] || die "huddly: no version in content-disposition"
+  curl -fL "$URL" -o "$DL" || die "huddly: dmg download failed"
+}
+write_cask_huddly(){ cat > "$CASK" <<RB
+cask "$TOKEN" do
+  version "$VERSION"
+  sha256 "$SHA"
+
+  url "https://app.huddly.com/download/latest/osx",
+      verified: "app.huddly.com/"
+  name "$NAME"
+  desc "$DESC"
+  homepage "$HOMEPAGE"
+
+  livecheck do
+    url :url
+    regex(/Huddly[._-](\d+(?:\.\d+)+)[._-]osx/i)
+    strategy :header_match
+  end
+
+  depends_on macos: :big_sur
+
+  app "$APP_NAME"
+$(zap_for "$BUNDLE_ID")
+  caveats do
+    requires_rosetta
+  end
+end
+RB
+}
+
+# ---------------------------------------------------------------------------
+# hudl-sportscode  (dmg-in-zip; url IS version-templatable; min macOS 15)
+# Outer HudlSportscode-<ver>.dmg.zip -> inner dmg. DL = inner dmg (for inspect);
+# cask sha = OUTER_SHA. No static version page (elite page is JS-rendered), so
+# livecheck uses :header_match against the version-templated outer URL.
+# ---------------------------------------------------------------------------
+resolve_hudl_sportscode(){
+  VERSION="12.81.1"
+  URL="https://sportscode64-updates.s3.amazonaws.com/PublicReleaseDmgs/HudlSportscode-12.81.1.dmg.zip"
+  curl -fL "$URL" -o "$DL" || die "hudl-sportscode: outer zip download failed"
+  OUTER_SHA="$(shasum -a 256 "$DL" | awk '{print $1}')"
+  rm -rf "$W/inner"; mkdir -p "$W/inner"; ditto -xk "$DL" "$W/inner" 2>/dev/null || unzip -oq "$DL" -d "$W/inner"
+  local inner; inner="$(find "$W/inner" -maxdepth 3 -type f -iname '*.dmg' ! -path '*__MACOSX*' | head -1)"
+  [ -n "$inner" ] || die "hudl-sportscode: no inner .dmg found in zip"
+  cp "$inner" "$DL"
+}
+write_cask_hudl_sportscode(){ cat > "$CASK" <<RB
+cask "$TOKEN" do
+  version "$VERSION"
+  sha256 "$OUTER_SHA"
+
+  url "https://sportscode64-updates.s3.amazonaws.com/PublicReleaseDmgs/HudlSportscode-#{version}.dmg.zip",
+      verified: "sportscode64-updates.s3.amazonaws.com/"
+  name "$NAME"
+  desc "$DESC"
+  homepage "$HOMEPAGE"
+
+  depends_on macos: :sequoia
+
+  app "$APP_NAME"
+$(zap_for "$BUNDLE_ID")
+end
+RB
+}
+
+# ---------------------------------------------------------------------------
+# huggingchat-mac  (GitHub zip; repo ARCHIVED, all releases pre-release)
+# releases/latest has no "Latest" tag, so :github_latest finds nothing -> pin
+# version 0.7.0; livecheck scans the releases page (prereleases) via page_match.
+# Discontinued. DL = zip, inspect sets app + bundle.
+# ---------------------------------------------------------------------------
+resolve_huggingchat_mac(){
+  VERSION="0.7.0"
+  URL="https://github.com/huggingface/chat-macOS/releases/download/v0.7.0/HuggingChat.zip"
+  curl -fL "$URL" -o "$DL" || die "huggingchat-mac: zip download failed"
+}
+write_cask_huggingchat_mac(){ cat > "$CASK" <<RB
+cask "$TOKEN" do
+  version "$VERSION"
+  sha256 "$SHA"
+
+  url "https://github.com/huggingface/chat-macOS/releases/download/v#{version}/HuggingChat.zip"
+  name "$NAME"
+  desc "$DESC"
+  homepage "$HOMEPAGE"
+
+  livecheck do
+    url "https://github.com/huggingface/chat-macOS/releases"
+    regex(/releases\/tag\/v?(\d+(?:\.\d+)+)/i)
+    strategy :page_match
+  end
+
+  depends_on macos: :sonoma
+
+  app "$APP_NAME"
+$(zap_for "$BUNDLE_ID")
+end
+RB
+}
+
+# ---------------------------------------------------------------------------
+# imanage-work-desktop  (pkg-in-zip; UNVERSIONED enclosure; Sparkle appcast)
+# Sparkle enclosure "iManage Work Desktop for Mac.pkg.zip" (pkg nested in zip,
+# spaces, no version in name) -> inner pkg. DL = inner pkg (for the receipt);
+# cask sha = OUTER_SHA; version from the appcast; livecheck = :sparkle.
+# ---------------------------------------------------------------------------
+resolve_imanage_work_desktop(){
+  VERSION="10.8.4"
+  URL="https://updates.imanage.com/autoupdates/iManage%20Work%20Desktop%20for%20Mac.pkg.zip"
+  curl -fL "$URL" -o "$DL" || die "imanage-work-desktop: outer zip download failed"
+  OUTER_SHA="$(shasum -a 256 "$DL" | awk '{print $1}')"
+  rm -rf "$W/inner"; mkdir -p "$W/inner"; ditto -xk "$DL" "$W/inner" 2>/dev/null || unzip -oq "$DL" -d "$W/inner"
+  local inner; inner="$(find "$W/inner" -maxdepth 3 -type f -iname '*.pkg' ! -path '*__MACOSX*' | head -1)"
+  [ -n "$inner" ] || die "imanage-work-desktop: no inner .pkg found in zip"
+  cp "$inner" "$DL"
+}
+write_cask_imanage_work_desktop(){ cat > "$CASK" <<RB
+cask "$TOKEN" do
+  version "$VERSION"
+  sha256 "$OUTER_SHA"
+
+  url "https://updates.imanage.com/autoupdates/iManage%20Work%20Desktop%20for%20Mac.pkg.zip",
+      verified: "updates.imanage.com/"
+  name "$NAME"
+  desc "$DESC"
+  homepage "$HOMEPAGE"
+
+  livecheck do
+    url "https://updates.imanage.com/autoupdates/appcast.xml"
+    strategy :sparkle
+  end
+
+  depends_on macos: :big_sur
+
+  pkg "iManage Work Desktop for Mac.pkg"
+
+  uninstall pkgutil: "$RECEIPT"
+$(zap_for "$BUNDLE_ID")
+end
+RB
+}
+
+# ---------------------------------------------------------------------------
+# ipsw-updater  (zip; version-string transform 2026.4.15-1 -> 202604151)
+# Filename token zero-pads the month and strips dots/dash, which is not a plain
+# version interpolation, so url is literal and version is pinned. DL = zip,
+# inspect sets app + bundle. livecheck = page_match on the updates page.
+# ---------------------------------------------------------------------------
+resolve_ipsw_updater(){
+  VERSION="2026.4.15-1"
+  URL="https://ipsw.app/download/IPSWUpdater-v202604151.zip"
+  curl -fL "$URL" -o "$DL" || die "ipsw-updater: zip download failed"
+}
+write_cask_ipsw_updater(){ cat > "$CASK" <<RB
+cask "$TOKEN" do
+  version "$VERSION"
+  sha256 "$SHA"
+
+  url "https://ipsw.app/download/IPSWUpdater-v202604151.zip",
+      verified: "ipsw.app/"
+  name "$NAME"
+  desc "$DESC"
+  homepage "$HOMEPAGE"
+
+  livecheck do
+    url "https://ipsw.app/download/updates.php"
+    regex(/(\d{4}\.\d+\.\d+(?:-\d+)?)/i)
+    strategy :page_match
+  end
+
+  depends_on macos: :big_sur
+
+  app "$APP_NAME"
+$(zap_for "$BUNDLE_ID")
+end
+RB
+}
+
+# ---------------------------------------------------------------------------
+# jamf-compliance-editor  (GitHub pkg; tag/version skew: tag v1.5, asset 1.5.0)
+# :github_latest gives tag "v1.5" which won't match the asset's "1.5.0", so the
+# version is pinned to the asset version and the tag is rebuilt from
+# #{version.major_minor}. livecheck reads the .pkg asset name out of the latest
+# release JSON to recover the full x.y.z version.
+# ---------------------------------------------------------------------------
+resolve_jamf_compliance_editor(){
+  local repo="Jamf-Concepts/jamf-compliance-editor" tag asset
+  tag="$(curl -sI "https://github.com/$repo/releases/latest" | awk -F'/tag/' 'tolower($0)~/^location/{print $2}' | tr -d '\r')"
+  [ -n "$tag" ] || tag="$(curl -fsSL "https://api.github.com/repos/$repo/releases/latest" 2>/dev/null | awk -F'"' '/"tag_name"/{print $4; exit}')"
+  [ -n "$tag" ] || die "jamf-compliance-editor: no latest tag"
+  asset="$(curl -fsSL "https://api.github.com/repos/$repo/releases/latest" 2>/dev/null | grep -oE 'JamfComplianceEditor-[0-9][0-9.]*\.pkg' | head -1)"
+  if [ -n "$asset" ]; then VERSION="$(printf '%s' "$asset" | grep -oE '[0-9]+(\.[0-9]+)+' | head -1)"
+  else VERSION="${tag#v}"; case "$VERSION" in *.*.*) ;; *) VERSION="$VERSION.0";; esac; asset="JamfComplianceEditor-$VERSION.pkg"; fi
+  URL="https://github.com/$repo/releases/download/$tag/$asset"
+  curl -fL "$URL" -o "$DL" || die "jamf-compliance-editor: pkg download failed"
+}
+write_cask_jamf_compliance_editor(){ cat > "$CASK" <<RB
+cask "$TOKEN" do
+  version "$VERSION"
+  sha256 "$SHA"
+
+  url "https://github.com/Jamf-Concepts/jamf-compliance-editor/releases/download/v#{version.major_minor}/JamfComplianceEditor-#{version}.pkg"
+  name "$NAME"
+  desc "$DESC"
+  homepage "$HOMEPAGE"
+
+  livecheck do
+    url :url
+    regex(/JamfComplianceEditor[._-]v?(\d+(?:\.\d+)+)\.pkg/i)
+    strategy :github_latest do |json, regex|
+      json["assets"]&.map { |a| a["name"][regex, 1] }&.compact&.max
+    end
+  end
+
+  depends_on macos: :big_sur
+
+  pkg "JamfComplianceEditor-#{version}.pkg"
+
+  uninstall pkgutil: "$RECEIPT"
+$(zap_for "$BUNDLE_ID")
+end
+RB
+}
+
+# ---------------------------------------------------------------------------
+# jamf-connect-configuration  (dmg; version ONLY in x-amz-meta-version header)
+# Shared JamfConnect.dmg (also used by jamf-connect-login) whose drag-install
+# artifact for THIS token is "Jamf Connect Configuration.app". url is unversioned;
+# version read from the x-amz-meta-version response header; livecheck =
+# :header_match on the same field. DL = dmg so inspect can read the bundle id.
+# ---------------------------------------------------------------------------
+resolve_jamf_connect_configuration(){
+  URL="https://files.jamfconnect.com/JamfConnect.dmg"
+  VERSION="$(curl -sIL "$URL" | grep -i '^x-amz-meta-version' | grep -oE '[0-9]+(\.[0-9]+)+' | head -1)"
+  [ -n "$VERSION" ] || die "jamf-connect-configuration: no x-amz-meta-version header"
+  curl -fL "$URL" -o "$DL" || die "jamf-connect-configuration: dmg download failed"
+}
+write_cask_jamf_connect_configuration(){ cat > "$CASK" <<RB
+cask "$TOKEN" do
+  version "$VERSION"
+  sha256 "$SHA"
+
+  url "https://files.jamfconnect.com/JamfConnect.dmg",
+      verified: "files.jamfconnect.com/"
+  name "$NAME"
+  desc "$DESC"
+  homepage "$HOMEPAGE"
+
+  livecheck do
+    url :url
+    strategy :header_match do |headers|
+      headers["x-amz-meta-version"]
+    end
+  end
+
+  depends_on macos: :big_sur
+
+  app "Jamf Connect Configuration.app"
+$(zap_for "$BUNDLE_ID")
+end
+RB
+}
+
+
+# shellcheck shell=bash
+# ============================================================================
+# funcs-cc-chunk3.sh — custom resolve_<tfn>/write_cask_<tfn> pairs for the
+# apps in in-cc-chunk3.tsv that do NOT fit a built-in cask-master.sh source.
+#
+# Source these from cask-master.sh (paste into its custom section, or
+# `source` this file) BEFORE running the batch. <tfn> = token with every
+# '-' replaced by '_'. Each resolve_<tfn> sets VERSION + URL and downloads
+# to "$DL" (arch-split also writes "$W/dl-x64" and sets SHA_X64). Each
+# write_cask_<tfn> writes "$CASK". $SHA/$SHA_X64/$VERSION are harness-set
+# during resolve+sha; receipts/bundle ids/app names are hardcoded from the
+# verified notes (the harness artifact inspector cannot reliably unwrap
+# pkgInDmg / pkgInZip / arch-split installers).
+#
+# Apps NOT in this file (mersive-solstice) fit a built-in source and live in
+# out-cc-chunk3.tsv as a regular registry row, not here.
+# ============================================================================
+
+# ---------------------------------------------------------------------------
+# jamf-connect-login — pkgInDmg, shared unversioned dmg, version in x-amz header
+#   Shared https://files.jamfconnect.com/JamfConnect.dmg (same dmg as
+#   jamf-connect-configuration). Inner artifact = "Jamf Connect.pkg"
+#   (receipt com.jamf.connect.login; bundles JamfConnectLaunchAgent.pkg).
+#   Version only in the x-amz-meta-version response header -> :header_match.
+# ---------------------------------------------------------------------------
+resolve_jamf_connect_login(){
+  local url="https://files.jamfconnect.com/JamfConnect.dmg"
+  VERSION="$(curl -sI "$url" | awk -F': ' 'tolower($1)=="x-amz-meta-version"{print $2}' | tr -d '\r ')"
+  [ -n "$VERSION" ] || VERSION="$(curl -sI "$url" | grep -i '^content-disposition' | grep -oE '[0-9]+(\.[0-9]+)+' | head -1)"
+  [ -n "$VERSION" ] || die "jamf-connect-login: no version in headers"
+  URL="$url"; curl -fL "$URL" -o "$DL"
+}
+write_cask_jamf_connect_login(){ cat > "$CASK" <<RB
+cask "$TOKEN" do
+  version "$VERSION"
+  sha256 "$SHA"
+
+  url "https://files.jamfconnect.com/JamfConnect.dmg",
+      verified: "files.jamfconnect.com/"
+  name "$NAME"
+  desc "$DESC"
+  homepage "$HOMEPAGE"
+
+  livecheck do
+    url :url
+    strategy :header_match
+  end
+
+  depends_on macos: :$SYM
+
+  pkg "Jamf Connect.pkg"
+
+  uninstall pkgutil: "com.jamf.connect.login"
+
+  zap trash: [
+    "~/Library/Caches/com.jamf.connect.login",
+    "~/Library/Preferences/com.jamf.connect.login.plist",
+  ]
+end
+RB
+}
+
+# ---------------------------------------------------------------------------
+# joan-configurator — arch-split dmg, UNVERSIONED stable aliases, header version
+#   arm  https://configurator.getjoan.com/download/flavor/joan/latest/osx_arm64
+#   intel https://configurator.getjoan.com/download/flavor/joan/latest/osx_64
+#   version only via Content-Disposition (joan-configurator-2.1.4-*.dmg) ->
+#   :header_match. URLs cannot template {v}; arch-split.
+# ---------------------------------------------------------------------------
+resolve_joan_configurator(){
+  local arm="https://configurator.getjoan.com/download/flavor/joan/latest/osx_arm64"
+  local intel="https://configurator.getjoan.com/download/flavor/joan/latest/osx_64"
+  VERSION="$(curl -sIL "$arm" | grep -i '^content-disposition' | grep -oE '[0-9]+(\.[0-9]+)+' | head -1)"
+  [ -n "$VERSION" ] || die "joan-configurator: no version in content-disposition"
+  URL="$arm"; curl -fL "$URL" -o "$DL"
+  curl -fL "$intel" -o "$W/dl-x64" && SHA_X64="$(shasum -a 256 "$W/dl-x64" | awk '{print $1}')" || die "joan-configurator: intel download failed"
+}
+write_cask_joan_configurator(){ cat > "$CASK" <<RB
+cask "$TOKEN" do
+  version "$VERSION"
+
+  on_arm do
+    sha256 "$SHA"
+    url "https://configurator.getjoan.com/download/flavor/joan/latest/osx_arm64",
+        verified: "configurator.getjoan.com/"
+  end
+  on_intel do
+    sha256 "$SHA_X64"
+    url "https://configurator.getjoan.com/download/flavor/joan/latest/osx_64",
+        verified: "configurator.getjoan.com/"
+  end
+
+  name "$NAME"
+  desc "$DESC"
+  homepage "$HOMEPAGE"
+
+  livecheck do
+    url "https://configurator.getjoan.com/download/flavor/joan/latest/osx_arm64"
+    regex(/joan-configurator[._-]v?(\d+(?:\.\d+)+)[._-]arm64/i)
+    strategy :header_match
+  end
+
+  depends_on macos: :$SYM
+
+  app "Joan Configurator.app"
+
+  zap trash: [
+    "~/Library/Application Support/Joan Configurator",
+    "~/Library/Caches/com.getjoan.joan-configurator",
+    "~/Library/Preferences/com.getjoan.joan-configurator.plist",
+  ]
+end
+RB
+}
+
+# ---------------------------------------------------------------------------
+# jpegmini-pro — dmg, build-only token in URL, version != filename
+#   https://assets.jpegmini.com/downloads/pro/mac/jpegmini_pro4_b72851.dmg
+#   marketing version 4.2.3.72851 (build b72851 is the only number in the URL).
+#   bundle com.beamr.jpegminipro.app. No stable versioned URL template.
+# ---------------------------------------------------------------------------
+resolve_jpegmini_pro(){
+  VERSION="4.2.3.72851"
+  URL="https://assets.jpegmini.com/downloads/pro/mac/jpegmini_pro4_b72851.dmg"
+  curl -fL "$URL" -o "$DL"
+}
+write_cask_jpegmini_pro(){ cat > "$CASK" <<RB
+cask "$TOKEN" do
+  version "$VERSION"
+  sha256 "$SHA"
+
+  url "https://assets.jpegmini.com/downloads/pro/mac/jpegmini_pro4_b72851.dmg",
+      verified: "assets.jpegmini.com/"
+  name "$NAME"
+  desc "$DESC"
+  homepage "$HOMEPAGE"
+
+  livecheck do
+    url "https://jpegmini.com/downloads/mac"
+    regex(/jpegmini[._-]pro\d*[._-]b(\d+)\.dmg/i)
+    strategy :page_match
+  end
+
+  depends_on macos: :$SYM
+
+  app "JPEGmini Pro.app"
+
+  zap trash: [
+    "~/Library/Caches/com.beamr.jpegminipro.app",
+    "~/Library/HTTPStorages/com.beamr.jpegminipro.app",
+    "~/Library/Preferences/com.beamr.jpegminipro.app.plist",
+    "~/Library/Saved Application State/com.beamr.jpegminipro.app.savedState",
+  ]
+end
+RB
+}
+
+# ---------------------------------------------------------------------------
+# keeper-secrets-manager-cli — pkg, GitHub monorepo (ksm-cli-* tags)
+#   https://github.com/Keeper-Security/secrets-manager/releases/download/
+#     ksm-cli-1.3.0/keeper-secrets-manager-cli-macos-1.3.0.pkg
+#   :github_latest grabs the wrong tag -> filter ksm-cli-* tags via regex.
+#   receipt resolved on-Mac; official Keeper-built pkg.
+# ---------------------------------------------------------------------------
+resolve_keeper_secrets_manager_cli(){
+  local repo="Keeper-Security/secrets-manager"
+  TAG="$(curl -fsSL "https://api.github.com/repos/$repo/releases?per_page=50" 2>/dev/null \
+        | awk -F'"' '/"tag_name"/{print $4}' | grep -E '^ksm-cli-[0-9]' | head -1)"
+  [ -n "$TAG" ] || die "keeper-ksm-cli: no ksm-cli-* tag found"
+  VERSION="${TAG#ksm-cli-}"
+  URL="https://github.com/$repo/releases/download/$TAG/keeper-secrets-manager-cli-macos-$VERSION.pkg"
+  curl -fL "$URL" -o "$DL"
+}
+write_cask_keeper_secrets_manager_cli(){ cat > "$CASK" <<RB
+cask "$TOKEN" do
+  version "$VERSION"
+  sha256 "$SHA"
+
+  url "https://github.com/Keeper-Security/secrets-manager/releases/download/ksm-cli-#{version}/keeper-secrets-manager-cli-macos-#{version}.pkg"
+  name "$NAME"
+  desc "$DESC"
+  homepage "$HOMEPAGE"
+
+  livecheck do
+    url :url
+    regex(/^ksm-cli[._-]v?(\d+(?:\.\d+)+)$/i)
+    strategy :github_latest
+  end
+
+  depends_on macos: :$SYM
+
+  pkg "keeper-secrets-manager-cli-macos-#{version}.pkg"
+
+  uninstall pkgutil: "$RECEIPT"
+
+$(zap_for "$BUNDLE_ID")
+end
+RB
+}
+
+# ---------------------------------------------------------------------------
+# lg-calibration-studio — pkgInZip, opaque fileId in URL, scraped version
+#   https://gscs-b2c.lge.com/downloadFile?fileId=mp6Ez3DAnsO4r3HuzRaLfw
+#   Content-Disposition Mac_LCS_7.6.8.zip ; version 7.6.8 from LG support page.
+#   fileId is NOT version-derived; both must be re-scraped each release.
+# ---------------------------------------------------------------------------
+resolve_lg_calibration_studio(){
+  VERSION="7.6.8"
+  URL="https://gscs-b2c.lge.com/downloadFile?fileId=mp6Ez3DAnsO4r3HuzRaLfw"
+  curl -fL "$URL" -o "$DL"
+}
+write_cask_lg_calibration_studio(){ cat > "$CASK" <<RB
+cask "$TOKEN" do
+  version "$VERSION"
+  sha256 "$SHA"
+
+  url "https://gscs-b2c.lge.com/downloadFile?fileId=mp6Ez3DAnsO4r3HuzRaLfw",
+      verified: "gscs-b2c.lge.com/"
+  name "$NAME"
+  desc "$DESC"
+  homepage "$HOMEPAGE"
+
+  livecheck do
+    url "https://www.lg.com/us/support/product/lg-34WK95U-W.AUS"
+    regex(/LG Calibration Studio[^0-9]+(\d+(?:\.\d+)+)/i)
+    strategy :page_match
+  end
+
+  depends_on macos: :$SYM
+
+  pkg "LG Calibration Studio.pkg"
+
+  uninstall pkgutil: "$RECEIPT"
+
+$(zap_for "$BUNDLE_ID")
+end
+RB
+}
+
+# ---------------------------------------------------------------------------
+# macos-instantview — dmg, compound version V3.24R0004 (zero-padded build)
+#   https://www.siliconmotion.com/downloads/macOS_InstantView_V3.24R0004.dmg
+#   marketing "V3.24 R04" -> version.csv "3.24,4". bundle com.SMI-Inc.InstantView.
+# ---------------------------------------------------------------------------
+resolve_macos_instantview(){
+  VERSION="3.24,4"
+  URL="https://www.siliconmotion.com/downloads/macOS_InstantView_V3.24R0004.dmg"
+  curl -fL "$URL" -o "$DL"
+}
+write_cask_macos_instantview(){ cat > "$CASK" <<RB
+cask "$TOKEN" do
+  version "$VERSION"
+  sha256 "$SHA"
+
+  url "https://www.siliconmotion.com/downloads/macOS_InstantView_V#{version.csv.first}R000#{version.csv.second}.dmg",
+      verified: "siliconmotion.com/"
+  name "$NAME"
+  desc "$DESC"
+  homepage "$HOMEPAGE"
+
+  livecheck do
+    url "https://www.siliconmotion.com/downloads/"
+    regex(/macOS_InstantView_V(\d+(?:\.\d+)+)R0*(\d+)\.dmg/i)
+    strategy :page_match do |page, regex|
+      page.scan(regex).map { |m| "#{m[0]},#{m[1]}" }
+    end
+  end
+
+  depends_on macos: :$SYM
+
+  app "InstantView.app"
+
+  zap trash: [
+    "~/Library/Caches/com.SMI-Inc.InstantView",
+    "~/Library/Preferences/com.SMI-Inc.InstantView.plist",
+  ]
+end
+RB
+}
+
+# ---------------------------------------------------------------------------
+# mamp-pro — arch-split pkg, URL embeds marketing "7.4" not full "7.4.0"
+#   arm   https://downloads.mamp.info/MAMP-PRO/macOS/MAMP-PRO/MAMP-MAMP-PRO-7.4-Apple-chip.pkg
+#   intel https://downloads.mamp.info/MAMP-PRO/macOS/MAMP-PRO/MAMP-MAMP-PRO-7.4-Intel-x86.pkg
+#   version 7.4.0 -> version.csv "7.4.0,7.4" (full,url). arch-split non-electron pkg.
+# ---------------------------------------------------------------------------
+resolve_mamp_pro(){
+  VERSION="7.4.0,7.4"
+  local base="https://downloads.mamp.info/MAMP-PRO/macOS/MAMP-PRO"
+  URL="$base/MAMP-MAMP-PRO-7.4-Apple-chip.pkg"; curl -fL "$URL" -o "$DL"
+  curl -fL "$base/MAMP-MAMP-PRO-7.4-Intel-x86.pkg" -o "$W/dl-x64" \
+    && SHA_X64="$(shasum -a 256 "$W/dl-x64" | awk '{print $1}')" || die "mamp-pro: intel download failed"
+}
+write_cask_mamp_pro(){ cat > "$CASK" <<RB
+cask "$TOKEN" do
+  version "$VERSION"
+
+  on_arm do
+    sha256 "$SHA"
+    url "https://downloads.mamp.info/MAMP-PRO/macOS/MAMP-PRO/MAMP-MAMP-PRO-#{version.csv.second}-Apple-chip.pkg",
+        verified: "downloads.mamp.info/"
+  end
+  on_intel do
+    sha256 "$SHA_X64"
+    url "https://downloads.mamp.info/MAMP-PRO/macOS/MAMP-PRO/MAMP-MAMP-PRO-#{version.csv.second}-Intel-x86.pkg",
+        verified: "downloads.mamp.info/"
+  end
+
+  name "$NAME"
+  desc "$DESC"
+  homepage "$HOMEPAGE"
+
+  livecheck do
+    url "https://www.mamp.info/en/downloads/"
+    regex(/MAMP[._-]PRO[^0-9]+(\d+(?:\.\d+)+)/i)
+    strategy :page_match
+  end
+
+  depends_on macos: :$SYM
+
+  pkg "MAMP PRO.pkg"
+
+  uninstall pkgutil: "$RECEIPT"
+
+$(zap_for "$BUNDLE_ID")
+end
+RB
+}
+
+# ---------------------------------------------------------------------------
+# maxon-cinema-4d-2026 — dmg, version path 2026.2.0 but filename uses 2026.2
+#   https://mx-app-blob-prod.maxon.net/.../releases/2026.2.0/Cinema4D_2026_2026.2_Mac.dmg
+#   version.csv "2026.2.0,2026.2" (path,filename). Licensed (installer public).
+# ---------------------------------------------------------------------------
+resolve_maxon_cinema_4d_2026(){
+  VERSION="2026.2.0,2026.2"
+  URL="https://mx-app-blob-prod.maxon.net/mx-package-production/installer/macos/maxon/cinema4d/releases/2026.2.0/Cinema4D_2026_2026.2_Mac.dmg"
+  curl -fL "$URL" -o "$DL"
+}
+write_cask_maxon_cinema_4d_2026(){ cat > "$CASK" <<RB
+cask "$TOKEN" do
+  version "$VERSION"
+  sha256 "$SHA"
+
+  url "https://mx-app-blob-prod.maxon.net/mx-package-production/installer/macos/maxon/cinema4d/releases/#{version.csv.first}/Cinema4D_2026_#{version.csv.second}_Mac.dmg",
+      verified: "mx-app-blob-prod.maxon.net/"
+  name "$NAME"
+  desc "$DESC"
+  homepage "$HOMEPAGE"
+
+  livecheck do
+    url "https://www.maxon.net/en/downloads/cinema-4d-2026-downloads"
+    regex(/Cinema4D_2026_(\d+(?:\.\d+)+)_Mac\.dmg/i)
+    strategy :page_match
+  end
+
+  depends_on macos: :$SYM
+
+  app "Maxon Cinema 4D 2026/Cinema 4D.app"
+
+  zap trash: [
+    "~/Library/Caches/net.maxon.cinema4d",
+    "~/Library/Preferences/net.maxon.cinema4d.plist",
+  ]
+end
+RB
+}
+
+# ---------------------------------------------------------------------------
+# medialab-connect — arch-split dmg, per-release content hash in URL path
+#   intel https://info.medialab.app/share/asset/source/M6MZN/<hash>/MediaLab_Connect-1.8.0.dmg
+#   arm   https://info.medialab.app/share/asset/source/gZ0v8/<hash>/MediaLab_Connect-1.8.0-arm64.dmg
+#   hash + short id not derivable from version -> hardcode current release.
+# ---------------------------------------------------------------------------
+resolve_medialab_connect(){
+  VERSION="1.8.0"
+  local arm="https://info.medialab.app/share/asset/source/gZ0v8/adc264f88859996db344c4c5d4161a67ea5e4e84366ec734e101975302ef2c73/MediaLab_Connect-1.8.0-arm64.dmg"
+  local intel="https://info.medialab.app/share/asset/source/M6MZN/db865132ed3f3d6a48efa5449963954cd45d189fbf8abba9c068d3d213d3cc75/MediaLab_Connect-1.8.0.dmg"
+  URL="$arm"; curl -fL "$URL" -o "$DL"
+  curl -fL "$intel" -o "$W/dl-x64" && SHA_X64="$(shasum -a 256 "$W/dl-x64" | awk '{print $1}')" || die "medialab-connect: intel download failed"
+}
+write_cask_medialab_connect(){ cat > "$CASK" <<RB
+cask "$TOKEN" do
+  version "$VERSION"
+
+  on_arm do
+    sha256 "$SHA"
+    url "https://info.medialab.app/share/asset/source/gZ0v8/adc264f88859996db344c4c5d4161a67ea5e4e84366ec734e101975302ef2c73/MediaLab_Connect-#{version}-arm64.dmg",
+        verified: "info.medialab.app/"
+  end
+  on_intel do
+    sha256 "$SHA_X64"
+    url "https://info.medialab.app/share/asset/source/M6MZN/db865132ed3f3d6a48efa5449963954cd45d189fbf8abba9c068d3d213d3cc75/MediaLab_Connect-#{version}.dmg",
+        verified: "info.medialab.app/"
+  end
+
+  name "$NAME"
+  desc "$DESC"
+  homepage "$HOMEPAGE"
+
+  livecheck do
+    url "https://www.medialab.co/downloads/"
+    regex(/MediaLab[._-]Connect[._-]v?(\d+(?:\.\d+)+)/i)
+    strategy :page_match
+  end
+
+  depends_on macos: :$SYM
+
+  app "MediaLab Connect.app"
+
+  zap trash: [
+    "~/Library/Application Support/MediaLab Connect",
+    "~/Library/Caches/co.medialab.connect",
+    "~/Library/Preferences/co.medialab.connect.plist",
+  ]
+end
+RB
+}
+
+# ---------------------------------------------------------------------------
+# microsoft-company-portal — pkg, derived from MAU Sparkle feed; bundles MAU
+#   feed 0409IMCP01.xml -> CompanyPortal_5.2604.1-Upgrade.pkg, -Upgrade->-Installer
+#   https://res.public.onecdn.static.microsoft/mro1cdnstorage/<UUID>/MacAutoupdate/
+#     CompanyPortal_#{version}-Installer.pkg . Deselect bundled MAU at install.
+# ---------------------------------------------------------------------------
+resolve_microsoft_company_portal(){
+  local feed="https://officecdnmac.microsoft.com/pr/C1297A47-86C4-4C1F-97FA-950631F94777/MacAutoupdate/0409IMCP01.xml"
+  local loc; loc="$(curl -fsSL "$feed" | grep -oE 'CompanyPortal_[0-9.]+-Upgrade\.pkg' | head -1)"
+  [ -n "$loc" ] || die "ms-company-portal: no Location in MAU feed"
+  VERSION="$(printf '%s' "$loc" | grep -oE '[0-9]+(\.[0-9]+)+' | head -1)"
+  URL="https://res.public.onecdn.static.microsoft/mro1cdnstorage/C1297A47-86C4-4C1F-97FA-950631F94777/MacAutoupdate/CompanyPortal_${VERSION}-Installer.pkg"
+  curl -fL "$URL" -o "$DL"
+}
+write_cask_microsoft_company_portal(){ cat > "$CASK" <<RB
+cask "$TOKEN" do
+  version "$VERSION"
+  sha256 "$SHA"
+
+  url "https://res.public.onecdn.static.microsoft/mro1cdnstorage/C1297A47-86C4-4C1F-97FA-950631F94777/MacAutoupdate/CompanyPortal_#{version}-Installer.pkg",
+      verified: "res.public.onecdn.static.microsoft/"
+  name "$NAME"
+  desc "$DESC"
+  homepage "$HOMEPAGE"
+
+  livecheck do
+    url "https://officecdnmac.microsoft.com/pr/C1297A47-86C4-4C1F-97FA-950631F94777/MacAutoupdate/0409IMCP01.xml"
+    strategy :sparkle
+  end
+
+  auto_updates true
+  depends_on macos: :$SYM
+
+  pkg "CompanyPortal_#{version}-Installer.pkg",
+      choices: [
+        {
+          "choiceIdentifier" => "com.microsoft.autoupdate",
+          "choiceAttribute"  => "selected",
+          "attributeSetting" => 0,
+        },
+      ]
+
+  uninstall quit:    "com.microsoft.autoupdate2",
+            pkgutil: "$RECEIPT"
+
+$(zap_for "$BUNDLE_ID")
+end
+RB
+}
+
+# ---------------------------------------------------------------------------
+# microsoft-powershell — arch-split pkg on GitHub (PowerShell/PowerShell)
+#   arm64 powershell-#{version}-osx-arm64.pkg ; x64 powershell-#{version}-osx-x64.pkg
+#   token avoids the homebrew-core 'powershell' formula collision.
+# ---------------------------------------------------------------------------
+resolve_microsoft_powershell(){
+  local repo="PowerShell/PowerShell"
+  get_github_tag "$repo"; [ -n "$TAG" ] || die "ms-powershell: no latest tag"
+  case "$TAG" in [vV][0-9]*) VERSION="${TAG#?}";; *) VERSION="$TAG";; esac
+  URL="https://github.com/$repo/releases/download/$TAG/powershell-${VERSION}-osx-arm64.pkg"
+  curl -fL "$URL" -o "$DL"
+  curl -fL "https://github.com/$repo/releases/download/$TAG/powershell-${VERSION}-osx-x64.pkg" -o "$W/dl-x64" \
+    && SHA_X64="$(shasum -a 256 "$W/dl-x64" | awk '{print $1}')" || die "ms-powershell: x64 download failed"
+}
+write_cask_microsoft_powershell(){ cat > "$CASK" <<RB
+cask "$TOKEN" do
+  version "$VERSION"
+
+  on_arm do
+    sha256 "$SHA"
+    url "https://github.com/PowerShell/PowerShell/releases/download/v#{version}/powershell-#{version}-osx-arm64.pkg"
+  end
+  on_intel do
+    sha256 "$SHA_X64"
+    url "https://github.com/PowerShell/PowerShell/releases/download/v#{version}/powershell-#{version}-osx-x64.pkg"
+  end
+
+  name "$NAME"
+  desc "$DESC"
+  homepage "$HOMEPAGE"
+
+  livecheck do
+    url :url
+    strategy :github_latest
+  end
+
+  depends_on macos: :$SYM
+
+  pkg "powershell-#{version}-osx-#{arch}.pkg"
+
+  uninstall pkgutil: "com.microsoft.powershell"
+
+  zap trash: [
+    "~/.cache/powershell",
+    "~/.config/powershell",
+    "~/.local/share/powershell",
+  ]
+end
+RB
+}
+
+# ---------------------------------------------------------------------------
+# mimiq — dmg, URL embeds a build timestamp + version + build (not derivable)
+#   https://updates.hedge.video/mimiq/macos/updates/production/
+#     Mimiq_20260505135920_v26.2b197/Mimiq_20260505135920_v26.2b197.dmg
+#   version 26.2 build 197. Hardcode current release; livecheck off release docs.
+# ---------------------------------------------------------------------------
+resolve_mimiq(){
+  VERSION="26.2"
+  URL="https://updates.hedge.video/mimiq/macos/updates/production/Mimiq_20260505135920_v26.2b197/Mimiq_20260505135920_v26.2b197.dmg"
+  curl -fL "$URL" -o "$DL"
+}
+write_cask_mimiq(){ cat > "$CASK" <<RB
+cask "$TOKEN" do
+  version "$VERSION"
+  sha256 "$SHA"
+
+  url "https://updates.hedge.video/mimiq/macos/updates/production/Mimiq_20260505135920_v26.2b197/Mimiq_20260505135920_v26.2b197.dmg",
+      verified: "updates.hedge.video/"
+  name "$NAME"
+  desc "$DESC"
+  homepage "$HOMEPAGE"
+
+  livecheck do
+    url "https://docs.hedge.video/mimiq/releases"
+    regex(/[Vv]ersion[^0-9]+(\d+(?:\.\d+)+)/i)
+    strategy :page_match
+  end
+
+  depends_on macos: :$SYM
+
+  app "Mimiq.app"
+
+  zap trash: [
+    "~/Library/Caches/video.hedge.Mimiq",
+    "~/Library/Preferences/video.hedge.Mimiq.plist",
+  ]
+end
+RB
+}
+
+# ---------------------------------------------------------------------------
+# mister-horse-product-manager — dmg, final CDN URL has a per-link random token
+#   stable https://misterhorse.com/downloads/product-manager/osx -> 301 ->
+#   /downloads/get?id=4&os=osx -> 302 -> CDN .../<token>/MisterHorseProductManager_<v>.dmg
+#   Use the stable redirect as url (brew follows it); version + livecheck via header_match.
+#   bundle com.misterhorse.ProductManager.
+# ---------------------------------------------------------------------------
+resolve_mister_horse_product_manager(){
+  local short="https://misterhorse.com/downloads/product-manager/osx"
+  local real; real="$(curl -sIL "$short" | awk -F': ' 'tolower($1)=="location"{print $2}' | tail -1 | tr -d '\r')"
+  VERSION="$(basename "${real%%\?*}" | grep -oE '[0-9]+(\.[0-9]+)+' | head -1)"
+  [ -n "$VERSION" ] || die "mister-horse: no version in redirect"
+  URL="$short"; curl -fL "$URL" -o "$DL"
+}
+write_cask_mister_horse_product_manager(){ cat > "$CASK" <<RB
+cask "$TOKEN" do
+  version "$VERSION"
+  sha256 "$SHA"
+
+  url "https://misterhorse.com/downloads/product-manager/osx",
+      verified: "misterhorse.com/"
+  name "$NAME"
+  desc "$DESC"
+  homepage "$HOMEPAGE"
+
+  livecheck do
+    url "https://misterhorse.com/downloads/product-manager/osx"
+    regex(/MisterHorseProductManager[._-]v?(\d+(?:\.\d+)+)\.dmg/i)
+    strategy :header_match
+  end
+
+  depends_on macos: :$SYM
+
+  app "Mister Horse Product Manager.app"
+
+  zap trash: [
+    "~/Library/Application Support/com.misterhorse.ProductManager",
+    "~/Library/Caches/com.misterhorse.ProductManager",
+    "~/Library/Preferences/com.misterhorse.ProductManager.plist",
+  ]
+end
+RB
+}
+
+# ---------------------------------------------------------------------------
+# monotype-connect — dmg, version is dot->hyphen encoded in the URL
+#   https://bin.extensis.com/ExtensisConnect-M-28-1-5.dmg  (28.1.5 -> 28-1-5)
+#   bundle com.extensis.connect. Public download via the links.extensis.com 302.
+# ---------------------------------------------------------------------------
+resolve_monotype_connect(){
+  VERSION="28.1.5"
+  URL="https://bin.extensis.com/ExtensisConnect-M-28-1-5.dmg"
+  curl -fL "$URL" -o "$DL"
+}
+write_cask_monotype_connect(){ cat > "$CASK" <<RB
+cask "$TOKEN" do
+  version "$VERSION"
+  sha256 "$SHA"
+
+  url "https://bin.extensis.com/ExtensisConnect-M-#{version.dots_to_hyphens}.dmg",
+      verified: "bin.extensis.com/"
+  name "$NAME"
+  desc "$DESC"
+  homepage "$HOMEPAGE"
+
+  livecheck do
+    url "https://links.extensis.com/extensis_connect/ec_latest?language=en&platform=mac"
+    regex(/ExtensisConnect-M-(\d+(?:-\d+)+)\.dmg/i)
+    strategy :header_match do |headers, regex|
+      m = headers["location"]&.match(regex)
+      next if m.blank?
+
+      m[1].tr("-", ".")
+    end
+  end
+
+  depends_on macos: :$SYM
+
+  app "Extensis Connect.app"
+
+  zap trash: [
+    "~/Library/Application Support/com.extensis.connect",
+    "~/Library/Caches/com.extensis.connect",
+    "~/Library/Preferences/com.extensis.connect.plist",
+  ]
+end
+RB
+}
+
+# ---------------------------------------------------------------------------
+# multiviewer-for-f1 — dmg (universal), per-release numeric ID in URL path
+#   https://releases.multiviewer.app/download/<numericID>/MultiViewer-<v>-universal.dmg
+#   ID not derivable from version; resolve via the JSON releases API.
+#   Electron, bundle com.electron.multiviewer-for-f1.
+# ---------------------------------------------------------------------------
+resolve_multiviewer_for_f1(){
+  local api="https://api.multiviewer.app/api/v1/releases/latest"
+  local json; json="$(curl -fsSL "$api")"
+  VERSION="$(printf '%s' "$json" | grep -oE '"version"[ :]*"[^"]+"' | head -1 | grep -oE '[0-9]+(\.[0-9]+)+' | head -1)"
+  [ -n "$VERSION" ] || die "multiviewer: no version from API"
+  URL="$(printf '%s' "$json" | grep -oE 'https://releases\.multiviewer\.app/download/[0-9]+/MultiViewer-[0-9.]+-universal\.dmg' | head -1)"
+  [ -n "$URL" ] || die "multiviewer: no universal dmg URL from API"
+  curl -fL "$URL" -o "$DL"
+}
+write_cask_multiviewer_for_f1(){ cat > "$CASK" <<RB
+cask "$TOKEN" do
+  version "$VERSION"
+  sha256 "$SHA"
+
+  url "$URL",
+      verified: "releases.multiviewer.app/"
+  name "$NAME"
+  desc "$DESC"
+  homepage "$HOMEPAGE"
+
+  livecheck do
+    url "https://api.multiviewer.app/api/v1/releases/latest"
+    strategy :json do |json|
+      json["version"]
+    end
+  end
+
+  auto_updates true
+  depends_on macos: :$SYM
+
+  app "MultiViewer for F1.app"
+
+  uninstall quit: "com.electron.multiviewer-for-f1"
+
+  zap trash: [
+    "~/Library/Application Support/MultiViewer for F1",
+    "~/Library/Caches/com.electron.multiviewer-for-f1",
+    "~/Library/Caches/com.electron.multiviewer-for-f1.ShipIt",
+    "~/Library/Preferences/com.electron.multiviewer-for-f1.plist",
+    "~/Library/Saved Application State/com.electron.multiviewer-for-f1.savedState",
+  ]
+end
+RB
+}
+
+# ---------------------------------------------------------------------------
+# netbird — arch-split pkg on GitHub (netbirdio/netbird)
+#   arm64 netbird_#{version}_darwin_arm64.pkg ; amd64 netbird_#{version}_darwin_amd64.pkg
+#   signed pkg installers (the darwin .tar.gz builds are not eligible).
+# ---------------------------------------------------------------------------
+resolve_netbird(){
+  local repo="netbirdio/netbird"
+  get_github_tag "$repo"; [ -n "$TAG" ] || die "netbird: no latest tag"
+  case "$TAG" in [vV][0-9]*) VERSION="${TAG#?}";; *) VERSION="$TAG";; esac
+  URL="https://github.com/$repo/releases/download/$TAG/netbird_${VERSION}_darwin_arm64.pkg"
+  curl -fL "$URL" -o "$DL"
+  curl -fL "https://github.com/$repo/releases/download/$TAG/netbird_${VERSION}_darwin_amd64.pkg" -o "$W/dl-x64" \
+    && SHA_X64="$(shasum -a 256 "$W/dl-x64" | awk '{print $1}')" || die "netbird: amd64 download failed"
+}
+write_cask_netbird(){ cat > "$CASK" <<RB
+cask "$TOKEN" do
+  arch arm: "arm64", intel: "amd64"
+
+  version "$VERSION"
+
+  on_arm do
+    sha256 "$SHA"
+  end
+  on_intel do
+    sha256 "$SHA_X64"
+  end
+
+  url "https://github.com/netbirdio/netbird/releases/download/v#{version}/netbird_#{version}_darwin_#{arch}.pkg"
+  name "$NAME"
+  desc "$DESC"
+  homepage "$HOMEPAGE"
+
+  livecheck do
+    url :url
+    strategy :github_latest
+  end
+
+  depends_on macos: :$SYM
+
+  pkg "netbird_#{version}_darwin_#{arch}.pkg"
+
+  uninstall pkgutil: "$RECEIPT"
+
+$(zap_for "$BUNDLE_ID")
+end
+RB
+}
+
+
+#!/usr/bin/env bash
+###############################################################################
+# funcs-cc-chunk4.sh — custom resolve_/write_cask_ pairs for chunk 4.
+#
+# Source these (or paste into) scripts/cask-master.sh's "OPTIONAL per-app
+# overrides" section. Each pair is named resolve_<tfn> / write_cask_<tfn>
+# where <tfn> is the registry token with every '-' replaced by '_'.
+#
+# Harness-set vars available in these functions:
+#   $TOKEN $NAME $DESC $HOMEPAGE $ARTIFACT $CASK $DL $W   (always)
+#   $VERSION $SHA $SHA_X64 $APP_NAME $BUNDLE_ID $RECEIPT $SYM  (set by the
+#   harness AFTER resolve, from artifact inspection — usable in write_cask_*)
+# resolve_* must set VERSION + URL and download the arm/universal file to $DL;
+# for arch-split also download intel to "$W/dl-x64" and set SHA_X64.
+#
+# Validate: bash -n progress/sourced/funcs-cc-chunk4.sh
+###############################################################################
+
+# ---------------------------------------------------------------------------
+# noor — native team-chat app (Rust). Arch-split DMG (aarch64 / x64) on a CDN.
+# WHY CUSTOM: arch-split non-electron dmg; the x86_64 redirect currently
+# resolves to cdn.noor.to/undefined, so URLs are built from the version read
+# off the working aarch64 redirect filename. Two shas (arm/intel).
+# ---------------------------------------------------------------------------
+resolve_noor(){
+  local loc base="https://cdn.noor.to/noor-2-releases"
+  loc="$(curl -sIL "https://sun.noor.to/download/latest/macos/aarch64" \
+        | awk -F': ' 'tolower($1)=="location"{print $2}' | tail -1 | tr -d '\r')"
+  VERSION="$(basename "${loc%%\?*}" | grep -oE '[0-9]+(\.[0-9]+)+' | head -1)"
+  [ -n "$VERSION" ] || { echo "noor: could not read version" >&2; return 1; }
+  URL="$base/Noor_${VERSION}_aarch64.dmg"; curl -fL "$URL" -o "$DL"
+  curl -fL "$base/Noor_${VERSION}_x64.dmg" -o "$W/dl-x64" \
+    && SHA_X64="$(shasum -a 256 "$W/dl-x64" | awk '{print $1}')" \
+    || { echo "noor: intel dmg download failed" >&2; return 1; }
+}
+write_cask_noor(){ cat > "$CASK" <<RB
+cask "$TOKEN" do
+  version "$VERSION"
+
+  on_arm do
+    sha256 "$SHA"
+    url "https://cdn.noor.to/noor-2-releases/Noor_#{version}_aarch64.dmg",
+        verified: "cdn.noor.to/"
+  end
+  on_intel do
+    sha256 "$SHA_X64"
+    url "https://cdn.noor.to/noor-2-releases/Noor_#{version}_x64.dmg",
+        verified: "cdn.noor.to/"
+  end
+
+  name "$NAME"
+  desc "$DESC"
+  homepage "$HOMEPAGE"
+
+  livecheck do
+    url "https://sun.noor.to/download/latest/macos/aarch64"
+    regex(/Noor_(\d+(?:\.\d+)+)_aarch64\.dmg/i)
+    strategy :header_match
+  end
+
+  depends_on macos: :$SYM
+
+  app "$APP_NAME"
+$(zap_for "$BUNDLE_ID")
+end
+RB
+}
+
+# ---------------------------------------------------------------------------
+# nvivo-14 — unversioned alias redirects to a versioned dmg whose version lives
+# in the URL PATH (.../14.24.0.52/NVivo14.dmg), NOT the filename. The built-in
+# direct_header resolver reads version from the basename only (NVivo14.dmg ->
+# no version) so it cannot resolve this. CUSTOM: parse version from Location.
+# ---------------------------------------------------------------------------
+resolve_nvivo_14(){
+  local loc short="https://download.qsrinternational.com/Software/NVivo14forMac/NVivo.dmg"
+  loc="$(curl -sIL "$short" | awk -F': ' 'tolower($1)=="location"{print $2}' | tail -1 | tr -d '\r')"
+  VERSION="$(printf '%s' "$loc" | grep -oE '[0-9]+(\.[0-9]+){2,}' | head -1)"
+  [ -n "$VERSION" ] || { echo "nvivo-14: could not read version" >&2; return 1; }
+  URL="https://download.qsrinternational.com/Software/NVivo14forMac/${VERSION}/NVivo14.dmg"
+  curl -fL "$URL" -o "$DL"
+}
+write_cask_nvivo_14(){ cat > "$CASK" <<RB
+cask "$TOKEN" do
+  version "$VERSION"
+  sha256 "$SHA"
+
+  url "https://download.qsrinternational.com/Software/NVivo14forMac/#{version}/NVivo14.dmg",
+      verified: "download.qsrinternational.com/"
+  name "$NAME"
+  desc "$DESC"
+  homepage "$HOMEPAGE"
+
+  livecheck do
+    url "https://download.qsrinternational.com/Software/NVivo14forMac/NVivo.dmg"
+    regex(%r{NVivo14forMac/(\d+(?:\.\d+)+)/}i)
+    strategy :header_match
+  end
+
+  depends_on macos: :$SYM
+
+  app "$APP_NAME"
+$(zap_for "$BUNDLE_ID")
+end
+RB
+}
+
+# ---------------------------------------------------------------------------
+# nvivo-15 — same shape as nvivo-14 (version in the redirect PATH).
+# ---------------------------------------------------------------------------
+resolve_nvivo_15(){
+  local loc short="https://download.qsrinternational.com/Software/NVivo15forMac/NVivo15.dmg"
+  loc="$(curl -sIL "$short" | awk -F': ' 'tolower($1)=="location"{print $2}' | tail -1 | tr -d '\r')"
+  VERSION="$(printf '%s' "$loc" | grep -oE '[0-9]+(\.[0-9]+){2,}' | head -1)"
+  [ -n "$VERSION" ] || { echo "nvivo-15: could not read version" >&2; return 1; }
+  URL="https://download.qsrinternational.com/Software/NVivo15forMac/${VERSION}/NVivo15.dmg"
+  curl -fL "$URL" -o "$DL"
+}
+write_cask_nvivo_15(){ cat > "$CASK" <<RB
+cask "$TOKEN" do
+  version "$VERSION"
+  sha256 "$SHA"
+
+  url "https://download.qsrinternational.com/Software/NVivo15forMac/#{version}/NVivo15.dmg",
+      verified: "download.qsrinternational.com/"
+  name "$NAME"
+  desc "$DESC"
+  homepage "$HOMEPAGE"
+
+  livecheck do
+    url "https://download.qsrinternational.com/Software/NVivo15forMac/NVivo15.dmg"
+    regex(%r{NVivo15forMac/(\d+(?:\.\d+)+)/}i)
+    strategy :header_match
+  end
+
+  depends_on macos: :$SYM
+
+  app "$APP_NAME"
+$(zap_for "$BUNDLE_ID")
+end
+RB
+}
+
+# ---------------------------------------------------------------------------
+# okiocam-snapshot-and-recorder — document-camera capture app.
+# WHY CUSTOM: nested dmgInZip (.dmg.zip = zip -> dmg -> app); the URL has a
+# space + double extension needing encoding. Version is in the filename.
+# Homebrew auto-unzips then mounts the inner dmg; the cask just declares `app`.
+# ---------------------------------------------------------------------------
+resolve_okiocam_snapshot_and_recorder(){
+  VERSION="1.0.17"
+  URL="https://okiolabs-downloads.s3.us-east-2.amazonaws.com/OKIOCAM+Snapshot+and+Recorder-${VERSION}.dmg.zip"
+  curl -fL "$URL" -o "$DL"
+}
+write_cask_okiocam_snapshot_and_recorder(){ cat > "$CASK" <<RB
+cask "$TOKEN" do
+  version "1.0.17"
+  sha256 "$SHA"
+
+  url "https://okiolabs-downloads.s3.us-east-2.amazonaws.com/OKIOCAM+Snapshot+and+Recorder-#{version}.dmg.zip",
+      verified: "okiolabs-downloads.s3.us-east-2.amazonaws.com/"
+  name "$NAME"
+  desc "$DESC"
+  homepage "$HOMEPAGE"
+
+  livecheck do
+    url "https://www.okiolabs.com/apps-software-download/"
+    regex(/Snapshot[+ ]and[+ ]Recorder-(\d+(?:\.\d+)+)\.dmg\.zip/i)
+    strategy :page_match
+  end
+
+  depends_on macos: :$SYM
+
+  app "$APP_NAME"
+$(zap_for "$BUNDLE_ID")
+end
+RB
+}
+
+# ---------------------------------------------------------------------------
+# origami-3 — Boxshot/Appsforlife packaging-dieline tool. Arch-split dmg
+# (ARM/Intel) whose CDN path embeds the version (origami/3/<v>/...). The
+# id.appsforlife.com redirect carries the version. WHY CUSTOM: arch-split +
+# version-in-CDN-path -> needs per-arch url + sha, not a single template.
+# ---------------------------------------------------------------------------
+resolve_origami_3(){
+  local loc base
+  loc="$(curl -sIL "https://id.appsforlife.com/download/origami/mac-arm" \
+        | awk -F': ' 'tolower($1)=="location"{print $2}' | tail -1 | tr -d '\r')"
+  VERSION="$(printf '%s' "$loc" | grep -oE 'origami/3/([0-9]+(\.[0-9]+)+)/' | grep -oE '[0-9]+(\.[0-9]+)+' | head -1)"
+  [ -n "$VERSION" ] || VERSION="3.4.5"
+  base="https://cdn4.appsforlife.com/origami/3/${VERSION}"
+  URL="$base/Origami3_ARM.dmg"; curl -fL "$URL" -o "$DL"
+  curl -fL "$base/Origami3_Intel.dmg" -o "$W/dl-x64" \
+    && SHA_X64="$(shasum -a 256 "$W/dl-x64" | awk '{print $1}')" \
+    || { echo "origami-3: intel dmg download failed" >&2; return 1; }
+}
+write_cask_origami_3(){ cat > "$CASK" <<RB
+cask "$TOKEN" do
+  version "$VERSION"
+
+  on_arm do
+    sha256 "$SHA"
+    url "https://cdn4.appsforlife.com/origami/3/#{version}/Origami3_ARM.dmg",
+        verified: "cdn4.appsforlife.com/"
+  end
+  on_intel do
+    sha256 "$SHA_X64"
+    url "https://cdn4.appsforlife.com/origami/3/#{version}/Origami3_Intel.dmg",
+        verified: "cdn4.appsforlife.com/"
+  end
+
+  name "$NAME"
+  desc "$DESC"
+  homepage "$HOMEPAGE"
+
+  livecheck do
+    url "https://id.appsforlife.com/download/origami/mac-arm"
+    regex(%r{origami/3/(\d+(?:\.\d+)+)/}i)
+    strategy :header_match
+  end
+
+  depends_on macos: :$SYM
+
+  app "$APP_NAME"
+$(zap_for "$BUNDLE_ID")
+end
+RB
+}
+
+# ---------------------------------------------------------------------------
+# poly-lens-desktop — HP Poly Lens, manages headsets/video bars/room devices.
+# WHY CUSTOM: nested pkgInDmg; the download URL embeds a non-derivable 4-part
+# build twice (.../2.3.1.1775/2.3.1.1775/LensDesktop-2.3.1.1775.dmg) only
+# obtainable from the GraphQL API; Apple-Silicon-only since 2.3.0.
+# ---------------------------------------------------------------------------
+resolve_poly_lens_desktop(){
+  local json api="https://api.silica-prod01.io.lens.poly.com/graphql"
+  json="$(curl -fsS "$api" \
+    -H 'Content-Type: application/json' \
+    --data '{"query":"{ availableProductSoftwareByPid(pid:\"lens-desktop-mac\"){ version productBuild{ archiveUrl } } }"}' 2>/dev/null)"
+  URL="$(printf '%s' "$json" | grep -oE 'https?://[^"]+\.dmg' | head -1)"
+  VERSION="$(printf '%s' "$json" | grep -oE '"version"[^,}]*' | grep -oE '[0-9]+(\.[0-9]+)+' | head -1)"
+  if [ -z "$URL" ]; then
+    VERSION="2.3.1.1775"
+    URL="https://swupdate.lens.poly.com/lens-desktop-mac/${VERSION}/${VERSION}/LensDesktop-${VERSION}.dmg"
+  fi
+  [ -n "$VERSION" ] || VERSION="2.3.1.1775"
+  curl -fL "$URL" -o "$DL"
+}
+write_cask_poly_lens_desktop(){ cat > "$CASK" <<RB
+cask "$TOKEN" do
+  version "$VERSION"
+  sha256 "$SHA"
+
+  url "https://swupdate.lens.poly.com/lens-desktop-mac/#{version}/#{version}/LensDesktop-#{version}.dmg",
+      verified: "swupdate.lens.poly.com/"
+  name "$NAME"
+  desc "$DESC"
+  homepage "$HOMEPAGE"
+
+  livecheck do
+    url "https://api.silica-prod01.io.lens.poly.com/graphql"
+    strategy :header_match
+  end
+
+  depends_on arch: :arm64
+  depends_on macos: :$SYM
+
+  pkg "LensDesktop-#{version}.pkg"
+
+  uninstall pkgutil: "$RECEIPT"
+$(zap_for "$BUNDLE_ID")
+end
+RB
+}
+
+# ---------------------------------------------------------------------------
+# postlab — Hedge PostLab, FCP/Premiere collaboration.
+# WHY CUSTOM: the download path/filename embed a non-derivable build timestamp
+# (20260429104609) and build (b254) not computable from version 26.1.3; the
+# version comes from the docs releases page (page_match livecheck).
+# ---------------------------------------------------------------------------
+resolve_postlab(){
+  VERSION="26.1.3"
+  local stamp="20260429104609" build="b254"
+  URL="https://updates.hedge.video/postlab/macos/updates/production/PostLab_${stamp}_v${VERSION}${build}/PostLab_${stamp}_v${VERSION}${build}.dmg"
+  curl -fL "$URL" -o "$DL"
+}
+write_cask_postlab(){ cat > "$CASK" <<RB
+cask "$TOKEN" do
+  version "26.1.3"
+  sha256 "$SHA"
+
+  url "https://updates.hedge.video/postlab/macos/updates/production/PostLab_20260429104609_v#{version}b254/PostLab_20260429104609_v#{version}b254.dmg",
+      verified: "updates.hedge.video/"
+  name "$NAME"
+  desc "$DESC"
+  homepage "$HOMEPAGE"
+
+  livecheck do
+    url "https://docs.hedge.video/postlab/releases"
+    regex(/PostLab[._-]v?(\d+(?:\.\d+)+)/i)
+    strategy :page_match
+  end
+
+  depends_on macos: :$SYM
+
+  app "$APP_NAME"
+$(zap_for "$BUNDLE_ID")
+end
+RB
+}
+
+# ---------------------------------------------------------------------------
+# praxislive — visual live-coding IDE. Arch-split macOS .pkg installers whose
+# release tag (v6.6.0-build1) differs from the version (6.6.0).
+# WHY CUSTOM: arch-split pkg + tag/version skew -> neither github_tag nor
+# github_arch (pkg unsupported) fits.
+# ---------------------------------------------------------------------------
+resolve_praxislive(){
+  local tag repo="codelerity/praxislive-installers"
+  tag="$(curl -sI "https://github.com/$repo/releases/latest" \
+        | awk -F'/tag/' 'tolower($0)~/^location/{print $2}' | tr -d '\r')"
+  [ -n "$tag" ] || tag="v6.6.0-build1"
+  VERSION="$(printf '%s' "$tag" | grep -oE '[0-9]+(\.[0-9]+)+' | head -1)"
+  [ -n "$VERSION" ] || VERSION="6.6.0"
+  URL="https://github.com/$repo/releases/download/$tag/PraxisLIVE-${VERSION}-arm64.pkg"
+  curl -fL "$URL" -o "$DL"
+  curl -fL "https://github.com/$repo/releases/download/$tag/PraxisLIVE-${VERSION}-x86_64.pkg" -o "$W/dl-x64" \
+    && SHA_X64="$(shasum -a 256 "$W/dl-x64" | awk '{print $1}')" \
+    || { echo "praxislive: intel pkg download failed" >&2; return 1; }
+}
+write_cask_praxislive(){ cat > "$CASK" <<RB
+cask "$TOKEN" do
+  arch arm: "arm64", intel: "x86_64"
+
+  version "$VERSION"
+  on_arm do
+    sha256 "$SHA"
+  end
+  on_intel do
+    sha256 "$SHA_X64"
+  end
+
+  url "https://github.com/codelerity/praxislive-installers/releases/download/v#{version}-build1/PraxisLIVE-#{version}-#{arch}.pkg"
+  name "$NAME"
+  desc "$DESC"
+  homepage "$HOMEPAGE"
+
+  livecheck do
+    url "https://github.com/codelerity/praxislive-installers/releases/latest"
+    regex(/PraxisLIVE[._-]v?(\d+(?:\.\d+)+)[._-].*\.pkg/i)
+    strategy :page_match
+  end
+
+  depends_on macos: :$SYM
+
+  pkg "PraxisLIVE-#{version}-#{arch}.pkg"
+
+  uninstall pkgutil: "$RECEIPT"
+$(zap_for "$BUNDLE_ID")
+end
+RB
+}
+
+# ---------------------------------------------------------------------------
+# prisma-access-browser — Palo Alto secure enterprise browser.
+# WHY CUSTOM: the pkg filename carries a per-build hash suffix (-8711916a) not
+# derivable from version; resolve via the release-manager redirect endpoint
+# (redirect=false returns JSON with nextversion + sha256 for livecheck :json).
+# ---------------------------------------------------------------------------
+resolve_prisma_access_browser(){
+  local appid="%7Bdfef2477-4f0e-454b-bc0d-03ce61074e4c%7D"
+  local api="https://release-manager.us.gs.talon-sec.com/api/v1/latest?appid=${appid}&platform=mac&architecture=universal&channel=packaged&redirect=true"
+  URL="$(curl -sIL "$api" | awk -F': ' 'tolower($1)=="location"{print $2}' | tail -1 | tr -d '\r')"
+  if [ -n "$URL" ]; then
+    VERSION="$(basename "${URL%%\?*}" | grep -oE '[0-9]+(\.[0-9]+){2,}' | head -1)"
+  fi
+  if [ -z "$URL" ] || [ -z "$VERSION" ]; then
+    VERSION="149.18.3.103"
+    URL="https://updates.talon-sec.com/releases/Prisma%20Access%20Browser/mac/packaged/universal/Prisma%20Access%20Browser-${VERSION}-8711916a.pkg"
+  fi
+  curl -fL "$URL" -o "$DL"
+}
+write_cask_prisma_access_browser(){
+  local fn; fn="$(basename "${URL%%\?*}")"
+  cat > "$CASK" <<RB
+cask "$TOKEN" do
+  version "$VERSION"
+  sha256 "$SHA"
+
+  url "https://release-manager.us.gs.talon-sec.com/api/v1/latest?appid=%7Bdfef2477-4f0e-454b-bc0d-03ce61074e4c%7D&platform=mac&architecture=universal&channel=packaged&redirect=true",
+      verified: "release-manager.us.gs.talon-sec.com/"
+  name "$NAME"
+  desc "$DESC"
+  homepage "$HOMEPAGE"
+
+  livecheck do
+    url "https://release-manager.us.gs.talon-sec.com/api/v1/latest?appid=%7Bdfef2477-4f0e-454b-bc0d-03ce61074e4c%7D&platform=mac&architecture=universal&channel=packaged&redirect=false"
+    strategy :json do |json|
+      json["nextversion"]
+    end
+  end
+
+  depends_on macos: :$SYM
+
+  pkg "$fn"
+
+  uninstall pkgutil: "$RECEIPT"
+$(zap_for "$BUNDLE_ID")
+end
+RB
+}
+
+# ---------------------------------------------------------------------------
+# setup-manager — jamf Setup Manager. github release; tag is plain v1.4.5 but
+# the build (646) appears ONLY in the asset filename, not the tag.
+# WHY CUSTOM: build-in-filename-only -> github_tag would hardcode the build and
+# github_compound expects a v-<ver>-b-<build> tag. version "1.4.5,646".
+# ---------------------------------------------------------------------------
+resolve_setup_manager(){
+  local tag repo="jamf/Setup-Manager" asset ver build
+  tag="$(curl -sI "https://github.com/$repo/releases/latest" \
+        | awk -F'/tag/' 'tolower($0)~/^location/{print $2}' | tr -d '\r')"
+  [ -n "$tag" ] || tag="v1.4.5"
+  ver="$(printf '%s' "$tag" | grep -oE '[0-9]+(\.[0-9]+)+' | head -1)"
+  asset="$(curl -fsSL "https://api.github.com/repos/$repo/releases/latest" 2>/dev/null \
+        | grep -oE 'Setup\.Manager-[0-9.]+-[0-9]+\.pkg' | head -1)"
+  build="$(printf '%s' "$asset" | sed -E 's/.*-([0-9]+)\.pkg/\1/')"
+  [ -n "$build" ] || build="646"
+  VERSION="${ver},${build}"
+  URL="https://github.com/$repo/releases/download/$tag/Setup.Manager-${ver}-${build}.pkg"
+  curl -fL "$URL" -o "$DL"
+}
+write_cask_setup_manager(){ cat > "$CASK" <<RB
+cask "$TOKEN" do
+  version "$VERSION"
+  sha256 "$SHA"
+
+  url "https://github.com/jamf/Setup-Manager/releases/download/v#{version.csv.first}/Setup.Manager-#{version.csv.first}-#{version.csv.second}.pkg"
+  name "$NAME"
+  desc "$DESC"
+  homepage "$HOMEPAGE"
+
+  livecheck do
+    url :url
+    regex(/Setup\.Manager-(\d+(?:\.\d+)+)-(\d+)\.pkg/i)
+    strategy :github_latest do |json, regex|
+      json["assets"].map do |asset|
+        match = asset["name"]&.match(regex)
+        next if match.blank?
+
+        "#{match[1]},#{match[2]}"
+      end
+    end
+  end
+
+  depends_on macos: :$SYM
+
+  pkg "Setup.Manager-#{version.csv.first}-#{version.csv.second}.pkg"
+
+  uninstall pkgutil: "$RECEIPT"
+$(zap_for "$BUNDLE_ID")
+end
+RB
+}
+
+# ---------------------------------------------------------------------------
+# sforzando — Plogue free SFZ player. Versioned dmg on s3 verified, but the
+# whole plogue.com site returns 410 Gone to brew's UA (200 only to a full
+# browser UA) -> no reachable homepage/version page for audit/livecheck.
+# WHY CUSTOM: download verified but no clean livecheck page; header_match off
+# the static s3 filename.
+# ---------------------------------------------------------------------------
+resolve_sforzando(){
+  VERSION="1.982"
+  URL="https://s3.amazonaws.com/sforzando/MAC_sforzando_v${VERSION}.dmg"
+  curl -fL "$URL" -o "$DL"
+}
+write_cask_sforzando(){ cat > "$CASK" <<RB
+cask "$TOKEN" do
+  version "1.982"
+  sha256 "$SHA"
+
+  url "https://s3.amazonaws.com/sforzando/MAC_sforzando_v#{version}.dmg",
+      verified: "s3.amazonaws.com/sforzando/"
+  name "$NAME"
+  desc "$DESC"
+  homepage "$HOMEPAGE"
+
+  livecheck do
+    url "https://s3.amazonaws.com/sforzando/MAC_sforzando_v#{version}.dmg"
+    strategy :header_match
+  end
+
+  depends_on macos: :$SYM
+
+  app "$APP_NAME"
+$(zap_for "$BUNDLE_ID")
+end
+RB
+}
+
+# ---------------------------------------------------------------------------
+# shellhistory — loshadki.app shell-history viewer. Nested appInZip; the URL
+# filename carries only "3.1" (not the full 3.1.0) and there is no clean
+# version-history page to livecheck. WHY CUSTOM: truncated version in URL +
+# no livecheck source -> version "3.1.0" hardcoded, literal url with 3.1.
+# ---------------------------------------------------------------------------
+resolve_shellhistory(){
+  VERSION="3.1.0"
+  URL="https://loshadki.app/shellhistory/releases/ShellHistory-3.1.app.zip"
+  curl -fL "$URL" -o "$DL"
+}
+write_cask_shellhistory(){ cat > "$CASK" <<RB
+cask "$TOKEN" do
+  version "3.1.0"
+  sha256 "$SHA"
+
+  url "https://loshadki.app/shellhistory/releases/ShellHistory-#{version.major_minor}.app.zip"
+  name "$NAME"
+  desc "$DESC"
+  homepage "$HOMEPAGE"
+
+  livecheck do
+    url "https://loshadki.app/shellhistory/releases/ShellHistory-#{version.major_minor}.app.zip"
+    strategy :header_match
+  end
+
+  depends_on macos: :$SYM
+
+  app "$APP_NAME"
+$(zap_for "$BUNDLE_ID")
+end
+RB
+}
+
+# ---------------------------------------------------------------------------
+# slido-for-powerpoint — Slido desktop poller. The dmg filename carries only
+# the build (r3325), not the 1.12.0 marketing version, so {v} can't template
+# the URL. WHY CUSTOM: version "1.12.0" + literal build url + :sparkle
+# livecheck on the appcast (shortVersionString).
+# ---------------------------------------------------------------------------
+resolve_slido_for_powerpoint(){
+  local loc
+  loc="$(curl -sIL "https://www.slido.com/api/download?application=powerpoint-mac" \
+        | awk -F': ' 'tolower($1)=="location"{print $2}' | tail -1 | tr -d '\r')"
+  [ -n "$loc" ] || loc="https://download.slido.com/slido-for-mac/updates/SlidoForMac_r3325.dmg"
+  VERSION="$(curl -fsSL "https://download.slido.com/slido-for-mac/updates/appcast.xml" 2>/dev/null \
+        | grep -oE 'sparkle:shortVersionString="[0-9.]+"' | grep -oE '[0-9]+(\.[0-9]+)+' | head -1)"
+  [ -n "$VERSION" ] || VERSION="1.12.0"
+  URL="$loc"; curl -fL "$URL" -o "$DL"
+}
+write_cask_slido_for_powerpoint(){ cat > "$CASK" <<RB
+cask "$TOKEN" do
+  version "1.12.0"
+  sha256 "$SHA"
+
+  url "https://download.slido.com/slido-for-mac/updates/SlidoForMac_r3325.dmg",
+      verified: "download.slido.com/"
+  name "$NAME"
+  desc "$DESC"
+  homepage "$HOMEPAGE"
+
+  livecheck do
+    url "https://download.slido.com/slido-for-mac/updates/appcast.xml"
+    strategy :sparkle
+  end
+
+  depends_on macos: :$SYM
+
+  app "$APP_NAME"
+$(zap_for "$BUNDLE_ID")
+end
+RB
+}
+
+# ---------------------------------------------------------------------------
+# smart-mirror-app — SMART Mirror screen-mirroring. The pkg URL embeds a
+# release-line path segment (4_49) AND a 4-part app version in the filename
+# that don't share one interpolatable token. WHY CUSTOM: hand-authored url +
+# page_match livecheck on the IQ3 downloads page.
+# ---------------------------------------------------------------------------
+resolve_smart_mirror_app(){
+  VERSION="2.49.1.50573.101"
+  URL="https://downloads.smarttech.com/software/smartmirror/4_49/mac/SMART_Mirror_App_${VERSION}.pkg"
+  curl -fL "$URL" -o "$DL"
+}
+write_cask_smart_mirror_app(){ cat > "$CASK" <<RB
+cask "$TOKEN" do
+  version "2.49.1.50573.101"
+  sha256 "$SHA"
+
+  url "https://downloads.smarttech.com/software/smartmirror/4_49/mac/SMART_Mirror_App_#{version}.pkg",
+      verified: "downloads.smarttech.com/"
+  name "$NAME"
+  desc "$DESC"
+  homepage "$HOMEPAGE"
+
+  livecheck do
+    url "https://support.smarttech.com/docs/software/smart-mirror/en/downloads/mirror-apps/macos-iq3.cshtml"
+    regex(/SMART[._ ]Mirror[._ ]App[._ ](\d+(?:\.\d+)+)\.pkg/i)
+    strategy :page_match
+  end
+
+  depends_on macos: :$SYM
+
+  pkg "SMART_Mirror_App_#{version}.pkg"
+
+  uninstall pkgutil: "$RECEIPT"
+$(zap_for "$BUNDLE_ID")
+end
+RB
+}
+
+# ---------------------------------------------------------------------------
+# snapgene — molecular-biology tool. A stable redirect resolves a dmg whose CDN
+# path nests version components: SnapGene/<major>.x/<major>.<minor>/<full>/
+# snapgene_<full>_mac.dmg. WHY CUSTOM: needs string transforms on the version
+# (major / major_minor) not expressible with a single {v} token.
+# ---------------------------------------------------------------------------
+resolve_snapgene(){
+  local loc
+  loc="$(curl -sIL "https://www.snapgene.com/local/targets/download.php?os=mac" \
+        | awk -F': ' 'tolower($1)=="location"{print $2}' | tail -1 | tr -d '\r')"
+  VERSION="$(basename "${loc%%\?*}" | grep -oE '[0-9]+(\.[0-9]+)+' | head -1)"
+  [ -n "$VERSION" ] || VERSION="8.2.2"
+  local maj min; maj="${VERSION%%.*}"; min="${VERSION#*.}"; min="${min%%.*}"
+  URL="https://cdn.snapgene.com/downloads/SnapGene/${maj}.x/${maj}.${min}/${VERSION}/snapgene_${VERSION}_mac.dmg"
+  curl -fL "$URL" -o "$DL"
+}
+write_cask_snapgene(){ cat > "$CASK" <<RB
+cask "$TOKEN" do
+  version "$VERSION"
+  sha256 "$SHA"
+
+  url "https://cdn.snapgene.com/downloads/SnapGene/#{version.major}.x/#{version.major_minor}/#{version}/snapgene_#{version}_mac.dmg",
+      verified: "cdn.snapgene.com/"
+  name "$NAME"
+  desc "$DESC"
+  homepage "$HOMEPAGE"
+
+  livecheck do
+    url "https://www.snapgene.com/local/targets/download.php?os=mac"
+    regex(/snapgene_(\d+(?:\.\d+)+)_mac\.dmg/i)
+    strategy :header_match
+  end
+
+  depends_on macos: :$SYM
+
+  app "$APP_NAME"
+$(zap_for "$BUNDLE_ID")
+end
+RB
+}
+
+
+#!/usr/bin/env bash
+###############################################################################
+# funcs-cc-chunk5.sh — CUSTOM resolve_/write_cask_ pairs for chunk5 apps that
+# do not fit any built-in cask-master.sh SOURCE. Append-sourced by the harness
+# (each app's source=custom). Token '-' -> '_' for the function suffix (<tfn>).
+#
+# Harness-set vars available inside these functions:
+#   $TOKEN $NAME $DESC $HOMEPAGE $ARTIFACT $CASK $DL $W
+#   (after resolve+sha+inspect): $VERSION $SHA $SHA_X64 $APP_NAME $RECEIPT
+#   $BUNDLE_ID $SYM
+# Helpers available: zap_for, die, curl.
+#
+# Facts come from progress/sourced/in-cc-chunk5.tsv notes (verified live).
+# Inner pkg/app names inside dmg/zip containers are resolved on-Mac during the
+# DRYRUN install; the literals below are best-known and may need a one-line
+# tweak after the first DRYRUN (see per-app comments).
+###############################################################################
+
+# ---------------------------------------------------------------------------
+# soundfield-by-rode — pkgInZip; opaque CMS ids in URL path won't survive {v}.
+# zip contains "SoundField By RØDE.pkg" (no .app). Download host != homepage.
+# ---------------------------------------------------------------------------
+resolve_soundfield_by_rode(){
+  VERSION="1.0.2"
+  URL="https://edge.rode.com/zip/page/1890/modules/5329/SoundFieldByRODE_MAC_ver${VERSION}.pkg.zip"
+  curl -fL "$URL" -o "$DL"
+}
+write_cask_soundfield_by_rode(){ cat > "$CASK" <<RB
+cask "$TOKEN" do
+  version "$VERSION"
+  sha256 "$SHA"
+
+  url "https://edge.rode.com/zip/page/1890/modules/5329/SoundFieldByRODE_MAC_ver#{version}.pkg.zip",
+      verified: "edge.rode.com/"
+  name "$NAME"
+  desc "$DESC"
+  homepage "$HOMEPAGE"
+
+  livecheck do
+    url "https://rode.com/en-us/software/soundfield-by-rode"
+    regex(/SoundFieldByRODE_MAC_ver(\d+(?:\.\d+)+)\.pkg\.zip/i)
+    strategy :page_match
+  end
+
+  depends_on macos: :$SYM
+
+  pkg "SoundField By RØDE.pkg"
+
+  uninstall pkgutil: "$RECEIPT"
+$(zap_for "$BUNDLE_ID")
+end
+RB
+}
+
+# ---------------------------------------------------------------------------
+# spyder-x-elite — pkgInZip; version only via redirect (sxe100). Inner pkg name
+# resolved on-Mac (best-known: "Spyder X Elite.pkg"). Download host != homepage.
+# ---------------------------------------------------------------------------
+resolve_spyder_x_elite(){
+  VERSION="6.3"
+  URL="https://cdn.datacolor.com/spyder/SpyderXElite_${VERSION}.pkg.zip"
+  curl -fL "$URL" -o "$DL"
+}
+write_cask_spyder_x_elite(){ cat > "$CASK" <<RB
+cask "$TOKEN" do
+  version "$VERSION"
+  sha256 "$SHA"
+
+  url "https://cdn.datacolor.com/spyder/SpyderXElite_#{version}.pkg.zip",
+      verified: "cdn.datacolor.com/"
+  name "$NAME"
+  desc "$DESC"
+  homepage "$HOMEPAGE"
+
+  livecheck do
+    url "https://goto.datacolor.com/download/mac/sxe100"
+    regex(/SpyderXElite_(\d+(?:\.\d+)+)\.pkg\.zip/i)
+    strategy :header_match
+  end
+
+  depends_on macos: :$SYM
+
+  pkg "Spyder X Elite.pkg"
+
+  uninstall pkgutil: "$RECEIPT"
+$(zap_for "$BUNDLE_ID")
+end
+RB
+}
+
+# ---------------------------------------------------------------------------
+# spyder-x-pro — pkgInZip; same shape as elite (sxp100). Inner pkg resolved
+# on-Mac (best-known: "Spyder X Pro.pkg"). Download host != homepage.
+# ---------------------------------------------------------------------------
+resolve_spyder_x_pro(){
+  VERSION="6.3"
+  URL="https://cdn.datacolor.com/spyder/SpyderXPro_${VERSION}.pkg.zip"
+  curl -fL "$URL" -o "$DL"
+}
+write_cask_spyder_x_pro(){ cat > "$CASK" <<RB
+cask "$TOKEN" do
+  version "$VERSION"
+  sha256 "$SHA"
+
+  url "https://cdn.datacolor.com/spyder/SpyderXPro_#{version}.pkg.zip",
+      verified: "cdn.datacolor.com/"
+  name "$NAME"
+  desc "$DESC"
+  homepage "$HOMEPAGE"
+
+  livecheck do
+    url "https://goto.datacolor.com/download/mac/sxp100"
+    regex(/SpyderXPro_(\d+(?:\.\d+)+)\.pkg\.zip/i)
+    strategy :header_match
+  end
+
+  depends_on macos: :$SYM
+
+  pkg "Spyder X Pro.pkg"
+
+  uninstall pkgutil: "$RECEIPT"
+$(zap_for "$BUNDLE_ID")
+end
+RB
+}
+
+# ---------------------------------------------------------------------------
+# starface — dmg filename embeds build (1789) + git short-hash (d191cf7) not
+# derivable from version 10.0.0, so {v} can't build the URL. page_match on the
+# KB download page. starface.com 401s automated clients; homepage is the KB.
+# ---------------------------------------------------------------------------
+resolve_starface(){
+  VERSION="10.0.0"
+  URL="https://www.starface-cdn.de/starface/clients/mac/STARFACE_10.0.0_1789_d191cf7.dmg"
+  curl -fL "$URL" -o "$DL"
+}
+write_cask_starface(){ cat > "$CASK" <<RB
+cask "$TOKEN" do
+  version "$VERSION"
+  sha256 "$SHA"
+
+  url "https://www.starface-cdn.de/starface/clients/mac/STARFACE_10.0.0_1789_d191cf7.dmg",
+      verified: "starface-cdn.de/"
+  name "$NAME"
+  desc "$DESC"
+  homepage "$HOMEPAGE"
+
+  livecheck do
+    url "https://knowledge.starface.de/pages/viewpage.action?pageId=46564694"
+    regex(/STARFACE[._-](\d+(?:\.\d+)+)[._-]/i)
+    strategy :page_match
+  end
+
+  depends_on macos: :$SYM
+
+  app "$APP_NAME"
+$(zap_for "$BUNDLE_ID")
+end
+RB
+}
+
+# ---------------------------------------------------------------------------
+# strongdm — universal dmg via stable alias that 307s to a URL with a per-build
+# hash path segment. Alias rejects HEAD (405), so the built-in direct_header
+# resolver (HEAD-only) can't read it -> custom resolve via GET. livecheck
+# :header_match on the alias (also GET-based via brew). Hash baked into the url
+# (maintainer bumps it; livecheck tracks the version).
+# ---------------------------------------------------------------------------
+resolve_strongdm(){
+  local alias="https://app.strongdm.com/downloads/client/darwin" real
+  real="$(curl -sL -o /dev/null -w '%{url_effective}' "$alias")"
+  [ -n "$real" ] || die "strongdm: could not resolve alias"
+  VERSION="$(basename "$real" | grep -oE '[0-9]+(\.[0-9]+)+' | head -1)"
+  [ -n "$VERSION" ] || die "strongdm: could not parse version from $real"
+  URL="$real"
+  curl -fL "$URL" -o "$DL"
+}
+write_cask_strongdm(){
+  local urlt host
+  urlt="$(printf '%s' "$URL" | sed "s/${VERSION//./\\.}/#{version}/g")"
+  host="$(printf '%s' "$URL" | sed -E 's#https?://([^/]+)/.*#\1#')"
+  cat > "$CASK" <<RB
+cask "$TOKEN" do
+  version "$VERSION"
+  sha256 "$SHA"
+
+  url "$urlt",
+      verified: "$host/"
+  name "$NAME"
+  desc "$DESC"
+  homepage "$HOMEPAGE"
+
+  livecheck do
+    url "https://app.strongdm.com/downloads/client/darwin"
+    regex(/SDM-(\d+(?:\.\d+)+)\.dmg/i)
+    strategy :header_match
+  end
+
+  depends_on macos: :$SYM
+
+  app "$APP_NAME"
+$(zap_for "$BUNDLE_ID")
+end
+RB
+}
+
+# ---------------------------------------------------------------------------
+# studio-viewer — dmg; version uses dots (26.03) but filename uses underscores
+# (Studio_Viewer_26_03.dmg) -> needs version.tr(".","_"). header_match on the
+# Latest/Mac redirect. Download host != homepage.
+# ---------------------------------------------------------------------------
+resolve_studio_viewer(){
+  VERSION="26.03"
+  URL="https://cdn-my.esko.com/downloads/Public/Free/Latest/Studio_Viewer_${VERSION//./_}.dmg"
+  curl -fL "$URL" -o "$DL"
+}
+write_cask_studio_viewer(){ cat > "$CASK" <<RB
+cask "$TOKEN" do
+  version "$VERSION"
+  sha256 "$SHA"
+
+  url "https://cdn-my.esko.com/downloads/Public/Free/Latest/Studio_Viewer_#{version.tr(".", "_")}.dmg",
+      verified: "cdn-my.esko.com/"
+  name "$NAME"
+  desc "$DESC"
+  homepage "$HOMEPAGE"
+
+  livecheck do
+    url "https://mysoftware.esko.com/public/downloads/Free/StudioViewer/Latest/Mac"
+    regex(/Studio_Viewer_(\d+(?:_\d+)+)\.dmg/i)
+    strategy :header_match do |headers, regex|
+      m = headers["content-disposition"]&.match(regex) || headers["location"]&.match(regex)
+      next if m.blank?
+
+      m[1].tr("_", ".")
+    end
+  end
+
+  depends_on macos: :$SYM
+
+  app "$APP_NAME"
+$(zap_for "$BUNDLE_ID")
+end
+RB
+}
+
+# ---------------------------------------------------------------------------
+# synology-active-backup-for-business-agent — pkgInDmg; inner pkg resolved
+# on-Mac (best-known: "Synology Active Backup for Business Agent.pkg"). Full
+# version "3.2.0-5053" used in both path and filename (single {v} ok), but the
+# direct writer can't reference the inner pkg -> custom. page_match on archive.
+# x86_64 build dir. Download host != homepage.
+# ---------------------------------------------------------------------------
+resolve_synology_active_backup_for_business_agent(){
+  VERSION="3.2.0-5053"
+  URL="https://global.download.synology.com/download/Utility/ActiveBackupBusinessAgent/${VERSION}/Mac/x86_64/Synology%20Active%20Backup%20for%20Business%20Agent-${VERSION}.dmg"
+  curl -fL "$URL" -o "$DL"
+}
+write_cask_synology_active_backup_for_business_agent(){ cat > "$CASK" <<RB
+cask "$TOKEN" do
+  version "$VERSION"
+  sha256 "$SHA"
+
+  url "https://global.download.synology.com/download/Utility/ActiveBackupBusinessAgent/#{version}/Mac/x86_64/Synology%20Active%20Backup%20for%20Business%20Agent-#{version}.dmg",
+      verified: "global.download.synology.com/"
+  name "$NAME"
+  desc "$DESC"
+  homepage "$HOMEPAGE"
+
+  livecheck do
+    url "https://archive.synology.com/download/Utility/ActiveBackupBusinessAgent"
+    regex(/>(\d+(?:[.-]\d+)+)</i)
+    strategy :page_match
+  end
+
+  depends_on macos: :$SYM
+
+  pkg "Synology Active Backup for Business Agent.pkg"
+
+  uninstall pkgutil: "$RECEIPT"
+$(zap_for "$BUNDLE_ID")
+end
+RB
+}
+
+# ---------------------------------------------------------------------------
+# synology-drive-client — pkgInDmg; version 4.0.3-17892 -> version.csv
+# "4.0.3,17892": URL path uses full "4.0.3-17892" but FILENAME uses only build
+# "17892" (synology-drive-client-17892.dmg) -> single {v} can't map both.
+# Inner pkg resolved on-Mac (best-known: "Install Synology Drive Client.pkg").
+# page_match on archive. Download host != homepage.
+# ---------------------------------------------------------------------------
+resolve_synology_drive_client(){
+  VERSION="4.0.3,17892"
+  local full="4.0.3-17892" build="17892"
+  URL="https://global.download.synology.com/download/Utility/SynologyDriveClient/${full}/Mac/Installer/synology-drive-client-${build}.dmg"
+  curl -fL "$URL" -o "$DL"
+}
+write_cask_synology_drive_client(){ cat > "$CASK" <<RB
+cask "$TOKEN" do
+  version "$VERSION"
+  sha256 "$SHA"
+
+  url "https://global.download.synology.com/download/Utility/SynologyDriveClient/#{version.csv.first}-#{version.csv.second}/Mac/Installer/synology-drive-client-#{version.csv.second}.dmg",
+      verified: "global.download.synology.com/"
+  name "$NAME"
+  desc "$DESC"
+  homepage "$HOMEPAGE"
+
+  livecheck do
+    url "https://archive.synology.com/download/Utility/SynologyDriveClient"
+    regex(%r{SynologyDriveClient[/-](\d+(?:\.\d+)+)-(\d+)}i)
+    strategy :page_match do |page, regex|
+      page.scan(regex).map { |m| "#{m[0]},#{m[1]}" }
+    end
+  end
+
+  depends_on macos: :$SYM
+
+  pkg "Install Synology Drive Client.pkg"
+
+  uninstall pkgutil: "$RECEIPT"
+$(zap_for "$BUNDLE_ID")
+end
+RB
+}
+
+# ---------------------------------------------------------------------------
+# universal-type-client — pkgInZip; version 7.0.13 but URL uses DASH form
+# UTC-7-0-13-M.zip -> needs version.tr(".","-"). Inner pkg resolved on-Mac
+# (best-known: "Universal Type Client.pkg"). page_match on the support page.
+# Download host (bin.extensis.com) != homepage.
+# ---------------------------------------------------------------------------
+resolve_universal_type_client(){
+  VERSION="7.0.13"
+  URL="https://bin.extensis.com/UTC-${VERSION//./-}-M.zip"
+  curl -fL "$URL" -o "$DL"
+}
+write_cask_universal_type_client(){ cat > "$CASK" <<RB
+cask "$TOKEN" do
+  version "$VERSION"
+  sha256 "$SHA"
+
+  url "https://bin.extensis.com/UTC-#{version.tr(".", "-")}-M.zip",
+      verified: "bin.extensis.com/"
+  name "$NAME"
+  desc "$DESC"
+  homepage "$HOMEPAGE"
+
+  livecheck do
+    url "https://www.extensis.com/support/universal-type-server-7/"
+    regex(/UTC-(\d+(?:-\d+)+)-M\.zip/i)
+    strategy :page_match do |page, regex|
+      page.scan(regex).map { |m| m[0].tr("-", ".") }
+    end
+  end
+
+  depends_on macos: :$SYM
+
+  pkg "Universal Type Client.pkg"
+
+  uninstall pkgutil: "$RECEIPT"
+$(zap_for "$BUNDLE_ID")
+end
+RB
+}
+
+# ---------------------------------------------------------------------------
+# usher — dmg; filename is usher<version.no_dots>.dmg (2.4.1 -> usher241.dmg)
+# -> needs version.no_dots. Sparkle appcast for livecheck. Download host
+# (manytricks.com) == homepage host -> no verified. min macOS 10.13.
+# ---------------------------------------------------------------------------
+resolve_usher(){
+  VERSION="2.4.1"
+  URL="https://manytricks.com/download/_do_not_hotlink_/usher${VERSION//./}.dmg"
+  curl -fL "$URL" -o "$DL"
+}
+write_cask_usher(){ cat > "$CASK" <<RB
+cask "$TOKEN" do
+  version "$VERSION"
+  sha256 "$SHA"
+
+  url "https://manytricks.com/download/_do_not_hotlink_/usher#{version.no_dots}.dmg"
+  name "$NAME"
+  desc "$DESC"
+  homepage "$HOMEPAGE"
+
+  livecheck do
+    url "https://manytricks.com/usher/appcast.xml"
+    strategy :sparkle, &:short_version
+  end
+
+  depends_on macos: :$SYM
+
+  app "$APP_NAME"
+$(zap_for "$BUNDLE_ID")
+end
+RB
+}
+
+# ---------------------------------------------------------------------------
+# windsurf — arch-split dmg via JSON update API; real dmg URL embeds a
+# non-derivable commit-hash path segment -> custom + arch-split. Token windsurf
+# (app rebranded "Devin"). livecheck :json field windsurfVersion. The JSON also
+# carries sha256hash, but the harness recomputes from the downloads.
+# ---------------------------------------------------------------------------
+resolve_windsurf(){
+  local api_arm="https://windsurf-stable.codeium.com/api/update/darwin-arm64-dmg/stable/latest"
+  local api_x64="https://windsurf-stable.codeium.com/api/update/darwin-x64-dmg/stable/latest"
+  local jarm jx64 uarm ux64
+  jarm="$(curl -fsSL "$api_arm")"; jx64="$(curl -fsSL "$api_x64")"
+  VERSION="$(printf '%s' "$jarm" | grep -oE '"windsurfVersion":"[^"]+"' | head -1 | sed -E 's/.*:"([^"]+)"/\1/')"
+  [ -n "$VERSION" ] || die "windsurf: could not read windsurfVersion"
+  uarm="$(printf '%s' "$jarm" | grep -oE '"url":"[^"]+"' | head -1 | sed -E 's/.*:"([^"]+)"/\1/')"
+  ux64="$(printf '%s' "$jx64" | grep -oE '"url":"[^"]+"' | head -1 | sed -E 's/.*:"([^"]+)"/\1/')"
+  [ -n "$uarm" ] && [ -n "$ux64" ] || die "windsurf: could not read dmg urls"
+  URL="$uarm"; curl -fL "$URL" -o "$DL"
+  curl -fL "$ux64" -o "$W/dl-x64" && SHA_X64="$(shasum -a 256 "$W/dl-x64" | awk '{print $1}')" || die "windsurf: x64 dmg download failed"
+  WS_ARM="$uarm"; WS_X64="$ux64"
+}
+write_cask_windsurf(){
+  local arm_t x64_t
+  arm_t="$(printf '%s' "$WS_ARM" | sed "s/${VERSION//./\\.}/#{version}/g")"
+  x64_t="$(printf '%s' "$WS_X64" | sed "s/${VERSION//./\\.}/#{version}/g")"
+  cat > "$CASK" <<RB
+cask "$TOKEN" do
+  version "$VERSION"
+
+  on_arm do
+    sha256 "$SHA"
+    url "$arm_t",
+        verified: "windsurf-stable.codeiumdata.com/"
+  end
+  on_intel do
+    sha256 "$SHA_X64"
+    url "$x64_t",
+        verified: "windsurf-stable.codeiumdata.com/"
+  end
+
+  name "$NAME"
+  desc "$DESC"
+  homepage "$HOMEPAGE"
+
+  livecheck do
+    url "https://windsurf-stable.codeium.com/api/update/darwin-arm64-dmg/stable/latest"
+    strategy :json do |json|
+      json["windsurfVersion"]
+    end
+  end
+
+  auto_updates true
+  depends_on macos: :$SYM
+
+  app "$APP_NAME"
+$(zap_for "$BUNDLE_ID")
+end
+RB
+}
+
+# ---------------------------------------------------------------------------
+# wonderpen — universal dmg; 4-part version (3.1.3.8431) plus a minor-version
+# subdir (/3.1/) in the path neither of which fits a single {v} template.
+# Versioned URL via tominlab CDN proxy (302 -> file.tominlab.com).
+# Subdir = first two version components. page_match on the downloads page.
+# ---------------------------------------------------------------------------
+resolve_wonderpen(){
+  VERSION="3.1.3.8431"
+  local minor="3.1"
+  URL="https://www.tominlab.com/to/get-file/cdn?file=WonderPen/desktop/${minor}/WonderPen-v${VERSION}-mac-universal.dmg"
+  curl -fL "$URL" -o "$DL"
+}
+write_cask_wonderpen(){ cat > "$CASK" <<RB
+cask "$TOKEN" do
+  version "$VERSION"
+  sha256 "$SHA"
+
+  url "https://www.tominlab.com/to/get-file/cdn?file=WonderPen/desktop/#{version.major_minor}/WonderPen-v#{version}-mac-universal.dmg",
+      verified: "tominlab.com/"
+  name "$NAME"
+  desc "$DESC"
+  homepage "$HOMEPAGE"
+
+  livecheck do
+    url "https://www.tominlab.com/en/wonderpen/downloads/all"
+    regex(/WonderPen-v(\d+(?:\.\d+)+)-mac-universal\.dmg/i)
+    strategy :page_match
+  end
+
+  depends_on macos: :$SYM
+
+  app "$APP_NAME"
+$(zap_for "$BUNDLE_ID")
+end
+RB
+}
+
+# ---------------------------------------------------------------------------
+# workbrew — plain pkg; only public source is the stable UNVERSIONED redirect
+# (console.workbrew.com/downloads/macos 303 -> signed GitHub asset that
+# EXPIRES). No public versioned URL -> url is the stable unversioned redirect;
+# header_match on it for the version. Receipt resolved on-Mac.
+# ---------------------------------------------------------------------------
+resolve_workbrew(){
+  local short="https://console.workbrew.com/downloads/macos" cd
+  cd="$(curl -sIL "$short" | grep -i '^content-disposition' | grep -oE '[0-9]+(\.[0-9]+)+' | head -1)"
+  [ -n "$cd" ] || cd="$(curl -sL -o /dev/null -w '%{url_effective}' "$short" | grep -oE 'Workbrew-[0-9]+(\.[0-9]+)+' | grep -oE '[0-9]+(\.[0-9]+)+' | head -1)"
+  VERSION="$cd"
+  [ -n "$VERSION" ] || die "workbrew: could not parse version"
+  URL="$short"
+  curl -fL "$URL" -o "$DL"
+}
+write_cask_workbrew(){ cat > "$CASK" <<RB
+cask "$TOKEN" do
+  version "$VERSION"
+  sha256 "$SHA"
+
+  url "https://console.workbrew.com/downloads/macos"
+  name "$NAME"
+  desc "$DESC"
+  homepage "$HOMEPAGE"
+
+  livecheck do
+    url "https://console.workbrew.com/downloads/macos"
+    regex(/Workbrew-(\d+(?:\.\d+)+)\.pkg/i)
+    strategy :header_match
+  end
+
+  depends_on macos: :$SYM
+
+  pkg "Workbrew-#{version}.pkg"
+
+  uninstall pkgutil: "$RECEIPT"
+$(zap_for "$BUNDLE_ID")
+end
+RB
+}
+
+# ---------------------------------------------------------------------------
+# xmlmind — dmg; filename encodes version with underscores (xxe-perso-11_1_0)
+# -> needs version.tr(".","_"). XMLmind XML Editor Personal Edition. Bundles a
+# private OpenJDK. page_match on the download page. Download host == homepage.
+# ---------------------------------------------------------------------------
+resolve_xmlmind(){
+  VERSION="11.1.0"
+  URL="https://www.xmlmind.com/xmleditor/_download/xxe-perso-${VERSION//./_}.dmg"
+  curl -fL "$URL" -o "$DL"
+}
+write_cask_xmlmind(){ cat > "$CASK" <<RB
+cask "$TOKEN" do
+  version "$VERSION"
+  sha256 "$SHA"
+
+  url "https://www.xmlmind.com/xmleditor/_download/xxe-perso-#{version.tr(".", "_")}.dmg"
+  name "$NAME"
+  desc "$DESC"
+  homepage "$HOMEPAGE"
+
+  livecheck do
+    url "https://www.xmlmind.com/xmleditor/download.shtml"
+    regex(/xxe-perso-(\d+(?:_\d+)+)\.dmg/i)
+    strategy :page_match do |page, regex|
+      page.scan(regex).map { |m| m[0].tr("_", ".") }
+    end
+  end
+
+  depends_on macos: :$SYM
+
+  app "$APP_NAME"
+$(zap_for "$BUNDLE_ID")
+end
+RB
+}
+
+# ---------------------------------------------------------------------------
+# zaxconvert — combined PC+MAC zip whose Mac app is itself a NESTED zip
+# ("ZaxConvert MAC v6.68.zip") under a versioned top dir; WordPress date-path
+# URL (/2025/08/) that doesn't derive from version; current build is BETA.
+# nested_container unpacks the inner zip; app resolved on-Mac. No stable
+# livecheck (date path + beta) -> page_match on the downloads page.
+# ---------------------------------------------------------------------------
+resolve_zaxconvert(){
+  VERSION="6.68"
+  URL="https://zaxcom.com/wp-content/uploads/2025/08/Zaxconvert_${VERSION}_PC_MAC-BETA.zip"
+  curl -fL "$URL" -o "$DL"
+}
+write_cask_zaxconvert(){ cat > "$CASK" <<RB
+cask "$TOKEN" do
+  version "$VERSION"
+  sha256 "$SHA"
+
+  url "https://zaxcom.com/wp-content/uploads/2025/08/Zaxconvert_#{version}_PC_MAC-BETA.zip",
+      verified: "zaxcom.com/"
+  name "$NAME"
+  desc "$DESC"
+  homepage "$HOMEPAGE"
+
+  livecheck do
+    url "https://zaxcom.com/support/downloads/"
+    regex(/Zaxconvert[._-](\d+(?:\.\d+)+)[._-]PC_MAC/i)
+    strategy :page_match
+  end
+
+  depends_on macos: :$SYM
+
+  nested_container "Zaxconvert_#{version}_PC_MAC-BETA/ZaxConvert MAC v#{version}.zip"
+
+  app "$APP_NAME"
+$(zap_for "$BUNDLE_ID")
+end
+RB
+}
+
+
 run_one(){
   set -uo pipefail
   STAGE=init; STATUS=incomplete
