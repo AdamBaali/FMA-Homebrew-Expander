@@ -13,18 +13,21 @@ script and the `homebrew-cask-author` skill.
 
 ## Status
 
-| | |
+**Progress: 192 / 533 sourced · 43 authored into the cask registry** — _updated as sourcing continues._
+
+| Bucket | Count |
 |---|---|
 | Total apps | **533** |
-| Sourced | **192** (Installomator 108, AutoPkg 67, web-research 17) |
-| Unsourced (to do) | **341** |
-| Registry-ready (eligible & high/med confidence) | 118 |
-| Review / ineligible | 6 |
-| In `cask-master.sh` REGISTRY | 0 _(Phase 2 pending)_ |
-| DRYRUN-clean | 0 _(requires macOS)_ |
+| **Sourced** (real download resolved) | **192** |
+| &nbsp;&nbsp;↳ authored into `cask-master.sh` REGISTRY | **43** |
+| &nbsp;&nbsp;↳ custom resolver to-do (verified; needs `resolve_`/`write_cask_`) | 36 |
+| &nbsp;&nbsp;↳ review / ineligible (gated, duplicate, unversioned) | 45 |
+| &nbsp;&nbsp;↳ AutoPkg rows pending installer-type classification | 68 |
+| **Unsourced** (Phase 1 backlog — sourcing in progress) | **341** |
+| DRYRUN-clean | 0 _(requires macOS — runs on the maintainer's Mac)_ |
 
 Live detail is in [`progress/`](progress/) — `state.json` (resumable cursor), `log.md`
-(append-only history), and `readiness.md` (per-app registry + review table).
+(append-only history), `readiness.md` (registry + review table), and `custom-todo.md`.
 
 ## Layout
 
