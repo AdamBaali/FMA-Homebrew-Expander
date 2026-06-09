@@ -1,0 +1,18 @@
+# OS / editor cruft
+.DS_Store
+*.swp
+*~
+.idea/
+.vscode/
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+
+# Local cask authoring scratch (cask-master.sh writes here, outside the repo by default)
+/tmp/caskwork/
+caskwork/
+
+# Local-only Claude settings (keep shared skills tracked; ignore personal settings)
+.claude/settings.local.json

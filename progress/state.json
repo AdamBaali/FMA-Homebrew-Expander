@@ -1,0 +1,41 @@
+{
+  "project": "FMA no-homebrew-cask sourcing + cask authoring",
+  "updated": "2026-06-09",
+  "phase": "0 complete (repo set up); Phase 1 not yet started",
+  "canonical_paths": {
+    "master_list": "data/master-list.csv",
+    "worklist": "data/unsourced-worklist.csv",
+    "autopkg_index": "sources/source-autopkg-index.tsv",
+    "installomator_fields": "sources/source-installomator-fields.tsv",
+    "installomator_slug_map": "sources/installomator-slug-to-label.tsv",
+    "script": "scripts/cask-master.sh",
+    "skill": ".claude/skills/homebrew-cask-author/SKILL.md",
+    "sourced_chunks": "progress/sourced/"
+  },
+  "counts": {
+    "total": 533,
+    "sourced": 192,
+    "unsourced": 341,
+    "registry_ready": 118,
+    "eligible_low_confidence": 1,
+    "review_or_ineligible": 6,
+    "autopkg_needs_installer_type": 67,
+    "in_registry": 0,
+    "dryrun_clean": 0
+  },
+  "sourcing_cursor": {
+    "next_worklist_index": 0,
+    "chunk_size": 20,
+    "chunks_total": 18,
+    "chunks_done": 0
+  },
+  "blockers": [
+    "brew + the homebrew-cask tap are unavailable on this Linux container, and cask audit is macOS-only, so Phase 2 DRYRUN validation (brew style + brew audit) must run on a Mac.",
+    "gh and autopkg are not installed (gh is only needed at submit time; autopkg is optional for sourcing)."
+  ],
+  "notes": [
+    "Phase 1 (source the 341 unsourced apps) has NOT started yet — awaiting go-ahead and any further skills the user is providing.",
+    "67 AutoPkg-sourced rows have source_class/source_detail but no installer_type/fma_eligible — classify these (resolve the recipe's download type) as part of Phase 2 prep; most should become eligible.",
+    "Do NOT submit. The deliverable is a filled, DRYRUN-clean scripts/cask-master.sh; the user opens the homebrew-cask PRs and Fleet FRs."
+  ]
+}

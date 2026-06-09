@@ -1,68 +1,93 @@
-# no-homebrew-cask sourcing — handoff bundle
+# FMA Homebrew Expander
 
-Source list: Fleet `ee/maintained-apps/app-catalog-parity/no-homebrew-cask.md`
-(533 appcatalog.cloud apps that have no Homebrew Cask).
+Sourcing and Homebrew-Cask authoring for the **Fleet Maintained Apps** "no-homebrew-cask" backlog:
+**533** [appcatalog.cloud](https://appcatalog.cloud) apps that currently have no Homebrew Cask.
 
-## Status (as of this handoff)
+The goal is to resolve a real macOS download source for each app, then author one Homebrew Cask
+(and a matching Fleet-maintained-app request) per eligible app — all driven by a single batch
+script and the `homebrew-cask-author` skill.
 
-- **533** apps total
-- **192 sourced** — Installomator 108, AutoPkg 67, web research 17
-- **341 unsourced** — not in Installomator or AutoPkg; need per-app vendor research
+> Submitting is a human step. This repo gets the casks **authored and DRYRUN-validated**; a
+> maintainer runs the script for real to open the homebrew-cask PRs and Fleet FRs. URLs and
+> versions are never invented — unverifiable apps are marked `review`/ineligible and skipped.
 
-The sourcing is the hard part and is only partly done. Everything mined so far,
-plus the raw source indexes to keep going, is in this bundle.
+## Status
 
-## Files
-
-| File | What it is |
+| | |
 |---|---|
-| `master-list.csv` | The master list. One row per app (533), with source fields filled for the 192 sourced. **This is the file to keep extending.** |
-| `unsourced-worklist.csv` | The 341 not yet sourced (slug, name, appcatalog URL). The to-do list. |
-| `source-installomator-fields.tsv` | Raw Installomator fields for the 108 matches: installer type, exact `downloadURL` expression, `appNewVersion` method, `expectedTeamID`, `packageID`, `blockingProcesses`. Join to the master on `installomator_label`. |
-| `source-autopkg-index.tsv` | **~7,500 app → source mappings** parsed from 44 AutoPkg recipe repos (normalised name, source class, detail, recipe name). The lookup table for sourcing the rest. |
-| `installomator-slug-to-label.tsv` | slug → Installomator label, for the 108. |
-| `cask-master.sh` | The cask authoring/PR/FR script. Feed it sourced+eligible rows once you have them. Run `DRYRUN=1` first. |
+| Total apps | **533** |
+| Sourced | **192** (Installomator 108, AutoPkg 67, web-research 17) |
+| Unsourced (to do) | **341** |
+| Registry-ready (eligible & high/med confidence) | 118 |
+| Review / ineligible | 6 |
+| In `cask-master.sh` REGISTRY | 0 _(Phase 2 pending)_ |
+| DRYRUN-clean | 0 _(requires macOS)_ |
 
-## `master-list.csv` columns
+Live detail is in [`progress/`](progress/) — `state.json` (resumable cursor), `log.md`
+(append-only history), and `readiness.md` (per-app registry + review table).
 
-`slug, name, appcatalog_url, source_origin, installomator_label, installer_type,
-fma_eligible, source_class, source_detail, version_method, team_id, pkg_receipt,
-blocking_processes, paid_or_gated, bucket, source_confidence`
+## Layout
 
-- **source_origin**: `installomator` | `autopkg` | `web-research` | empty (=unsourced)
-- **installer_type**: `pkg` | `dmg` | `zip` (FMA-eligible) | `pkgInDmg`/`appInDmgInZip` (nested, authorable with extra handling) | empty
-- **fma_eligible**: `yes` | `yes-nested` | `no` | `review` | `unknown`
-- **source_class**: `github` | `direct` | `dynamic-scrape` | `sparkle/feed` | `msft` | `mas` | `vendor` | `unknown`
-- **source_detail**: owner/repo for github, host or URL for the rest
-- **source_confidence**: `high` (tooling) | `med` | `low` (knowledge/flagged, verify before authoring)
+```
+.
+├── data/                         # the working lists (extend in place)
+│   ├── master-list.csv           #   533 rows, one per app — the source of truth
+│   └── unsourced-worklist.csv    #   the 341 still to source
+├── sources/                      # raw lookup tables mined from Mac-admin tooling
+│   ├── source-autopkg-index.tsv  #   ~7,500 app→source mappings (primary lookup)
+│   ├── source-installomator-fields.tsv
+│   └── installomator-slug-to-label.tsv
+├── scripts/
+│   └── cask-master.sh            # batch cask authoring + PR/FR harness (run DRYRUN first)
+├── .claude/skills/               # project skills, auto-discovered by Claude Code
+│   └── homebrew-cask-author/     #   research → author → validate → PR → Fleet FR
+├── progress/                     # resumable state + logs + readiness table
+│   ├── state.json  log.md  readiness.md
+│   └── sourced/                  #   per-chunk sourcing output
+├── docs/
+│   ├── HANDOFF.md                # original handoff bundle (provenance, status, column spec)
+│   └── MASTER-PROMPT.md          # the operative workflow spec (Phases 0–3)
+└── README.md
+```
 
-## How the 192 were sourced (provenance)
+## Workflow
 
-1. **Installomator** (`Installomator/Installomator` `main`): matched 533 slugs to its labels (93 exact + 15 curated aliases = 108), then extracted each label's full field block. `downloadURL`/type/teamID are authoritative.
-2. **AutoPkg**: downloaded 44 recipe repos from the `autopkg` org, parsed 10,090 recipe files (plist + yaml) into a name→source index (`GitHubReleasesInfoProvider` → github repo; `Sparkle` → appcast; `URLDownloader`/`URLTextSearcher` → direct/dynamic URL). Matched 67 of the still-unsourced apps by normalised name.
-3. **Web research**: per-vendor searches for clusters (AKVIS, Koingo, Veertu, Acon Digital, Adobe, etc.). Flagged `med`/`low` confidence; gated/App-Store-only apps marked `review`/ineligible.
+1. **Source** each unsourced app's macOS download in order — AutoPkg index → `autopkg search` →
+   vendor web — cross-checking two sources, and write the result back into `data/master-list.csv`.
+2. **Author** every eligible app (`zip`/`dmg`/`pkg`, high/med confidence) as a REGISTRY row in
+   `scripts/cask-master.sh`, then **DRYRUN-validate** on a Mac until `brew style` + `brew audit`
+   pass for every row.
+3. **Hand off**: a maintainer runs the script for real.
 
-appcatalog.cloud public pages give bundle ID + Developer (Team) ID but **not** download URLs (that's Root3's paid data), so they weren't a source for the URL.
+The full spec is in [`docs/MASTER-PROMPT.md`](docs/MASTER-PROMPT.md); the authoring rules live in
+the [`homebrew-cask-author`](.claude/skills/homebrew-cask-author/SKILL.md) skill.
 
-## Continue in Claude Code
+### `data/master-list.csv` columns
 
-The homebrew-cask-author skill lives at `/mnt/skills/user/homebrew-cask-author/`
-(and `fleet-maintained-app-request`, `winget-manifest-author`). Use them.
+`slug, name, appcatalog_url, source_origin, installomator_label, installer_type, fma_eligible,
+source_class, source_detail, version_method, team_id, pkg_receipt, blocking_processes,
+paid_or_gated, bucket, source_confidence` — see [`docs/HANDOFF.md`](docs/HANDOFF.md) for the value
+sets.
 
-Suggested prompt:
+## Running `cask-master.sh`
 
-> Read `master-list.csv` and `unsourced-worklist.csv`. For each unsourced app, resolve its macOS download source in this order, and write the result back into `master-list.csv` (fill `source_origin`, `source_class`, `source_detail`, `installer_type`, `fma_eligible`, `source_confidence`):
-> 1. Join the app's normalised name/slug against `source-autopkg-index.tsv`. If hit, use that source (origin=autopkg, confidence=high).
-> 2. Else run `autopkg search <app>` and inspect the recipe.
-> 3. Else web-search the vendor and confirm a real download URL + installer type, following the homebrew-cask-author skill's research-sources order (vendor, Installomator, AutoPkg, Munki, existing casks). Cross-check two sources. Confidence med/high only if verified.
-> Eligibility rules: only `zip`/`dmg`/`pkg` downloads are FMA-eligible. Mark Mac-App-Store-only, paid-portal-gated, or tenant-gated apps as `fma_eligible=review` or `no` and move on — do not invent URLs. Work in batches, you can parallelise across the worklist.
-> Once a batch of rows is sourced and eligible, hand them to `cask-master.sh` (registry format is documented at the top of that script): run `DRYRUN=1` first, then for real.
+**Requires macOS** with Homebrew and the homebrew-cask tap — `brew audit`/`brew style` for casks
+are macOS-only, so this cannot run on Linux. The script is location-independent (it operates on the
+brew tap and `/tmp/caskwork`), so run it from anywhere:
 
-### Speeding it up
-- The AutoPkg index is the highest-yield lookup — match against it first.
-- Group by vendor: one search/recipe often resolves a whole developer's catalogue.
-- For bundle ID + Team ID on any app (feeds the cask `zap`/uninstall and signature checks), fetch its `appcatalog_url` page.
+```bash
+DRYRUN=1 bash scripts/cask-master.sh           # preview: write + audit every cask, open nothing
+DRYRUN=1 ONLY="filezilla" bash scripts/cask-master.sh   # one app
+bash scripts/cask-master.sh                    # FOR REAL — opens a PR + Fleet FR per app (maintainer only)
+```
 
-### Authoring (cask-master.sh)
-Registry rows are `token | name | desc | artifact | source | homepage | spec`.
-Map each sourced app to a source type (`github_tag`, `electron`, `msft_cdn`, `direct`, `custom`) and fill the spec. Always `DRYRUN=1` first; a failing app stops only itself, not the batch; per-app reports land in `/tmp/caskwork/<token>/report.md`.
+Registry format, per-source spec, and all flags (`ONLY`, `LIMIT`, `STRICT`, `ZAP`, `FILE_FR`,
+`CUSTOMER_LABEL`, …) are documented at the top of the script. Before a real run: `gh auth login`,
+add your `fork` remote in `$(brew --repository homebrew/cask)`, and optionally set
+`CUSTOMER_LABEL=...` for the Fleet FRs. Per-app reports land in `/tmp/caskwork/<token>/report.md`.
+
+## Provenance
+
+The 192 already-sourced apps were resolved from Installomator labels, 44 AutoPkg recipe repos
+(~10,090 recipes parsed), and per-vendor web research. Full provenance is in
+[`docs/HANDOFF.md`](docs/HANDOFF.md).
