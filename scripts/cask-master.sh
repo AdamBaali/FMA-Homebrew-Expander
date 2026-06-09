@@ -692,6 +692,7 @@ resolve(){
     direct)          _resolve_direct;;
     direct_latest)   _resolve_direct_latest;;
     direct_arch)     _resolve_direct_arch;;
+    direct_header)   _resolve_direct_header;;
     custom)          die "source=custom but no resolve_$TFN defined";;
     *) die "unknown source '$SOURCE' for $TOKEN";;
   esac; }
@@ -834,6 +835,80 @@ end
 RB
   fi; }
 
+# Generic header/redirect download (version lives in the redirect target filename or a
+# Content-Disposition header, not in a page) — like msft_cdn but for any host and any artifact.
+# spec: short=<url that redirects to the versioned file> ; regex=<filename regex, version captured>
+_resolve_direct_header(){
+  local short="${SP[short]}" real
+  real="$(curl -sIL "$short" | awk -F': ' 'tolower($1)=="location"{print $2}' | tail -1 | tr -d '\r')"
+  [ -n "$real" ] || real="$short"
+  VERSION="$(basename "${real%%\?*}" | grep -oE '[0-9]+(\.[0-9]+)+' | head -1)"
+  [ -n "$VERSION" ] || VERSION="$(curl -sIL "$short" | grep -i '^content-disposition' | grep -oE '[0-9]+(\.[0-9]+)+' | head -1)"
+  [ -n "$VERSION" ] || die "direct_header: no version from $short"
+  DH_URLT="$(printf '%s' "$real" | sed "s/${VERSION//./\\.}/#{version}/")"
+  URL="$real"; curl -fL "$URL" -o "$DL"; }
+write_direct_header(){
+  local host lc uninstall zapblock=""
+  host="$(printf '%s' "$DH_URLT" | sed -E 's#https?://([^/]+)/.*#\1#')"
+  lc="livecheck do
+    url \"${SP[short]}\"
+    regex(/${SP[regex]}/i)
+    strategy :header_match
+  end"
+  [ -n "$BUNDLE_ID" ] && zapblock="
+$(zap_for "$BUNDLE_ID")"
+  case "$ARTIFACT" in
+    pkg)
+      if [ -n "$LABELS" ]; then local arr; arr="$(printf '"%s", ' $LABELS | sed 's/, $//')"
+        uninstall="uninstall launchctl: [$arr],
+            pkgutil:   \"$RECEIPT\""
+      else uninstall="uninstall pkgutil: \"$RECEIPT\""; fi
+      cat > "$CASK" <<RB
+cask "$TOKEN" do
+  version "$VERSION"
+  sha256 "$SHA"
+
+  url "$DH_URLT",
+      verified: "$host/"
+  name "$NAME"
+  desc "$DESC"
+  homepage "$HOMEPAGE"
+
+  $lc
+
+  depends_on macos: :$SYM
+
+  pkg "$(basename "${URL%%\?*}")"
+
+  $uninstall
+$zapblock
+end
+RB
+    ;;
+    zip|dmg)
+      cat > "$CASK" <<RB
+cask "$TOKEN" do
+  version "$VERSION"
+  sha256 "$SHA"
+
+  url "$DH_URLT",
+      verified: "$host/"
+  name "$NAME"
+  desc "$DESC"
+  homepage "$HOMEPAGE"
+
+  $lc
+
+  depends_on macos: :$SYM
+
+  app "$APP_NAME"
+$zapblock
+end
+RB
+    ;;
+    *) die "direct_header writer: unsupported artifact '$ARTIFACT'";;
+  esac; }
+
 write_msft(){
   local host fn pkgstanza uninstall zapblock=""
   host="$(printf '%s' "$MS_URLT" | sed -E 's#https?://([^/]+)/.*#\1#')"
@@ -963,6 +1038,7 @@ write_cask(){
     direct)   write_direct;;
     direct_latest) write_direct_latest;;
     direct_arch) write_direct_arch;;
+    direct_header) write_direct_header;;
     custom)   die "source=custom but no write_cask_$TFN defined";;
     *) die "unknown source '$SOURCE'";;
   esac; }
@@ -994,7 +1070,7 @@ run_one(){
   STAGE=init; STATUS=incomplete
   VERSION=""; URL=""; SHA=""; SHA_X64=""; BUNDLE_ID=""; MINOS=""; SYM=""; RECEIPT=""; LABELS=""; MAU=""
   STYLE_OUT=""; AUDIT=""; LIVECHECK=""; PR=""; FR=""; REFUSED=""; AUTOFIX=""; APP_NAME=""
-  MS_REAL=""; MS_URLT=""; TAG=""; TAGI=""
+  MS_REAL=""; MS_URLT=""; DH_URLT=""; TAG=""; TAGI=""
   S="$W/summary.txt"; REPORT="$W/report.md"; : > "$S"
   local LETTER; LETTER="$(printf '%s' "$TOKEN" | cut -c1)"; CASK="$TAP/Casks/$LETTER/$TOKEN.rb"
 
