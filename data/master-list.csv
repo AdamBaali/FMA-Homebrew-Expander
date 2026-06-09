@@ -116,7 +116,7 @@ default-mail-app-to-microsoft-outlook,Default Mail App To Microsoft Outlook,http
 delighted,Delighted,https://appcatalog.cloud/apps/delighted,web-research,,zip,yes,vendor,https://eclecticlight.co/wp-content/uploads/2026/03/delighted25.zip,custom,,,,,custom: needs resolver,high
 dell-display-peripheral-manager,Dell Display Peripheral Manager,https://appcatalog.cloud/apps/dell-display-peripheral-manager,web-research,,pkgInZip,yes,vendor,https://dl.dell.com/FOLDER09180078M/1/DDPMv1.0.2.0019.zip,custom,,,,,custom: needs resolver,med
 depnotify,Depnotify,https://appcatalog.cloud/apps/depnotify,installomator,depnotify,pkg,yes,direct,files.jamfconnect.com,,VRPY9KHGX6,,,,custom: needs resolver,high
-deskrest,Deskrest,https://appcatalog.cloud/apps/deskrest,,,,,,,,,,,,manual-research,
+deskrest,Deskrest,https://appcatalog.cloud/apps/deskrest,web-research,,dmg,yes,github,github.com/Marceeelll/DeskRest-releases,custom,,,,,custom: needs resolver,high
 desktop-icon-manager,Desktop Icon Manager,https://appcatalog.cloud/apps/desktop-icon-manager,web-research,,zip,yes,github,repo=com-entonos/Desktop-Icon-Manager;asset=DesktopIconManager{v}.zip,github_tag,,,,,in-registry,high
 dialpad-meetings,Dialpad Meetings,https://appcatalog.cloud/apps/dialpad-meetings,web-research,,dmg,yes,vendor,https://storage.googleapis.com/uc_native/stable/osx/arm64/DialpadMeetings.dmg,custom,,,,,custom: needs resolver,high
 dictation-daddy,Dictation Daddy,https://appcatalog.cloud/apps/dictation-daddy,web-research,,dmg,yes,github,repo=rahulbansal16/DictationDaddy;asset=Dictation-Daddy-mac.dmg,github_tag,,,,,in-registry,high
@@ -451,84 +451,84 @@ studies,Studies,https://appcatalog.cloud/apps/studies,web-research,,,review,,htt
 studio-viewer,Studio Viewer,https://appcatalog.cloud/apps/studio-viewer,web-research,,dmg,yes,vendor,https://cdn-my.esko.com/downloads/Public/Free/Latest/Studio_Viewer_26_03.dmg,custom,,,,,custom: needs resolver,high
 substage,Substage,https://appcatalog.cloud/apps/substage,web-research,,dmg,yes,vendor,https://assets.selkie.design/substage/download/latest/Substage.dmg,custom,,,,,custom: needs resolver,high
 supavdo,Supavdo,https://appcatalog.cloud/apps/supavdo,web-research,,,no,,,,,,,,"ineligible: Domain dead. SupaVdo (bundle com.supavdo.SupaVdo, dev id PM83B39XB9). supavdo.com and www.",
-supercharge,Supercharge,https://appcatalog.cloud/apps/supercharge,,,,,,,,,,,,manual-research,
-supercorners,Supercorners,https://appcatalog.cloud/apps/supercorners,,,,,,,,,,,,manual-research,
+supercharge,Supercharge,https://appcatalog.cloud/apps/supercharge,web-research,,,review,,https://sindresorhus.com/supercharge,,,,,,review: Paid app (one-time purchase via Gumroad / Setapp). Only a time-limited TRIAL is publicly d,low
+supercorners,Supercorners,https://appcatalog.cloud/apps/supercorners,web-research,,zip,yes,github,repo=daniyalmaster693/SuperCorners;asset=SuperCorners.zip,github_tag,,,,,in-registry,high
 surfdrive,Surfdrive,https://appcatalog.cloud/apps/surfdrive,installomator,surfdrive,pkg,review,dynamic-scrape,servicedesk.surf.nl,"$(curl -fs https://servicedesk.surf.nl/wiki/spaces/WIKI/pages/74225443/Desktop+client+login|grep -Eo ""(http|https)://[a-zA-Z0-9./?=_%:-]*"" | grep pkg | grep arm |cut -d -f2)",4AP2STM4H5,,"( ""surfdrive"" )",,review: Gated. Installomator source page (servicedesk.surf.nl/wiki/.../74225443) is logi,high
-swiftcord,Swiftcord,https://appcatalog.cloud/apps/swiftcord,,,,,,,,,,,,manual-research,
-swiftguard,Swiftguard,https://appcatalog.cloud/apps/swiftguard,,,,,,,,,,,,manual-research,
+swiftcord,Swiftcord,https://appcatalog.cloud/apps/swiftcord,web-research,,zip,yes,github,repo=SwiftcordApp/Swiftcord;asset=Swiftcord.zip,github_tag,,,,,in-registry,high
+swiftguard,Swiftguard,https://appcatalog.cloud/apps/swiftguard,web-research,,dmg,yes,vendor,https://github.com/Lennolium/swiftGuard/releases/download/v0.0.2/swiftGuard.dmg,custom,,,,,custom: needs resolver,high
 sym-helper,SYM-Helper,https://appcatalog.cloud/apps/sym-helper,installomator,symhelper,zip,yes,github,setup-your-mac/SYM-Helper,"""$(versionFromGit setup-your-mac SYM-Helper)""",PS2F6S478M,,,,in-registry,high
 synology-active-backup-for-business-agent,Synology Active Backup For Business Agent,https://appcatalog.cloud/apps/synology-active-backup-for-business-agent,installomator,synologyactivebackupforbusinessagent,pkgInDmg,yes-nested,dynamic-scrape,archive.synology.com,"$(curl -sf https://archive.synology.com/download/Utility/ActiveBackupBusinessAgent | grep -m 1 /download/Utility/ActiveBackupBusinessAgent/ | sed ""s|.*>\(.*\)<.*|\\1|"" | sed ""s#.*-\(\)#\1#"")",X85BAK35Y4,com.synology.activebackup-agent,,,custom: needs resolver,high
 synology-drive-client,Synology Drive Client,https://appcatalog.cloud/apps/synology-drive-client,installomator,synologydriveclient,pkgInDmg,yes-nested,direct,global.download.synology.com,"""$( echo $appFullVersion | sed ""s|.*-\(\)|\\1|"" )""",X85BAK35Y4,,,,custom: needs resolver,high
-talkdesk,Talkdesk,https://appcatalog.cloud/apps/talkdesk,,,,,,,,,,,,manual-research,
+talkdesk,Talkdesk,https://appcatalog.cloud/apps/talkdesk,web-research,,,review,,https://support.talkdesk.com/hc/en-us/articles/13920616167963,,,,,,review: Talkdesk Workspace desktop app download is behind the Talkdesk Workspace tenant login (use,low
 teamwire,Teamwire,https://appcatalog.cloud/apps/teamwire,installomator,teamwire,dmg,yes,direct,desktop.teamwire.eu,$(curl -fsI $downloadURL | grep -i 'Location' | cut -d ' ' -f2 | sed 's|.*dist/v\([^/]*\).*|\1|'),2JCSJ44B3U,eu.teamwire.app,,,custom: needs resolver,high
 tembo-2,Tembo 2,https://appcatalog.cloud/apps/tembo-2,autopkg,,,,sparkle/feed,www.houdah.com,,,,,,autopkg-sourced-format-tbd,high
 tembo-3,Tembo 3,https://appcatalog.cloud/apps/tembo-3,autopkg,,,,sparkle/feed,www.houdah.com,,,,,,autopkg-sourced-format-tbd,high
-teos-connect,Teos Connect,https://appcatalog.cloud/apps/teos-connect,,,,,,,,,,,,manual-research,
-text-on-tap-overlay,Text On Tap Overlay,https://appcatalog.cloud/apps/text-on-tap-overlay,,,,,,,,,,,,manual-research,
-text-workflow,Text Workflow,https://appcatalog.cloud/apps/text-workflow,,,,,,,,,,,,manual-research,
-textream,Textream,https://appcatalog.cloud/apps/textream,,,,,,,,,,,,manual-research,
+teos-connect,Teos Connect,https://appcatalog.cloud/apps/teos-connect,web-research,,,review,,https://pro.sony/en_CV/product-resources/knowledge-panel/teos-applications,,,,,,review: Sony TEOS Connect is part of Sony's enterprise TEOS workplace-management suite (tied to BR,low
+text-on-tap-overlay,Text On Tap Overlay,https://appcatalog.cloud/apps/text-on-tap-overlay,web-research,,,review,,https://text-on-tap.live/overlay.html,,,,,,review: Vendor download page https://text-on-tap.live/overlay.html unreachable from sandbox (HTTP ,low
+text-workflow,Text Workflow,https://appcatalog.cloud/apps/text-workflow,web-research,,,review,,https://apps.apple.com/us/app/text-workflow-text-converter/id1600520682,,,,,,"review: Mac App Store only (Text Workflow: Text Converter, id 1600520682; dev gtrigonakis links on",low
+textream,Textream,https://appcatalog.cloud/apps/textream,web-research,,dmg,yes,github,repo=f/textream;asset=Textream.dmg,github_tag,,,,,in-registry,high
 textsoap,Textsoap,https://appcatalog.cloud/apps/textsoap,autopkg,,,,dynamic-scrape,unmarked.s3.amazonaws.com,,,,,,autopkg-sourced-format-tbd,high
 things,Things,https://appcatalog.cloud/apps/things,installomator,things,zip,yes,direct,culturedcode.com,,JLMPQHK86H,,,,in-registry,high
-tigervnc-viewer,Tigervnc Viewer,https://appcatalog.cloud/apps/tigervnc-viewer,,,,,,,,,,,,manual-research,
-time-machine-inspector,Time Machine Inspector,https://appcatalog.cloud/apps/time-machine-inspector,,,,,,,,,,,,manual-research,
-timebuzzer,Timebuzzer,https://appcatalog.cloud/apps/timebuzzer,,,,,,,,,,,,manual-research,
-tinyweb,Tinyweb,https://appcatalog.cloud/apps/tinyweb,,,,,,,,,,,,manual-research,
-trace,Trace,https://appcatalog.cloud/apps/trace,,,,,,,,,,,,manual-research,
-trash-sweep,Trash Sweep,https://appcatalog.cloud/apps/trash-sweep,,,,,,,,,,,,manual-research,
-trident,Trident,https://appcatalog.cloud/apps/trident,,,,,,,,,,,,manual-research,
+tigervnc-viewer,Tigervnc Viewer,https://appcatalog.cloud/apps/tigervnc-viewer,web-research,,,review,,,,,,,,review: Duplicate: a cask 'tigervnc' already exists (formulae.brew.sh/api/cask/tigervnc.json = HTT,high
+time-machine-inspector,Time Machine Inspector,https://appcatalog.cloud/apps/time-machine-inspector,web-research,,dmg,yes,vendor,https://github.com/probablykasper/time-machine-inspector/releases/download/v1.2.1/Time.Mac,custom,,,,,custom: needs resolver,high
+timebuzzer,Timebuzzer,https://appcatalog.cloud/apps/timebuzzer,web-research,,,review,,https://timebuzzer.com/get/timeBuzzer.dmg,,,,,,review: timeBuzzer requires a paid account/login to use (my.timebuzzer.com; 15-day trial). Downloa,low
+tinyweb,Tinyweb,https://appcatalog.cloud/apps/tinyweb,web-research,,dmg,yes,vendor,https://tinyweb.so/release/osx/tinyweb_latest,custom,,,,,custom: needs resolver,high
+trace,Trace,https://appcatalog.cloud/apps/trace,web-research,,dmg,yes,vendor,https://trace.argio.ch/download/Trace.dmg,custom,,,,,custom: needs resolver,high
+trash-sweep,Trash Sweep,https://appcatalog.cloud/apps/trash-sweep,web-research,,,review,,https://trashsweep.gurubag.com/,,,,,,review: Vendor site https://trashsweep.gurubag.com/ unreachable from sandbox (HTTP 503 / anti-bot),low
+trident,Trident,https://appcatalog.cloud/apps/trident,web-research,,dmg,yes,vendor,https://downloads.zohocdn.com/trident/mac/apple/Trident.dmg,custom,,,,,custom: needs resolver,high
 trint,Trint,https://appcatalog.cloud/apps/trint,installomator,trint,zip,yes,direct,desktopapp.trint.com,"$(getJSONValue ""$(curl -fsL https://desktopapp.trint.com/updates/darwin/arm64/RELEASES.json)"" ""currentRelease"" )",4SN3PJXHG2,,,,custom: needs resolver,high
-tweeten,Tweeten,https://appcatalog.cloud/apps/tweeten,,,,,,,,,,,,manual-research,
+tweeten,Tweeten,https://appcatalog.cloud/apps/tweeten,web-research,,zip,yes,vendor,https://github.com/MehediH/Tweeten/releases/download/v5.5.0/tweeten-darwin-x64.zip,custom,,,,,custom: needs resolver,high
 typewhisper,Typewhisper,https://appcatalog.cloud/apps/typewhisper,autopkg,,,,sparkle/feed,typewhisper.github.io,,,,,,autopkg-sourced-format-tbd,high
 ultracompare,Ultracompare,https://appcatalog.cloud/apps/ultracompare,installomator,ultracompare,dmg,review,direct,downloads.ultraedit.com,"""""",2T4C9Y59FF,,,yes,review: Only an unversioned dmg https://downloads.ultraedit.com/main/uc/mac/UltraCompare,high
-umbra,Umbra,https://appcatalog.cloud/apps/umbra,,,,,,,,,,,,manual-research,
+umbra,Umbra,https://appcatalog.cloud/apps/umbra,web-research,,,review,,https://replay.software/umbra,,,,,,"review: Pay-what-you-want via Gumroad (Replay Software); no GitHub, no public versioned download e",low
 universal-type-client,Universal Type Client,https://appcatalog.cloud/apps/universal-type-client,installomator,universaltypeclient,pkgInZip,yes-nested,dynamic-scrape,bin.extensis.com,"$(echo ""$downloadURL"" | awk -F'UTC-' '{split($2, a, ""-M""); print a[1]}' | tr '-' '.')",J6MMHGD9D6,,,yes,custom: needs resolver,high
-upaste,Upaste,https://appcatalog.cloud/apps/upaste,,,,,,,,,,,,manual-research,
-usb-network-gate,Usb Network Gate,https://appcatalog.cloud/apps/usb-network-gate,,,,,,,,,,,,manual-research,
+upaste,Upaste,https://appcatalog.cloud/apps/upaste,web-research,,,review,,https://apps.apple.com/us/app/upaste-clipboard-manager/id1503649026,,,,,,"review: Mac App Store only (uPaste - Clipboard Manager, id 1503649026, dev Wu Chenghao). https://a",low
+usb-network-gate,Usb Network Gate,https://appcatalog.cloud/apps/usb-network-gate,web-research,,dmg,yes,vendor,https://cdn.electronic.us/products/usb-over-ethernet/mac/download/usb_network_gate.dmg,custom,,,,,custom: needs resolver,high
 usher,Usher,https://appcatalog.cloud/apps/usher,autopkg,,,,sparkle/feed,manytricks.com,,,,,,autopkg-sourced-format-tbd,high
 utiluti,utiluti,https://appcatalog.cloud/apps/utiluti,installomator,utiluti,pkg,yes,github,scriptingosx/utiluti,"$(versionFromGit ""scriptingosx"" ""utiluti"")",JME5BW3F3R,com.scriptingosx.utiluti,( NONE ),,in-registry,high
-utm-coordinate-converter,Utm Coordinate Converter,https://appcatalog.cloud/apps/utm-coordinate-converter,,,,,,,,,,,,manual-research,
-vagon,Vagon,https://appcatalog.cloud/apps/vagon,,,,,,,,,,,,manual-research,
-vectoraster,Vectoraster,https://appcatalog.cloud/apps/vectoraster,,,,,,,,,,,,manual-research,
-vectorstyler,Vectorstyler,https://appcatalog.cloud/apps/vectorstyler,,,,,,,,,,,,manual-research,
+utm-coordinate-converter,Utm Coordinate Converter,https://appcatalog.cloud/apps/utm-coordinate-converter,web-research,,dmg,yes,vendor,https://bitbucket.org/vewert/ewert-technologies/downloads/ucc_2.0.4.2_aarch64.dmg,custom,,,,,custom: needs resolver,high
+vagon,Vagon,https://appcatalog.cloud/apps/vagon,web-research,,dmg,yes,vendor,https://app.vagon.io/apps/Vagon-arm64.dmg,custom,,,,,custom: needs resolver,high
+vectoraster,Vectoraster,https://appcatalog.cloud/apps/vectoraster,web-research,,dmg,yes,vendor,https://www.lostminds.com/downloads/vectoraster8.dmg,custom,,,,,custom: needs resolver,high
+vectorstyler,Vectorstyler,https://appcatalog.cloud/apps/vectorstyler,web-research,,dmg,yes,vendor,https://www.vectorstyler.com/product/vectorstyler_m1.dmg,custom,,,,,custom: needs resolver,high
 vernier-graphical-analysis,Vernier Graphical Analysis,https://appcatalog.cloud/apps/vernier-graphical-analysis,autopkg,,,,dynamic-scrape,,,,,,,autopkg-sourced-format-tbd,high
-videoproc-vlogger,Videoproc Vlogger,https://appcatalog.cloud/apps/videoproc-vlogger,,,,,,,,,,,,manual-research,
-videostream,Videostream,https://appcatalog.cloud/apps/videostream,,,,,,,,,,,,manual-research,
-vidmore-player,Vidmore Player,https://appcatalog.cloud/apps/vidmore-player,,,,,,,,,,,,manual-research,
-vidmore-screen-recorder,Vidmore Screen Recorder,https://appcatalog.cloud/apps/vidmore-screen-recorder,,,,,,,,,,,,manual-research,
-vidmore-video-enhancer,Vidmore Video Enhancer,https://appcatalog.cloud/apps/vidmore-video-enhancer,,,,,,,,,,,,manual-research,
-viper-ftp,Viper Ftp,https://appcatalog.cloud/apps/viper-ftp,,,,,,,,,,,,manual-research,
+videoproc-vlogger,Videoproc Vlogger,https://appcatalog.cloud/apps/videoproc-vlogger,web-research,,dmg,yes,vendor,https://www.videoproc.com/download/videoproc-vlogger.dmg,custom,,,,,custom: needs resolver,high
+videostream,Videostream,https://appcatalog.cloud/apps/videostream,web-research,,,review,,https://cdn.getvideostream.com/videostream-native-updates/macOS/Videostream.pkg,,,,,,review: Native Mac pkg exists but is stale + unversioned: https://cdn.getvideostream.com/videostre,med
+vidmore-player,Vidmore Player,https://appcatalog.cloud/apps/vidmore-player,web-research,,dmg,yes,vendor,https://download.vidmore.com/mac/vidmore-player.dmg,custom,,,,,custom: needs resolver,high
+vidmore-screen-recorder,Vidmore Screen Recorder,https://appcatalog.cloud/apps/vidmore-screen-recorder,web-research,,zip,yes,vendor,https://download.vidmore.com/mac/screen-recorder.zip,custom,,,,,custom: needs resolver,high
+vidmore-video-enhancer,Vidmore Video Enhancer,https://appcatalog.cloud/apps/vidmore-video-enhancer,web-research,,dmg,yes,vendor,https://download.vidmore.com/mac/video-enhancer.dmg,custom,,,,,custom: needs resolver,high
+viper-ftp,Viper Ftp,https://appcatalog.cloud/apps/viper-ftp,web-research,,dmg,yes,vendor,https://naarakstudio.com/download/ViperFTP.dmg,custom,,,,,custom: needs resolver,high
 visualz,Visualz,https://appcatalog.cloud/apps/visualz,installomator,visualz,dmg,yes,github,madchops1/visualz-releases,"""$(versionFromGit madchops1 visualz-releases)""",6RLU6426R3,,,,custom: needs resolver,high
 vivi,Vivi,https://appcatalog.cloud/apps/vivi,installomator,vivi,pkg,yes,dynamic-scrape,api.vivi.io,"$(curl -fsIL https://api.vivi.io/mac | grep -i ""^location"" | awk ""{print $2}"" | sed -E ""s/.*\/[a-zA-Z]*-([0-9.]*)\..*/\1/g"")",3NRCUJ8TJC,au.com.viviaustralia.mac,,,custom: needs resolver,high
-vocal,Vocal,https://appcatalog.cloud/apps/vocal,,,,,,,,,,,,manual-research,
-voiceedge,Voiceedge,https://appcatalog.cloud/apps/voiceedge,,,,,,,,,,,,manual-research,
-voices,Voices,https://appcatalog.cloud/apps/voices,,,,,,,,,,,,manual-research,
+vocal,Vocal,https://appcatalog.cloud/apps/vocal,web-research,,zip,yes,github,repo=nuance-dev/vocal;asset=Vocal.app.zip,github_tag,,,,,in-registry,high
+voiceedge,Voiceedge,https://appcatalog.cloud/apps/voiceedge,web-research,,,review,,,,,,,,review: Comcast Business VoiceEdge desktop app: distribution is gated behind a Comcast Business ac,high
+voices,Voices,https://appcatalog.cloud/apps/voices,web-research,,,review,,https://goodsnooze.gumroad.com/l/voices,,,,,,"review: Voices (text-to-speech, Jordi Bruin / goodsnooze, bundle com.goodsnooze.voices, latest v2.",high
 vonage-business,Vonage Business,https://appcatalog.cloud/apps/vonage-business,installomator,vonagebusiness,dmg,yes,direct,vbc-downloads.vonage.com,"$(curl -fs ""https://s3.amazonaws.com/vbcdesktop.vonage.com/prod/mac/latest-mac.yml"" | grep -i version | cut -w -f2)",E37FZSUGQP,,,,in-registry,high
-vox-music-player,Vox Music Player,https://appcatalog.cloud/apps/vox-music-player,,,,,,,,,,,,manual-research,
-wacom-driver,Wacom Driver,https://appcatalog.cloud/apps/wacom-driver,,,,,,,,,,,,manual-research,
+vox-music-player,Vox Music Player,https://appcatalog.cloud/apps/vox-music-player,web-research,,,review,,https://formulae.brew.sh/api/cask/vox.json,,,,,,"review: Duplicate: already a cask. appcatalog bundle com.coppertino.Vox == existing cask ""vox"" (ht",high
+wacom-driver,Wacom Driver,https://appcatalog.cloud/apps/wacom-driver,web-research,,,review,,https://formulae.brew.sh/api/cask/wacom-tablet.json,,,,,,"review: Duplicate: already a cask. appcatalog bundle com.wacom.wacomtablet == existing cask ""wacom",high
 walkme,Walkme,https://appcatalog.cloud/apps/walkme,autopkg,,,,dynamic-scrape,cdn.walkme.com,,,,,,autopkg-sourced-format-tbd,high
-walkme-extension-for-safari,Walkme Extension For Safari,https://appcatalog.cloud/apps/walkme-extension-for-safari,,,,,,,,,,,,manual-research,
-watchflower,Watchflower,https://appcatalog.cloud/apps/watchflower,,,,,,,,,,,,manual-research,
-wavepad,Wavepad,https://appcatalog.cloud/apps/wavepad,,,,,,,,,,,,manual-research,
-weave,Weave,https://appcatalog.cloud/apps/weave,,,,,,,,,,,,manual-research,
-webfont,Webfont,https://appcatalog.cloud/apps/webfont,,,,,,,,,,,,manual-research,
-webkiosk-8,Webkiosk 8,https://appcatalog.cloud/apps/webkiosk-8,,,,,,,,,,,,manual-research,
-wework-print,Wework Print,https://appcatalog.cloud/apps/wework-print,,,,,,,,,,,,manual-research,
-window-glue,Window Glue,https://appcatalog.cloud/apps/window-glue,,,,,,,,,,,,manual-research,
+walkme-extension-for-safari,Walkme Extension For Safari,https://appcatalog.cloud/apps/walkme-extension-for-safari,web-research,,,review,,"https://apps.apple.com/us/app/walkme-extension/id1452131559,",,,,,,review: WalkMe Extension is a Safari App Extension distributed only via the Mac App Store (https:/,high
+watchflower,Watchflower,https://appcatalog.cloud/apps/watchflower,web-research,,zip,yes,github,repo=emericg/WatchFlower;asset=WatchFlower-{v}-macOS.zip,github_tag,,,,,in-registry,high
+wavepad,Wavepad,https://appcatalog.cloud/apps/wavepad,web-research,,,review,,https://www.nch.com.au/components/wavepadmacu.zip,,,,,,review: NCH WavePad Mac download https://www.nch.com.au/components/wavepadmacu.zip (HTTP 200) is o,high
+weave,Weave,https://appcatalog.cloud/apps/weave,web-research,,,review,,,,,,,,"review: No public versioned download; bundle com.weave.app deployed via appcatalog/MDM portal, no ",low
+webfont,Webfont,https://appcatalog.cloud/apps/webfont,web-research,,,review,,,,,,,,review: com.virae.webfontapp (webfontapp.com) current app is Mac-App-Store/Setapp-distributed; onl,med
+webkiosk-8,Webkiosk 8,https://appcatalog.cloud/apps/webkiosk-8,web-research,,,review,,"https://download.xproline.io/access.php?file=WebKiosk.dmg,",,,,,,review: xProline WebKiosk; only public download is a license-locked trial (https://download.xproli,med
+wework-print,Wework Print,https://appcatalog.cloud/apps/wework-print,web-research,,,review,,,,,,,,review: bundle com.hp.roamsetup = HP Roam print client rebranded for WeWork; tenant/portal-provisi,low
+window-glue,Window Glue,https://appcatalog.cloud/apps/window-glue,web-research,,dmg,yes,github,repo=Conxt/WindowGlue;asset=Window.Glue.{v}.dmg,github_tag,,,,,in-registry,high
 windsurf,Windsurf,https://appcatalog.cloud/apps/windsurf,installomator,windsurf,dmg,yes,dynamic-scrape,docs.devin.ai,"""$(basename ""$downloadURL"" .dmg | awk -F- '{print $NF}')""",83Z2LHX6XW,,,,custom: needs resolver,high
-withsecure-elements,Withsecure Elements,https://appcatalog.cloud/apps/withsecure-elements,,,,,,,,,,,,manual-research,
-wonderpen,Wonderpen,https://appcatalog.cloud/apps/wonderpen,,,,,,,,,,,,manual-research,
-wondershare-mockitt,Wondershare Mockitt,https://appcatalog.cloud/apps/wondershare-mockitt,,,,,,,,,,,,manual-research,
+withsecure-elements,Withsecure Elements,https://appcatalog.cloud/apps/withsecure-elements,web-research,,,review,,"https://download.withsecure.com/PSB/latest/ElementsAgentInstaller.mpkg,",,,,,,review: WithSecure Elements Agent installer is public (https://download.withsecure.com/PSB/latest/,med
+wonderpen,Wonderpen,https://appcatalog.cloud/apps/wonderpen,web-research,,dmg,yes,vendor,https://www.tominlab.com/to/get-file/cdn?file=WonderPen/desktop/3.1/WonderPen-v3.1.3.8431-,custom,,,,,custom: needs resolver,high
+wondershare-mockitt,Wondershare Mockitt,https://appcatalog.cloud/apps/wondershare-mockitt,web-research,,dmg,yes,direct,https://cdn-us.modao.cc/desktop/{v}/mockitt-mac-{v}.dmg,direct,,,,,in-registry,high
 workbrew,Workbrew,https://appcatalog.cloud/apps/workbrew,installomator,workbrew,pkg,yes,direct,console.workbrew.com,"""$(curl -sIL https://console.workbrew.com/downloads/macos | grep -i ""^content-disposition:"" | grep -o '[0-9]\+\.[0-9]\+\.[0-9]\+')""",676JW3JDLF,,,,custom: needs resolver,high
-workplace-pure-client,Workplace Pure Client,https://appcatalog.cloud/apps/workplace-pure-client,,,,,,,,,,,,manual-research,
-wudpecker,Wudpecker,https://appcatalog.cloud/apps/wudpecker,,,,,,,,,,,,manual-research,
-xelion,Xelion,https://appcatalog.cloud/apps/xelion,,,,,,,,,,,,manual-research,
+workplace-pure-client,Workplace Pure Client,https://appcatalog.cloud/apps/workplace-pure-client,web-research,,,review,,,,,,,,review: Konica Minolta Workplace Pure cloud-print client; download served only behind the Workplac,med
+wudpecker,Wudpecker,https://appcatalog.cloud/apps/wudpecker,web-research,,dmg,yes,github,repo=wudpecker/mac-updates;asset=Wudpecker.dmg,github_tag,,,,,in-registry,high
+xelion,Xelion,https://appcatalog.cloud/apps/xelion,web-research,,,review,,,,,,,,review: Xelion Classic Softphone (nl.xelion.softphone.Xelion8); apps.xelion.com download portal li,med
 xink,Xink,https://appcatalog.cloud/apps/xink,installomator,xink,pkg,review,direct,downloads.xink.io,"$(curl -fs ""https://downloads.xink.io/macos/appcast"" | xpath '(//rss/channel/item/enclosure/@sparkle:version)[1]' 2>/dev/null | head -1 | cut -d '""' -f 2)",F287823HVS,com.emailsignature.Xink,,,review: account-gated SaaS email-signature client; download https://downloads.xink.io/ma,high
-xmledita,Xmledita,https://appcatalog.cloud/apps/xmledita,,,,,,,,,,,,manual-research,
-xmlmind,Xmlmind,https://appcatalog.cloud/apps/xmlmind,,,,,,,,,,,,manual-research,
-xnresize,Xnresize,https://appcatalog.cloud/apps/xnresize,,,,,,,,,,,,manual-research,
-yodel,Yodel,https://appcatalog.cloud/apps/yodel,,,,,,,,,,,,manual-research,
-yoyotta,Yoyotta,https://appcatalog.cloud/apps/yoyotta,,,,,,,,,,,,manual-research,
-zaxconvert,Zaxconvert,https://appcatalog.cloud/apps/zaxconvert,,,,,,,,,,,,manual-research,
+xmledita,Xmledita,https://appcatalog.cloud/apps/xmledita,web-research,,,review,,"https://www.coxone.com/download/trial/xmledita2/XMLEdita.dmg,",,,,,,review: CoxOne XML Edita is Mac-App-Store (id1142675672) + paid FastSpring; only public direct dow,med
+xmlmind,Xmlmind,https://appcatalog.cloud/apps/xmlmind,web-research,,dmg,yes,vendor,https://www.xmlmind.com/xmleditor/_download/xxe-perso-11_1_0.dmg,custom,,,,,custom: needs resolver,high
+xnresize,Xnresize,https://appcatalog.cloud/apps/xnresize,web-research,,dmg,yes,vendor,https://download.xnview.com/XnResize-mac-x64.dmg,custom,,,,,custom: needs resolver,high
+yodel,Yodel,https://appcatalog.cloud/apps/yodel,web-research,,,review,,,,,,,,"review: Yodel is discontinued: www.yodel.io/apps now 301-redirects to a ""Yodel End-of-Life FAQ"" (s",high
+yoyotta,Yoyotta,https://appcatalog.cloud/apps/yoyotta,web-research,,,review,,,,,,,,review: YoYotta current v4 requires a subscription and yoyotta.com offers no direct v4 download li,high
+zaxconvert,Zaxconvert,https://appcatalog.cloud/apps/zaxconvert,web-research,,zip,yes,vendor,https://zaxcom.com/wp-content/uploads/2025/08/Zaxconvert_6.68_PC_MAC-BETA.zip,custom,,,,,custom: needs resolver,high
 zerotier,Zerotier,https://appcatalog.cloud/apps/zerotier,installomator,zerotier,pkg,review,direct,download.zerotier.com,$(versionFromGit zerotier ZeroTierOne ),8ZD9JUCZ4V,com.zerotier.pkg.ZeroTierOne,,,review: duplicate of existing Homebrew cask zerotier-one (ZeroTier One),high
 zoho-workdrive-genie,Zoho Workdrive Genie,https://appcatalog.cloud/apps/zoho-workdrive-genie,installomator,zohoworkdrivegenie,dmg,review,direct,www.zoho.com,,TZ824L8Y37,,,,"review: download confirmed (200, ~55MB) https://www.zoho.com/workdrive/downloads/edit-to",high
-zoom-workplace,Zoom Workplace,https://appcatalog.cloud/apps/zoom-workplace,,,,,,,,,,,,manual-research,
+zoom-workplace,Zoom Workplace,https://appcatalog.cloud/apps/zoom-workplace,web-research,,,review,,,,,,,,"review: Duplicate: ""Zoom Workplace"" is the rebranded Zoom desktop client, bundle us.zoom.xos, alre",high

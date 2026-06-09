@@ -218,6 +218,16 @@ rumpus | Rumpus | File transfer server supporting FTP, FTPS, WebDAV, and SFTP | 
 scrutiny | Scrutiny | Website link checker, SEO auditor, and XML sitemap generator | dmg | direct | https://peacockmedia.software/mac/scrutiny/ | url=https://peacockmedia.software/mac/scrutiny/scrutiny.dmg;version=12.12.2;vers=https://peacockmedia.software/mac/scrutiny/;vregex=v([0-9]+(?:\.[0-9]+)+)
 squirreldisk | SquirrelDisk | Disk usage analyzer that visualizes large files with a sunburst chart | dmg | github_tag | https://github.com/adileo/squirreldisk | repo=adileo/squirreldisk;asset=SquirrelDisk_{v}_x64.dmg
 
+# ---- Phase 1 wave 4 (cold-sourced; verify on Mac with DRYRUN) ----
+supercorners | SuperCorners | Assigns custom actions to screen corners and trigger zones | zip | github_tag | https://github.com/daniyalmaster693/SuperCorners | repo=daniyalmaster693/SuperCorners;asset=SuperCorners.zip
+swiftcord | Swiftcord | Native Discord client built entirely in Swift | zip | github_tag | https://github.com/SwiftcordApp/Swiftcord | repo=SwiftcordApp/Swiftcord;asset=Swiftcord.zip
+textream | Textream | Teleprompter that highlights your script in real time as you speak | dmg | github_tag | https://github.com/f/textream | repo=f/textream;asset=Textream.dmg
+vocal | Vocal | Transcribes speech from video files into text on device | zip | github_tag | https://github.com/nuance-dev/vocal | repo=nuance-dev/vocal;asset=Vocal.app.zip
+watchflower | WatchFlower | Reads and plots data from Bluetooth plant and temperature sensors | zip | github_tag | https://github.com/emericg/WatchFlower | repo=emericg/WatchFlower;asset=WatchFlower-{v}-macOS.zip
+window-glue | Window Glue | Glues two windows together so they move and resize as one | dmg | github_tag | https://github.com/Conxt/WindowGlue | repo=Conxt/WindowGlue;asset=Window.Glue.{v}.dmg
+wondershare-mockitt | Wondershare Mockitt | Online prototyping and UI/UX design and collaboration platform | dmg | direct | https://mockitt.com/download.html | url=https://cdn-us.modao.cc/desktop/{v}/mockitt-mac-{v}.dmg;vers=https://mockitt.com/download.html;vregex=mockitt-mac-(\d+(?:\.\d+)+)\.dmg
+wudpecker | Wudpecker | AI meeting assistant that records calls and writes tailored notes | dmg | github_tag | https://github.com/wudpecker/mac-updates | repo=wudpecker/mac-updates;asset=Wudpecker.dmg
+
 TABLE
 
 # ----------------------------------------------------------------------------
