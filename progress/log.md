@@ -51,3 +51,10 @@
 - Reclassified azul-zulu-jdk-22/24 custom->review (non-LTS; zulu cask tracks latest).
 
 `sourced 286/533 | in-registry 62 | custom 68 | review/inelig 88 | unsourced 247 | dryrun-clean 0`
+
+## 2026-06-09 — Phase 1 wave 2 (chunks 6-10, 95 apps)
+
+- 5 subagents cold-sourced 95 apps. Triage: 23 row, 34 custom, 37 review, 1 ineligible.
+- Registry now 85 rows; sourced 381/533; unsourced 152 remain.
+
+`sourced 381/533 | in-registry 85 | custom 102 | review/inelig 126 | unsourced 152 | dryrun-clean 0`

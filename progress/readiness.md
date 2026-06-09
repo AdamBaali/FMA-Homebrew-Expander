@@ -1,24 +1,24 @@
 # Readiness — registry, custom to-do & review
 
-_Last updated: 2026-06-09 (Phase 1 wave 1 consolidated)._
+_Last updated: 2026-06-09 (Phase 1 wave 2 consolidated)._
 
 ## Summary
 
 | Bucket | Count |
 |---|---|
 | Total apps | 533 |
-| Sourced | 286 |
-| **In REGISTRY (authored)** | **62** |
-| Custom resolver to-do | 68 |
-| Review | 78 |
-| Ineligible | 10 |
+| Sourced | 381 |
+| **In REGISTRY (authored)** | **85** |
+| Custom resolver to-do | 102 |
+| Review | 115 |
+| Ineligible | 11 |
 | AutoPkg pending classification | 67 |
-| Unsourced remaining | 247 |
+| Unsourced remaining | 152 |
 | DRYRUN-clean | 0 (requires macOS) |
 
 All registry rows are statically verified (live URL + version + livecheck where applicable) but **not** DRYRUN-validated. Run `DRYRUN=1 bash scripts/cask-master.sh` on a Mac.
 
-## Registry apps (62) — token | source | artifact
+## Registry apps (85) — token | source | artifact
 
 | token | source | artifact |
 |---|---|---|
@@ -84,14 +84,37 @@ All registry rows are statically verified (live URL + version + livecheck where 
 | `fivenotes` | direct | zip |
 | `freeter` | electron | dmg |
 | `fuzzlecheck-4` | direct | dmg |
+| `haiku-animator` | github_tag | dmg |
+| `hue` | electron | zip |
+| `ibm-data-shift` | github_compound | zip |
+| `impulso` | github_tag | zip |
+| `insight` | direct | dmg |
+| `jamf-actions` | github_tag | zip |
+| `jamf-aftermath` | github_tag | pkg |
+| `jamf-cloud-package-replicator` | github_tag | zip |
+| `jamf-environment-test` | github_tag | zip |
+| `jamf-framework-redeploy` | github_tag | zip |
+| `jamf-protect-ulf-uploader` | github_tag | zip |
+| `jamf-prune` | github_tag | zip |
+| `jamfdash` | github_tag | pkg |
+| `jamfhelper-constructor` | github_tag | zip |
+| `logoer` | github_tag | dmg |
+| `lucidlink-classic` | direct | pkg |
+| `maccleanse` | direct | dmg |
+| `microsoft-365-license-removal-tool` | msft_cdn | pkg |
+| `modalfilemanager` | github_tag | zip |
+| `monsterwriter` | github_tag | dmg |
+| `mut` | github_tag | zip |
+| `mymedia` | github_tag | dmg |
+| `namo` | direct | dmg |
 
-## Custom resolver to-do (68)
+## Custom resolver to-do (102)
 
-Verified live download + version; URL needs a bespoke resolver. Per-app facts in [`custom-todo.md`](custom-todo.md).
+Per-app facts in [`custom-todo.md`](custom-todo.md).
 
-`arclite-pro, barcode-studio, beam-studio, bimcollab-zoom, blink-eye, boundary, buhontfs, canister, capture-one, cascable-pro-webcam, cato-client, chatkit, cisco-audio-device, cloudya, code42, connectmenow4, conniepad, cotypist, cricut-design-space, cursor-teleporter, daylite, dedoose, delighted, dell-display-peripheral-manager, depnotify, dialpad-meetings, disk-space-analyzer, displaylink-manager, dropnotch, droppoint, eclipse-ide-for-embedded-cc-developers, eclipse-ide-for-scout-developers, editready, everweb, file-architect, filemail, fileminutes, final-draft-12, final-draft-13, flashpeak-slimjet, flexihub, flowjo, focusee, folge, fotomagico, frameio-transfer, grasshopper, guardian-browser, huddly, hudl-sportscode, ipsw-updater, jamf-connect-configuration, jamf-connect-login, lg-calibration-studio, microsoft-company-portal, microsoft-powershell, nvivo-14, nvivo-15, strongdm, synology-active-backup-for-business-agent, synology-drive-client, teamwire, trint, universal-type-client, visualz, vivi, windsurf, workbrew`
+`arclite-pro, barcode-studio, beam-studio, bimcollab-zoom, blink-eye, boundary, buhontfs, canister, capture-one, cascable-pro-webcam, cato-client, chatkit, cisco-audio-device, cloudya, code42, connectmenow4, conniepad, cotypist, cricut-design-space, cursor-teleporter, daylite, dedoose, delighted, dell-display-peripheral-manager, depnotify, dialpad-meetings, disk-space-analyzer, displaylink-manager, dropnotch, droppoint, eclipse-ide-for-embedded-cc-developers, eclipse-ide-for-scout-developers, editready, everweb, file-architect, filemail, fileminutes, final-draft-12, final-draft-13, flashpeak-slimjet, flexihub, flowjo, focusee, folge, fotomagico, frameio-transfer, global-secure-access-client, grasshopper, growly-glucose, guardian-browser, horse, huddly, hudl-sportscode, huggingchat-mac, iboostup, imymac-pdf-compressor, imymac-video-converter, integrity-plus, integrity-pro, iperius-remote, iphone-backup-extractor, ipsw-updater, istatistica-pro, jamf-connect-configuration, jamf-connect-login, jane-reader, jpegmini-pro, keeper-secrets-manager-cli, later, lg-calibration-studio, lingvanex-translator, mac-linguist, macos-instantview, macuncle-eml-viewer, mamp-pro, maxon-cinema-4d-2026, medialab-connect, mersive-solstice, microsoft-company-portal, microsoft-powershell, mimiq, minimoon, mister-horse-product-manager, mixpad, monotype-connect, multiviewer-for-f1, mxmarkedit, my-picturemaxx-5, netbird, nextai-translator, nvivo-14, nvivo-15, strongdm, synology-active-backup-for-business-agent, synology-drive-client, teamwire, trint, universal-type-client, visualz, vivi, windsurf, workbrew`
 
-## Review / ineligible (88)
+## Review / ineligible (126)
 
-Per-app reasons are in the `bucket` column of [`../data/master-list.csv`](../data/master-list.csv) (gated, duplicate-of-existing-cask, unversioned, discontinued, Mac-App-Store-only).
+Per-app reasons in the `bucket` column of [`../data/master-list.csv`](../data/master-list.csv).
 

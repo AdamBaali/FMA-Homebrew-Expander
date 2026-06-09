@@ -174,6 +174,31 @@ fivenotes | FiveNotes | Menu bar notepad with five quick Markdown notes always a
 freeter | Freeter | Organizer that gathers apps, files, and notes per project and workflow | dmg | electron | https://freeter.io | feed=https://github.com/FreeterApp/Freeter/releases/latest/download/latest-mac.yml;arm=Freeter-{v}-mac-arm64;intel=Freeter-{v}-mac-x64
 fuzzlecheck-4 | Fuzzlecheck 4 | Plans film and video shoots with scheduling and call sheets | dmg | direct | https://www.fuzzlecheck.com/index/US/index.html | url=https://fuz4downloads.fuzzlecheck.com/fuz_mac_setup_{v}.dmg;version=4.8.0
 
+# ---- Phase 1 wave 2 (cold-sourced; verify on Mac with DRYRUN) ----
+haiku-animator | Haiku Animator | Design tool for creating Lottie animations and interactive web components | dmg | github_tag | https://github.com/HaikuTeam/animator | repo=HaikuTeam/animator;asset=Haiku-{v}.dmg
+hue | Hue | Client for photo retouching teams to manage post-production workflows | zip | electron | https://help.creativeforce.io/en/articles/4752283-hue-desktop-app-overview | feed=https://download.creativeforce.io/released-files.042024/prod/hue-uxp/mac/latest-mac.yml;arm=Hue-{v}-mac-arm64;intel=Hue-{v}-mac
+ibm-data-shift | IBM Data Shift | Migrates files, apps, and preferences between devices over peer-to-peer | zip | github_compound | https://github.com/IBM/mac-ibm-migration-tool | repo=IBM/mac-ibm-migration-tool;asset=IBM.Data.Shift.zip
+impulso | Impulso | Task manager with priority scoring and flexible organization | zip | github_tag | https://github.com/nuance-dev/impulso | repo=nuance-dev/impulso;asset=Impulso.app.zip
+insight | Insight | Video review and performance analysis for sports teams and athletes | dmg | direct | https://www.hudl.com/releases/insight | url=https://insight-releases.s3.eu-west-1.amazonaws.com/Insight-{v}-universal.dmg;vers=https://www.hudl.com/releases/insight;vregex=[0-9]+(\.[0-9]+)+
+jamf-actions | Jamf Actions | Shortcuts actions for automating Jamf Pro tasks | zip | github_tag | https://github.com/Jamf-Concepts/actions | repo=Jamf-Concepts/actions;asset=Jamf.Actions.zip
+jamf-aftermath | Jamf Aftermath | Incident response framework that collects and analyzes forensic data | pkg | github_tag | https://github.com/jamf/aftermath | repo=jamf/aftermath;asset=aftermath-{v}.pkg
+jamf-cloud-package-replicator | Jamf Cloud Package Replicator | Replicates packages between Jamf Pro servers | zip | github_tag | https://github.com/BIG-RAT/jamfcpr | repo=BIG-RAT/jamfcpr;asset=jamfcpr.zip
+jamf-environment-test | Jamf Environment Test | Tests network connectivity to Apple and Jamf hosted services | zip | github_tag | https://github.com/jamf/Jamf-Environment-Test | repo=jamf/Jamf-Environment-Test;asset=Jamf.Environment.Test.app.zip
+jamf-framework-redeploy | Jamf Framework Redeploy | Redeploys the management framework to enrolled devices | zip | github_tag | https://github.com/red5coder/Jamf-Framework-Redeploy | repo=red5coder/Jamf-Framework-Redeploy;asset=Jamf.Framework.Redeploy.app.zip
+jamf-protect-ulf-uploader | Jamf Protect ULF Uploader | Uploads unified log files to Jamf Protect | zip | github_tag | https://github.com/red5coder/jamf-protect-ulf-uploader | repo=red5coder/jamf-protect-ulf-uploader;asset=Jamf.Protect.ULF.Uploader.app.zip
+jamf-prune | Jamf Prune | Removes unused items from a Jamf Pro server | zip | github_tag | https://github.com/BIG-RAT/Prune | repo=BIG-RAT/Prune;asset=Prune.zip
+jamfdash | JamfDash | Native dashboard for browsing a Jamf fleet and security posture | pkg | github_tag | https://github.com/DevliegereM/JamfDash | repo=DevliegereM/JamfDash;asset=JamfDash_v{v}.pkg
+jamfhelper-constructor | jamfHelper Constructor | Builds and previews jamfHelper dialog prompts | zip | github_tag | https://github.com/BIG-RAT/jhc | repo=BIG-RAT/jhc;asset=jhc.zip
+logoer | Logoer | Changes the style of the Apple logo in the menu bar | dmg | github_tag | https://github.com/lihaoyun6/Logoer | repo=lihaoyun6/Logoer;asset=Logoer_v{v}.dmg
+lucidlink-classic | LucidLink Classic | Cloud storage that streams team media files on demand | pkg | direct | https://www.lucidlink.com/classic | url=https://d3il9duqikhdqy.cloudfront.net/latest/osx/lucid-{v}.pkg;vers=https://www.lucidlink.com/download;vregex=lucid-(\d+(?:\.\d+)+)\.pkg
+maccleanse | MacCleanse | Removes junk files and uninstalls apps to free disk space | dmg | direct | https://www.koingosw.com/products/maccleanse/ | url=https://www.koingosw.com/products/maccleanse/download/maccleanse.dmg;vers=https://www.koingosw.com/products/maccleanse/;vregex=Version (\d+(?:\.\d+)+)
+microsoft-365-license-removal-tool | Microsoft 365 License Removal Tool | Removes Office license files for activation troubleshooting | pkg | msft_cdn | https://support.microsoft.com/en-us/office/how-to-remove-office-license-files-on-a-mac-b032c0f6-a431-4dad-83a9-6b727c03b193 | short=https://go.microsoft.com/fwlink/?linkid=849815;regex=Microsoft_Office_License_Removal_(\d+(?:\.\d+)+)\.pkg
+modalfilemanager | ModalFileManager | Dual-pane file manager with Vim-style modal hotkeys | zip | github_tag | https://github.com/raguay/ModalFileManager | repo=raguay/ModalFileManager;asset=ModalFileManager-macOS-Universal.zip
+monsterwriter | MonsterWriter | Distraction-free editor for theses, papers, and blog posts | dmg | github_tag | https://github.com/wolfoo2931/MonsterWriter | repo=wolfoo2931/MonsterWriter;asset=MonsterWriter-{v}-universal.dmg
+mut | MUT | Bulk-update inventory records, groups, and prestage scope in Jamf Pro | zip | github_tag | https://github.com/jamf/mut | repo=jamf/mut;asset=MUT.app.zip
+mymedia | MyMedia | Browse and play a local movie and TV library with artwork and tracking | dmg | github_tag | https://github.com/photangralenphie/MyMedia | repo=photangralenphie/MyMedia;asset=MyMedia-v{v}.dmg
+namo | NAMO | Runs a local DNS server with host names that resolve to your current IP | dmg | direct | https://www.mamp.info/namo/en/ | url=https://downloads.mamp.info/NAMO/releases/mac/NAMO-{v}.dmg;vers=https://www.mamp.info/namo/en/;vregex=NAMO-(\d+\.\d+-\d+)\.dmg
+
 TABLE
 
 # ----------------------------------------------------------------------------
