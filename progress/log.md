@@ -80,3 +80,10 @@
 - Registry now 130 rows.
 
 `sourced 533/533 | in-registry 130 | custom 148 | autopkg-pending 58 | review/inelig 196 | dryrun-clean 0`
+
+## 2026-06-09 — Author batch B: direct_latest/direct_arch (+44 rows)
+
+- Converted 44 of 95 wave-1 customs into rows: direct_latest 34, direct_arch 9, direct 1. 51 remain bespoke-custom.
+- Registry now 174 rows.
+
+`in-registry 174 | custom 104 | autopkg-pending 58 | review/inelig 196 | dryrun-clean 0`
