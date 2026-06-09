@@ -102,3 +102,10 @@
 - Registry now 234 rows; AutoPkg-pending now 0.
 
 `in-registry 234 | custom 84 | review/inelig 214 | autopkg-pending 0 | dryrun-clean 0`
+
+## 2026-06-09 — sudo caching + status docs
+
+- cask-master.sh: rewrote sudo handling — one prompt, then a temp passwordless sudoers drop-in (auto-removed on exit); SUDO_NOPASSWD=0 opts out. No more per-install/uninstall prompts.
+- readiness.md regenerated as the comprehensive revisit doc (added 234 / needs-resolver 84 by category / review+ineligible 214 with reasons); master-list bucket column enriched with the per-app 'why' category.
+
+`in-registry 234 | needs-resolver 84 | review/inelig 214 | categories {'arch-split .pkg (needs arch var + per-arch sha)': 10, 'version only in redirect/header (:header_match)': 32, 'build-in-filename / tag-version skew': 10, 'per-release hash/token in URL': 9, 'nested container (pkg/app-in-zip/dmg)': 8, 'other — see custom-todo.md': 9, 'string-transform version (dots->_/-/none)': 6}`

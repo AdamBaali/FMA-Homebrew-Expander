@@ -13,20 +13,22 @@ script and the `homebrew-cask-author` skill.
 
 ## Status
 
-**Progress: 533 / 533 sourced · 234 authored into the cask registry** — _authoring the sourced backlog into `cask-master.sh`._
+**533 / 533 sourced · 234 authored into the cask registry.** Full per-app status — what's added, what isn't, and **why** — lives in **[`progress/readiness.md`](progress/readiness.md)** (the revisit doc).
 
-| Bucket | Count |
-|---|---|
-| Total apps | **533** |
-| **Sourced** (real download resolved) | **533** |
-| &nbsp;&nbsp;↳ authored into `cask-master.sh` REGISTRY | **234** |
-| &nbsp;&nbsp;↳ custom resolver to-do (bespoke; needs `resolve_`/`write_cask_`) | 84 |
-| &nbsp;&nbsp;↳ review / ineligible (gated, duplicate, unversioned) | 214 |
-| &nbsp;&nbsp;↳ AutoPkg rows pending classification | 0 |
-| **Unsourced** remaining | **0** |
-| DRYRUN-clean | 0 _(requires macOS — runs on the maintainer's Mac)_ |
+| Bucket | Count | What it means |
+|---|---|---|
+| Total apps | **533** | the no-homebrew-cask backlog |
+| ✅ **Added** to `cask-master.sh` | **234** | ready to `DRYRUN` on a Mac |
+| 🛠️ Not added — needs custom resolver | **84** | verified download, but the URL/version doesn't fit a built-in source — needs a hand-written `resolve_`/`write_cask_` |
+| 🚫 Not added — review | **196** | gated / login / paid / unversioned / unverifiable |
+| 🚫 Not added — ineligible | **18** | Mac-App-Store-only, discontinued, non-eligible artifact, or duplicate of an existing cask |
+| DRYRUN-clean | 0 | _validated on macOS by the maintainer_ |
 
-Live detail is in [`progress/`](progress/) — `state.json`, `log.md`, `readiness.md`, `custom-todo.md`.
+The 84 "needs resolver" by reason: header-only version 32 · arch-split `.pkg` 10 · build-in-filename/tag skew 10 · per-release hash/token URL 9 · nested container 8 · string-transform version 6 · other 9. Per-app authoring facts are in [`progress/custom-todo.md`](progress/custom-todo.md).
+
+> The 234 authored include 68 `direct_latest` rows (`version :latest` + `sha256 :no_check`) — Homebrew discourages these for new casks, so prune/upgrade them at DRYRUN. All flagged in `readiness.md`.
+
+Live detail in [`progress/`](progress/) — `state.json`, `log.md`, `readiness.md`, `custom-todo.md`.
 
 ## Layout
 
@@ -84,9 +86,14 @@ bash scripts/cask-master.sh                    # FOR REAL — opens a PR + Fleet
 ```
 
 Registry format, per-source spec, and all flags (`ONLY`, `LIMIT`, `STRICT`, `ZAP`, `FILE_FR`,
-`CUSTOMER_LABEL`, …) are documented at the top of the script. Before a real run: `gh auth login`,
-add your `fork` remote in `$(brew --repository homebrew/cask)`, and optionally set
+`CUSTOMER_LABEL`, `SUDO_NOPASSWD`, …) are documented at the top of the script. Before a real run:
+`gh auth login`, add your `fork` remote in `$(brew --repository homebrew/cask)`, and optionally set
 `CUSTOMER_LABEL=...` for the Fleet FRs. Per-app reports land in `/tmp/caskwork/<token>/report.md`.
+
+**Password prompts:** a real run asks for your sudo password **once** and caches it for the whole
+batch — it installs a temporary passwordless-sudo drop-in (`/etc/sudoers.d/cask-master-<pid>`) that
+is **auto-removed when the run ends**, so pkg install/uninstall/zap never re-prompt. Set
+`SUDO_NOPASSWD=0` to skip that and only keep the sudo credential timestamp warm instead.
 
 ## Provenance
 
