@@ -33,3 +33,12 @@
 - Fixed `airbattery` installer_type zip→dmg (master-list error); filled GitHub repos into `source_detail`.
 
 `sourced 192/533 | in-registry 14 | dryrun-clean 0 | needs-me: DRYRUN the 14 on your Mac; then I continue with electron/msft/direct batches + the 341`
+
+## 2026-06-09 — Phase 2: subagent batch consolidated (43 rows total)
+
+- 5 parallel research subagents sourced the 97 remaining-eligible apps (chunks 1-5); chunk 6 (JDKs/misc) direct.
+- All 97 triaged: 29 row, 36 custom, 45 review/ineligible (incl. duplicate-of-existing-cask catches).
+- Inserted 29 verified direct/electron/msft rows -> 43 registry rows total (github + this batch). Tokens checked vs cask+formula APIs.
+- 36 apps need custom resolvers (facts in progress/custom-todo.md).
+
+`sourced 192/533 | in-registry 43 | dryrun-clean 0 | custom-todo 36 | needs-me: DRYRUN on Mac; Phase 1 (341) pending`
