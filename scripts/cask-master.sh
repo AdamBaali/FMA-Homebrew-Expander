@@ -5119,7 +5119,17 @@ fi
 # branch per app off this base.
 # ----------------------------------------------------------------------------
 git -C "$TAP" checkout -q "$DEF" 2>/dev/null || true
-git -C "$TAP" pull -q --ff-only 2>/dev/null || true
+# Base the run on UPSTREAM's tip when an upstream remote exists: in a fork-clone
+# tap, origin is the fork and forks don't auto-sync — a stale base makes the
+# duplicate precheck (`brew info --cask`, API disabled) miss casks merged
+# upstream since, and the script would open duplicate PRs. Fall back to a plain
+# pull (the old behavior) when there's no upstream remote.
+if git -C "$TAP" remote get-url upstream >/dev/null 2>&1; then
+  git -C "$TAP" fetch -q upstream "$DEF" 2>/dev/null \
+    && git -C "$TAP" merge -q --ff-only "upstream/$DEF" 2>/dev/null || true
+else
+  git -C "$TAP" pull -q --ff-only 2>/dev/null || true
+fi
 
 # ----------------------------------------------------------------------------
 # Parallel prefetch: resolve + download up to JOBS apps ahead. Built-in source
