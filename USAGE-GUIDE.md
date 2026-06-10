@@ -4,13 +4,23 @@ This guide covers the complete workflow and all the improvements made to the `ca
 
 ## 🚀 Quick Start
 
-### Safe Testing (No Real PRs/FRs)
+### Fast Audit (30 seconds per app)
 ```bash
-# Preview first 10 apps without creating PRs
+# Quick audit of first 10 apps (cask write + audit only)
 DRYRUN=1 bash scripts/cask-master.sh
 
 # Check results
 cat /tmp/caskwork/MASTER-summary.md
+```
+
+### Full Testing (2-3 minutes per app)
+```bash
+# Complete verification: install/uninstall/zap tests, but no PR/FR submission
+DRYRUN=1 TEST_INSTALL=1 bash scripts/cask-master.sh
+
+# Check detailed results
+cat /tmp/caskwork/MASTER-summary.md
+cat /tmp/caskwork/escrow-buddy/report.md  # See full app report
 ```
 
 ### First Batch Submission
@@ -35,7 +45,8 @@ BATCH_SIZE=10 SKIP_PASSED=1 bash scripts/cask-master.sh
 ### Core Workflow
 | Flag | Default | Purpose |
 |------|---------|---------|
-| `DRYRUN=1` | 0 | Preview only — no PRs, no installs, no git changes |
+| `DRYRUN=1` | 0 | Quick audit only (write + audit, no install/push/PR) |
+| `TEST_INSTALL=1` | 0 | Full testing (install/uninstall/zap, no push/PR) — use with DRYRUN=1 for safe testing |
 | `ONLY="a b c"` | — | Run only specific apps (space-separated) |
 | `LIMIT=N` | — | Run at most N apps total |
 
@@ -72,17 +83,24 @@ BATCH_SIZE=10 SKIP_PASSED=1 bash scripts/cask-master.sh
 
 ### Workflow 1: Safe Testing Before Submission
 ```bash
-# 1. Preview the first batch
+# 1. Quick audit of first batch (fast, 30 sec per app)
 DRYRUN=1 bash scripts/cask-master.sh
 
 # 2. Review the report
 cat /tmp/caskwork/MASTER-summary.md
-cat /tmp/caskwork/escrow-buddy/report.md  # Check individual app
 
-# 3. Fix issues if needed (edit scripts/cask-master.sh spec/custom resolvers)
+# 3. Full testing of specific apps (slow, 2-3 min per app, but complete)
+DRYRUN=1 TEST_INSTALL=1 ONLY="escrow-buddy icons" bash scripts/cask-master.sh
 
-# 4. Iterate on specific apps
-DRYRUN=1 ONLY="escrow-buddy icons" LIVECHECK=0 bash scripts/cask-master.sh
+# 4. Check full reports
+cat /tmp/caskwork/escrow-buddy/report.md  # Check individual app details
+cat /tmp/caskwork/escrow-buddy/install.log  # See install test
+cat /tmp/caskwork/escrow-buddy/zap.log  # See zap test
+
+# 5. Fix issues if needed (edit scripts/cask-master.sh spec/custom resolvers)
+
+# 6. Re-test after fixes
+DRYRUN=1 TEST_INSTALL=1 ONLY="escrow-buddy" LIVECHECK=0 bash scripts/cask-master.sh
 ```
 
 ### Workflow 2: Staged Batch Submission (Safe for Fleet)

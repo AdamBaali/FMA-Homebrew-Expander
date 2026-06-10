@@ -12,6 +12,12 @@ Safely process apps in controlled batches to avoid overwhelming Homebrew and Fle
 - `BATCH_SIZE=0` — no limit (process all selected apps)
 - Perfect for testing before large-scale runs
 
+### 🧪 Full Testing in Dry-Run (NEW)
+Test casks completely before submitting PRs:
+- `DRYRUN=1 TEST_INSTALL=1` — runs full install/uninstall/zap tests but skips git push and PR creation
+- Combines safe testing with complete verification
+- Perfect for validating casks before deployment
+
 ### 🛡️ Duplicate PR Prevention (NEW)
 Prevents accidental duplicate PR creation:
 - `SKIP_OPEN_PR=1` — automatically skips apps with open PRs
@@ -136,6 +142,65 @@ bash scripts/cask-master.sh  # Updates existing PRs, creates new ones for failur
 # To avoid updating existing PRs:
 SKIP_OPEN_PR=1 bash scripts/cask-master.sh  # Only processes apps without PRs
 ```
+
+---
+
+## Full Testing in Dry-Run Mode (NEW)
+
+### TEST_INSTALL Flag
+Run complete install/uninstall/zap tests without pushing to git or creating PRs.
+
+**Usage:**
+```bash
+# Quick audit only (fast, ~30 seconds per app)
+DRYRUN=1 bash scripts/cask-master.sh
+
+# Full testing (slow, ~2-3 minutes per app, but complete verification)
+DRYRUN=1 TEST_INSTALL=1 bash scripts/cask-master.sh
+
+# Test specific app before submitting
+DRYRUN=1 TEST_INSTALL=1 ONLY="escrow-buddy" bash scripts/cask-master.sh
+```
+
+**What gets tested:**
+- ✅ Version resolution
+- ✅ Download & sha256 verification
+- ✅ Bundle ID & artifact inspection
+- ✅ Cask DSL generation
+- ✅ `brew style --fix`
+- ✅ `brew audit --strict --online --new`
+- ✅ `brew install --cask` (full installation test)
+- ✅ `brew uninstall --cask` (uninstall test)
+- ✅ `brew install --cask` (reinstall for idempotency)
+- ✅ `brew uninstall --zap --cask` (zap stanza verification)
+- ❌ Git push
+- ❌ PR creation
+- ❌ Fleet FR creation
+
+**Behavior:**
+- DRYRUN=1 TEST_INSTALL=1: Full testing, no submission (safest before going live)
+- DRYRUN=0 TEST_INSTALL=1: Same as DRYRUN=1 TEST_INSTALL=1 (not recommended)
+- DRYRUN=1 TEST_INSTALL=0: Quick audit only (original dry-run behavior)
+- DRYRUN=0 TEST_INSTALL=0: Full submission with PRs and FRs (production)
+
+**Recommended workflow:**
+```bash
+# Step 1: Quick audit of first batch
+DRYRUN=1 BATCH_SIZE=10 bash scripts/cask-master.sh
+cat /tmp/caskwork/MASTER-summary.md
+
+# Step 2: Full testing of specific problematic apps
+DRYRUN=1 TEST_INSTALL=1 ONLY="escrow-buddy pique" bash scripts/cask-master.sh
+
+# Step 3: Once confident, submit full batch with testing
+# (no DRYRUN, full testing happens automatically)
+BATCH_SIZE=10 bash scripts/cask-master.sh
+```
+
+**Time estimates:**
+- Quick audit (DRYRUN=1): 30 seconds per app
+- Full testing (DRYRUN=1 TEST_INSTALL=1): 2-3 minutes per app
+- Full run with submission (DRYRUN=0): 2-3 minutes per app + PR creation
 
 ---
 

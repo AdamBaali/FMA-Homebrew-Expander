@@ -50,7 +50,9 @@
 #      /tmp/caskwork/results.tsv, and the script exits non-zero if any app failed.
 #
 # ------------------------------ FLAGS ----------------------------------------
-#   DRYRUN=1          preview only (no install/push/PR/FR)
+#   DRYRUN=1          preview only (cask write + audit, no install/push/PR/FR)
+#   TEST_INSTALL=1    do full testing: resolve+write+audit+install+uninstall+zap,
+#                     but skip git push/PR/FR (DRYRUN=1 still applies if set)
 #   ONLY="a b c"      run only these tokens (space-separated)
 #   LIMIT=N           run at most N apps from the registry
 #   BATCH_SIZE=N      process apps in batches of N to avoid flooding Homebrew/Fleet
@@ -636,7 +638,7 @@ set -uo pipefail
 # Recommended long-term alternative: `brew trust homebrew/cask` (done below too).
 export GIT_PAGER=cat HOMEBREW_NO_INSTALL_FROM_API=1 HOMEBREW_NO_AUTO_UPDATE=1 HOMEBREW_NO_REQUIRE_TAP_TRUST=1
 DRYRUN="${DRYRUN:-0}"; FORK="${FORK:-fork}"; FILE_FR="${FILE_FR:-1}"; CUSTOMER_LABEL="${CUSTOMER_LABEL:-}"
-FRESH="${FRESH:-1}"; STRICT="${STRICT:-1}"; ZAP="${ZAP:-1}"
+FRESH="${FRESH:-1}"; STRICT="${STRICT:-1}"; ZAP="${ZAP:-1}"; TEST_INSTALL="${TEST_INSTALL:-0}"
 ONLY="${ONLY:-}"; LIMIT="${LIMIT:-}"; STOP_ON_FAIL="${STOP_ON_FAIL:-0}"
 BATCH_SIZE="${BATCH_SIZE:-10}"; SKIP_OPEN_PR="${SKIP_OPEN_PR:-0}"
 JOBS="${JOBS:-4}"; KEEP="${KEEP:-0}"; SKIP_PASSED="${SKIP_PASSED:-0}"; START_AT="${START_AT:-}"
@@ -5092,11 +5094,11 @@ $STYLE_OUT" || { log "[$TOKEN] no further safe auto-fix applies (remaining issue
   if [ "$LIVECHECK" = 1 ]; then
     STAGE="livecheck"; LIVECHECK_OUT="$(brew livecheck --cask "$TOKEN" 2>&1 || true)"
   fi
-  if [ "$DRYRUN" != 1 ]; then git add "$CASK"; git commit -q -m "Add $TOKEN (new cask)" 2>/dev/null || true; fi
+  if [ "$DRYRUN" != 1 ] && [ "$TEST_INSTALL" != 1 ]; then git add "$CASK"; git commit -q -m "Add $TOKEN (new cask)" 2>/dev/null || true; fi
   STAGE="audit"; issues && die "style/audit still failing after auto-fix — see report (auto-fixed: ${AUTOFIX:-none})"
   log "[$TOKEN] style + audit OK${AUTOFIX:+ (auto-fixed: $AUTOFIX)}"
 
-  if [ "$DRYRUN" = 1 ]; then STATUS="dryrun (audited, not shipped)"; log "[$TOKEN] DRYRUN — no install/push/PR/FR"; report; exit 0; fi
+  if [ "$DRYRUN" = 1 ] && [ "$TEST_INSTALL" != 1 ]; then STATUS="dryrun (audited, not shipped)"; log "[$TOKEN] DRYRUN — no install/push/PR/FR"; report; exit 0; fi
 
   STAGE="install"; log "[$TOKEN] install test (sudo prompt for pkgs)…"
   HOMEBREW_NO_INSTALL_FROM_API=1 brew install --cask "$TOKEN" 2>&1 | tee "$W/install.log" || die "install failed — no PR opened"
@@ -5115,6 +5117,10 @@ $STYLE_OUT" || { log "[$TOKEN] no further safe auto-fix applies (remaining issue
   if [ "$KEEP" != 1 ]; then
     BC="$(brew --cache --cask "$TOKEN" 2>/dev/null || true)"
     [ -n "$BC" ] && rm -f "$BC" 2>/dev/null
+  fi
+
+  if [ "$DRYRUN" = 1 ] && [ "$TEST_INSTALL" = 1 ]; then
+    STATUS="test (install verified, not shipped)"; log "[$TOKEN] TEST_INSTALL — full testing done but no push/PR/FR"; report; exit 0
   fi
 
   STAGE="push"
