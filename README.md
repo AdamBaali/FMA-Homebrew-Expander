@@ -52,11 +52,21 @@ homebrew-cask tap. It's location-independent (operates on the tap and `/tmp/cask
 ```bash
 DRYRUN=1 bash scripts/cask-master.sh                    # preview: write + audit every cask, open nothing
 DRYRUN=1 ONLY="filezilla" bash scripts/cask-master.sh   # one app
+DRYRUN=1 SKIP_PASSED=1 bash scripts/cask-master.sh      # re-run only apps that haven't passed yet
 bash scripts/cask-master.sh                             # FOR REAL — opens a PR + Fleet FR per app (maintainer)
 ```
 
-Registry format, per-source spec, and all flags (`ONLY`, `LIMIT`, `STRICT`, `ZAP`, `FILE_FR`,
-`CUSTOMER_LABEL`, `SUDO_NOPASSWD`, …) are documented at the top of the script. **Sudo is asked once
+Registry format, per-source spec, and all flags (`ONLY`, `LIMIT`, `JOBS`, `KEEP`, `SKIP_PASSED`,
+`START_AT`, `LIVECHECK`, `CASKWORK`, `CHECK`, `STRICT`, `ZAP`, `FILE_FR`, `CUSTOMER_LABEL`,
+`SUDO_NOPASSWD`, …) are documented at the top of the script. Downloads are prefetched up to
+`JOBS` apps ahead (default 4) and **each app's download + extracted tree is deleted as soon as
+the app finishes** (`KEEP=1` keeps them), so a full run can't fill the disk. **Sudo is asked once
 and cached for the whole run** (a temporary `/etc/sudoers.d` drop-in, auto-removed on exit), so
 installs/uninstalls never re-prompt. Before a real run: `gh auth login` and add your `fork` remote
-in `$(brew --repository homebrew/cask)`. Per-app reports land in `/tmp/caskwork/<token>/report.md`.
+in `$(brew --repository homebrew/cask)`.
+
+Per-app reports land in `/tmp/caskwork/<token>/report.md` (override the dir with `CASKWORK=`;
+`/tmp` is wiped on reboot). A machine-readable rollup lands at `/tmp/caskwork/results.tsv`, the
+failures are listed at the bottom of `MASTER-summary.md` with a ready-made `ONLY="..."` re-run
+line, and the script exits non-zero if any app failed. `CHECK=1` prints a registry vs
+`data/master-list.csv` drift report without running anything (works on any OS).
