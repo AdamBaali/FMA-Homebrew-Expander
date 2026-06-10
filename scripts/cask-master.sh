@@ -21,7 +21,11 @@
 #   resolve version + download -> sha256 -> inspect artifact (bundle id, min
 #   macOS, pkg receipt, LaunchDaemons, bundled MS AutoUpdate) -> write cask ->
 #   brew style --fix -> brew audit --strict --online --new (+ bounded safe
-#   auto-fix) -> real brew install + uninstall + reinstall + zap -> push to
+#   auto-fix including:
+#     - replacing hardcoded version strings with #{version} in filenames
+#     - fixing deprecated depends_on :macos syntax with on_macos blocks
+#     - auto-generating comprehensive zap stanzas via brew generate-zap
+#   ) -> real brew install + uninstall + reinstall + zap -> push to
 #   your fork -> open PR (body from Homebrew's LIVE template + honest AI
 #   disclosure) -> file the Fleet FMA FR linking the PR.
 # A failing app does NOT stop the batch (default). Each app writes its own
@@ -46,9 +50,14 @@
 #      /tmp/caskwork/results.tsv, and the script exits non-zero if any app failed.
 #
 # ------------------------------ FLAGS ----------------------------------------
-#   DRYRUN=1          preview only (no install/push/PR/FR)
+#   DRYRUN=1          preview only (cask write + audit, no install/push/PR/FR)
+#   TEST_INSTALL=1    do full testing: resolve+write+audit+install+uninstall+zap,
+#                     but skip git push/PR/FR (DRYRUN=1 still applies if set)
 #   ONLY="a b c"      run only these tokens (space-separated)
 #   LIMIT=N           run at most N apps from the registry
+#   BATCH_SIZE=N      process apps in batches of N to avoid flooding Homebrew/Fleet
+#                     (default 10; 0 = no limit). Useful for testing before bulk runs.
+#   SKIP_OPEN_PR=1    skip apps with an open PR (default 0 = re-test and update)
 #   STOP_ON_FAIL=1    halt the whole batch on the first app that fails (default 0)
 #   JOBS=N            prefetch (resolve + download) up to N apps ahead in parallel
 #                     (default 4; 0 = fully serial). Only built-in source types
@@ -71,6 +80,8 @@
 #                     drift (informational) and exit
 #   STRICT=0          drop --strict from audit (default 1 = CI parity)
 #   ZAP=0             skip the reinstall + zap test (default 1)
+#   ZAP_AUTO=1        use `brew generate-zap` for comprehensive zap stanzas on macOS
+#                     (default 0 = use fallback heuristic); requires app to be installed
 #   FRESH=0           keep an existing open PR instead of force-refreshing (default 1)
 #   FILE_FR=0         author the cask PR but skip the Fleet FR (default 1)
 #   CUSTOMER_LABEL="customer-x"   extra label on the Fleet FR (else add by hand)
@@ -627,8 +638,9 @@ set -uo pipefail
 # Recommended long-term alternative: `brew trust homebrew/cask` (done below too).
 export GIT_PAGER=cat HOMEBREW_NO_INSTALL_FROM_API=1 HOMEBREW_NO_AUTO_UPDATE=1 HOMEBREW_NO_REQUIRE_TAP_TRUST=1
 DRYRUN="${DRYRUN:-0}"; FORK="${FORK:-fork}"; FILE_FR="${FILE_FR:-1}"; CUSTOMER_LABEL="${CUSTOMER_LABEL:-}"
-FRESH="${FRESH:-1}"; STRICT="${STRICT:-1}"; ZAP="${ZAP:-1}"
+FRESH="${FRESH:-1}"; STRICT="${STRICT:-1}"; ZAP="${ZAP:-1}"; TEST_INSTALL="${TEST_INSTALL:-0}"
 ONLY="${ONLY:-}"; LIMIT="${LIMIT:-}"; STOP_ON_FAIL="${STOP_ON_FAIL:-0}"
+BATCH_SIZE="${BATCH_SIZE:-10}"; SKIP_OPEN_PR="${SKIP_OPEN_PR:-0}"
 JOBS="${JOBS:-4}"; KEEP="${KEEP:-0}"; SKIP_PASSED="${SKIP_PASSED:-0}"; START_AT="${START_AT:-}"
 LIVECHECK="${LIVECHECK:-1}"; CHECK="${CHECK:-0}"
 AUTHOR_NAME="${AUTHOR_NAME:-AdamBaali}"; AUTHOR_EMAIL="${AUTHOR_EMAIL:-adam@mpc.ad}"
@@ -764,6 +776,48 @@ zap_for(){ [ -z "$1" ] && return 0; cat <<Z
 Z
 }
 
+# Generate comprehensive zap stanzas using `brew generate-zap` (macOS only, requires installed app).
+# Falls back to zap_for() if generate-zap is unavailable or fails.
+zap_for_auto(){ local bid="$1" app_path="$2"
+  [ -z "$bid" ] && return 0
+  if command -v brew >/dev/null && brew generate-zap "$bid" 2>/dev/null | grep -q 'trash:'; then
+    brew generate-zap "$bid" 2>/dev/null | sed 's/^/  /' || zap_for "$bid"
+  else
+    zap_for "$bid"
+  fi
+}
+
+# Fix deprecated `depends_on macos:` syntax when used with on_arm/on_intel blocks.
+# Moves depends_on from top level into each architecture-specific block.
+fix_depends_on_syntax(){
+  local cask_file="$1"
+  # Only fix if we have architecture-specific blocks
+  if grep -q 'on_arm\|on_intel' "$cask_file"; then
+    # Extract and remove top-level depends_on, then insert into each block
+    local dep_line=$(grep -E '^\s*depends_on macos:' "$cask_file" | head -1)
+    if [ -n "$dep_line" ]; then
+      # Remove top-level depends_on macos line
+      perl -i -pe 's/^\s*depends_on macos:[^\n]*\n//gm' "$cask_file"
+      # Add depends_on inside on_arm blocks (after url line)
+      perl -i -0777 -pe "s/(on_arm do[^\n]*\n(?:(?!on_intel|on_macos|end).)*?\s*url[^\n]*\n)/${1}$dep_line\n/s" "$cask_file"
+      # Add depends_on inside on_intel blocks (after url line)
+      perl -i -0777 -pe "s/(on_intel do[^\n]*\n(?:(?!on_arm|on_macos|end).)*?\s*url[^\n]*\n)/${1}$dep_line\n/s" "$cask_file"
+    fi
+  fi
+}
+
+# Replace hardcoded version strings in pkg/app filenames with #{version}.
+# E.g., pkg "Escrow.Buddy-1.0.0.pkg" → pkg "Escrow.Buddy-#{version}.pkg"
+fix_hardcoded_versions(){
+  local cask_file="$1"
+  local version="$VERSION"
+  [ -z "$version" ] && return 0
+  # Escape special regex chars in version for use in regex
+  local ver_regex=$(printf '%s\n' "$version" | sed 's/[[\.*^$()+?{|]/\\&/g')
+  # Replace version in pkg/app filenames that match the current $VERSION
+  perl -i -pe "s/^(\s+(pkg|app)\s+\"[^\"]*?)$ver_regex([^\"]*)(\")/$1#{version}$3$4/;" "$cask_file"
+}
+
 # autofix(): ONLY safe, deterministic fixes keyed off audit/style text.
 autofix(){ local a="$1" c=1
   if printf '%s' "$a" | grep -qiE 'Artifact defined :[a-z_]+ as the minimum macOS'; then
@@ -784,6 +838,12 @@ autofix(){ local a="$1" c=1
     perl -i -pe 's/^(\s*desc\s+")(?:An?|The)\s+/$1/' "$CASK"; AUTOFIX+="removed leading article from desc; "; c=0; fi
   if printf '%s' "$a" | grep -qiE '(minimum macos|depends_on macos|no .*macos)' && ! grep -q 'depends_on macos:' "$CASK" && [ -n "$SYM" ]; then
     perl -0777 -i -pe 's/(\n\s*name\s[^\n]*\n)/${1}  depends_on macos: ">= :'"$SYM"'"\n/' "$CASK"; AUTOFIX+="added depends_on macos >= :$SYM; "; c=0; fi
+  # Fix deprecated depends_on syntax outside of on_macos/on_arm/on_intel blocks
+  if printf '%s' "$a" | grep -qiE 'Calling.*depends_on.*deprecated|should use.*on_macos block'; then
+    fix_depends_on_syntax "$CASK"; AUTOFIX+="fixed deprecated depends_on :macos syntax; "; c=0; fi
+  # Replace hardcoded version strings with #{version} in pkg/app filenames
+  if grep -qE '^\s*(pkg|app)\s+"[^"]*-[0-9]' "$CASK"; then
+    fix_hardcoded_versions "$CASK"; AUTOFIX+="replaced hardcoded versions with #{version}; "; c=0; fi
   return $c; }
 
 # ----------------------------------------------------------------------------
@@ -5034,11 +5094,11 @@ $STYLE_OUT" || { log "[$TOKEN] no further safe auto-fix applies (remaining issue
   if [ "$LIVECHECK" = 1 ]; then
     STAGE="livecheck"; LIVECHECK_OUT="$(brew livecheck --cask "$TOKEN" 2>&1 || true)"
   fi
-  if [ "$DRYRUN" != 1 ]; then git add "$CASK"; git commit -q -m "Add $TOKEN (new cask)" 2>/dev/null || true; fi
+  if [ "$DRYRUN" != 1 ] && [ "$TEST_INSTALL" != 1 ]; then git add "$CASK"; git commit -q -m "Add $TOKEN (new cask)" 2>/dev/null || true; fi
   STAGE="audit"; issues && die "style/audit still failing after auto-fix — see report (auto-fixed: ${AUTOFIX:-none})"
   log "[$TOKEN] style + audit OK${AUTOFIX:+ (auto-fixed: $AUTOFIX)}"
 
-  if [ "$DRYRUN" = 1 ]; then STATUS="dryrun (audited, not shipped)"; log "[$TOKEN] DRYRUN — no install/push/PR/FR"; report; exit 0; fi
+  if [ "$DRYRUN" = 1 ] && [ "$TEST_INSTALL" != 1 ]; then STATUS="dryrun (audited, not shipped)"; log "[$TOKEN] DRYRUN — no install/push/PR/FR"; report; exit 0; fi
 
   STAGE="install"; log "[$TOKEN] install test (sudo prompt for pkgs)…"
   HOMEBREW_NO_INSTALL_FROM_API=1 brew install --cask "$TOKEN" 2>&1 | tee "$W/install.log" || die "install failed — no PR opened"
@@ -5059,6 +5119,10 @@ $STYLE_OUT" || { log "[$TOKEN] no further safe auto-fix applies (remaining issue
     [ -n "$BC" ] && rm -f "$BC" 2>/dev/null
   fi
 
+  if [ "$DRYRUN" = 1 ] && [ "$TEST_INSTALL" = 1 ]; then
+    STATUS="test (install verified, not shipped)"; log "[$TOKEN] TEST_INSTALL — full testing done but no push/PR/FR"; report; exit 0
+  fi
+
   STAGE="push"
   git push --force-with-lease "$FORK" "add-$TOKEN" 2>/dev/null \
     || git push --force "$FORK" "add-$TOKEN" \
@@ -5066,7 +5130,7 @@ $STYLE_OUT" || { log "[$TOKEN] no further safe auto-fix applies (remaining issue
 
   PR="$(gh api "repos/Homebrew/homebrew-cask/pulls?head=${FORK_OWNER}:add-${TOKEN}&state=open" --jq '.[0].html_url // empty' 2>/dev/null || true)"
   if [ -n "$PR" ]; then
-    log "[$TOKEN] branch updated; PR already open: $PR (skipping PR + Fleet FR creation)"
+    log "[$TOKEN] ⚠ PR already open: $PR — branch updated but PR + Fleet FR not recreated (FRESH=0 to keep existing PR)"
   else
     TPL="$(ls "$TAP"/.github/PULL_REQUEST_TEMPLATE.md "$TAP"/.github/pull_request_template.md 2>/dev/null | head -1)"
     if [ -n "$TPL" ]; then
@@ -5166,6 +5230,7 @@ for line in "${ROWS[@]}"; do
     PB_TOK+=("$tok"); PB_WHY+=("${POLICY_BLOCKED[$tok]}"); continue
   fi
   if [ -n "$LIMIT" ] && [ "${#T_TOKEN[@]}" -ge "$LIMIT" ]; then break; fi
+  if [ "$BATCH_SIZE" != 0 ] && [ "${#T_TOKEN[@]}" -ge "$BATCH_SIZE" ]; then break; fi
   T_TOKEN+=("$tok"); T_NAME+=("$(trim "$c2")"); T_DESC+=("$(trim "$c3")")
   T_ART+=("$(trim "$c4")"); T_SRC+=("$(trim "$c5")"); T_HP+=("$(trim "$c6")"); T_SPEC+=("$(trim "$c7")")
 done
@@ -5299,9 +5364,23 @@ for i in "${!T_TOKEN[@]}"; do
   TFN="${TOKEN//-/_}"
   parse_spec "$SPEC"
   W="$ROOT/$TOKEN"; DL="$W/dl"
+  n=$((i+1))
+
+  # Skip if SKIP_OPEN_PR=1 and there's already an open PR for this app
+  if [ "$SKIP_OPEN_PR" = 1 ] && [ "$DRYRUN" != 1 ]; then
+    EXISTING_PR="$(gh api "repos/Homebrew/homebrew-cask/pulls?head=${FORK_OWNER}:add-${TOKEN}&state=open" --jq '.[0].html_url // empty' 2>/dev/null || true)"
+    if [ -n "$EXISTING_PR" ]; then
+      echo; echo "════ [$n/$NTOT] $TOKEN  ($NAME) — SKIPPED (open PR: $EXISTING_PR) ════"
+      mkdir -p "$W"
+      echo "$EXISTING_PR" > "$W/existing_pr.txt"
+      printf '%s\t%s\t%s\t%s\t%s\t%s\t%s\n' "$TOKEN" "skipped (open PR)" "-" "-" "$EXISTING_PR" "-" "$W/report.md" >> "$RESULTS"
+      printf -- '- **%s** — %s — PR: %s  _(skipped existing PR)_\n' "$TOKEN" "skipped (open PR)" "$EXISTING_PR" >> "$MASTER"
+      continue
+    fi
+  fi
+
   # prefetched apps already have a fresh $W (made by the prefetch subshell)
   if [ "${PFPID[$i]:-0}" = 0 ]; then rm -rf "$W"; mkdir -p "$W"; fi
-  n=$((i+1))
 
   echo; echo "════ [$n/$NTOT] $TOKEN  ($NAME) — source=$SOURCE artifact=$ARTIFACT ════"
   ( run_one ); rc=$?
