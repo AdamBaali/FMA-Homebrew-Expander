@@ -34,7 +34,7 @@ The full flag reference is in the script header.
 - Exit code is non-zero if any app failed.
 - `$CASKWORK/results.tsv` — one row per app (`token  status  stage  version  pr  fr  report`).
   Read this first; don't open 300 reports.
-- 90 rows saying `skipped (policy-blocked)` are EXPECTED on a full run — those apps are
+- 91 rows saying `skipped (policy-blocked)` are EXPECTED on a full run — those apps are
   known brew-audit policy rejections (NOT-ADDED.md §2; `POLICY_BLOCKED` in the script).
   Don't try to fix them; only re-test with `RUN_BLOCKED=1 ONLY="tok"` if upstream changed
   (app got notarized, repo gained stars), and delete the entry if it now passes.
