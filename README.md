@@ -15,7 +15,7 @@ It's since been removed from fleet `main`, so the pinned commit is the durable l
 
 ## Status
 
-**533 / 533 sourced · 318 authored into the registry · 228 shippable** — one `bash scripts/cask-master.sh` run authors them all; the 90 policy-blocked apps are skipped by default. The `bucket` column of [`data/master-list.csv`](data/master-list.csv) is the authoritative per-app verdict; [`NOT-ADDED.md`](NOT-ADDED.md) lists every app that isn't shipped, grouped by reason.
+**533 / 533 sourced · 318 authored into the registry · 228 shippable** — one `bash scripts/cask-master.sh` run authors all 228 shippable casks; the 90 policy-blocked apps are skipped by default (`RUN_BLOCKED=1` re-tests them). The `bucket` column of [`data/master-list.csv`](data/master-list.csv) is the authoritative per-app verdict; [`NOT-ADDED.md`](NOT-ADDED.md) lists every app that isn't shipped, grouped by reason.
 
 | Bucket | Count |
 |---|---|
@@ -57,7 +57,7 @@ Authored by source type: `github_tag 71 · direct 55 · direct_latest 69 · cust
 homebrew-cask tap. It's location-independent (operates on the tap and `/tmp/caskwork`).
 
 ```bash
-DRYRUN=1 bash scripts/cask-master.sh                    # preview: write + audit every cask, open nothing
+DRYRUN=1 bash scripts/cask-master.sh                    # preview: write + audit all 228 shippable casks, open nothing
 DRYRUN=1 ONLY="filezilla" bash scripts/cask-master.sh   # one app
 DRYRUN=1 SKIP_PASSED=1 bash scripts/cask-master.sh      # re-run only apps that haven't passed yet
 bash scripts/cask-master.sh                             # FOR REAL — opens a PR + Fleet FR per app (maintainer)
