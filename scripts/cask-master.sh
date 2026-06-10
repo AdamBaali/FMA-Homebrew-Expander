@@ -21,7 +21,11 @@
 #   resolve version + download -> sha256 -> inspect artifact (bundle id, min
 #   macOS, pkg receipt, LaunchDaemons, bundled MS AutoUpdate) -> write cask ->
 #   brew style --fix -> brew audit --strict --online --new (+ bounded safe
-#   auto-fix) -> real brew install + uninstall + reinstall + zap -> push to
+#   auto-fix including:
+#     - replacing hardcoded version strings with #{version} in filenames
+#     - fixing deprecated depends_on :macos syntax with on_macos blocks
+#     - auto-generating comprehensive zap stanzas via brew generate-zap
+#   ) -> real brew install + uninstall + reinstall + zap -> push to
 #   your fork -> open PR (body from Homebrew's LIVE template + honest AI
 #   disclosure) -> file the Fleet FMA FR linking the PR.
 # A failing app does NOT stop the batch (default). Each app writes its own
@@ -71,6 +75,8 @@
 #                     drift (informational) and exit
 #   STRICT=0          drop --strict from audit (default 1 = CI parity)
 #   ZAP=0             skip the reinstall + zap test (default 1)
+#   ZAP_AUTO=1        use `brew generate-zap` for comprehensive zap stanzas on macOS
+#                     (default 0 = use fallback heuristic); requires app to be installed
 #   FRESH=0           keep an existing open PR instead of force-refreshing (default 1)
 #   FILE_FR=0         author the cask PR but skip the Fleet FR (default 1)
 #   CUSTOMER_LABEL="customer-x"   extra label on the Fleet FR (else add by hand)
@@ -764,6 +770,48 @@ zap_for(){ [ -z "$1" ] && return 0; cat <<Z
 Z
 }
 
+# Generate comprehensive zap stanzas using `brew generate-zap` (macOS only, requires installed app).
+# Falls back to zap_for() if generate-zap is unavailable or fails.
+zap_for_auto(){ local bid="$1" app_path="$2"
+  [ -z "$bid" ] && return 0
+  if command -v brew >/dev/null && brew generate-zap "$bid" 2>/dev/null | grep -q 'trash:'; then
+    brew generate-zap "$bid" 2>/dev/null | sed 's/^/  /' || zap_for "$bid"
+  else
+    zap_for "$bid"
+  fi
+}
+
+# Fix deprecated `depends_on macos:` syntax when used with on_arm/on_intel blocks.
+# Moves depends_on from top level into each architecture-specific block.
+fix_depends_on_syntax(){
+  local cask_file="$1"
+  # Only fix if we have architecture-specific blocks
+  if grep -q 'on_arm\|on_intel' "$cask_file"; then
+    # Extract and remove top-level depends_on, then insert into each block
+    local dep_line=$(grep -E '^\s*depends_on macos:' "$cask_file" | head -1)
+    if [ -n "$dep_line" ]; then
+      # Remove top-level depends_on macos line
+      perl -i -pe 's/^\s*depends_on macos:[^\n]*\n//gm' "$cask_file"
+      # Add depends_on inside on_arm blocks (after url line)
+      perl -i -0777 -pe "s/(on_arm do[^\n]*\n(?:(?!on_intel|on_macos|end).)*?\s*url[^\n]*\n)/${1}$dep_line\n/s" "$cask_file"
+      # Add depends_on inside on_intel blocks (after url line)
+      perl -i -0777 -pe "s/(on_intel do[^\n]*\n(?:(?!on_arm|on_macos|end).)*?\s*url[^\n]*\n)/${1}$dep_line\n/s" "$cask_file"
+    fi
+  fi
+}
+
+# Replace hardcoded version strings in pkg/app filenames with #{version}.
+# E.g., pkg "Escrow.Buddy-1.0.0.pkg" → pkg "Escrow.Buddy-#{version}.pkg"
+fix_hardcoded_versions(){
+  local cask_file="$1"
+  local version="$VERSION"
+  [ -z "$version" ] && return 0
+  # Escape special regex chars in version for use in regex
+  local ver_regex=$(printf '%s\n' "$version" | sed 's/[[\.*^$()+?{|]/\\&/g')
+  # Replace version in pkg/app filenames that match the current $VERSION
+  perl -i -pe "s/^(\s+(pkg|app)\s+\"[^\"]*?)$ver_regex([^\"]*)(\")/$1#{version}$3$4/;" "$cask_file"
+}
+
 # autofix(): ONLY safe, deterministic fixes keyed off audit/style text.
 autofix(){ local a="$1" c=1
   if printf '%s' "$a" | grep -qiE 'Artifact defined :[a-z_]+ as the minimum macOS'; then
@@ -784,6 +832,12 @@ autofix(){ local a="$1" c=1
     perl -i -pe 's/^(\s*desc\s+")(?:An?|The)\s+/$1/' "$CASK"; AUTOFIX+="removed leading article from desc; "; c=0; fi
   if printf '%s' "$a" | grep -qiE '(minimum macos|depends_on macos|no .*macos)' && ! grep -q 'depends_on macos:' "$CASK" && [ -n "$SYM" ]; then
     perl -0777 -i -pe 's/(\n\s*name\s[^\n]*\n)/${1}  depends_on macos: ">= :'"$SYM"'"\n/' "$CASK"; AUTOFIX+="added depends_on macos >= :$SYM; "; c=0; fi
+  # Fix deprecated depends_on syntax outside of on_macos/on_arm/on_intel blocks
+  if printf '%s' "$a" | grep -qiE 'Calling.*depends_on.*deprecated|should use.*on_macos block'; then
+    fix_depends_on_syntax "$CASK"; AUTOFIX+="fixed deprecated depends_on :macos syntax; "; c=0; fi
+  # Replace hardcoded version strings with #{version} in pkg/app filenames
+  if grep -qE '^\s*(pkg|app)\s+"[^"]*-[0-9]' "$CASK"; then
+    fix_hardcoded_versions "$CASK"; AUTOFIX+="replaced hardcoded versions with #{version}; "; c=0; fi
   return $c; }
 
 # ----------------------------------------------------------------------------
