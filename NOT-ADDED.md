@@ -1,8 +1,19 @@
 # Apps not added — and why
 
 The catalog is **533** apps (`data/master-list.csv`, one row each, with a `bucket` column that
-holds the authoritative per-app verdict). **318 were authored** into `scripts/cask-master.sh`;
-the **215** below are not shipped, for two kinds of reason.
+holds the authoritative per-app verdict). **318 were authored** into `scripts/cask-master.sh`.
+**305** apps are not shipped, for two kinds of reason: **215** were never eligible to author
+(section 1) and **90** were authored but are blocked by Homebrew core policy (section 2) —
+leaving **228** casks that can actually ship to homebrew-cask core.
+
+> **Source / future ref.** The 533-app universe is Fleet's "appcatalog.cloud apps with no
+> Homebrew cask" list — 533 macOS [appcatalog.cloud](https://appcatalog.cloud/apps) apps with no
+> matching Homebrew cask (checked against the full 7,706-cask Homebrew list) — shared by Allen
+> Houchins on 2026-06-08:
+> [the list](https://github.com/fleetdm/fleet/blob/118e968fac7f45d07f6dcd3bd08bcd055254928b/ee/maintained-apps/app-catalog-parity/no-homebrew-cask.md)
+> · [Slack post](https://fleetdm.slack.com/archives/C02TYJF11P0/p1780941961900449?thread_ts=1780930437.788159&cid=C02TYJF11P0).
+> The file has since been removed from fleet `main`, so the **pinned commit (`118e968`)** is the
+> durable reference for reconciling this pile against the live catalog later.
 
 ## 1. Not eligible / not sourced — decided before authoring
 
@@ -54,23 +65,59 @@ the **215** below are not shipped, for two kinds of reason.
 These *were* authored, but `brew audit --strict --online --new` rejects them and nothing in the
 cask can fix it. Skip for homebrew-cask **core** (a Fleet-owned custom tap is the alternative).
 
-> ⚠️ From the dry run, **partial — 230/318 authored apps audited so far** (the run was still
-> going when this was generated). Regenerate when it finishes — see the command at the bottom.
+> ✅ **Enforced since 2026-06-10:** `scripts/cask-master.sh` carries this list as
+> `POLICY_BLOCKED` (right after the REGISTRY) and skips these tokens by default,
+> recording `skipped (policy-blocked)` in results.tsv instead of re-failing them on
+> every run. A new upstream release can flip a verdict (app gets notarized, repo gains
+> stars) — re-test with `RUN_BLOCKED=1 ONLY="tok ..."` and delete entries that pass.
+
+> ⚠️ Coverage: the dry run behind this list stopped at **244/318** authored apps (174 failed —
+> 87 of them proved policy-blocked below, the other 87 were registry/spec bugs since fixed;
+> 63 passed; 7 already existed upstream; 74 never ran). `appcode`, `corelcad`, and `nightowl`
+> were added from research rather than audit output. Regenerate after the next full `DRYRUN=1`
+> run — see the command at the bottom.
+
+90 unique apps; the 95 reason rows below overlap because 5 apps (`battery-toolkit`,
+`chromebuddy`, `dropnote`, `mxmarkedit`, `smotrite`) hit two reasons at once.
 
 | Reason | Count |
 |---|---|
-| Not signed + Apple-notarized | 38 |
-| GitHub repo not notable enough (<75★ / <30 forks / <30 watchers) | 32 |
+| Not signed + Apple-notarized / signature invalid | 43 |
+| GitHub/Bitbucket repo not notable enough (<75★ / <30 forks / <30 watchers) | 36 |
 | GitHub repo archived | 2 |
+| Vendor blocks automation / no version source / EOL (found 2026-06-10) | 13 |
+| Removed from homebrew-cask as malware | 1 |
 
-**Not signed + Apple-notarized (38)**  
-`airbattery`, `bartranslate`, `battery-toolkit`, `blink-eye`, `boring-notch`, `brewmate`, `caesium-image-compressor`, `canister`, `chromebuddy`, `dropnote`, `droppoint`, `editready`, `fontagent`, `freeter`, `later`, `logoer`, `macuncle-eml-viewer`, `mindview-9`, `mixpad`, `modalfilemanager`, `mxmarkedit`, `offshoot`, `peazip`, `pixillion`, `quickrecorder`, `shokz-connect`, `smotrite`, `sniffnet`, `squirreldisk`, `station`, `supercorners`, `swiftcord`, `swiftguard`, `textream`, `time-machine-inspector`, `tinyweb`, `trace`, `watchflower`
+**Not signed + Apple-notarized / signature invalid (43)**  
+`okiocam-snapshot-and-recorder`, `soundfield-by-rode`,
+`1piece`, `airbattery`, `bartranslate`, `bimcollab-zoom` *(signature invalid: "software has been altered")*, `battery-toolkit`, `blink-eye`, `boring-notch`, `brewmate`, `caesium-image-compressor`, `canister`, `chromebuddy`, `dropnote`, `droppoint`, `editready`, `fontagent`, `freeter`, `later`, `logoer`, `macuncle-eml-viewer`, `mindview-9`, `mixpad`, `modalfilemanager`, `mxmarkedit`, `offshoot`, `peazip`, `pixillion`, `quickrecorder`, `relagit`, `shokz-connect`, `smotrite`, `sniffnet`, `squirreldisk`, `station`, `supercorners`, `swiftcord`, `swiftguard`, `textream`, `time-machine-inspector`, `tinyweb`, `trace`, `watchflower`
 
-**GitHub repo not notable enough (<75★ / <30 forks / <30 watchers) (32)**  
-`air-flow`, `api-utility`, `backgrounds`, `chatkit`, `chromebuddy`, `close-desktop`, `desktop-icon-manager`, `dictation-daddy`, `dropnote`, `elevate24`, `file-architect`, `hide-icons`, `impulso`, `jamf-actions`, `jamf-cli`, `jamf-framework-redeploy`, `jamf-printer-manager`, `jamf-protect-ulf-uploader`, `jamfdash`, `mailvault`, `monsterwriter`, `mxmarkedit`, `noteey`, `object-info`, `psso-utility`, `quilt-app`, `sapmachine-manager`, `smotrite`, `sym-helper`, `visualz`, `vocal`, `wudpecker`
+**GitHub/Bitbucket repo not notable enough (<75★ / <30 forks / <30 watchers) (36)**  
+`depnotify`, `deskrest`, `jamf-compliance-editor`,
+`air-flow`, `api-utility`, `backgrounds`, `chatkit`, `chromebuddy`, `close-desktop`, `desktop-icon-manager`, `dictation-daddy`, `dropnote`, `elevate24`, `file-architect`, `hide-icons`, `impulso`, `jamf-actions`, `jamf-cli`, `jamf-framework-redeploy`, `jamf-printer-manager`, `jamf-protect-ulf-uploader`, `jamfdash`, `mailvault`, `monsterwriter`, `mxmarkedit`, `noteey`, `object-info`, `psso-utility`, `quilt-app`, `sapmachine-manager`, `smotrite`, `sym-helper`, `utm-coordinate-converter` *(Bitbucket)*, `visualz`, `vocal`, `wudpecker`
 
 **GitHub repo archived (2)**  
 `battery-toolkit`, `jamf-environment-test`
+
+**Vendor blocks automation / no version source / EOL (13)**  
+`dragonframe-2024`, `dragonframe-2025`, `dragonframe-5` — dragonframe.com returns HTTP 406
+to every non-browser client (curl, Homebrew's own UA), so brew's homepage/livecheck checks
+can never pass. `corelcad` — discontinued 2023; only a fixed unversioned trial dmg remains.
+`fuzzlecheck-4`, `onemenu` — JS-only download pages, no robot-readable version source.
+`appcode` — JetBrains discontinued AppCode (EOL Dec 2023). `lucidlink` — the v3 client is
+portal-distributed (app.lucidlink.com), no public versioned URL; Classic 2.x ships as
+`lucidlink-classic`. `horse` — downloads are unversioned redirects to expiring signed URLs
+on a private GitHub repo; no version-pinned public URL or stable sha256 is possible.
+`imymac-pdf-compressor`, `imymac-video-converter` — imymac.com 403s every non-browser
+download, so brew itself cannot fetch them (same vendor as the PUA-bucketed `powermymac`).
+`print-window` — printwindowapp.com serves an expired TLS certificate; brew cannot
+download. Re-test with `RUN_BLOCKED=1` once the vendor renews it.
+`huggingchat-mac` — only GitHub pre-releases exist; audit `--new` rejects
+pre-release-only projects.
+
+**Removed from homebrew-cask as malware (1)**  
+`nightowl` — removed upstream in 2023 ([homebrew-cask#149439](https://github.com/Homebrew/homebrew-cask/pull/149439)):
+the app silently enrolled Macs in a paid third-party proxy network. Do not resubmit.
 
 ---
 

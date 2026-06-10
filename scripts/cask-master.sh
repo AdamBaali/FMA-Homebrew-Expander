@@ -3,6 +3,15 @@
 # cask-master.sh — bulk Homebrew Cask authoring for the appcatalog.cloud
 #                  "no-homebrew-cask" backlog (fleetdm/fleet).
 #
+# SOURCE OF THE BACKLOG — the 533-app universe this script + master-list.csv
+# are derived from is Fleet's "appcatalog.cloud apps with no Homebrew cask"
+# list (533 macOS appcatalog.cloud apps with no matching Homebrew cask, checked
+# against the full 7,706-cask Homebrew list). Shared by Allen Houchins, 2026-06-08:
+#   list  https://github.com/fleetdm/fleet/blob/118e968fac7f45d07f6dcd3bd08bcd055254928b/ee/maintained-apps/app-catalog-parity/no-homebrew-cask.md
+#   slack https://fleetdm.slack.com/archives/C02TYJF11P0/p1780941961900449?thread_ts=1780930437.788159&cid=C02TYJF11P0
+#   NOTE  the file has since been removed from fleet `main`; the pinned commit
+#         (118e968) above is the durable reference. See NOT-ADDED.md.
+#
 # This is the homebrew-cask-author skill's verified one-shot harness, wrapped
 # in a loop. Each app you add to the REGISTRY below still gets:
 #   its own add-<token> branch, its own homebrew-cask PR, its own Fleet FR.
@@ -51,6 +60,9 @@
 #   SKIP_PASSED=1     skip apps that already passed in a previous run (same CASKWORK
 #                     dir): success/skipped always count; a dryrun pass counts only
 #                     when running DRYRUN=1 again (default 0)
+#   RUN_BLOCKED=1     also run the POLICY_BLOCKED tokens (known, re-verified brew
+#                     audit policy rejections listed after the REGISTRY; default 0 =
+#                     skip them, recorded as "skipped (policy-blocked)" in the rollup)
 #   START_AT=token    skip registry rows until this token (resume an interrupted run)
 #   LIVECHECK=0       skip the per-app `brew livecheck` (info-only; faster iteration)
 #   CASKWORK=dir      work/report dir (default /tmp/caskwork — macOS wipes /tmp on
@@ -182,32 +194,32 @@ alarm-clock-pro | Alarm Clock Pro | Schedules alarms, reminders, and timed event
 alivecolors | AliveColors | Image editor with painting, retouching, and AI-based effects | dmg | direct | https://alivecolors.com/en/index.php | url=https://alivecolors.sfo2.cdn.digitaloceanspaces.com/alivecolors.dmg;vers=https://alivecolors.com/en/download.php;vregex=AliveColors (\d+(?:\.\d+)+)
 atlassian-companion | Atlassian Companion | Edits Confluence and Jira attachments in their native apps | zip | direct | https://confluence.atlassian.com/display/DOC/Install+Atlassian+Companion | url=https://update-nucleus.atlassian.com/Atlassian-Companion/291cb34fe2296e5fb82b83a04704c9b4/darwin/x64/Atlassian%20Companion-darwin-x64-{v}.zip;vers=https://update-nucleus.atlassian.com/Atlassian-Companion/291cb34fe2296e5fb82b83a04704c9b4/darwin/x64/RELEASES.json;vregex=currentRelease"\s*:\s*"(\d+(?:\.\d+)+)
 automounter | AutoMounter | Mounts and remounts network file shares automatically | dmg | direct | https://www.pixeleyes.co.nz/automounter/ | url=https://www.pixeleyes.co.nz/automounter/AutoMounter.dmg;vers=https://www.pixeleyes.co.nz/automounter/version;vregex=([0-9]+(?:\.[0-9]+)+)
-aws-cli | AWS Command Line Interface | Unified tool to manage Amazon Web Services from the command line | pkg | direct | https://aws.amazon.com/cli/ | url=https://awscli.amazonaws.com/AWSCLIV2-{v}.pkg;vers=https://raw.githubusercontent.com/aws/aws-cli/v2/CHANGELOG.rst;vregex=([0-9]+(?:\.[0-9]+)+)
-brosix | Brosix | Secure instant messaging and collaboration client for teams | pkg | direct | https://www.brosix.com/download/ | url=https://downloads.brosix.com/builds/official/Brosix.pkg;vers=https://www.brosix.com/download/;vregex=version (\d+(?:\.\d+)+)
-cakebrew | Cakebrew | Graphical interface to manage the Homebrew package manager | zip | direct | https://www.cakebrew.com | url=https://cakebrew-377a.kxcdn.com/cakebrew-{v}.zip;vers=https://www.cakebrew.com/appcast/profileInfo.php;vregex=([0-9]+(?:\.[0-9]+)+)
+aws-cli | AWS Command Line Interface | Unified tool to manage Amazon Web Services from the command line | pkg | direct | https://aws.amazon.com/cli/ | url=https://awscli.amazonaws.com/AWSCLIV2-{v}.pkg;vers=https://raw.githubusercontent.com/aws/aws-cli/v2/CHANGELOG.rst;vregex=^(2(?:\.\d+)+)$
+brosix | Brosix | Secure instant messaging and collaboration client for teams | pkg | direct | https://www.brosix.com/download/ | url=https://downloads.brosix.com/builds/official/Brosix.pkg;vers=https://www.brosix.com/download/;vregex=version="mac">(\d+(?:\.\d+)+)
+cakebrew | Cakebrew | Graphical interface to manage the Homebrew package manager | zip | direct | https://www.cakebrew.com | url=https://cakebrew-377a.kxcdn.com/cakebrew-{v}.zip;vers=https://www.cakebrew.com/appcast/profileInfo.php;vregex=cakebrew-(\d+(?:\.\d+)+)\.zip
 dragonframe-2024 | Dragonframe 2024 | Stop-motion animation and time-lapse capture tool | pkg | direct | https://www.dragonframe.com/downloads/ | url=https://www.dragonframe.com/download/Dragonframe_{v}.pkg;vers=https://www.dragonframe.com/downloads/;vregex=2024\.[0-9]+\.[0-9]+
 dragonframe-2025 | Dragonframe 2025 | Stop-motion animation and time-lapse capture tool | pkg | direct | https://www.dragonframe.com/downloads/ | url=https://www.dragonframe.com/download/Dragonframe_{v}.pkg;vers=https://www.dragonframe.com/downloads/;vregex=2025\.[0-9]+\.[0-9]+
 dragonframe-5 | Dragonframe 5 | Stop-motion animation and time-lapse capture tool | pkg | direct | https://www.dragonframe.com/downloads/ | url=https://www.dragonframe.com/download/Dragonframe_{v}.pkg;vers=https://www.dragonframe.com/downloads/;vregex=5\.[0-9]+\.[0-9]+
-grammarly | Grammarly | Writing assistant for grammar, spelling, and style suggestions | dmg | direct | https://www.grammarly.com/desktop | url=https://download-mac.grammarly.com/versions/{v}/Grammarly.dmg;vers=https://download-mac.grammarly.com/appcast.xml;vregex=([0-9]+(?:\.[0-9]+)+)
-hudl-studio | Hudl Studio | Creates animated sports graphics and telestration for video | dmg | direct | https://www.hudl.com/downloads/elite | url=https://studio-releases.s3.amazonaws.com/Studio-{v}.dmg;version=2.2.8
-lucidlink | LucidLink | Streams files from cloud object storage as a local drive | pkg | direct | https://www.lucidlink.com/download | url=https://d3il9duqikhdqy.cloudfront.net/latest/osx/lucid-{v}.pkg;version=2.10.8237
-luna-display | Luna Display | Turns an iPad or second device into an external display | dmg | direct | https://astropad.com/getting-started/luna-display/ | url=https://downloads.astropad.com/luna/mac/LunaDisplay-{v}.dmg;version=5.3.8.4999
+grammarly | Grammarly | Writing assistant for grammar, spelling, and style suggestions | dmg | direct | https://www.grammarly.com/desktop | url=https://download-mac.grammarly.com/versions/{v}/Grammarly.dmg;vers=https://download-mac.grammarly.com/appcast.xml;vregex=versions\/(\d+(?:\.\d+)+)\/Grammarly\.dmg
+hudl-studio | Hudl Studio | Creates animated sports graphics and telestration for video | dmg | direct | https://www.hudl.com/downloads/elite | url=https://studio-releases.s3.amazonaws.com/Studio-{v}.dmg;vers=https://studio-releases.s3.amazonaws.com/?list-type=2;vregex=Key>Studio-(\d+(?:\.\d+)+)\.dmg<
+lucidlink | LucidLink | Streams files from cloud object storage as a local drive | pkg | direct_header | https://www.lucidlink.com/download | short=https://www.lucidlink.com/download/latest/osx/stable;regex=lucid-(\d+(?:\.\d+)+)\.pkg
+luna-display | Luna Display | Turns an iPad or second device into an external display | dmg | direct_header | https://astropad.com/getting-started/luna-display/ | short=https://downloads.astropad.com/luna/mac/latest;regex=LunaDisplay-(\d+(?:\.\d+)+)\.dmg
 masv | MASV | Transfers large media files at high speed | dmg | electron | https://massive.io | feed=https://dl.massive.io/latest-mac.yml;universal=masv-{v}-universal
-mestrenova | Mestrenova | Processes and analyzes NMR, LC/GC/MS and other analytical chemistry data | dmg | direct | https://mestrelab.com | url=https://mestrelab.com/downloads/mnova/mac/MestReNova-{v}.dmg;version=16.0.0-39276
+mestrenova | Mestrenova | Processes and analyzes NMR, LC/GC/MS and other analytical chemistry data | dmg | direct | https://mestrelab.com | url=https://mestrelab.com/downloads/mnova/mac/MestReNova-{v}.dmg;vers=https://mestrelab.com/download/;vregex=MestReNova-(\d+\.\d+\.\d+-\d+)\.dmg
 microsoft-skype-for-business | Microsoft Skype for Business | Enterprise instant messaging and online meeting client | pkg | msft_cdn | https://learn.microsoft.com/en-us/skypeforbusiness/ | short=https://go.microsoft.com/fwlink/?linkid=832978;regex=SkypeForBusinessUpdater-(\d+(?:\.\d+)+)\.pkg
 network-share-mounter | Network Share Mounter | Mounts network shares automatically using stored credentials | pkg | direct | https://gitlab.rrze.fau.de/faumac/networkShareMounter | url=https://gitlab.rrze.fau.de/api/v4/projects/506/packages/generic/networksharemounter/release-{v}/NetworkShareMounter-{v}.pkg;vers=https://gitlab.rrze.fau.de/api/v4/projects/506/releases;vregex=release-([0-9]+(?:\.[0-9]+)+)
 nodejs | Node.js | JavaScript runtime built on the V8 engine | pkg | direct | https://nodejs.org | url=https://nodejs.org/dist/v{v}/node-v{v}.pkg;vers=https://nodejs.org/dist/latest/;vregex=node-v([0-9]+(?:\.[0-9]+)+)\.pkg
-particulars | Particulars | Displays detailed hardware and system information in the menu bar | pkg | direct | https://particulars.app | url=https://particulars.app/_downloads/Particulars-{v}.pkg;version=68.485
-poll-everywhere | Poll Everywhere | Live audience response and interactive polling client | dmg | direct | https://www.polleverywhere.com | url=https://polleverywhere-app.s3.amazonaws.com/mac-stable/{v}/pollev.dmg;vers=https://www.polleverywhere.com/app/releases/mac;vregex=([0-9]+(?:\.[0-9]+)+)
+particulars | Particulars | Displays detailed hardware and system information in the menu bar | pkg | direct_header | https://particulars.app | short=https://particulars.app/_downloads/Particulars-latest.pkg;regex=Particulars-(\d+(?:\.\d+)+)\.pkg
+poll-everywhere | Poll Everywhere | Live audience response and interactive polling client | dmg | direct | https://www.polleverywhere.com | url=https://polleverywhere-app.s3.amazonaws.com/mac-stable/{v}/pollev.dmg;vers=https://polleverywhere-app.s3.amazonaws.com/?list-type=2&prefix=mac-stable/;vregex=mac-stable\/(\d+(?:\.\d+)+)\/pollev\.dmg
 screencloud-player | ScreenCloud Player | Displays digital signage content on connected screens | dmg | electron | https://screencloud.com/download | feed=https://release.screen.cloud/player/desktop/channel/stable/latest-mac.yml;arm=scplayer_{v}_darwin_arm64;intel=scplayer_{v}_darwin_x64
 signiant-app | Signiant App | Accelerated large file transfer client for Media Shuttle | dmg | direct | https://help.signiant.com/media-shuttle/signiant-app/download-signiant-app | url=https://updates.signiant.com/signiant_app/Signiant_App_{v}.dmg;vers=https://updates.signiant.com/signiant_app/signiant-app-info-mac.json;vregex=Signiant_App_([0-9]+(?:\.[0-9]+)+)\.dmg
-things | Things | Personal task manager and to-do list organizer | zip | direct | https://culturedcode.com/things/ | url=https://static.culturedcode.com/things/Things3.zip;vers=https://culturedcode.com/things/mac/help/releasenotes/;vregex=([0-9]+(?:\.[0-9]+)+)
-vonage-business | Vonage Business | Calling, messaging, and meetings for unified communications | dmg | electron | https://businesssupport.vonage.com/ | feed=https://s3.amazonaws.com/vbcdesktop.vonage.com/prod/mac/latest-mac.yml;universal=Vonage Business-{v}-universal
+things | Things | Personal task manager and to-do list organizer | zip | direct | https://culturedcode.com/things/ | url=https://static.culturedcode.com/things/Things3.zip;vers=https://culturedcode.com/things/mac/help/releasenotes/;vregex=\b(3\.\d+(?:\.\d+)+)
+vonage-business | Vonage Business | Calling, messaging, and meetings for unified communications | dmg | electron | https://businesssupport.vonage.com/ | feed=https://s3.amazonaws.com/vbcdesktop.vonage.com/prod/mac/latest-mac.yml;universal=Vonage%20Business-{v}-universal
 
 # ---- Phase 1 wave 1 (cold-sourced; verify on Mac with DRYRUN) ----
 achico | Achico | Compresses images, PDFs, and videos while preserving quality | zip | github_tag | https://github.com/nuance-dev/achico | repo=nuance-dev/achico;asset=Achico.app.zip
 api-utility | API Utility | Command-line tool to work with Jamf Pro APIs and manage secrets | zip | github_tag | https://github.com/Jamf-Concepts/apiutil | repo=Jamf-Concepts/apiutil;asset=API.Utility.zip
-barcode-producer | Barcode Producer | Designs and generates retail barcodes and labels with vector export | zip | direct | https://www.barcodeproducer.com | url=https://download.barcodeproducer.com/Barcode-Producer-{v}.zip;vers=https://r.barcodeproducer.com/app/download_mac/;vregex=([0-9]+(?:\.[0-9]+)+)
+barcode-producer | Barcode Producer | Designs and generates retail barcodes and labels with vector export | zip | direct_header | https://www.barcodeproducer.com | short=https://r.barcodeproducer.com/app/download_mac/;regex=Barcode-Producer-(\d+(?:\.\d+)+)\.zip
 bartranslate | BarTranslate | Menu bar translator widget powered by Google Translate | zip | github_tag | https://github.com/ThijmenDam/BarTranslate | repo=ThijmenDam/BarTranslate;asset=BarTranslate.app.zip
 boring-notch | Boring Notch | Turns the notch into a music control center with visualizer and controls | dmg | github_tag | https://github.com/TheBoredTeam/boring.notch | repo=TheBoredTeam/boring.notch;asset=boringNotch.dmg
 brewmate | BrewMate | GUI to search, install, and uninstall Homebrew casks | dmg | github_tag | https://github.com/romankurnovskii/BrewMate | repo=romankurnovskii/BrewMate;asset=BrewMate-{v}-universal.dmg
@@ -227,10 +239,10 @@ fuzzlecheck-4 | Fuzzlecheck 4 | Plans film and video shoots with scheduling and 
 
 # ---- Phase 1 wave 2 (cold-sourced; verify on Mac with DRYRUN) ----
 haiku-animator | Haiku Animator | Design tool for creating Lottie animations and interactive web components | dmg | github_tag | https://github.com/HaikuTeam/animator | repo=HaikuTeam/animator;asset=Haiku-{v}.dmg
-hue | Hue | Client for photo retouching teams to manage post-production workflows | zip | electron | https://help.creativeforce.io/en/articles/4752283-hue-desktop-app-overview | feed=https://download.creativeforce.io/released-files.042024/prod/hue-uxp/mac/latest-mac.yml;arm=Hue-{v}-mac-arm64;intel=Hue-{v}-mac
+hue | Hue | Client for photo retouching teams to manage post-production workflows | zip | direct_arch | https://help.creativeforce.io/en/articles/4752283-hue-desktop-app-overview | arm=https://download.creativeforce.io/released-files.042024/prod/hue-uxp/mac/Hue-{v}-mac-arm64.zip;intel=https://download.creativeforce.io/released-files.042024/prod/hue-uxp/mac/Hue-{v}-mac.zip;vers=https://download.creativeforce.io/released-files.042024/prod/hue-uxp/mac/latest-mac.yml;vregex=version: (\d+(?:\.\d+)+)
 ibm-data-shift | IBM Data Shift | Migrates files, apps, and preferences between devices over peer-to-peer | zip | github_compound | https://github.com/IBM/mac-ibm-migration-tool | repo=IBM/mac-ibm-migration-tool;asset=IBM.Data.Shift.zip
 impulso | Impulso | Task manager with priority scoring and flexible organization | zip | github_tag | https://github.com/nuance-dev/impulso | repo=nuance-dev/impulso;asset=Impulso.app.zip
-insight | Insight | Video review and performance analysis for sports teams and athletes | dmg | direct | https://www.hudl.com/releases/insight | url=https://insight-releases.s3.eu-west-1.amazonaws.com/Insight-{v}-universal.dmg;vers=https://www.hudl.com/releases/insight;vregex=([0-9]+(?:\.[0-9]+)+)
+insight | Insight | Video review and performance analysis for sports teams and athletes | dmg | direct | https://www.hudl.com/releases/insight | url=https://insight-releases.s3.eu-west-1.amazonaws.com/Insight-{v}-universal.dmg;vers=https://insight-releases.s3.eu-west-1.amazonaws.com/?list-type=2;vregex=Key>Insight-(\d+(?:\.\d+)+)-universal\.dmg<
 jamf-actions | Jamf Actions | Shortcuts actions for automating Jamf Pro tasks | zip | github_tag | https://github.com/Jamf-Concepts/actions | repo=Jamf-Concepts/actions;asset=Jamf.Actions.zip
 jamf-aftermath | Jamf Aftermath | Incident response framework that collects and analyzes forensic data | pkg | github_tag | https://github.com/jamf/aftermath | repo=jamf/aftermath;asset=aftermath-{v}.pkg
 jamf-cloud-package-replicator | Jamf Cloud Package Replicator | Replicates packages between Jamf Pro servers | zip | github_tag | https://github.com/BIG-RAT/jamfcpr | repo=BIG-RAT/jamfcpr;asset=jamfcpr.zip
@@ -241,7 +253,7 @@ jamf-prune | Jamf Prune | Removes unused items from a Jamf Pro server | zip | gi
 jamfdash | JamfDash | Native dashboard for browsing a Jamf fleet and security posture | pkg | github_tag | https://github.com/DevliegereM/JamfDash | repo=DevliegereM/JamfDash;asset=JamfDash_v{v}.pkg
 jamfhelper-constructor | jamfHelper Constructor | Builds and previews jamfHelper dialog prompts | zip | github_tag | https://github.com/BIG-RAT/jhc | repo=BIG-RAT/jhc;asset=jhc.zip
 logoer | Logoer | Changes the style of the Apple logo in the menu bar | dmg | github_tag | https://github.com/lihaoyun6/Logoer | repo=lihaoyun6/Logoer;asset=Logoer_v{v}.dmg
-lucidlink-classic | LucidLink Classic | Cloud storage that streams team media files on demand | pkg | direct | https://www.lucidlink.com/classic | url=https://d3il9duqikhdqy.cloudfront.net/latest/osx/lucid-{v}.pkg;vers=https://www.lucidlink.com/download;vregex=lucid-(\d+(?:\.\d+)+)\.pkg
+lucidlink-classic | LucidLink Classic | Cloud storage that streams team media files on demand | pkg | direct_header | https://www.lucidlink.com/classic | short=https://www.lucidlink.com/download/latest/osx/stable;regex=lucid-(\d+(?:\.\d+)+)\.pkg
 maccleanse | MacCleanse | Removes junk files and uninstalls apps to free disk space | dmg | direct | https://www.koingosw.com/products/maccleanse/ | url=https://www.koingosw.com/products/maccleanse/download/maccleanse.dmg;vers=https://www.koingosw.com/products/maccleanse/;vregex=Version (\d+(?:\.\d+)+)
 microsoft-365-license-removal-tool | Microsoft 365 License Removal Tool | Removes Office license files for activation troubleshooting | pkg | msft_cdn | https://support.microsoft.com/en-us/office/how-to-remove-office-license-files-on-a-mac-b032c0f6-a431-4dad-83a9-6b727c03b193 | short=https://go.microsoft.com/fwlink/?linkid=849815;regex=Microsoft_Office_License_Removal_(\d+(?:\.\d+)+)\.pkg
 modalfilemanager | ModalFileManager | Dual-pane file manager with Vim-style modal hotkeys | zip | github_tag | https://github.com/raguay/ModalFileManager | repo=raguay/ModalFileManager;asset=ModalFileManager-macOS-Universal.zip
@@ -303,15 +315,15 @@ script2pkg | Script2Pkg | Wraps shell scripts into installer packages | pkg | gi
 
 # ---- author batch B: direct_latest / direct_arch (verify on Mac; :no_check flagged) ----
 arclite-pro | Arclite Pro | Menu bar tool to organize, compress, and manage archive files | dmg | direct_latest | https://etheriar.com/arclite-pro/ | url=https://etheriar.com/apps/Arclite+Pro.dmg
-beam-studio | Beam Studio | Design and control software for laser cutters and engravers | dmg | direct_arch | https://flux3dp.com/beam-studio/ | arm=https://beamstudio.s3-ap-northeast-1.amazonaws.com/mac-arm64/Beam+Studio+{v}.dmg;intel=https://beamstudio.s3-ap-northeast-1.amazonaws.com/mac/Beam+Studio+{v}.dmg;vers=https://id.flux3dp.com/api/check-update?key=beamstudio-stable;vregex=([0-9]+(?:\.[0-9]+)+)
-boundary | Boundary | Secure access to hosts and services without managing credentials | dmg | direct_arch | https://www.boundaryproject.io/ | arm=https://releases.hashicorp.com/boundary-desktop/{v}/boundary-desktop_{v}_darwin_arm64.dmg;intel=https://releases.hashicorp.com/boundary-desktop/{v}/boundary-desktop_{v}_darwin_amd64.dmg;vers=https://api.releases.hashicorp.com/v1/releases/boundary-desktop/latest;vregex=([0-9]+(?:\.[0-9]+)+)
+beam-studio | Beam Studio | Design and control software for laser cutters and engravers | dmg | direct_arch | https://flux3dp.com/beam-studio/ | arm=https://beamstudio.s3-ap-northeast-1.amazonaws.com/mac-arm64/Beam+Studio+{v}.dmg;intel=https://beamstudio.s3-ap-northeast-1.amazonaws.com/mac/Beam+Studio+{v}.dmg;vers=https://id.flux3dp.com/api/check-update?key=beamstudio-stable;vregex=mac-arm64\/Beam\+Studio\+(\d+(?:\.\d+)+)\.dmg
+boundary | Boundary | Secure access to hosts and services without managing credentials | dmg | direct_arch | https://www.boundaryproject.io/ | arm=https://releases.hashicorp.com/boundary-desktop/{v}/boundary-desktop_{v}_darwin_arm64.dmg;intel=https://releases.hashicorp.com/boundary-desktop/{v}/boundary-desktop_{v}_darwin_amd64.dmg;vers=https://api.releases.hashicorp.com/v1/releases/boundary-desktop/latest;vregex="version"\s*:\s*"(\d+(?:\.\d+)+)\"
 buhontfs | Buhontfs | Reads and writes Microsoft NTFS-formatted drives | dmg | direct_latest | https://www.drbuho.com/buhontfs | url=https://www.drbuho.com/download/buhontfs.dmg
 canister | Canister | Verifies and manages LTO and LTFS tape archives | dmg | direct_latest | https://hedge.co/products/canister | url=https://hedge.video/download/canister/macos
 cascable-pro-webcam | Cascable Pro Webcam | Uses a camera as a high-quality webcam for video calls | zip | direct_latest | https://cascable.se/pro-webcam/ | url=https://cascable.se/pro-webcam/CascableProWebcam-Latest.zip
 cisco-audio-device | Cisco Audio Device | Audio driver for using a desk phone or headset with Webex | pkg | direct_latest | https://help.webex.com/ | url=https://www.cisco.com/c/dam/en/us/td/docs/collaboration/webex_centers/Collaboration-Help/TS-Help-Portal-Support-Utilities/CiscoAudioDeviceInstall/CiscoAudioDeviceInstall.pkg
 connectmenow4 | ConnectMeNow4 | Mounts and monitors network shares from the menu bar | dmg | direct_arch | https://www.tweaking4all.com/software/macosx-software/connectmenow-v4/ | arm=https://www.tweaking4all.com/downloads/network/ConnectMeNow4-v{v}-macOS-arm64.dmg;intel=https://www.tweaking4all.com/downloads/network/ConnectMeNow4-v{v}-macOS-x86-64.dmg;vers=https://www.tweaking4all.com/software/macosx-software/connectmenow-v4/;vregex=ConnectMeNow4-v(\d+(?:\.\d+)+)-macOS
 cotypist | Cotypist | Predictive text autocompletion that works across all apps | dmg | direct_latest | https://cotypist.app/ | url=https://cotypist.app/download/Cotypist.dmg
-cursor-teleporter | Cursor Teleporter | Quickly jump the text cursor between recent edit locations | zip | direct | https://www.apptorium.com/cursor-teleporter | url=https://www.apptorium.com/public/products/cursor-teleporter/releases/CursorTeleporter-{v}.zip;vers=https://www.apptorium.com/cursor-teleporter/buy;vregex=CursorTeleporter-(\d+(?:\.\d+)+)\.zip
+cursor-teleporter | Cursor Teleporter | Quickly jump the text cursor between recent edit locations | zip | direct | https://www.apptorium.com/cursor-teleporter | url=https://www.apptorium.com/public/products/cursor-teleporter/releases/CursorTeleporter-{v}.zip;vers=https://www.apptorium.com/updates/cursor-teleporter;vregex=CursorTeleporter-(\d+(?:\.\d+)+)\.zip
 dialpad-meetings | Dialpad Meetings | Video meetings and conferencing client | dmg | direct_arch | https://www.dialpad.com/download/ | arm=https://storage.googleapis.com/uc_native/stable/osx/arm64/DialpadMeetings.dmg;intel=https://storage.googleapis.com/uc_native/stable/osx/x64/DialpadMeetings.dmg
 disk-space-analyzer | Disk Space Analyzer | Visualizes disk usage and finds large files and folders | dmg | direct_latest | https://nektony.com/disk-expert | url=https://download.nektony.com/download/diskexpert/disk-space-analyzer.dmg
 dropnotch | Dropnotch | Drag-and-drop shelf that lives in the notch area | dmg | direct_latest | https://junebytes.com/dropnotch | url=https://junebytes.com/downloads/DropNotch.dmg
@@ -335,7 +347,7 @@ integrity-pro | Integrity Pro | Link checker with sitemap, SEO, and spelling rep
 iperius-remote | Iperius Remote | Remote desktop client for support and unattended access | dmg | direct_latest | https://www.iperiusremote.com/ | url=https://www.iperiusremote.com/dsir.aspx?file=IperiusRemote.dmg
 iphone-backup-extractor | Iphone Backup Extractor | Recovers messages, photos, and data from iOS device backups | dmg | direct_latest | https://reincubate.com/iphone-backup-extractor/ | url=https://releases.reincubate.com/iphonebackupextractor-latest.dmg
 istatistica-pro | Istatistica Pro | System and hardware monitor showing sensors, network, and disk activity | dmg | direct_latest | https://www.imagetasks.com/istatistica/pro/ | url=https://www.imagetasks.com/istatistica/pro/download-pro/iStatisticaProTrial.dmg
-jane-reader | Jane Reader | Distraction-free EPUB reader with annotation and library management | dmg | direct_arch | https://janereader.com/ | arm=https://janereader.com/downloads/releases/darwin/aarch64/{v};intel=https://janereader.com/downloads/releases/darwin/x86_64/{v};vers=https://janereader.com/en/changelog.xml;vregex=([0-9]+(?:\.[0-9]+)+)
+jane-reader | Jane Reader | Distraction-free EPUB reader with annotation and library management | dmg | direct_arch | https://janereader.com/ | arm=https://janereader.com/downloads/releases/darwin/aarch64/{v};intel=https://janereader.com/downloads/releases/darwin/x86_64/{v};vers=https://janereader.com/en/changelog.xml;vregex=changelog\/(\d+(?:\.\d+)+)<\/guid>
 later | Later | Saves open browser tabs and restores them in a later session | dmg | direct_latest | https://github.com/alyssaxuu/later | url=https://github.com/alyssaxuu/later/raw/master/Later.dmg
 lingvanex-translator | Lingvanex Translator | Translates text, speech, and documents across many languages | dmg | direct_latest | https://lingvanex.com/products/macos-translator/ | url=https://lingvanex-downlod.s3.eu-central-1.amazonaws.com/LingvanexMacOS.dmg
 mac-linguist | Mac Linguist | Translates text between languages using online translation services | dmg | direct_latest | https://maclinguist.com/ | url=https://maclinguist.com/Mac%20Linguist.dmg
@@ -349,7 +361,7 @@ ondesoft-spotify-converter | Ondesoft Spotify Converter | Downloads and converts
 
 # ---- author batch C: direct_latest / direct_arch / github_tag (verify on Mac) ----
 otter | Otter | AI meeting notetaker that records, transcribes, and summarizes conversations | dmg | direct_latest | https://otter.ai/ | url=https://assets.otter.ai/desktop-app/mac/production/integrationpage/otter_universal_latest.dmg
-patch-desktop | Patch Desktop | Configures and manages Alectrona Patch software-update policies | pkg | direct_latest | https://www.alectrona.com/patch | url=https://software.alectrona.com/patch-desktop/latest.pkg
+alectrona-patch | Patch Desktop | Configures and manages Alectrona Patch software-update policies | pkg | direct_latest | https://www.alectrona.com/patch | url=https://software.alectrona.com/patch-desktop/latest.pkg
 patternodes | Patternodes | Node-based tool for creating animated and parametric vector graphics | dmg | direct_latest | https://www.lostminds.com/patternodes/ | url=https://www.lostminds.com/downloads/patternodes3.dmg
 pdfsail | Pdfsail | Edits, converts, and compresses PDF documents | dmg | direct_latest | https://www.pdfsail.com/ | url=https://download.pdfsail.com/OfficeSuite/PDFSailMac/PDFsail_mac_Desktop%20Installer.dmg
 pixillion | Pixillion | Converts images between 65+ formats including JPG, PNG, and GIF | zip | direct_latest | https://www.nchsoftware.com/imageconverter/index.html | url=https://www.nchsoftware.com/imageconverter/pixillionmaci.zip
@@ -361,7 +373,7 @@ screenflow-hal-audio-driver | Screenflow Hal Audio Driver | Audio capture driver
 shokz-connect | Shokz Connect | Manages and updates firmware for Shokz headsets | dmg | direct_latest | https://pro.shokz.com/pages/shokz-connect | url=https://appcdn.shokz.com/shokz-connect/latest/Shokz-Connect-latest-mac.dmg
 station | Station | Workspace that unifies your web apps into a single window | zip | github_tag | https://github.com/getstation/desktop-app | repo=getstation/desktop-app;asset=Station.zip
 substage | Substage | Client for staging, committing, and managing Git repositories | dmg | direct_latest | https://selkie.design/substage/ | url=https://assets.selkie.design/substage/download/latest/Substage.dmg
-teamwire | Teamwire | Secure messenger for enterprise team chat and file sharing | dmg | direct_arch | https://www.teamwire.eu | arm=https://desktop.teamwire.eu/dist/v{v}/teamwire-{v}-mac-arm64.dmg;intel=https://desktop.teamwire.eu/dist/v{v}/teamwire-{v}-mac-x64.dmg;vers=https://desktop.teamwire.eu/download.php?platform=darwinArm64;vregex=dist/v(\d+(?:\.\d+)+)/
+teamwire | Teamwire | Secure messenger for enterprise team chat and file sharing | dmg | direct_arch | https://www.teamwire.eu | arm=https://desktop.teamwire.eu/dist/v{v}/teamwire-{v}-mac-arm64.dmg;intel=https://desktop.teamwire.eu/dist/v{v}/teamwire-{v}-mac-x64.dmg;vers=https://desktop.teamwire.eu/dist/;vregex=href="v(\d+(?:\.\d+)+)\/\"
 tinyweb | TinyWeb | Minimal browser that stays out of the way while reading | dmg | direct_latest | https://tinyweb.so/ | url=https://tinyweb.so/release/osx/tinyweb_latest
 trace | Trace | Logs and reviews how working time is spent across tasks | dmg | direct_latest | https://trace.argio.ch/en/ | url=https://trace.argio.ch/download/Trace.dmg
 trident | Trident | Unified workspace combining email, calendar, chat, and contacts | dmg | direct_arch | https://www.zoho.com/trident/ | arm=https://downloads.zohocdn.com/trident/mac/apple/Trident.dmg;intel=https://downloads.zohocdn.com/trident/mac/intel/Trident.dmg
@@ -380,35 +392,35 @@ viper-ftp | Viper Ftp | Client for transferring files over FTP, SFTP, and cloud 
 xnresize | Xnresize | Batch resizes images and converts between formats | dmg | direct_latest | https://www.xnview.com/en/xnresize/ | url=https://download.xnview.com/XnResize-mac-x64.dmg
 
 # ---- author batch D: AutoPkg-pending resolved (verify on Mac with DRYRUN) ----
-1piece | 1Piece | Window manager with thumbnails, hot corners, and mouse triggers | zip | direct | https://app1piece.com | url=https://app1piece.com/1Piece-{v}.zip;vers=https://app1piece.com/download/;vregex=class="version">(\d+(?:\.\d+)+)
+1piece | 1Piece | Window manager with thumbnails, hot corners, and mouse triggers | zip | direct | https://app1piece.com | url=https://app1piece.com/1Piece-{v}.zip;vers=https://app1piece.com/download/;vregex=1Piece-(\d+(?:\.\d+)+)\.zip
 accents | Accents | Unlocks iMac and MacBook accent colors on any Mac | zip | direct_latest | https://mahdi.jp/apps/accents | url=https://tars.mahdi.jp/apps/accents.zip
 air-flow | Air | Syncs an Air workspace into Finder for local file access | zip | direct_arch | https://air.inc/air-flow-macos | arm=https://github.com/AirLabsTeam/airflow-releases/releases/download/v{v}/Air-{v}-arm64-mac.zip;intel=https://github.com/AirLabsTeam/airflow-releases/releases/download/v{v}/Air-{v}-mac.zip;vers=https://github.com/AirLabsTeam/airflow-releases/releases/latest;vregex=([0-9]+(?:\.[0-9]+)+)
-aircall-workspace | Aircall Workspace | Business phone client with CRM and helpdesk integrations | pkg | direct_arch | https://aircall.io/download/ | arm=https://download-electron.aircall.io/aircall-workspace/Aircall-Workspace-{v}-arm64.pkg;intel=https://download-electron.aircall.io/aircall-workspace/Aircall-Workspace-{v}-x64.pkg;vers=https://electron.aircall.io/download/osx?appType=aircall-workspace&platform=macPkg;vregex=Aircall-Workspace-(\d+(?:\.\d+)+)-
+aircall-workspace | Aircall Workspace | Business phone client with CRM and helpdesk integrations | pkg | direct_arch | https://aircall.io/download/ | arm=https://download-electron.aircall.io/aircall-workspace/Aircall-Workspace-{v}-arm64.pkg;intel=https://download-electron.aircall.io/aircall-workspace/Aircall-Workspace-{v}-x64.pkg;vers=https://electron.aircall.io/update/osx/0.0.0?appType=aircall-workspace;vregex="name"\s*:\s*"(\d+(?:\.\d+)+)\"
 airtime | Airtime | Adds custom looks and visuals to video-meeting webcam feeds | dmg | direct_latest | https://www.airtime.com/download | url=https://updates.airtimetools.com/mac/hybrid/Airtime.dmg
 amazon-appstream-20 | Amazon Appstream 20 | Client for streaming applications and desktops from AWS | pkg | direct_latest | https://clients.amazonappstream.com/ | url=https://clients.amazonappstream.com/installers/mac/global/WorkSpacesApplicationsClient.pkg
 appcode | Appcode | IDE for Swift and Objective-C iOS and app development | dmg | direct_arch | https://www.jetbrains.com/objc/ | arm=https://download.jetbrains.com/objc/AppCode-{v}-aarch64.dmg;intel=https://download.jetbrains.com/objc/AppCode-{v}.dmg;vers=https://data.services.jetbrains.com/products/releases?code=AC&latest=true&type=release;vregex="version":"(\d+(?:\.\d+)+)"
-arcade | Arcade | Records interactive product demos and exports to video or GIF | dmg | direct | https://www.arcade.software/download | url=https://cdn.arcade.software/desktop/dmg/{v}/Arcade.dmg;vers=https://app.arcade.software/desktop/download;vregex=dmg/(\d+(?:\.\d+)+)/
+arcade | Arcade | Records interactive product demos and exports to video or GIF | dmg | direct_header | https://www.arcade.software/download | short=https://app.arcade.software/desktop/download;regex=dmg\/(\d+(?:\.\d+)+)\/Arcade\.dmg
 changes | Changes | Native Git client with a low-cognitive-load interface | zip | github_tag | https://github.com/maoyama/Changes | repo=maoyama/Changes;asset=Changes.zip
 dinoxcope | Dinoxcope | Image capture and analysis for Dino-Lite USB microscopes | dmg | direct_latest | https://www.dinolite.us/features/dinoxcope/ | url=https://files.dinolite.us/downloads/software/dnx/latest/DinoXcope.dmg
-flinto | Flinto | Designs interactive and animated app prototypes | dmg | direct | https://www.flinto.com/ | url=https://s3.amazonaws.com/flinto-assets/assets/Flinto-{v}.dmg;vers=https://www.flinto.com/download_latest;vregex=Flinto-(\d+(?:\.\d+)+)\.dmg
-folder-tidy | Folder Tidy | Sorts and organizes files into subfolders by type using rules | dmg | direct | https://www.tunabellysoftware.com/folder_tidy/ | url=https://www.tunabellysoftware.com/resources/Folder%20Tidy%20{v}.dmg;vers=https://www.tunabellysoftware.com/latest/Folder_Tidy.dmg;vregex=([0-9]+(?:\.[0-9]+)+)
+flinto | Flinto | Designs interactive and animated app prototypes | dmg | direct_header | https://www.flinto.com/ | short=https://www.flinto.com/download_latest;regex=Flinto-(\d+(?:\.\d+)+)\.dmg
+folder-tidy | Folder Tidy | Sorts and organizes files into subfolders by type using rules | dmg | direct_header | https://www.tunabellysoftware.com/folder_tidy/ | short=https://www.tunabellysoftware.com/latest/Folder_Tidy.dmg;regex=Folder Tidy (\d+(?:\.\d+)+)\.dmg
 fontagent | FontAgent | Organizes, activates, and manages font libraries with previews | dmg | direct_latest | https://www.insidersoftware.com/fontagent-mac/ | url=https://store.insidersoftware.com/_downloads/FontAgent10.dmg
-goto-desktop | GoTo | Client for online meetings and screen sharing | dmg | electron | https://www.goto.com/meeting | feed=https://goto-desktop.getgo.com/latest-mac.yml;arm=GoTo-{v}-arm64;intel=GoTo-{v}
+goto-meeting | GoTo | Client for online meetings and screen sharing | dmg | electron | https://support.goto.com/ | feed=https://goto-desktop.getgo.com/latest-mac.yml;arm=GoTo-{v}-arm64;intel=GoTo-{v}
 grab2text | Grab2Text | Extracts text and QR codes from images, PDFs, and video | dmg | direct_latest | https://www.softwarehow.com/grab2text/ | url=https://www.softwarehow.com/downloads/Grab2Text.dmg
-houdahgeo | HoudahGeo | Geotags and maps photos with GPS tracks and reverse geocoding | zip | direct | https://www.houdah.com/houdahGeo/ | url=https://dl.houdah.com/houdahGeo/updates/cast_assets/HoudahGeo{v}.zip;vers=https://www.houdah.com/houdahGeo/updates/cast6.xml;vregex=HoudahGeo(\d+(?:\.\d+)+)\.zip
+houdahgeo | HoudahGeo | Geotags and maps photos with GPS tracks and reverse geocoding | zip | direct | https://www.houdah.com/houdahGeo/ | url=https://dl.houdah.com/houdahGeo/updates/cast_assets/HoudahGeo{v}.zip;vers=https://www.houdah.com/houdahGeo/updates/cast6.php;vregex=HoudahGeo(\d+(?:\.\d+)+)\.zip
 ledger-live | Ledger Live | Manages crypto assets and Ledger hardware wallets | dmg | electron | https://www.ledger.com/ledger-live | feed=https://download.live.ledger.com/latest-mac.yml;universal=ledger-live-desktop-{v}-mac
 microsoft-advertising-editor | Microsoft Advertising Editor | Bulk-edits and manages Microsoft Advertising campaigns offline | dmg | direct_latest | https://about.ads.microsoft.com/en/tools/productivity/microsoft-advertising-editor | url=https://prod.editor.ads.microsoft.com/download/production-mac/c/MicrosoftAdvertisingEditor.dmg
 mindview-9 | MindView 9 | Mind mapping with timelines, outlines, and Office export | dmg | direct_latest | https://www.matchware.com/mind-mapping-software-mac | url=https://link.matchware.com/mindview9_mac
 movie-magic-budgeting | Movie Magic Budgeting | Creates and manages film and TV production budgets | dmg | direct_latest | https://www.ep.com/support/movie-magic-budgeting/ | url=https://updates.ep.com/mmb/Movie%20Magic%20Budgeting.dmg
 nightowl | NightOwl | Menu bar toggle for switching between light and dark mode | zip | direct | https://nightowl.kramser.xyz/ | url=https://darkmenu.s3.amazonaws.com/NightOwl-{v}.zip;vers=https://darkmenu.s3.amazonaws.com/appcast.xml;vregex=NightOwl-(\d+(?:\.\d+)+)\.zip
 phraseexpress | PhraseExpress | Text expander that inserts canned responses and boilerplate text | dmg | direct_latest | https://www.phraseexpress.com/ | url=https://www.phraseexpress.com/PhraseExpressSetup.dmg
-sidebar | Sidebar | Adds a customizable shortcut bar to the menu bar and screen edge | dmg | direct | https://sidebarapp.net/ | url=https://download.sidebarapp.net/Sidebar {v}.dmg;vers=https://download.sidebarapp.net/appcast.xml;vregex=([0-9]+(?:\.[0-9]+)+)
-soundq | SoundQ | Searches, auditions, and downloads sound effects from connected libraries | pkg | direct | https://www.prosoundeffects.com/soundq/ | url=https://prosoundeffects.blob.core.windows.net/software-updates/SoundQ/SoundQ_v{v}.pkg;vers=https://www.prosoundeffects.com/soundq/;vregex=([0-9]+(?:\.[0-9]+)+)
-startup-manager-pro | Startup Manager Pro | Manages login items, launch delays, and multiple startup sets | dmg | direct | https://startupmanager.appmac.fr/ | url=https://startupmanager.appmac.fr/update/sparkle/Startup Manager Pro-{v}.dmg;vers=https://startupmanager.appmac.fr/update/sparkle/appcast.xml;vregex=([0-9]+(?:\.[0-9]+)+)
-tembo-2 | Tembo 2 | Searches every file on the computer from one window | zip | direct | https://www.houdah.com/tembo/ | url=https://dl.houdah.com/tembo/updates/cast2_assets/Tembo{v}.zip;vers=https://www.houdah.com/tembo/updates/cast2.xml;vregex=([0-9]+(?:\.[0-9]+)+)
-tembo-3 | Tembo 3 | Searches every file on the computer from one window | zip | direct | https://www.houdah.com/tembo/ | url=https://dl.houdah.com/tembo/updates/cast2_assets/Tembo{v}.zip;vers=https://www.houdah.com/tembo/updates/cast3.xml;vregex=([0-9]+(?:\.[0-9]+)+)
+sidebar | Sidebar | Adds a customizable shortcut bar to the menu bar and screen edge | dmg | direct | https://sidebarapp.net/ | url=https://download.sidebarapp.net/Sidebar%20{v}.dmg;vers=https://download.sidebarapp.net/appcast.xml;vregex=Sidebar%20(\d+(?:\.\d+)+)\.dmg
+soundq | SoundQ | Searches, auditions, and downloads sound effects from connected libraries | pkg | direct | https://www.prosoundeffects.com/soundq/ | url=https://prosoundeffects.blob.core.windows.net/software-updates/SoundQ/SoundQ_v{v}.pkg;vers=https://www.prosoundeffects.com/soundq/;vregex=SoundQ_v(\d+(?:\.\d+)+)\.pkg
+startup-manager-pro | Startup Manager Pro | Manages login items, launch delays, and multiple startup sets | dmg | direct | https://startupmanager.appmac.fr/ | url=https://startupmanager.appmac.fr/update/sparkle/Startup%20Manager%20Pro-{v}.dmg;vers=https://startupmanager.appmac.fr/update/sparkle/appcast.xml;vregex=Startup%20Manager%20Pro-(\d+(?:\.\d+)+)\.dmg
+tembo-2 | Tembo 2 | Searches every file on the computer from one window | zip | direct | https://www.houdah.com/tembo/ | url=https://dl.houdah.com/tembo/updates/cast2_assets/Tembo{v}.zip;vers=https://www.houdah.com/tembo/updates/cast2.xml;vregex=Tembo(\d+(?:\.\d+)+)\.zip
+tembo-3 | Tembo 3 | Searches every file on the computer from one window | zip | direct | https://www.houdah.com/tembo/ | url=https://dl.houdah.com/tembo/updates/cast2_assets/Tembo{v}.zip;vers=https://www.houdah.com/tembo/updates/cast3.xml;vregex=Tembo(\d+(?:\.\d+)+)\.zip
 textsoap | TextSoap | Cleans up and reformats text with automated scrubbing rules | dmg | direct_latest | https://textsoap.com/mac/index.html | url=https://textsoap.nyc3.digitaloceanspaces.com/files/textsoap9_latest.dmg
-typewhisper | TypeWhisper | On-device speech-to-text dictation that types into any app | dmg | direct | https://github.com/TypeWhisper/typewhisper-mac | url=https://github.com/TypeWhisper/typewhisper-mac/releases/download/v{v}/TypeWhisper-v{v}.dmg;vers=https://github.com/TypeWhisper/typewhisper-mac/releases;vregex=TypeWhisper-v(\d+\.\d+\.\d+)\.dmg
+typewhisper | TypeWhisper | On-device speech-to-text dictation that types into any app | dmg | direct | https://github.com/TypeWhisper/typewhisper-mac | url=https://github.com/TypeWhisper/typewhisper-mac/releases/download/v{v}/TypeWhisper-v{v}.dmg;vers=https://api.github.com/repos/TypeWhisper/typewhisper-mac/releases?per_page=100;vregex=TypeWhisper-v(\d+\.\d+\.\d+)\.dmg
 vernier-graphical-analysis | Vernier Graphical Analysis | Collects and graphs data from Vernier sensors and probes | dmg | direct_latest | https://graphicalanalysis.app/ | url=https://software-releases.graphicalanalysis.com/ga/mac/release/latest/Vernier-Graphical-Analysis.dmg
 
 # ---- custom conversion: 78 source=custom (resolver fns below) + 6 handler rows ----
@@ -442,7 +454,7 @@ guardian-browser | Guardian Browser | Locked-down browser for taking online proc
 huddly | Huddly | Configures and updates firmware for Huddly conference cameras | dmg | custom | https://www.huddly.com |
 hudl-sportscode | Hudl Sportscode | Tags and analyzes sports video for performance review | dmg | custom | https://www.hudl.com/downloads/elite |
 huggingchat-mac | HuggingChat | Chat client for Hugging Face conversational models | zip | custom | https://github.com/huggingface/chat-macOS |
-imanage-work-desktop | iManage Work Desktop | Connects to iManage Work document and email management | pkg | custom | https://docs.imanage.com/work-mac-help/10.4.1/en/ |
+imanage-work | iManage Work Desktop | Connects to iManage Work document and email management | pkg | custom | https://docs.imanage.com/work-mac-help/10.4.1/en/ |
 ipsw-updater | IPSW Updater | Notifies when new IPSW firmware files are released | zip | custom | https://ipsw.app/ |
 jamf-compliance-editor | Jamf Compliance Editor | Builds and tailors security compliance baselines for devices | pkg | custom | https://github.com/Jamf-Concepts/jamf-compliance-editor |
 jamf-connect-configuration | Jamf Connect Configuration | Builds configuration profiles for Jamf Connect authentication | dmg | custom | https://www.jamf.com/products/jamf-connect/ |
@@ -470,7 +482,7 @@ okiocam-snapshot-and-recorder | OKIOCAM Snapshot and Recorder | Document-camera 
 onemenu | OneMenu | All-in-one window manager with clipboard and system monitor menu bar | zip | direct | https://coffeebreak.software/one-menu/ | url=https://files.coffeebreak.software/products/one-menu/OneMenu-v{v}.zip;version=26.10.2
 optisigns-digital-signage | OptiSigns Digital Signage | Plays digital signage content on connected screens | dmg | direct_header | https://www.optisigns.com/ | short=https://links.optisigns.com/mac;regex=OptiSigns Digital Signage-(\d+(?:\.\d+)+)\.dmg
 origami-3 | Origami 3 | Designs packaging dielines and 3D mockups for print | dmg | custom | https://boxshot.com/origami/ |
-poly-lens-desktop | Poly Lens Desktop | Manages headsets, video bars, and room devices | pkg | custom | https://www.hp.com/us-en/poly/software-and-services/software/poly-lens/app.html |
+poly-lens | Poly Lens Desktop | Manages headsets, video bars, and room devices | pkg | custom | https://www.hp.com/us-en/poly/software-and-services/software/poly-lens/app.html |
 postlab | PostLab | Collaboration and version history for Final Cut and Premiere | dmg | custom | https://hedge.co/products/postlab |
 praxislive | PraxisLIVE | Visual live programming for media and generative art | pkg | custom | https://www.praxislive.org/ |
 prisma-access-browser | Prisma Access Browser | Secure enterprise browser with built-in access controls | pkg | custom | https://www.paloaltonetworks.com/sase/prisma-browser |
@@ -500,6 +512,110 @@ zaxconvert | Zaxconvert | Converts Zaxcom audio recordings between file formats 
 TABLE
 
 # ----------------------------------------------------------------------------
+# POLICY-BLOCKED tokens - authored in the REGISTRY above, but a full dry run
+# proved `brew audit --strict --online --new` rejects them for reasons NO cask
+# edit can fix (NOT-ADDED.md section 2 keeps the human-readable rollup).
+# Skipped by default so a full run doesn't burn ~70 download+audit cycles on
+# known rejections; each lands in results.tsv as "skipped (policy-blocked)".
+# A new upstream release CAN flip a verdict (app gets notarized, repo gains
+# stars): re-test with  RUN_BLOCKED=1 [ONLY="tok ..."]  and delete what passes.
+# ----------------------------------------------------------------------------
+declare -A POLICY_BLOCKED=(
+  [1piece]="app not signed + Apple-notarized (hard requirement for new homebrew/cask casks)"
+  [air-flow]="GitHub repo not notable enough (<75 stars / <30 forks / <30 watchers)"
+  [airbattery]="app not signed + Apple-notarized (hard requirement for new homebrew/cask casks)"
+  [api-utility]="GitHub repo not notable enough (<75 stars / <30 forks / <30 watchers)"
+  [backgrounds]="GitHub repo not notable enough (<75 stars / <30 forks / <30 watchers)"
+  [bartranslate]="app not signed + Apple-notarized (hard requirement for new homebrew/cask casks)"
+  [battery-toolkit]="GitHub repo archived; app not signed + Apple-notarized (hard requirement for new homebrew/cask casks)"
+  [bimcollab-zoom]="Gatekeeper signature invalid ('software has been altered') - vendor bundle fails verification, hard audit reject"
+  [blink-eye]="app not signed + Apple-notarized (hard requirement for new homebrew/cask casks)"
+  [boring-notch]="app not signed + Apple-notarized (hard requirement for new homebrew/cask casks)"
+  [brewmate]="app not signed + Apple-notarized (hard requirement for new homebrew/cask casks)"
+  [caesium-image-compressor]="app not signed + Apple-notarized (hard requirement for new homebrew/cask casks)"
+  [canister]="app not signed + Apple-notarized (hard requirement for new homebrew/cask casks)"
+  [chatkit]="GitHub repo not notable enough (<75 stars / <30 forks / <30 watchers)"
+  [chromebuddy]="GitHub repo not notable enough (<75 stars / <30 forks / <30 watchers); app not signed + Apple-notarized (hard requirement for new homebrew/cask casks)"
+  [close-desktop]="GitHub repo not notable enough (<75 stars / <30 forks / <30 watchers)"
+  [corelcad]="discontinued (2023); only a fixed unversioned trial dmg, no livecheck source"
+  [desktop-icon-manager]="GitHub repo not notable enough (<75 stars / <30 forks / <30 watchers)"
+  [dictation-daddy]="GitHub repo not notable enough (<75 stars / <30 forks / <30 watchers)"
+  [dragonframe-2024]="vendor site returns HTTP 406 to every non-browser client - brew homepage/livecheck checks cannot pass"
+  [dragonframe-2025]="vendor site returns HTTP 406 to every non-browser client - brew homepage/livecheck checks cannot pass"
+  [dragonframe-5]="vendor site returns HTTP 406 to every non-browser client - brew homepage/livecheck checks cannot pass"
+  [dropnote]="GitHub repo not notable enough (<75 stars / <30 forks / <30 watchers); app not signed + Apple-notarized (hard requirement for new homebrew/cask casks)"
+  [droppoint]="app not signed + Apple-notarized (hard requirement for new homebrew/cask casks)"
+  [editready]="app not signed + Apple-notarized (hard requirement for new homebrew/cask casks)"
+  [elevate24]="GitHub repo not notable enough (<75 stars / <30 forks / <30 watchers)"
+  [file-architect]="GitHub repo not notable enough (<75 stars / <30 forks / <30 watchers)"
+  [fontagent]="app not signed + Apple-notarized (hard requirement for new homebrew/cask casks)"
+  [freeter]="app not signed + Apple-notarized (hard requirement for new homebrew/cask casks)"
+  [fuzzlecheck-4]="no robot-readable version source (JS-only download page)"
+  [hide-icons]="GitHub repo not notable enough (<75 stars / <30 forks / <30 watchers)"
+  [impulso]="GitHub repo not notable enough (<75 stars / <30 forks / <30 watchers)"
+  [jamf-actions]="GitHub repo not notable enough (<75 stars / <30 forks / <30 watchers)"
+  [jamf-cli]="GitHub repo not notable enough (<75 stars / <30 forks / <30 watchers)"
+  [imymac-pdf-compressor]="vendor 403s all non-browser downloads (imymac.com WAF) - brew cannot fetch; same vendor as PUA-bucketed powermymac"
+  [imymac-video-converter]="vendor 403s all non-browser downloads (imymac.com WAF) - brew cannot fetch; same vendor as PUA-bucketed powermymac"
+  [jamf-environment-test]="GitHub repo archived"
+  [jamf-framework-redeploy]="GitHub repo not notable enough (<75 stars / <30 forks / <30 watchers)"
+  [jamf-printer-manager]="GitHub repo not notable enough (<75 stars / <30 forks / <30 watchers)"
+  [jamf-protect-ulf-uploader]="GitHub repo not notable enough (<75 stars / <30 forks / <30 watchers)"
+  [jamfdash]="GitHub repo not notable enough (<75 stars / <30 forks / <30 watchers)"
+  [later]="app not signed + Apple-notarized (hard requirement for new homebrew/cask casks)"
+  [logoer]="app not signed + Apple-notarized (hard requirement for new homebrew/cask casks)"
+  [macuncle-eml-viewer]="app not signed + Apple-notarized (hard requirement for new homebrew/cask casks)"
+  [mailvault]="GitHub repo not notable enough (<75 stars / <30 forks / <30 watchers)"
+  [mindview-9]="app not signed + Apple-notarized (hard requirement for new homebrew/cask casks)"
+  [mixpad]="app not signed + Apple-notarized (hard requirement for new homebrew/cask casks)"
+  [modalfilemanager]="app not signed + Apple-notarized (hard requirement for new homebrew/cask casks)"
+  [monsterwriter]="GitHub repo not notable enough (<75 stars / <30 forks / <30 watchers)"
+  [mxmarkedit]="GitHub repo not notable enough (<75 stars / <30 forks / <30 watchers); app not signed + Apple-notarized (hard requirement for new homebrew/cask casks)"
+  [noteey]="GitHub repo not notable enough (<75 stars / <30 forks / <30 watchers)"
+  [object-info]="GitHub repo not notable enough (<75 stars / <30 forks / <30 watchers)"
+  [offshoot]="app not signed + Apple-notarized (hard requirement for new homebrew/cask casks)"
+  [onemenu]="no robot-readable version source (JS-only download page)"
+  [peazip]="app not signed + Apple-notarized (hard requirement for new homebrew/cask casks)"
+  [pixillion]="app not signed + Apple-notarized (hard requirement for new homebrew/cask casks)"
+  [print-window]="vendor TLS certificate expired (printwindowapp.com) - brew cannot download; re-test with RUN_BLOCKED=1 once the vendor renews"
+  [psso-utility]="GitHub repo not notable enough (<75 stars / <30 forks / <30 watchers)"
+  [quickrecorder]="app not signed + Apple-notarized (hard requirement for new homebrew/cask casks)"
+  [quilt-app]="GitHub repo not notable enough (<75 stars / <30 forks / <30 watchers)"
+  [sapmachine-manager]="GitHub repo not notable enough (<75 stars / <30 forks / <30 watchers)"
+  [shokz-connect]="app not signed + Apple-notarized (hard requirement for new homebrew/cask casks)"
+  [smotrite]="GitHub repo not notable enough (<75 stars / <30 forks / <30 watchers); app not signed + Apple-notarized (hard requirement for new homebrew/cask casks)"
+  [sniffnet]="app not signed + Apple-notarized (hard requirement for new homebrew/cask casks)"
+  [squirreldisk]="app not signed + Apple-notarized (hard requirement for new homebrew/cask casks)"
+  [station]="app not signed + Apple-notarized (hard requirement for new homebrew/cask casks)"
+  [supercorners]="app not signed + Apple-notarized (hard requirement for new homebrew/cask casks)"
+  [swiftcord]="app not signed + Apple-notarized (hard requirement for new homebrew/cask casks)"
+  [swiftguard]="app not signed + Apple-notarized (hard requirement for new homebrew/cask casks)"
+  [sym-helper]="GitHub repo not notable enough (<75 stars / <30 forks / <30 watchers)"
+  [textream]="app not signed + Apple-notarized (hard requirement for new homebrew/cask casks)"
+  [time-machine-inspector]="app not signed + Apple-notarized (hard requirement for new homebrew/cask casks)"
+  [tinyweb]="app not signed + Apple-notarized (hard requirement for new homebrew/cask casks)"
+  [trace]="app not signed + Apple-notarized (hard requirement for new homebrew/cask casks)"
+  [utm-coordinate-converter]="Bitbucket repo not notable enough (<30 forks / <75 watchers) - same policy bar as GitHub"
+  [visualz]="GitHub repo not notable enough (<75 stars / <30 forks / <30 watchers)"
+  [vocal]="GitHub repo not notable enough (<75 stars / <30 forks / <30 watchers)"
+  [watchflower]="app not signed + Apple-notarized (hard requirement for new homebrew/cask casks)"
+  [wudpecker]="GitHub repo not notable enough (<75 stars / <30 forks / <30 watchers)"
+  # -- added 2026-06-10 after audit/research proof during the full dry run:
+  [appcode]="JetBrains discontinued AppCode (EOL Dec 2023) - new casks for EOL products are rejected"
+  [depnotify]="GitHub repo not notable enough (<75 stars / <30 forks / <30 watchers)"
+  [deskrest]="GitHub repo not notable enough (<75 stars / <30 forks / <30 watchers)"
+  [huggingchat-mac]="only GitHub pre-releases exist (v0.7.0) - audit --new rejects pre-release-only projects"
+  [jamf-compliance-editor]="GitHub repo not notable enough (<75 stars / <30 forks / <30 watchers)"
+  [okiocam-snapshot-and-recorder]="app not signed + Apple-notarized (hard requirement for new homebrew/cask casks)"
+  [soundfield-by-rode]="app not signed + Apple-notarized (hard requirement for new homebrew/cask casks)"
+  [horse]="downloads are unversioned redirects to expiring signed URLs on a private GitHub repo - no version-pinned public URL or stable sha256 possible"
+  [lucidlink]="v3 client is portal-distributed (app.lucidlink.com) - no public versioned URL; Classic 2.x is covered by lucidlink-classic"
+  [nightowl]="removed from homebrew-cask as possible malware (Homebrew/homebrew-cask#149439) - app silently enrolled Macs in a paid proxy network"
+  [relagit]="app not signed + Apple-notarized (hard requirement for new homebrew/cask casks)"
+)
+RUN_BLOCKED="${RUN_BLOCKED:-0}"
+
+# ----------------------------------------------------------------------------
 # Environment + flags
 # ----------------------------------------------------------------------------
 set -uo pipefail
@@ -527,6 +643,10 @@ trim(){ local s="$1"; s="${s#"${s%%[![:space:]]*}"}"; s="${s%"${s##*[![:space:]]
 
 # Every download/scrape goes through curl; bounded retries so one transient
 # network blip doesn't fail an app (HTTP 4xx aren't retried; -f still fails them).
+# NOTE: deliberately NO default User-Agent spoof — what our resolvers see must match
+# what brew's own (non-browser) curl sees at audit/livecheck time. Vendors that block
+# robots get POLICY_BLOCKED instead (dragonframe). Some WAFs even invert: cisco.com
+# 403s browser UAs but serves plain curl — a global -A breaks more than it fixes.
 curl(){ command curl --connect-timeout 20 --retry 3 "$@"; }
 
 # ----------------------------------------------------------------------------
@@ -543,10 +663,18 @@ if [ "$CHECK" = 1 ]; then
     case "$(trim "$_l")" in ""|\#*) continue;; esac
     IFS='|' read -r _t _rest <<< "$_l"; printf '%s\n' "$(trim "$_t")"
   done <<< "$REGISTRY" | sort -u > "$RT"
-  FL="$(mktemp)"; awk -F',' 'NR>1 && $15 ~ /^"?in-registry/' "$CSV" > "$FL"
-  # a bucket like "in-registry (token goto-desktop)" means the slug was renamed:
+  # quoted CSV fields may contain commas (curl one-liners in version_method), so a
+  # naive awk -F',' shifts the bucket out of $15 for those rows (dragonframe-2024/2025,
+  # lucidlink, poll-everywhere showed as false drift). Parse the CSV properly and emit
+  # "slug<TAB>bucket" for in-registry rows.
+  FL="$(mktemp)"
+  perl -ne 'next if $. == 1; chomp;
+    my @f; while (/\G("(?:[^"]|"")*"|[^,]*)(,|$)/g) { push @f, $1; last if $2 eq "" }
+    my $b = $f[14] // ""; $b =~ s/^"//;
+    print "$f[0]\t$b\n" if $b =~ /^in-registry/;' "$CSV" > "$FL"
+  # a bucket like "in-registry (token goto-meeting)" means the slug was renamed:
   # count the renamed token, not the original slug
-  { awk -F',' '$15 !~ /token / {print $1}' "$FL"; grep -oE 'token [a-z0-9@.+-]+' "$FL" | awk '{print $2}'; } \
+  { awk -F'\t' '$2 !~ /token / {print $1}' "$FL"; grep -oE 'token [a-z0-9@.+-]+' "$FL" | awk '{print $2}'; } \
     | sort -u > "$CT"; rm -f "$FL"
   echo "Registry tokens: $(wc -l < "$RT" | tr -d ' ')   CSV in-registry slugs (incl. renames): $(wc -l < "$CT" | tr -d ' ')"
   echo; echo "-- in REGISTRY but not in-registry in the CSV:"
@@ -648,7 +776,7 @@ autofix(){ local a="$1" c=1
   fi
   if printf '%s' "$a" | grep -qiE "desc.*(shouldn't contain the platform|should not contain the platform)"; then
     perl -i -pe 's/\b(macOS|Mac OS X|Windows|Linux|Mac)\b ?//g if /^\s*desc\s/; s/(desc\s+")(\w)/$1.uc($2)/e' "$CASK"; AUTOFIX+="removed platform word from desc; "; c=0; fi
-  if printf '%s' "$a" | grep -qiE 'verified.*(redundant|not needed|should be removed|do not need)'; then
+  if printf '%s' "$a" | grep -qiE 'verified.*(redundant|not needed|should be removed|do not need|unnecessary)'; then
     perl -0777 -i -pe 's/,\s*\n?\s*verified:\s*"[^"]*"//g' "$CASK"; AUTOFIX+="removed redundant verified; "; c=0; fi
   if printf '%s' "$a" | grep -qiE 'desc.*(full stop|period|should not end)'; then
     perl -i -pe 's/^(\s*desc\s+"[^"]*)\."/$1"/' "$CASK"; AUTOFIX+="stripped trailing period from desc; "; c=0; fi
@@ -726,10 +854,17 @@ _resolve_direct(){
   local v
   if [ -n "${SP[version]:-}" ]; then v="${SP[version]}"
   elif [ -n "${SP[vers]:-}" ]; then
-    # Mirror Homebrew livecheck (Ruby String#scan): capture group 1 if the regex
-    # defines one, else the whole match. grep -o returns the WHOLE match, which
-    # wrongly keeps any literal prefix (e.g. "Version 8.0" instead of "8.0").
-    v="$(curl -fsSL "${SP[vers]}" | VRE="${SP[vregex]}" perl -ne 'if(/$ENV{VRE}/i){print +(defined $1 ? $1 : $&); exit}')"
+    # Mirror Homebrew livecheck (PageMatch): collect EVERY match (capture group 1
+    # if the regex defines one, else the whole match) and keep the version-max,
+    # exactly like livecheck does. First-match broke on pages that list oldest
+    # first (mestrelab) and on stray numbers (aws changelog "p6-b300.48xlarge").
+    # The XML/RSS prologue is stripped first: a generic vregex on a Sparkle
+    # appcast otherwise matches `<?xml version="1.0"` / `<rss version="2.0">`
+    # and resolves a bogus "1.0" (grammarly, cakebrew).
+    v="$(curl -fsSL "${SP[vers]}" | VRE="${SP[vregex]}" perl -ne '
+           s/<\?xml[^>]*\?>//g; s/<rss[^>]*>//g;
+           while (/$ENV{VRE}/gi) { print((defined $1 ? $1 : $&), "\n") }
+         ' | sort -uV | tail -1)"
     [ -n "$v" ] || die "direct: vregex matched nothing at ${SP[vers]}"
   else die "direct: provide version= or vers=+vregex="; fi
   VERSION="$v"; URL="$(sub_dl "${SP[url]}")"; curl -fL "$URL" -o "$DL"; }
@@ -790,7 +925,7 @@ write_direct_latest(){
   hp_host="$(printf '%s' "$HOMEPAGE" | sed -E 's#^https?://([^/]+).*#\1#')"
   dl_host="$(printf '%s' "$url_cask" | sed -E 's#^https?://([^/]+).*#\1#')"
   [ "$(reg_dom "$hp_host")" != "$(reg_dom "$dl_host")" ] && verified=",
-      verified: \"$dl_host/\""
+      verified: \"${dl_host#www.}/\""
   [ -n "$BUNDLE_ID" ] && zapblock="
 $(zap_for "$BUNDLE_ID")"
   case "$ARTIFACT" in
@@ -842,7 +977,14 @@ RB
 # arch-split direct download (two URLs). Versioned via vers/vregex (or version=), else :latest.
 _resolve_direct_arch(){
   if [ -n "${SP[version]:-}" ]; then VERSION="${SP[version]}"
-  elif [ -n "${SP[vers]:-}" ]; then VERSION="$(curl -fsSL "${SP[vers]}" | VRE="${SP[vregex]}" perl -ne 'if(/$ENV{VRE}/i){print +(defined $1 ? $1 : $&); exit}')"; [ -n "$VERSION" ] || die "direct_arch: vregex matched nothing at ${SP[vers]}"
+  elif [ -n "${SP[vers]:-}" ]; then
+    # same matching rules as _resolve_direct: version-MAX over every match,
+    # XML/RSS prologue stripped (mirrors brew livecheck's PageMatch behavior)
+    VERSION="$(curl -fsSL "${SP[vers]}" | VRE="${SP[vregex]}" perl -ne '
+           s/<\?xml[^>]*\?>//g; s/<rss[^>]*>//g;
+           while (/$ENV{VRE}/gi) { print((defined $1 ? $1 : $&), "\n") }
+         ' | sort -uV | tail -1)"
+    [ -n "$VERSION" ] || die "direct_arch: vregex matched nothing at ${SP[vers]}"
   else VERSION="latest"; fi
   URL="$(sub_dl "${SP[arm]}")"; curl -fL "$URL" -o "$DL"
   curl -fL "$(sub_dl "${SP[intel]}")" -o "$W/dl-x64" && SHA_X64="$(shasum -a 256 "$W/dl-x64" | awk '{print $1}')" || die "direct_arch: intel download failed"; }
@@ -852,9 +994,12 @@ write_direct_arch(){
   hp_host="$(printf '%s' "$HOMEPAGE" | sed -E 's#^https?://([^/]+).*#\1#')"
   dl_host="$(printf '%s' "$armurl" | sed -E 's#^https?://([^/]+).*#\1#')"
   [ "$(reg_dom "$hp_host")" != "$(reg_dom "$dl_host")" ] && verified=",
-        verified: \"$dl_host/\""
+        verified: \"${dl_host#www.}/\""
   if [ "$VERSION" = latest ]; then verline="version :latest"; armsha="sha256 :no_check"; intelsha="sha256 :no_check"
   else verline="version \"$VERSION\""; armsha="sha256 \"$SHA\""; intelsha="sha256 \"$SHA_X64\""
+    # unversioned templates (no #{version}) serve a changing file: audit requires
+    # `sha256 :no_check` even with a pinned version + livecheck (flashpeak-slimjet)
+    case "$armurl$intelurl" in *'#{version}'*) ;; *) armsha="sha256 :no_check"; intelsha="sha256 :no_check";; esac
     [ -n "${SP[vers]:-}" ] && lc="
   livecheck do
     url \"${SP[vers]}\"
@@ -1001,7 +1146,7 @@ write_electron(){
   bhost="$(printf '%s' "$base" | sed -E 's#^https?://([^/]+).*#\1#')"
   hphost="$(printf '%s' "$HOMEPAGE" | sed -E 's#^https?://([^/]+).*#\1#')"
   [ "$(reg_dom "$bhost")" != "$(reg_dom "$hphost")" ] && verified=",
-      verified: \"$bhost/\""
+      verified: \"${bhost#www.}/\""
   lc="livecheck do
     url \"${SP[feed]}\"
     strategy :electron_builder
@@ -1065,8 +1210,18 @@ RB
 # Content-Disposition header, not in a page) — like msft_cdn but for any host and any artifact.
 # spec: short=<url that redirects to the versioned file> ; regex=<filename regex, version captured>
 _resolve_direct_header(){
-  local short="${SP[short]}" real
-  real="$(curl -sIL "$short" | awk -F': ' 'tolower($1)=="location"{print $2}' | tail -1 | tr -d '\r')"
+  local short="${SP[short]}" real="" base loc
+  base="$(printf '%s' "$short" | sed -E 's#^(https?://[^/]+).*#\1#')"
+  # Walk every redirect hop and keep the FIRST whose filename carries a version:
+  # vendors often bounce versioned-URL -> opaque CDN/id URL (particulars.app ->
+  # gitlab package_files), and only the early hop is livecheck-bumpable. Relative
+  # Locations (astropad) are resolved against the short URL's host.
+  while IFS= read -r loc; do
+    case "$loc" in http://*|https://*) ;; /*) loc="$base$loc";; *) continue;; esac
+    if basename "${loc%%\?*}" | grep -qE '[0-9]+(\.[0-9]+)+'; then real="$loc"; break; fi
+  done < <(curl -sIL "$short" | awk -F': ' 'tolower($1)=="location"{print $2}' | tr -d '\r')
+  # fallback: the final URL after all redirects (%{url_effective} is always absolute)
+  [ -n "$real" ] || real="$(curl -sIL -o /dev/null -w '%{url_effective}' "$short" 2>/dev/null)"
   [ -n "$real" ] || real="$short"
   VERSION="$(basename "${real%%\?*}" | grep -oE '[0-9]+(\.[0-9]+)+' | head -1)"
   [ -n "$VERSION" ] || VERSION="$(curl -sIL "$short" | grep -i '^content-disposition' | grep -oE '[0-9]+(\.[0-9]+)+' | head -1)"
@@ -1074,8 +1229,13 @@ _resolve_direct_header(){
   DH_URLT="$(printf '%s' "$real" | sed "s/${VERSION//./\\.}/#{version}/")"
   URL="$real"; curl -fL "$URL" -o "$DL"; }
 write_direct_header(){
-  local host lc uninstall zapblock=""
+  local host lc uninstall zapblock="" verified="" hp_host
   host="$(printf '%s' "$DH_URLT" | sed -E 's#https?://([^/]+)/.*#\1#')"
+  # same rule as write_direct: `verified:` ONLY when the registrable domain
+  # differs from the homepage's (downloads.astropad.com == astropad.com -> none)
+  hp_host="$(printf '%s' "$HOMEPAGE" | sed -E 's#^https?://([^/]+).*#\1#')"
+  [ "$(reg_dom "$hp_host")" != "$(reg_dom "$host")" ] && verified=",
+      verified: \"${host#www.}/\""
   lc="livecheck do
     url \"${SP[short]}\"
     regex(/${SP[regex]}/i)
@@ -1094,8 +1254,7 @@ cask "$TOKEN" do
   version "$VERSION"
   sha256 "$SHA"
 
-  url "$DH_URLT",
-      verified: "$host/"
+  url "$DH_URLT"$verified
   name "$NAME"
   desc "$DESC"
   homepage "$HOMEPAGE"
@@ -1117,8 +1276,7 @@ cask "$TOKEN" do
   version "$VERSION"
   sha256 "$SHA"
 
-  url "$DH_URLT",
-      verified: "$host/"
+  url "$DH_URLT"$verified
   name "$NAME"
   desc "$DESC"
   homepage "$HOMEPAGE"
@@ -1192,7 +1350,7 @@ write_direct(){
   hp_host="$(printf '%s' "$HOMEPAGE" | sed -E 's#^https?://([^/]+).*#\1#')"
   dl_host="$(printf '%s' "$url_cask" | sed -E 's#^https?://([^/]+).*#\1#')"
   [ "$(reg_dom "$hp_host")" != "$(reg_dom "$dl_host")" ] && verified=",
-      verified: \"$dl_host/\""
+      verified: \"${dl_host#www.}/\""
   if [ -n "${SP[vers]:-}" ]; then
     lc="livecheck do
     url \"${SP[vers]}\"
@@ -1388,8 +1546,7 @@ cask "$TOKEN" do
   version "$VERSION"
   sha256 "$SHA"
 
-  url "https://download.bimcollab.com/BIMcollab%20Zoom%20#{version.csv.first}%20build%20#{version.csv.second}.dmg",
-      verified: "download.bimcollab.com/"
+  url "https://download.bimcollab.com/BIMcollab%20Zoom%20#{version.csv.first}%20build%20#{version.csv.second}.dmg"
   name "$NAME"
   desc "$DESC"
   homepage "$HOMEPAGE"
@@ -1441,7 +1598,9 @@ cask "$TOKEN" do
 
   livecheck do
     url "https://drbuho.net/buhocleaner/appcast.xml"
-    strategy :sparkle, &:short_version
+    strategy :sparkle do |item|
+      "#{item.short_version},#{item.version}"
+    end
   end
 
   depends_on macos: :$SYM
@@ -1507,8 +1666,7 @@ cask "$TOKEN" do
   version "$VERSION"
   sha256 "$SHA"
 
-  url "https://clients.catonetworks.com/macos/#{version}/CatoClient.pkg",
-      verified: "clients.catonetworks.com/"
+  url "https://clients.catonetworks.com/macos/#{version}/CatoClient.pkg"
   name "$NAME"
   desc "$DESC"
   homepage "$HOMEPAGE"
@@ -1728,8 +1886,7 @@ cask "$TOKEN" do
   version "$VERSION"
   sha256 "$SHA"
 
-  url "https://apis.cricut.com/desktopdownload/InstallerFile?operatingSystem=osxnative&shard=a&fileName=CricutDesignSpace-Install-v#{version}.dmg",
-      verified: "apis.cricut.com/"
+  url "https://apis.cricut.com/desktopdownload/InstallerFile?operatingSystem=osxnative&shard=a&fileName=CricutDesignSpace-Install-v#{version}.dmg"
   name "$NAME"
   desc "$DESC"
   homepage "$HOMEPAGE"
@@ -1849,8 +2006,7 @@ cask "$TOKEN" do
   version "$VERSION"
   sha256 "$SHA"
 
-  url "https://dl.dell.com/FOLDER09180078M/1/DDPMv#{version}.zip",
-      verified: "dl.dell.com/"
+  url "https://dl.dell.com/FOLDER09180078M/1/DDPMv#{version}.zip"
   name "$NAME"
   desc "$DESC"
   homepage "$HOMEPAGE"
@@ -2106,8 +2262,7 @@ cask "$TOKEN" do
   version "$VERSION"
   sha256 "$OUTER_SHA"
 
-  url "https://www.finaldraft.com/downloads/finaldraft#{version.no_dots}Mac.zip",
-      verified: "finaldraft.com/"
+  url "https://www.finaldraft.com/downloads/finaldraft#{version.no_dots}Mac.zip"
   name "$NAME"
   desc "$DESC"
   homepage "$HOMEPAGE"
@@ -2146,8 +2301,7 @@ cask "$TOKEN" do
   version "$VERSION"
   sha256 "$OUTER_SHA"
 
-  url "https://www.finaldraft.com/downloads/finaldraft#{version.no_dots}Mac.zip",
-      verified: "finaldraft.com/"
+  url "https://www.finaldraft.com/downloads/finaldraft#{version.no_dots}Mac.zip"
   name "$NAME"
   desc "$DESC"
   homepage "$HOMEPAGE"
@@ -2306,19 +2460,15 @@ cask "$TOKEN" do
   sha256 :no_check
 
   on_arm do
-    url "https://transferapp.frame.io/Frame.io-Transfer/6ab0c27d61d7cf8793b0357e6533ed81/latest/darwin/arm64/Frame.io+Transfer.dmg",
-        verified: "transferapp.frame.io/"
+    url "https://transferapp.frame.io/Frame.io-Transfer/6ab0c27d61d7cf8793b0357e6533ed81/latest/darwin/arm64/Frame.io+Transfer.dmg"
   end
   on_intel do
-    url "https://transferapp.frame.io/Frame.io-Transfer/6ab0c27d61d7cf8793b0357e6533ed81/latest/darwin/x64/Frame.io+Transfer.dmg",
-        verified: "transferapp.frame.io/"
+    url "https://transferapp.frame.io/Frame.io-Transfer/6ab0c27d61d7cf8793b0357e6533ed81/latest/darwin/x64/Frame.io+Transfer.dmg"
   end
 
   name "$NAME"
   desc "$DESC"
   homepage "$HOMEPAGE"
-
-  auto_updates true
   depends_on macos: :catalina
 
   app "$APP_NAME"
@@ -2341,8 +2491,7 @@ cask "$TOKEN" do
   version "$VERSION"
   sha256 "$SHA"
 
-  url "https://www.growlybird.com/downloads/glucose_#{version.no_dots}.dmg",
-      verified: "growlybird.com/"
+  url "https://www.growlybird.com/downloads/glucose_#{version.no_dots}.dmg"
   name "$NAME"
   desc "$DESC"
   homepage "$HOMEPAGE"
@@ -2382,7 +2531,7 @@ cask "$TOKEN" do
   version "$VERSION"
 
   on_arm do
-    sha256 "$SHA"
+    sha256 :no_check
     url "https://production-archimedes-secure-browser-artifacts.s3.amazonaws.com/latest/mac-arm64/guardian-browser-arm64.dmg",
         verified: "production-archimedes-secure-browser-artifacts.s3.amazonaws.com/"
   end
@@ -2425,10 +2574,9 @@ resolve_huddly(){
 write_cask_huddly(){ cat > "$CASK" <<RB
 cask "$TOKEN" do
   version "$VERSION"
-  sha256 "$SHA"
+  sha256 :no_check
 
-  url "https://app.huddly.com/download/latest/osx",
-      verified: "app.huddly.com/"
+  url "https://app.huddly.com/download/latest/osx"
   name "$NAME"
   desc "$DESC"
   homepage "$HOMEPAGE"
@@ -2521,28 +2669,27 @@ RB
 }
 
 # ---------------------------------------------------------------------------
-# imanage-work-desktop  (pkg-in-zip; UNVERSIONED enclosure; Sparkle appcast)
+# imanage-work  (pkg-in-zip; UNVERSIONED enclosure; Sparkle appcast)
 # Sparkle enclosure "iManage Work Desktop for Mac.pkg.zip" (pkg nested in zip,
 # spaces, no version in name) -> inner pkg. DL = inner pkg (for the receipt);
 # cask sha = OUTER_SHA; version from the appcast; livecheck = :sparkle.
 # ---------------------------------------------------------------------------
-resolve_imanage_work_desktop(){
+resolve_imanage_work(){
   VERSION="10.8.4"
   URL="https://updates.imanage.com/autoupdates/iManage%20Work%20Desktop%20for%20Mac.pkg.zip"
-  curl -fL "$URL" -o "$DL" || die "imanage-work-desktop: outer zip download failed"
+  curl -fL "$URL" -o "$DL" || die "imanage-work: outer zip download failed"
   OUTER_SHA="$(shasum -a 256 "$DL" | awk '{print $1}')"
   rm -rf "$W/inner"; mkdir -p "$W/inner"; ditto -xk "$DL" "$W/inner" 2>/dev/null || unzip -oq "$DL" -d "$W/inner"
   local inner; inner="$(find "$W/inner" -maxdepth 3 -type f -iname '*.pkg' ! -path '*__MACOSX*' | head -1)"
-  [ -n "$inner" ] || die "imanage-work-desktop: no inner .pkg found in zip"
+  [ -n "$inner" ] || die "imanage-work: no inner .pkg found in zip"
   cp "$inner" "$DL"
 }
-write_cask_imanage_work_desktop(){ cat > "$CASK" <<RB
+write_cask_imanage_work(){ cat > "$CASK" <<RB
 cask "$TOKEN" do
   version "$VERSION"
   sha256 "$OUTER_SHA"
 
-  url "https://updates.imanage.com/autoupdates/iManage%20Work%20Desktop%20for%20Mac.pkg.zip",
-      verified: "updates.imanage.com/"
+  url "https://updates.imanage.com/autoupdates/iManage%20Work%20Desktop%20for%20Mac.pkg.zip"
   name "$NAME"
   desc "$DESC"
   homepage "$HOMEPAGE"
@@ -2576,10 +2723,9 @@ resolve_ipsw_updater(){
 write_cask_ipsw_updater(){ cat > "$CASK" <<RB
 cask "$TOKEN" do
   version "$VERSION"
-  sha256 "$SHA"
+  sha256 :no_check
 
-  url "https://ipsw.app/download/IPSWUpdater-v202604151.zip",
-      verified: "ipsw.app/"
+  url "https://ipsw.app/download/IPSWUpdater-v202604151.zip"
   name "$NAME"
   desc "$DESC"
   homepage "$HOMEPAGE"
@@ -2660,7 +2806,7 @@ resolve_jamf_connect_configuration(){
 write_cask_jamf_connect_configuration(){ cat > "$CASK" <<RB
 cask "$TOKEN" do
   version "$VERSION"
-  sha256 "$SHA"
+  sha256 :no_check
 
   url "https://files.jamfconnect.com/JamfConnect.dmg",
       verified: "files.jamfconnect.com/"
@@ -2719,7 +2865,7 @@ resolve_jamf_connect_login(){
 write_cask_jamf_connect_login(){ cat > "$CASK" <<RB
 cask "$TOKEN" do
   version "$VERSION"
-  sha256 "$SHA"
+  sha256 :no_check
 
   url "https://files.jamfconnect.com/JamfConnect.dmg",
       verified: "files.jamfconnect.com/"
@@ -2766,14 +2912,12 @@ cask "$TOKEN" do
   version "$VERSION"
 
   on_arm do
-    sha256 "$SHA"
-    url "https://configurator.getjoan.com/download/flavor/joan/latest/osx_arm64",
-        verified: "configurator.getjoan.com/"
+    sha256 :no_check
+    url "https://configurator.getjoan.com/download/flavor/joan/latest/osx_arm64"
   end
   on_intel do
     sha256 "$SHA_X64"
-    url "https://configurator.getjoan.com/download/flavor/joan/latest/osx_64",
-        verified: "configurator.getjoan.com/"
+    url "https://configurator.getjoan.com/download/flavor/joan/latest/osx_64"
   end
 
   name "$NAME"
@@ -2815,8 +2959,7 @@ cask "$TOKEN" do
   version "$VERSION"
   sha256 "$SHA"
 
-  url "https://assets.jpegmini.com/downloads/pro/mac/jpegmini_pro4_b72851.dmg",
-      verified: "assets.jpegmini.com/"
+  url "https://assets.jpegmini.com/downloads/pro/mac/jpegmini_pro4_b72851.dmg"
   name "$NAME"
   desc "$DESC"
   homepage "$HOMEPAGE"
@@ -2898,7 +3041,7 @@ resolve_lg_calibration_studio(){
 write_cask_lg_calibration_studio(){ cat > "$CASK" <<RB
 cask "$TOKEN" do
   version "$VERSION"
-  sha256 "$SHA"
+  sha256 :no_check
 
   url "https://gscs-b2c.lge.com/downloadFile?fileId=mp6Ez3DAnsO4r3HuzRaLfw",
       verified: "gscs-b2c.lge.com/"
@@ -2938,8 +3081,7 @@ cask "$TOKEN" do
   version "$VERSION"
   sha256 "$SHA"
 
-  url "https://www.siliconmotion.com/downloads/macOS_InstantView_V#{version.csv.first}R000#{version.csv.second}.dmg",
-      verified: "siliconmotion.com/"
+  url "https://www.siliconmotion.com/downloads/macOS_InstantView_V#{version.csv.first}R000#{version.csv.second}.dmg"
   name "$NAME"
   desc "$DESC"
   homepage "$HOMEPAGE"
@@ -2983,13 +3125,11 @@ cask "$TOKEN" do
 
   on_arm do
     sha256 "$SHA"
-    url "https://downloads.mamp.info/MAMP-PRO/macOS/MAMP-PRO/MAMP-MAMP-PRO-#{version.csv.second}-Apple-chip.pkg",
-        verified: "downloads.mamp.info/"
+    url "https://downloads.mamp.info/MAMP-PRO/macOS/MAMP-PRO/MAMP-MAMP-PRO-#{version.csv.second}-Apple-chip.pkg"
   end
   on_intel do
     sha256 "$SHA_X64"
-    url "https://downloads.mamp.info/MAMP-PRO/macOS/MAMP-PRO/MAMP-MAMP-PRO-#{version.csv.second}-Intel-x86.pkg",
-        verified: "downloads.mamp.info/"
+    url "https://downloads.mamp.info/MAMP-PRO/macOS/MAMP-PRO/MAMP-MAMP-PRO-#{version.csv.second}-Intel-x86.pkg"
   end
 
   name "$NAME"
@@ -3028,8 +3168,7 @@ cask "$TOKEN" do
   version "$VERSION"
   sha256 "$SHA"
 
-  url "https://mx-app-blob-prod.maxon.net/mx-package-production/installer/macos/maxon/cinema4d/releases/#{version.csv.first}/Cinema4D_2026_#{version.csv.second}_Mac.dmg",
-      verified: "mx-app-blob-prod.maxon.net/"
+  url "https://mx-app-blob-prod.maxon.net/mx-package-production/installer/macos/maxon/cinema4d/releases/#{version.csv.first}/Cinema4D_2026_#{version.csv.second}_Mac.dmg"
   name "$NAME"
   desc "$DESC"
   homepage "$HOMEPAGE"
@@ -3261,10 +3400,9 @@ resolve_mister_horse_product_manager(){
 write_cask_mister_horse_product_manager(){ cat > "$CASK" <<RB
 cask "$TOKEN" do
   version "$VERSION"
-  sha256 "$SHA"
+  sha256 :no_check
 
-  url "https://misterhorse.com/downloads/product-manager/osx",
-      verified: "misterhorse.com/"
+  url "https://misterhorse.com/downloads/product-manager/osx"
   name "$NAME"
   desc "$DESC"
   homepage "$HOMEPAGE"
@@ -3303,8 +3441,7 @@ cask "$TOKEN" do
   version "$VERSION"
   sha256 "$SHA"
 
-  url "https://bin.extensis.com/ExtensisConnect-M-#{version.dots_to_hyphens}.dmg",
-      verified: "bin.extensis.com/"
+  url "https://bin.extensis.com/ExtensisConnect-M-#{version.dots_to_hyphens}.dmg"
   name "$NAME"
   desc "$DESC"
   homepage "$HOMEPAGE"
@@ -3353,8 +3490,7 @@ cask "$TOKEN" do
   version "$VERSION"
   sha256 "$SHA"
 
-  url "$URL",
-      verified: "releases.multiviewer.app/"
+  url "$URL"
   name "$NAME"
   desc "$DESC"
   homepage "$HOMEPAGE"
@@ -3474,13 +3610,11 @@ cask "$TOKEN" do
 
   on_arm do
     sha256 "$SHA"
-    url "https://cdn.noor.to/noor-2-releases/Noor_#{version}_aarch64.dmg",
-        verified: "cdn.noor.to/"
+    url "https://cdn.noor.to/noor-2-releases/Noor_#{version}_aarch64.dmg"
   end
   on_intel do
     sha256 "$SHA_X64"
-    url "https://cdn.noor.to/noor-2-releases/Noor_#{version}_x64.dmg",
-        verified: "cdn.noor.to/"
+    url "https://cdn.noor.to/noor-2-releases/Noor_#{version}_x64.dmg"
   end
 
   name "$NAME"
@@ -3664,12 +3798,12 @@ RB
 }
 
 # ---------------------------------------------------------------------------
-# poly-lens-desktop — HP Poly Lens, manages headsets/video bars/room devices.
+# poly-lens — HP Poly Lens, manages headsets/video bars/room devices.
 # WHY CUSTOM: nested pkgInDmg; the download URL embeds a non-derivable 4-part
 # build twice (.../2.3.1.1775/2.3.1.1775/LensDesktop-2.3.1.1775.dmg) only
 # obtainable from the GraphQL API; Apple-Silicon-only since 2.3.0.
 # ---------------------------------------------------------------------------
-resolve_poly_lens_desktop(){
+resolve_poly_lens(){
   local json api="https://api.silica-prod01.io.lens.poly.com/graphql"
   json="$(curl -fsS "$api" \
     -H 'Content-Type: application/json' \
@@ -3683,7 +3817,7 @@ resolve_poly_lens_desktop(){
   [ -n "$VERSION" ] || VERSION="2.3.1.1775"
   curl -fL "$URL" -o "$DL"
 }
-write_cask_poly_lens_desktop(){ cat > "$CASK" <<RB
+write_cask_poly_lens(){ cat > "$CASK" <<RB
 cask "$TOKEN" do
   version "$VERSION"
   sha256 "$SHA"
@@ -3992,8 +4126,7 @@ cask "$TOKEN" do
   version "1.12.0"
   sha256 "$SHA"
 
-  url "https://download.slido.com/slido-for-mac/updates/SlidoForMac_r3325.dmg",
-      verified: "download.slido.com/"
+  url "https://download.slido.com/slido-for-mac/updates/SlidoForMac_r3325.dmg"
   name "$NAME"
   desc "$DESC"
   homepage "$HOMEPAGE"
@@ -4027,8 +4160,7 @@ cask "$TOKEN" do
   version "2.49.1.50573.101"
   sha256 "$SHA"
 
-  url "https://downloads.smarttech.com/software/smartmirror/4_49/mac/SMART_Mirror_App_#{version}.pkg",
-      verified: "downloads.smarttech.com/"
+  url "https://downloads.smarttech.com/software/smartmirror/4_49/mac/SMART_Mirror_App_#{version}.pkg"
   name "$NAME"
   desc "$DESC"
   homepage "$HOMEPAGE"
@@ -4070,8 +4202,7 @@ cask "$TOKEN" do
   version "$VERSION"
   sha256 "$SHA"
 
-  url "https://cdn.snapgene.com/downloads/SnapGene/#{version.major}.x/#{version.major_minor}/#{version}/snapgene_#{version}_mac.dmg",
-      verified: "cdn.snapgene.com/"
+  url "https://cdn.snapgene.com/downloads/SnapGene/#{version.major}.x/#{version.major_minor}/#{version}/snapgene_#{version}_mac.dmg"
   name "$NAME"
   desc "$DESC"
   homepage "$HOMEPAGE"
@@ -4123,8 +4254,7 @@ cask "$TOKEN" do
   version "$VERSION"
   sha256 "$SHA"
 
-  url "https://edge.rode.com/zip/page/1890/modules/5329/SoundFieldByRODE_MAC_ver#{version}.pkg.zip",
-      verified: "edge.rode.com/"
+  url "https://edge.rode.com/zip/page/1890/modules/5329/SoundFieldByRODE_MAC_ver#{version}.pkg.zip"
   name "$NAME"
   desc "$DESC"
   homepage "$HOMEPAGE"
@@ -4159,8 +4289,7 @@ cask "$TOKEN" do
   version "$VERSION"
   sha256 "$SHA"
 
-  url "https://cdn.datacolor.com/spyder/SpyderXElite_#{version}.pkg.zip",
-      verified: "cdn.datacolor.com/"
+  url "https://cdn.datacolor.com/spyder/SpyderXElite_#{version}.pkg.zip"
   name "$NAME"
   desc "$DESC"
   homepage "$HOMEPAGE"
@@ -4195,8 +4324,7 @@ cask "$TOKEN" do
   version "$VERSION"
   sha256 "$SHA"
 
-  url "https://cdn.datacolor.com/spyder/SpyderXPro_#{version}.pkg.zip",
-      verified: "cdn.datacolor.com/"
+  url "https://cdn.datacolor.com/spyder/SpyderXPro_#{version}.pkg.zip"
   name "$NAME"
   desc "$DESC"
   homepage "$HOMEPAGE"
@@ -4277,8 +4405,7 @@ cask "$TOKEN" do
   version "$VERSION"
   sha256 "$SHA"
 
-  url "$urlt",
-      verified: "$host/"
+  url "$urlt"
   name "$NAME"
   desc "$DESC"
   homepage "$HOMEPAGE"
@@ -4312,8 +4439,7 @@ cask "$TOKEN" do
   version "$VERSION"
   sha256 "$SHA"
 
-  url "https://cdn-my.esko.com/downloads/Public/Free/Latest/Studio_Viewer_#{version.tr(".", "_")}.dmg",
-      verified: "cdn-my.esko.com/"
+  url "https://cdn-my.esko.com/downloads/Public/Free/Latest/Studio_Viewer_#{version.tr(".", "_")}.dmg"
   name "$NAME"
   desc "$DESC"
   homepage "$HOMEPAGE"
@@ -4354,8 +4480,7 @@ cask "$TOKEN" do
   version "$VERSION"
   sha256 "$SHA"
 
-  url "https://global.download.synology.com/download/Utility/ActiveBackupBusinessAgent/#{version}/Mac/x86_64/Synology%20Active%20Backup%20for%20Business%20Agent-#{version}.dmg",
-      verified: "global.download.synology.com/"
+  url "https://global.download.synology.com/download/Utility/ActiveBackupBusinessAgent/#{version}/Mac/x86_64/Synology%20Active%20Backup%20for%20Business%20Agent-#{version}.dmg"
   name "$NAME"
   desc "$DESC"
   homepage "$HOMEPAGE"
@@ -4394,8 +4519,7 @@ cask "$TOKEN" do
   version "$VERSION"
   sha256 "$SHA"
 
-  url "https://global.download.synology.com/download/Utility/SynologyDriveClient/#{version.csv.first}-#{version.csv.second}/Mac/Installer/synology-drive-client-#{version.csv.second}.dmg",
-      verified: "global.download.synology.com/"
+  url "https://global.download.synology.com/download/Utility/SynologyDriveClient/#{version.csv.first}-#{version.csv.second}/Mac/Installer/synology-drive-client-#{version.csv.second}.dmg"
   name "$NAME"
   desc "$DESC"
   homepage "$HOMEPAGE"
@@ -4434,8 +4558,7 @@ cask "$TOKEN" do
   version "$VERSION"
   sha256 "$SHA"
 
-  url "https://bin.extensis.com/UTC-#{version.tr(".", "-")}-M.zip",
-      verified: "bin.extensis.com/"
+  url "https://bin.extensis.com/UTC-#{version.tr(".", "-")}-M.zip"
   name "$NAME"
   desc "$DESC"
   homepage "$HOMEPAGE"
@@ -4567,8 +4690,7 @@ cask "$TOKEN" do
   version "$VERSION"
   sha256 "$SHA"
 
-  url "https://www.tominlab.com/to/get-file/cdn?file=WonderPen/desktop/#{version.major_minor}/WonderPen-v#{version}-mac-universal.dmg",
-      verified: "tominlab.com/"
+  url "https://www.tominlab.com/to/get-file/cdn?file=WonderPen/desktop/#{version.major_minor}/WonderPen-v#{version}-mac-universal.dmg"
   name "$NAME"
   desc "$DESC"
   homepage "$HOMEPAGE"
@@ -4605,7 +4727,7 @@ resolve_workbrew(){
 write_cask_workbrew(){ cat > "$CASK" <<RB
 cask "$TOKEN" do
   version "$VERSION"
-  sha256 "$SHA"
+  sha256 :no_check
 
   url "https://console.workbrew.com/downloads/macos"
   name "$NAME"
@@ -4681,8 +4803,7 @@ cask "$TOKEN" do
   version "$VERSION"
   sha256 "$SHA"
 
-  url "https://zaxcom.com/wp-content/uploads/2025/08/Zaxconvert_#{version}_PC_MAC-BETA.zip",
-      verified: "zaxcom.com/"
+  url "https://zaxcom.com/wp-content/uploads/2025/08/Zaxconvert_#{version}_PC_MAC-BETA.zip"
   name "$NAME"
   desc "$DESC"
   homepage "$HOMEPAGE"
@@ -4919,6 +5040,7 @@ done <<< "$REGISTRY"
 # so the sudo check and the prefetcher only consider what will actually run.
 # ----------------------------------------------------------------------------
 declare -a T_TOKEN=() T_NAME=() T_DESC=() T_ART=() T_SRC=() T_HP=() T_SPEC=()
+declare -a PB_TOK=() PB_WHY=()
 started=1; [ -n "$START_AT" ] && started=0
 nskip=0
 for line in "${ROWS[@]}"; do
@@ -4933,12 +5055,23 @@ for line in "${ROWS[@]}"; do
       dryrun*) if [ "$DRYRUN" = 1 ]; then nskip=$((nskip+1)); continue; fi;;
     esac
   fi
+  if [ -n "${POLICY_BLOCKED[$tok]:-}" ] && [ "$RUN_BLOCKED" != 1 ]; then
+    PB_TOK+=("$tok"); PB_WHY+=("${POLICY_BLOCKED[$tok]}"); continue
+  fi
   if [ -n "$LIMIT" ] && [ "${#T_TOKEN[@]}" -ge "$LIMIT" ]; then break; fi
   T_TOKEN+=("$tok"); T_NAME+=("$(trim "$c2")"); T_DESC+=("$(trim "$c3")")
   T_ART+=("$(trim "$c4")"); T_SRC+=("$(trim "$c5")"); T_HP+=("$(trim "$c6")"); T_SPEC+=("$(trim "$c7")")
 done
 [ "$nskip" -gt 0 ] && echo "SKIP_PASSED=1 — skipping $nskip app(s) that already passed (reports under $ROOT)."
-[ "${#T_TOKEN[@]}" -gt 0 ] || { echo "Nothing to run (ONLY/START_AT/LIMIT/SKIP_PASSED selected 0 apps)."; exit 0; }
+if [ "${#T_TOKEN[@]}" -eq 0 ]; then
+  if [ "${#PB_TOK[@]}" -gt 0 ]; then
+    echo "Nothing to run: the selection matched only POLICY_BLOCKED app(s) — known brew-audit policy rejections (NOT-ADDED.md §2). Re-test with RUN_BLOCKED=1:"
+    for _k in "${!PB_TOK[@]}"; do echo "  - ${PB_TOK[$_k]} — ${PB_WHY[$_k]}"; done
+  else
+    echo "Nothing to run (ONLY/START_AT/LIMIT/SKIP_PASSED selected 0 apps)."
+  fi
+  exit 0
+fi
 
 # ----------------------------------------------------------------------------
 # Sudo: ask ONCE, then cache for the entire run so per-app install/uninstall/zap
@@ -5026,6 +5159,18 @@ start_prefetch(){
 NTOT="${#T_TOKEN[@]}"
 { echo "# Master cask run — $(date)"; echo; echo "Mode: $([ "$DRYRUN" = 1 ] && echo DRYRUN || echo LIVE)  |  base: $DEF  |  fork: ${FORK_OWNER:-?}  |  apps: $NTOT  |  jobs: $JOBS"; echo; } > "$MASTER"
 printf 'token\tstatus\tstage\tversion\tpr\tfr\treport\n' > "$RESULTS"
+if [ "${#PB_TOK[@]}" -gt 0 ]; then
+  echo "Policy-blocked: skipping ${#PB_TOK[@]} app(s) a prior full audit proved unshippable (NOT-ADDED.md §2; RUN_BLOCKED=1 re-tests them)."
+  for _k in "${!PB_TOK[@]}"; do
+    _t="${PB_TOK[$_k]}"; _why="${PB_WHY[$_k]}"
+    mkdir -p "$ROOT/$_t"
+    { echo "TOKEN=$_t"; echo "STATUS=skipped (policy-blocked)"; echo "STAGE=policy"
+      echo "PR="; echo "FR="; echo "VERSION="; } > "$ROOT/$_t/result.env"
+    [ -f "$ROOT/$_t/report.md" ] || printf '# Cask run report — %s\n\n- Outcome: **skipped (policy-blocked)**\n- Reason: %s\n' "$_t" "$_why" > "$ROOT/$_t/report.md"
+    printf '%s\tskipped (policy-blocked)\tpolicy\t\t\t\t%s\n' "$_t" "$ROOT/$_t/report.md" >> "$RESULTS"
+    printf -- '- **%s** — skipped (policy-blocked: %s)\n' "$_t" "$_why" >> "$MASTER"
+  done
+fi
 NFAIL=0; FAILED_TOKENS=""
 for i in "${!T_TOKEN[@]}"; do
   if [ "$JOBS" -gt 0 ] 2>/dev/null; then
@@ -5071,7 +5216,7 @@ for i in "${!T_TOKEN[@]}"; do
 done
 
 { echo; echo "## Totals"; echo
-  echo "- ran: $NTOT  |  failed: $NFAIL  |  results: $RESULTS"
+  echo "- ran: $NTOT  |  failed: $NFAIL  |  policy-skipped: ${#PB_TOK[@]}  |  results: $RESULTS"
   if [ "$NFAIL" -gt 0 ]; then
     echo; echo "## Failed (re-run just these: SKIP_PASSED=1, or ONLY=\"$(trim "$FAILED_TOKENS")\")"; echo
     for t in $FAILED_TOKENS; do echo "- $t — $ROOT/$t/report.md"; done
