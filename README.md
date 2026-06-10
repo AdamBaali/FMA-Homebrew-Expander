@@ -9,9 +9,25 @@ Homebrew Cask.
 list, shared by Allen Houchins on [2026-06-08](https://fleetdm.slack.com/archives/C02TYJF11P0/p1780941961900449?thread_ts=1780930437.788159&cid=C02TYJF11P0).
 It's since been removed from fleet `main`, so the pinned commit is the durable link — see [`NOT-ADDED.md`](NOT-ADDED.md).
 
-> Submitting is a human step. Run the script on a Mac: `DRYRUN=1` writes + audits every cask and
-> opens nothing; a real run opens one homebrew-cask PR + Fleet FR per app. URLs and versions are
-> never invented — unverifiable apps are marked review/ineligible and skipped.
+## Quick Start
+
+### Audit only (fast, no installation)
+```bash
+DRYRUN=1 bash scripts/cask-master.sh
+```
+
+### Full test (complete verification, no PR submission)
+```bash
+DRYRUN=1 TEST_INSTALL=1 bash scripts/cask-master.sh
+```
+
+### Submit apps (with batching to prevent flooding)
+```bash
+bash scripts/cask-master.sh              # First 10 apps
+BATCH_SIZE=10 SKIP_PASSED=1 bash scripts/cask-master.sh   # Next 10 apps
+```
+
+**📖 Full documentation:** See [**DOCUMENTATION.md**](DOCUMENTATION.md) for complete guide, all flags, workflows, and troubleshooting.
 
 ## Status
 
@@ -37,6 +53,27 @@ Authored by source type: `custom 77 · github_tag 71 · direct_latest 69 · dire
 > them by default (`RUN_BLOCKED=1` re-tests them). Counts are derived from the script's REGISTRY +
 > `master-list.csv`; regenerate after edits to avoid drift.
 
+## Key Features
+
+### 🛡️ Safety First
+- **Batch processing** (`BATCH_SIZE=10`) prevents overwhelming Homebrew with too many submissions
+- **Duplicate PR prevention** (`SKIP_OPEN_PR=1`) avoids double submissions
+- **Safe dry-run** (`DRYRUN=1`) audits without installing, git changes, or PR creation
+- **Full testing** (`TEST_INSTALL=1`) validates install/uninstall/zap without committing
+
+### 🔧 Auto-fixes
+- Hardcoded version strings → `#{version}` variable
+- Deprecated `depends_on` syntax → Correct architecture blocks
+- Platform words in descriptions → Removed
+- Missing cleanup paths → Auto-detected
+- And more...
+
+### 📦 Smart Defaults
+- 10 apps per run (safe for Fleet/Homebrew)
+- Resumable runs with `SKIP_PASSED=1`
+- Parallel prefetch for faster downloads
+- Automatic disk cleanup
+
 ## Layout
 
 ```
@@ -44,37 +81,100 @@ Authored by source type: `custom 77 · github_tag 71 · direct_latest 69 · dire
 ├── scripts/
 │   └── cask-master.sh            # the deliverable: batch cask authoring + PR/FR harness
 ├── data/
-│   └── master-list.csv           # one row per app — source of truth + per-app verdict (`bucket` column)
+│   └── master-list.csv           # one row per app — source of truth + per-app verdict
 ├── .claude/skills/
-│   └── homebrew-cask-author/     # the cask-authoring skill (drives the script; auto-loaded by Claude Code)
+│   └── homebrew-cask-author/     # cask authoring skill
+├── DOCUMENTATION.md              # complete guide (all flags, workflows, etc.)
+├── CLAUDE.md                     # project operating instructions
 ├── NOT-ADDED.md                  # apps not shipped, grouped by reason
 ├── .gitignore
 └── README.md
 ```
 
-## Running it (macOS only)
+## Usage (macOS only)
 
-`brew audit`/`brew style` for casks are macOS-only, so the script needs a Mac with Homebrew and the
-homebrew-cask tap. It's location-independent (operates on the tap and `/tmp/caskwork`).
+`brew audit`/`brew style` for casks are macOS-only. The script operates on the Homebrew tap and `/tmp/caskwork`.
 
+### Setup (one-time)
 ```bash
-DRYRUN=1 bash scripts/cask-master.sh                    # preview: write + audit all 226 shippable casks, open nothing
-DRYRUN=1 ONLY="filezilla" bash scripts/cask-master.sh   # one app
-DRYRUN=1 SKIP_PASSED=1 bash scripts/cask-master.sh      # re-run only apps that haven't passed yet
-bash scripts/cask-master.sh                             # FOR REAL — opens a PR + Fleet FR per app (maintainer)
+# Ensure you have Homebrew and the cask tap
+brew tap Homebrew/cask
+gh auth login  # GitHub CLI, authorized for your fork
+cd $(brew --repository homebrew/cask)
+git remote add fork https://github.com/YOUR_USERNAME/homebrew-cask
 ```
 
-Registry format, per-source spec, and all flags (`ONLY`, `LIMIT`, `JOBS`, `KEEP`, `SKIP_PASSED`,
-`RUN_BLOCKED`, `START_AT`, `LIVECHECK`, `CASKWORK`, `CHECK`, `STRICT`, `ZAP`, `FILE_FR`,
-`CUSTOMER_LABEL`, `SUDO_NOPASSWD`, …) are documented at the top of the script. Downloads are prefetched up to
-`JOBS` apps ahead (default 4) and **each app's download + extracted tree is deleted as soon as
-the app finishes** (`KEEP=1` keeps them), so a full run can't fill the disk. **Sudo is asked once
-and cached for the whole run** (a temporary `/etc/sudoers.d` drop-in, auto-removed on exit), so
-installs/uninstalls never re-prompt. Before a real run: `gh auth login` and add your `fork` remote
-in `$(brew --repository homebrew/cask)`.
+### Running
+```bash
+cd /path/to/FMA-Homebrew-Expander
 
-Per-app reports land in `/tmp/caskwork/<token>/report.md` (override the dir with `CASKWORK=`;
-`/tmp` is wiped on reboot). A machine-readable rollup lands at `/tmp/caskwork/results.tsv`, the
-failures are listed at the bottom of `MASTER-summary.md` with a ready-made `ONLY="..."` re-run
-line, and the script exits non-zero if any app failed. `CHECK=1` prints a registry vs
-`data/master-list.csv` drift report without running anything (works on any OS).
+# Preview: audit all casks without installing or submitting
+DRYRUN=1 bash scripts/cask-master.sh
+
+# Test specific app with full install/uninstall/zap
+DRYRUN=1 TEST_INSTALL=1 ONLY="escrow-buddy" bash scripts/cask-master.sh
+
+# Submit first 10 apps (creates PRs and Fleet FRs)
+bash scripts/cask-master.sh
+
+# Submit next batch
+BATCH_SIZE=10 SKIP_PASSED=1 bash scripts/cask-master.sh
+```
+
+## Common Tasks
+
+| Task | Command |
+|------|---------|
+| Quick audit | `DRYRUN=1 bash scripts/cask-master.sh` |
+| Full test | `DRYRUN=1 TEST_INSTALL=1 bash scripts/cask-master.sh` |
+| Test one app | `DRYRUN=1 TEST_INSTALL=1 ONLY="app-name" bash scripts/cask-master.sh` |
+| Submit 10 apps | `bash scripts/cask-master.sh` |
+| Submit next 10 | `BATCH_SIZE=10 SKIP_PASSED=1 bash scripts/cask-master.sh` |
+| Skip existing PRs | `SKIP_OPEN_PR=1 bash scripts/cask-master.sh` |
+| Check results | `cat /tmp/caskwork/MASTER-summary.md` |
+| Check one app | `cat /tmp/caskwork/app-name/report.md` |
+| Resume from failure | `SKIP_PASSED=1 bash scripts/cask-master.sh` |
+
+## Important Flags
+
+| Flag | Default | Purpose |
+|------|---------|---------|
+| `DRYRUN=1` | 0 | Audit only (no install/push/PR) |
+| `TEST_INSTALL=1` | 0 | Full testing (no push/PR) |
+| `BATCH_SIZE=N` | 10 | Apps per run (0 = unlimited) |
+| `SKIP_OPEN_PR=1` | 0 | Skip apps with open PRs |
+| `SKIP_PASSED=1` | 0 | Skip apps that already passed |
+| `ONLY="a b c"` | — | Run only these apps |
+
+**Full flag reference:** See [DOCUMENTATION.md](DOCUMENTATION.md#flag-reference)
+
+## Output
+
+Results land in `/tmp/caskwork/`:
+- `MASTER-summary.md` — High-level rollup with pass/fail summary
+- `results.tsv` — Machine-readable results (import to spreadsheet)
+- `<token>/report.md` — Per-app detailed report
+- `<token>/audit.log` — Brew audit output
+- `<token>/install.log` — Installation test results
+- `<token>/zap.log` — Zap stanza verification
+
+Use persistent directory to survive reboots:
+```bash
+CASKWORK=~/caskwork bash scripts/cask-master.sh
+```
+
+## Next Steps
+
+1. Read [**DOCUMENTATION.md**](DOCUMENTATION.md) for complete reference
+2. Start with `DRYRUN=1` to preview
+3. Test with `DRYRUN=1 TEST_INSTALL=1` on a few apps
+4. Submit first batch with `bash scripts/cask-master.sh`
+5. Monitor PRs and proceed with next batches using `SKIP_PASSED=1`
+
+## References
+
+- **Operating guide:** [`CLAUDE.md`](CLAUDE.md)
+- **Complete documentation:** [`DOCUMENTATION.md`](DOCUMENTATION.md)
+- **Policy decisions:** [`NOT-ADDED.md`](NOT-ADDED.md)
+- **App registry:** [`data/master-list.csv`](data/master-list.csv)
+- **Cask skill:** [`.claude/skills/homebrew-cask-author/`](.claude/skills/homebrew-cask-author/)
