@@ -53,6 +53,9 @@
 #   DRYRUN=1          preview only (no install/push/PR/FR)
 #   ONLY="a b c"      run only these tokens (space-separated)
 #   LIMIT=N           run at most N apps from the registry
+#   BATCH_SIZE=N      process apps in batches of N to avoid flooding Homebrew/Fleet
+#                     (default 10; 0 = no limit). Useful for testing before bulk runs.
+#   SKIP_OPEN_PR=1    skip apps with an open PR (default 0 = re-test and update)
 #   STOP_ON_FAIL=1    halt the whole batch on the first app that fails (default 0)
 #   JOBS=N            prefetch (resolve + download) up to N apps ahead in parallel
 #                     (default 4; 0 = fully serial). Only built-in source types
@@ -635,6 +638,7 @@ export GIT_PAGER=cat HOMEBREW_NO_INSTALL_FROM_API=1 HOMEBREW_NO_AUTO_UPDATE=1 HO
 DRYRUN="${DRYRUN:-0}"; FORK="${FORK:-fork}"; FILE_FR="${FILE_FR:-1}"; CUSTOMER_LABEL="${CUSTOMER_LABEL:-}"
 FRESH="${FRESH:-1}"; STRICT="${STRICT:-1}"; ZAP="${ZAP:-1}"
 ONLY="${ONLY:-}"; LIMIT="${LIMIT:-}"; STOP_ON_FAIL="${STOP_ON_FAIL:-0}"
+BATCH_SIZE="${BATCH_SIZE:-10}"; SKIP_OPEN_PR="${SKIP_OPEN_PR:-0}"
 JOBS="${JOBS:-4}"; KEEP="${KEEP:-0}"; SKIP_PASSED="${SKIP_PASSED:-0}"; START_AT="${START_AT:-}"
 LIVECHECK="${LIVECHECK:-1}"; CHECK="${CHECK:-0}"
 AUTHOR_NAME="${AUTHOR_NAME:-AdamBaali}"; AUTHOR_EMAIL="${AUTHOR_EMAIL:-adam@mpc.ad}"
@@ -5120,7 +5124,7 @@ $STYLE_OUT" || { log "[$TOKEN] no further safe auto-fix applies (remaining issue
 
   PR="$(gh api "repos/Homebrew/homebrew-cask/pulls?head=${FORK_OWNER}:add-${TOKEN}&state=open" --jq '.[0].html_url // empty' 2>/dev/null || true)"
   if [ -n "$PR" ]; then
-    log "[$TOKEN] branch updated; PR already open: $PR (skipping PR + Fleet FR creation)"
+    log "[$TOKEN] ⚠ PR already open: $PR — branch updated but PR + Fleet FR not recreated (FRESH=0 to keep existing PR)"
   else
     TPL="$(ls "$TAP"/.github/PULL_REQUEST_TEMPLATE.md "$TAP"/.github/pull_request_template.md 2>/dev/null | head -1)"
     if [ -n "$TPL" ]; then
@@ -5220,6 +5224,7 @@ for line in "${ROWS[@]}"; do
     PB_TOK+=("$tok"); PB_WHY+=("${POLICY_BLOCKED[$tok]}"); continue
   fi
   if [ -n "$LIMIT" ] && [ "${#T_TOKEN[@]}" -ge "$LIMIT" ]; then break; fi
+  if [ "$BATCH_SIZE" != 0 ] && [ "${#T_TOKEN[@]}" -ge "$BATCH_SIZE" ]; then break; fi
   T_TOKEN+=("$tok"); T_NAME+=("$(trim "$c2")"); T_DESC+=("$(trim "$c3")")
   T_ART+=("$(trim "$c4")"); T_SRC+=("$(trim "$c5")"); T_HP+=("$(trim "$c6")"); T_SPEC+=("$(trim "$c7")")
 done
@@ -5353,9 +5358,23 @@ for i in "${!T_TOKEN[@]}"; do
   TFN="${TOKEN//-/_}"
   parse_spec "$SPEC"
   W="$ROOT/$TOKEN"; DL="$W/dl"
+  n=$((i+1))
+
+  # Skip if SKIP_OPEN_PR=1 and there's already an open PR for this app
+  if [ "$SKIP_OPEN_PR" = 1 ] && [ "$DRYRUN" != 1 ]; then
+    EXISTING_PR="$(gh api "repos/Homebrew/homebrew-cask/pulls?head=${FORK_OWNER}:add-${TOKEN}&state=open" --jq '.[0].html_url // empty' 2>/dev/null || true)"
+    if [ -n "$EXISTING_PR" ]; then
+      echo; echo "════ [$n/$NTOT] $TOKEN  ($NAME) — SKIPPED (open PR: $EXISTING_PR) ════"
+      mkdir -p "$W"
+      echo "$EXISTING_PR" > "$W/existing_pr.txt"
+      printf '%s\t%s\t%s\t%s\t%s\t%s\t%s\n' "$TOKEN" "skipped (open PR)" "-" "-" "$EXISTING_PR" "-" "$W/report.md" >> "$RESULTS"
+      printf -- '- **%s** — %s — PR: %s  _(skipped existing PR)_\n' "$TOKEN" "skipped (open PR)" "$EXISTING_PR" >> "$MASTER"
+      continue
+    fi
+  fi
+
   # prefetched apps already have a fresh $W (made by the prefetch subshell)
   if [ "${PFPID[$i]:-0}" = 0 ]; then rm -rf "$W"; mkdir -p "$W"; fi
-  n=$((i+1))
 
   echo; echo "════ [$n/$NTOT] $TOKEN  ($NAME) — source=$SOURCE artifact=$ARTIFACT ════"
   ( run_one ); rc=$?
