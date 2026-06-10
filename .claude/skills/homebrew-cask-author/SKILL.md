@@ -158,3 +158,57 @@ research up front, fill the registry, then:
 The per-app gates, hard stops, and AI disclosure are identical to the single-app flow above — batch
 mode only saves re-pasting the harness. In this repository the batch wrapper is
 `scripts/cask-master.sh` (registry format and per-source spec are documented at the top of that script).
+
+### Batch mode flags and workflow
+
+The `cask-master.sh` script supports several flags to control the batch run:
+
+**Preview before running:**
+```bash
+DRYRUN=1 bash scripts/cask-master.sh          # write + audit casks, touch nothing else
+DRYRUN=1 TEST_INSTALL=1 bash scripts/cask-master.sh  # full test: resolve + write + audit + install/uninstall/zap
+```
+
+**Real submission (after DRYRUN passes):**
+```bash
+bash scripts/cask-master.sh                   # submit first 10 apps (default batch size)
+BATCH_SIZE=10 SKIP_PASSED=1 bash scripts/cask-master.sh  # resume from failures
+```
+
+**Key flags:**
+- `DRYRUN=1` — preview only, no installation/git push/PR/FR
+- `TEST_INSTALL=1` — full testing: installs the app, uninstalls, reinstalls, and tests zap
+- `BATCH_SIZE=N` — submit N apps per run (default 10; prevents flooding Homebrew/Fleet)
+- `SKIP_PASSED=1` — skip apps that already passed in a previous run
+- `ONLY="token1 token2"` — run only specific app tokens
+- `SKIP_OPEN_PR=1` — skip apps that already have an open PR
+- `KEEP=1` — keep downloaded files after the run (default: delete to save disk)
+- `ZAP=0` — skip the reinstall + zap test phase (default: run full testing)
+
+**Results and diagnostics:**
+Each run writes:
+- `/tmp/caskwork/MASTER-summary.md` — human-readable rollup (read this first)
+- `/tmp/caskwork/results.tsv` — machine-readable tab-separated results
+- `/tmp/caskwork/<token>/report.md` — per-app audit report with full diagnostics (resolve values, cask code, brew audit output, install logs, git state)
+
+**Batch workflow example:**
+```bash
+# 1. Preview the whole batch — each app writes + audits its cask
+DRYRUN=1 TEST_INSTALL=1 bash scripts/cask-master.sh
+
+# 2. For any app marked as failed, read its report.md and fix only that row
+# (e.g. livecheck regex, sha256, arch dmg filenames)
+vim data/master-list.csv  # edit the failing row
+
+# 3. Re-run just that app until it's clean
+DRYRUN=1 TEST_INSTALL=1 ONLY="problematic-app" bash scripts/cask-master.sh
+
+# 4. Once all apps are clean, run for real — each gets its own PR + FR
+bash scripts/cask-master.sh
+```
+
+**Common batch mode issues and fixes:**
+- **"No such file or directory" on log files** — fixed; script now properly exports variables to subshells
+- **TEST_INSTALL runs counted as failures** — fixed; now correctly reported as "test (install verified, not shipped)"
+- **Audit warnings about `depends_on :macos` syntax** — these come from external Homebrew tap dependencies, not your generated casks; your casks have correct syntax and will submit fine
+- **Download failures mid-batch** — one app's failure doesn't stop the rest; check its `report.md` for the stage and reason, fix the registry row, and re-run with `SKIP_PASSED=1`

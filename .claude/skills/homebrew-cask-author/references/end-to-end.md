@@ -1,10 +1,26 @@
 # End-to-end cask script
 
+## For a single app
+
 Copy **The harness** verbatim. Fill the `CONFIG` block at the top. Replace the two stub functions
 `resolve()` and `write_cask()` with the block from **Source blocks** that matches the app's download
 source (GitHub release / electron feed / Microsoft CDN pkg / direct). Keep everything else. Hand the
 user the whole assembled script, then ask them to run `DRYRUN=1 bash …` to preview and paste back
 `/tmp/caskwork/summary.txt`.
+
+## For batch mode (10+ apps)
+
+Use `scripts/cask-master.sh` instead. It wraps this harness in a loop over a registry (CSV rows: 
+`token | name | desc | artifact | source | homepage | spec`). Fill the registry, then:
+
+```bash
+DRYRUN=1 TEST_INSTALL=1 bash scripts/cask-master.sh  # preview all, full testing
+bash scripts/cask-master.sh  # submit (first 10 by default; BATCH_SIZE=N for more)
+SKIP_PASSED=1 bash scripts/cask-master.sh  # resume from failures
+```
+
+Each app gets its own `/tmp/caskwork/<token>/report.md` with full diagnostics. See SKILL.md for 
+complete flag reference and workflow.
 
 Baked-in behaviour: the script **stops with a summary** the moment audit, install, or uninstall
 fails (so the PR is never opened on a broken cask); `DRYRUN=1` writes + audits the cask and prints
