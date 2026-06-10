@@ -5091,6 +5091,12 @@ $STYLE_OUT" || { log "[$TOKEN] no further safe auto-fix applies (remaining issue
       pass=$((pass+1))
     done
   fi
+  # Always replace hardcoded version strings even if audit passed (audit doesn't flag this)
+  if grep -qE '^\s*(pkg|app)\s+"[^"]*-[0-9]' "$CASK"; then
+    fix_hardcoded_versions "$CASK"
+    log "[$TOKEN] replaced hardcoded versions with #{version}"
+    brew style --fix "$TOKEN" >/dev/null 2>&1
+  fi
   if [ "$LIVECHECK" = 1 ]; then
     STAGE="livecheck"; LIVECHECK_OUT="$(brew livecheck --cask "$TOKEN" 2>&1 || true)"
   fi
