@@ -766,24 +766,43 @@ inspect(){ RECEIPT=""; LABELS=""; MAU=""; NEEDS_ROSETTA=0
   SYM="$(mac_symbol "$MINOS")"; }
 
 # zap_for BUNDLE_ID -> standard user-level leftover paths, scoped to that bundle id.
-zap_for(){ [ -z "$1" ] && return 0; cat <<Z
+# Also works for pkg receipts (falls back to RECEIPT if BUNDLE_ID empty)
+zap_for(){
+  local bid="${1:-}"
+  [ -z "$bid" ] && [ -z "${RECEIPT:-}" ] && return 0
+  [ -z "$bid" ] && bid="${RECEIPT}"
+  [ -z "$bid" ] && return 0
+  cat <<Z
   zap trash: [
-    "~/Library/Caches/$1",
-    "~/Library/HTTPStorages/$1",
-    "~/Library/Preferences/$1.plist",
-    "~/Library/Saved Application State/$1.savedState",
+    "~/Library/Caches/$bid",
+    "~/Library/HTTPStorages/$bid",
+    "~/Library/Preferences/$bid.plist",
+    "~/Library/Saved Application State/$bid.savedState",
   ]
 Z
 }
 
 # Generate comprehensive zap stanzas using `brew generate-zap` (macOS only, requires installed app).
 # Falls back to zap_for() if generate-zap is unavailable or fails.
-zap_for_auto(){ local bid="$1" app_path="$2"
-  [ -z "$bid" ] && return 0
-  if command -v brew >/dev/null && brew generate-zap "$bid" 2>/dev/null | grep -q 'trash:'; then
-    brew generate-zap "$bid" 2>/dev/null | sed 's/^/  /' || zap_for "$bid"
-  else
-    zap_for "$bid"
+# For pkg installers without bundle ID, generates heuristic zap based on package name.
+zap_for_auto(){ local bid="$1" app_path="$2" pkg_name="$3"
+  if [ -n "$bid" ]; then
+    if command -v brew >/dev/null && brew generate-zap "$bid" 2>/dev/null | grep -q 'trash:'; then
+      brew generate-zap "$bid" 2>/dev/null | sed 's/^/  /' || zap_for "$bid"
+    else
+      zap_for "$bid"
+    fi
+  elif [ -n "$pkg_name" ]; then
+    # For pkg installers without bundle ID, generate heuristic zap from package name
+    # E.g., "com.company.product" → ~/Library/Caches/com.company.product, etc.
+    cat <<Z
+  zap trash: [
+    "~/Library/Caches/$pkg_name",
+    "~/Library/HTTPStorages/$pkg_name",
+    "~/Library/Preferences/$pkg_name.plist",
+    "~/Library/Saved Application State/$pkg_name.savedState",
+  ]
+Z
   fi
 }
 
