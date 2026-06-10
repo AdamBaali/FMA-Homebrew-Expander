@@ -5383,6 +5383,8 @@ for i in "${!T_TOKEN[@]}"; do
   if [ "${PFPID[$i]:-0}" = 0 ]; then rm -rf "$W"; mkdir -p "$W"; fi
 
   echo; echo "════ [$n/$NTOT] $TOKEN  ($NAME) — source=$SOURCE artifact=$ARTIFACT ════"
+  # Export variables needed by run_one subshell to avoid 'set -u' errors
+  export TOKEN NAME DESC ARTIFACT SOURCE HOMEPAGE SPEC TFN W DL n DRYRUN TEST_INSTALL ZAP ZAP_AUTO KEEP LIVECHECK STRICT FILE_FR FRESH FORK_OWNER TAP DEF ROOT FORK AUTHOR_NAME AUTHOR_EMAIL NTOT MASTER RESULTS FORK_OWNER
   ( run_one ); rc=$?
 
   if [ "$DRYRUN" != 1 ]; then
@@ -5404,7 +5406,7 @@ for i in "${!T_TOKEN[@]}"; do
   printf '%s\t%s\t%s\t%s\t%s\t%s\t%s\n' "$TOKEN" "$st" "$stg" "$ver" "$pr" "$fr" "$W/report.md" >> "$RESULTS"
   printf -- '- **%s** — %s%s%s  _(report: %s)_\n' "$TOKEN" "$st" "${pr:+ — PR: $pr}" "${fr:+ — FR: $fr}" "$W/report.md" >> "$MASTER"
   echo "──── $TOKEN: $st ${pr:+| PR=$pr} ${fr:+| FR=$fr}"
-  case "$st" in success*|dryrun*|skipped*) ;; *) NFAIL=$((NFAIL+1)); FAILED_TOKENS+="$TOKEN ";; esac
+  case "$st" in success*|dryrun*|skipped*|test*) ;; *) NFAIL=$((NFAIL+1)); FAILED_TOKENS+="$TOKEN ";; esac
 
   if [ "$rc" != 0 ] && [ "$STOP_ON_FAIL" = 1 ]; then
     echo "STOP_ON_FAIL=1 and $TOKEN did not succeed — stopping the batch."; break
