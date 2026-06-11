@@ -1,0 +1,49 @@
+{
+  "name": "App Display Name",
+  "vendor": "Company/Developer Name",
+  "token": "app-name",
+  "description": "Brief description of what the app does",
+  "homepage": "https://example.com",
+  "download_url": "https://example.com/download/app-#{version}.dmg",
+  "url_pattern": {
+    "contains_version": true,
+    "version_placeholder": "#{version}",
+    "example_url": "https://example.com/download/app-1.2.3.dmg"
+  },
+  "version_detection": {
+    "strategy": "page_match|header_match|git|url",
+    "source_url": "https://example.com/releases",
+    "regex": "app[._-]v?(\\d+(?:\\.\\d+)*)",
+    "notes": "Explains the regex and why it works"
+  },
+  "bundle_id": "com.company.app",
+  "min_macos": "monterey|ventura|sonoma|latest",
+  "artifact_type": "dmg|pkg|zip|tar.gz",
+  "code_signing": {
+    "signed": true,
+    "notarized": true,
+    "verified": "example.com"
+  },
+  "zap_stanza": {
+    "locations": [
+      "~/Library/Application Support/App Name",
+      "~/Library/Preferences/com.company.app.plist",
+      "~/Library/Caches/com.company.app"
+    ],
+    "launch_agents": [],
+    "launch_daemons": []
+  },
+  "installation_notes": "Any special handling needed (e.g., manual install, pkg extraction)",
+  "known_issues": "Version detection doesn't work, download changes frequently, etc.",
+  "status": "pending|researched|ready|duplicate|blocked",
+  "research_date": "YYYY-MM-DD",
+  "researched_by": "Name",
+  "duplicate_of": null,
+  "block_reason": null,
+  "tags": ["productivity", "development", "utilities"],
+  "sources": {
+    "github": "https://github.com/user/repo",
+    "appstore": null,
+    "direct": "https://example.com"
+  }
+}

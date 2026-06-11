@@ -1,0 +1,51 @@
+{
+  "poll_everywhere": {
+    "name": "Poll Everywhere",
+    "vendor": "Poll Everywhere",
+    "token": "poll-everywhere",
+    "description": "Live audience response and interactive polling client",
+    "homepage": "https://www.polleverywhere.com/",
+    "download_url": "https://polleverywhere-app.s3.amazonaws.com/mac-stable/#{version}/pollev.dmg",
+    "url_pattern": {
+      "contains_version": true,
+      "version_placeholder": "#{version}",
+      "example_url": "https://polleverywhere-app.s3.amazonaws.com/mac-stable/4.0.1/pollev.dmg"
+    },
+    "version_detection": {
+      "strategy": "page_match",
+      "source_url": "https://polleverywhere-app.s3.amazonaws.com/?list-type=2&prefix=mac-stable/",
+      "regex": "mac-stable/(\\d+(?:\\.\\d+)+)/pollev\\.dmg",
+      "notes": "Extracts version from S3 directory listing pattern"
+    },
+    "bundle_id": "com.polleverywhere.PollEv-Presenter",
+    "min_macos": "sonoma",
+    "artifact_type": "dmg",
+    "code_signing": {
+      "signed": true,
+      "notarized": true,
+      "verified": "polleverywhere-app.s3.amazonaws.com/"
+    },
+    "zap_stanza": {
+      "locations": [
+        "~/Library/Caches/com.polleverywhere.PollEv-Presenter",
+        "~/Library/HTTPStorages/com.polleverywhere.PollEv-Presenter",
+        "~/Library/Preferences/com.polleverywhere.PollEv-Presenter.plist",
+        "~/Library/Saved Application State/com.polleverywhere.PollEv-Presenter.savedState"
+      ],
+      "launch_agents": [],
+      "launch_daemons": []
+    },
+    "installation_notes": "Standard DMG installation, no special handling needed",
+    "known_issues": null,
+    "status": "ready",
+    "research_date": "2024-06-11",
+    "researched_by": "Adam Baali",
+    "tags": ["productivity", "presentation", "polling"],
+    "sources": {
+      "github": null,
+      "appstore": null,
+      "direct": "https://www.polleverywhere.com/"
+    },
+    "cask_status": "generated|validated|ready_for_pr"
+  }
+}
