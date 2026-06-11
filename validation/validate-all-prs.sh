@@ -108,15 +108,15 @@ for i in "${!APPS[@]}"; do
     fi
 
     # Run quality analysis
-    local cask_file="$CASKWORK/$app/$app.rb"
+    cask_file="$CASKWORK/$app/$app.rb"
     if [[ -f "$cask_file" ]]; then
       log_info "Analyzing code quality..."
-      if bash analyze-cask.sh "$cask_file" > "$VALIDATION_DIR/$app-analysis.txt" 2>&1; then
+      if bash validation/analyze-cask.sh "$cask_file" > "$VALIDATION_DIR/$app-analysis.txt" 2>&1; then
         log_pass "Analysis completed"
 
         # Extract summary from analysis
-        local issues=$(grep -c "^ERROR:" "$VALIDATION_DIR/$app-analysis.txt" || echo 0)
-        local warnings=$(grep -c "^WARNING:" "$VALIDATION_DIR/$app-analysis.txt" || echo 0)
+        issues=$(grep -c "^ERROR:" "$VALIDATION_DIR/$app-analysis.txt" || echo 0)
+        warnings=$(grep -c "^WARNING:" "$VALIDATION_DIR/$app-analysis.txt" || echo 0)
 
         if [[ $issues -eq 0 && $warnings -le 1 ]]; then
           ready_apps+=("$app")
