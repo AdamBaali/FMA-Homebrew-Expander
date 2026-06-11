@@ -143,7 +143,7 @@ EOF
   echo "## 2. Duplicate Detection" >> "$report"
   echo "" >> "$report"
 
-  if bash check-duplicates.sh "$cask_file" > "$app_work/duplicates.log" 2>&1; then
+  if bash validation/check-duplicates.sh "$cask_file" > "$app_work/duplicates.log" 2>&1; then
     log_pass "No duplicates detected"
     echo "✓ No duplicate casks found" >> "$report"
     ((checks_passed++))
@@ -178,7 +178,7 @@ EOF
 
   local system_before="$app_work/system_before.txt"
   log_info "Capturing system state before install..."
-  bash check-system-state.sh capture "$system_before"
+  bash validation/check-system-state.sh capture "$system_before"
   log_pass "System state snapshot captured"
 
   # =========================================================================
@@ -257,7 +257,7 @@ EOF
 
   # Check for unexpected system changes
   log_info "Checking for unexpected system changes..."
-  bash check-system-state.sh compare "$system_before" "$system_after" "$app" 2>&1 | tee -a "$app_work/system_changes.txt" || true
+  bash validation/check-system-state.sh compare "$system_before" "$system_after" "$app" 2>&1 | tee -a "$app_work/system_changes.txt" || true
 
   # =========================================================================
   # PHASE 9: Post-app filesystem snapshot & diff

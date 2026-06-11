@@ -99,7 +99,7 @@ for i in "${!APPS[@]}"; do
   log_section "[$app_num/$total] Validating: $app"
 
   # Run end-to-end validation
-  if bash end-to-end-validate.sh "$app" > "$VALIDATION_DIR/$app.log" 2>&1; then
+  if bash validation/end-to-end-validate.sh "$app" > "$VALIDATION_DIR/$app.log" 2>&1; then
     log_pass "Validation completed"
 
     # Copy detailed report
