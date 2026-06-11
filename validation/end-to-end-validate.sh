@@ -125,8 +125,18 @@ EOF
   fi
   ((checks_total++))
 
+  # Check if cask was skipped (already exists upstream)
+  if grep -q "a cask already exists in homebrew-cask" "$app_work/gen.log" 2>/dev/null; then
+    log_warn "Cask already exists in Homebrew (skipped)"
+    echo "⚠ Cask already exists in Homebrew — skipped" >> "$report"
+    echo "" >> "$report"
+    echo "**Status: SKIPPED (already exists upstream)**" >> "$report"
+    cat "$report"
+    return 0
+  fi
+
   # Find cask file
-  local cask_file="$app_work/$app.rb"
+  cask_file="$app_work/$app.rb"
   if [[ ! -f "$cask_file" ]]; then
     log_fail "Cask file not found: $cask_file"
     echo "✗ Cask file not found: $cask_file" >> "$report"

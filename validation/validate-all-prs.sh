@@ -72,6 +72,7 @@ declare -A status_map
 declare -a ready_apps
 declare -a review_apps
 declare -a failed_apps
+declare -a skipped_apps
 
 # Main workflow
 echo "FMA Homebrew Cask — End-to-End Validation"
@@ -105,6 +106,16 @@ for i in "${!APPS[@]}"; do
     # Copy detailed report
     if [[ -f "$CASKWORK/e2e-reports/$app-validation.md" ]]; then
       cp "$CASKWORK/e2e-reports/$app-validation.md" "$VALIDATION_DIR/$app-e2e.md"
+    fi
+
+    # Check if cask was skipped (already exists in Homebrew)
+    if grep -q "already exists in Homebrew" "$VALIDATION_DIR/$app-e2e.md" 2>/dev/null || \
+       grep -q "skipped (cask exists upstream)" "$CASKWORK/$app/report.md" 2>/dev/null; then
+      skipped_apps+=("$app")
+      status_map["$app"]="SKIPPED"
+      log_warn "Status: SKIPPED (already exists in Homebrew)"
+      ((passed_count++))
+      continue
     fi
 
     # Run quality analysis
@@ -152,9 +163,10 @@ log_section "FINAL SUMMARY"
 
 echo ""
 echo "Results:"
-echo "  Ready:  ${#ready_apps[@]} apps"
-echo "  Review: ${#review_apps[@]} apps"
-echo "  Failed: ${#failed_apps[@]} apps"
+echo "  Ready:   ${#ready_apps[@]} apps"
+echo "  Review:  ${#review_apps[@]} apps"
+echo "  Failed:  ${#failed_apps[@]} apps"
+echo "  Skipped: ${#skipped_apps[@]} apps (already exist in Homebrew)"
 echo ""
 
 if [[ ${#ready_apps[@]} -gt 0 ]]; then
@@ -169,6 +181,14 @@ if [[ ${#review_apps[@]} -gt 0 ]]; then
   echo -e "${YELLOW}Need review/fixes:${NC}"
   for app in "${review_apps[@]}"; do
     echo "  ⚠ $app"
+  done
+  echo ""
+fi
+
+if [[ ${#skipped_apps[@]} -gt 0 ]]; then
+  echo -e "${YELLOW}Skipped (already exist):${NC}"
+  for app in "${skipped_apps[@]}"; do
+    echo "  ⊘ $app"
   done
   echo ""
 fi
