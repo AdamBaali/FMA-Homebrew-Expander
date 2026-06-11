@@ -1,0 +1,176 @@
+╔════════════════════════════════════════════════════════════════════════════╗
+║                    E2E CASK VALIDATION — QUICK START                        ║
+╚════════════════════════════════════════════════════════════════════════════╝
+
+📍 START HERE: Read VALIDATION-GUIDE.md for complete walkthrough
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+ONE-LINER TO RUN EVERYTHING:
+
+  bash validate-all-prs.sh
+
+  ⏱️  Takes 60-90 minutes
+  📁 Results: ~/caskwork/validation-YYYYMMDD-HHMMSS/
+  📊 Summary: cat ~/caskwork/validation-YYYYMMDD-HHMMSS/SUMMARY.md
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+COMMON TASKS:
+
+Test one app (interactive):
+  bash end-to-end-validate.sh poll-everywhere
+
+Check for duplicates:
+  bash check-duplicates.sh ~/caskwork/<app>/<app>.rb
+
+Analyze code quality:
+  bash analyze-cask.sh ~/caskwork/<app>/<app>.rb
+
+Auto-fix issues:
+  bash cask-fixer.sh ~/caskwork/<app>/<app>.rb
+
+Re-validate after fixes:
+  bash end-to-end-validate.sh <app>
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+TYPICAL WORKFLOW:
+
+1. Generate casks:
+   BATCH_SIZE=10 bash scripts/cask-master.sh
+
+2. Validate all:
+   bash validate-all-prs.sh
+
+3. Review results:
+   cat ~/caskwork/validation-YYYYMMDD-HHMMSS/SUMMARY.md
+
+4. Fix issues:
+   bash analyze-cask.sh ~/caskwork/<app>/<app>.rb
+   bash cask-fixer.sh ~/caskwork/<app>/<app>.rb
+   vim ~/caskwork/<app>/<app>.rb
+   bash end-to-end-validate.sh <app>
+
+5. Submit:
+   bash scripts/cask-master.sh
+
+6. Commit:
+   git add -A && git commit -m "FMA cask validation" && git push
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+WHAT GETS CHECKED (17 Phases):
+
+✓ Cask generation
+✓ Duplicate detection (vs 14k+ Homebrew casks)
+✓ Pre-install system snapshot
+✓ App installation
+✓ App launch & usage monitoring
+✓ Post-install system snapshot
+✓ Filesystem snapshot (what files app created)
+✓ Zap stanza verification (cleanup is complete)
+✓ Code style check
+✓ Audit check (Homebrew policy)
+✓ Livecheck validation (auto-update detection)
+✓ App metadata (bundle ID, min macOS)
+✓ Uninstall test
+✓ Reinstall test (idempotency)
+✓ Zap cleanup verification
+
+PLUS: Code quality analysis (8 additional checks)
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+DOCUMENTATION:
+
+VALIDATION-GUIDE.md     ← START HERE (practical usage)
+E2E-VALIDATION.md       ← Deep dive (workflow & best practices)
+E2E-CHECKS.md          ← All 17 phases explained in detail
+E2E-QUICK-START.md     ← 5-minute quick reference
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+EXAMPLE: Validate Poll Everywhere
+
+Step 1: Run validation
+  bash end-to-end-validate.sh poll-everywhere
+
+  [1/5] Generating cask...
+  ✓ Cask generated
+  [2/5] Review the generated cask...
+  << Opens cask, waits for Enter >>
+  [3/5] Installing app: brew install --cask poll-everywhere
+  ✓ Installation complete
+  [4/5] Opening app: poll-everywhere
+  << App opens, interact with it for 1-2 minutes, close when done >>
+  [5/5] Uninstalling...
+  << Verification complete >>
+
+Step 2: Check results
+  cat ~/caskwork/e2e-reports/poll-everywhere-validation.md
+
+  Summary
+  Checks passed: 17 / 17
+  Status: ✓ READY FOR SUBMISSION
+
+Step 3: Submit
+  bash scripts/cask-master.sh
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+TROUBLESHOOTING:
+
+Q: Scripts not found?
+A: cd /Users/adam/Documents/GitHub/FMA-Homebrew-Expander && bash validate-all-prs.sh
+
+Q: Permission denied?
+A: chmod +x *.sh
+
+Q: Cask generation fails?
+A: cat ~/caskwork/<app>/report.md (check for download URL or SHA256 issues)
+
+Q: Duplicate detected?
+A: bash check-duplicates.sh ~/caskwork/<app>/<app>.rb (may need -desktop suffix)
+
+Q: Zap stanza incomplete?
+A: cat ~/caskwork/<app>/fs_changes.txt (add missing paths to cask)
+
+Q: Low disk?
+A: rm -rf ~/caskwork/validation-* (keep results, delete old runs)
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+KEY FEATURES:
+
+🔍 Duplicate Detection
+   → Checks against all 14k+ Homebrew casks
+   → Handles vendor variations, desktop variants, fuzzy matches
+
+📸 Filesystem Snapshots
+   → Before/after app launch
+   → Exact list of files app creates
+   → Verifies zap stanza covers everything
+
+🏠 System State Monitoring
+   → Matches Homebrew CI exactly
+   → Detects kernel extensions, launch agents, packages
+   → Ensures app doesn't pollute system
+
+✅ 17 Validation Phases
+   → Zero guessing
+   → Production-ready verification
+   → Will pass Homebrew CI
+
+🔧 Auto-Fix Common Issues
+   → Hardcoded versions → #{version}
+   → Deprecated syntax updates
+   → Whitespace cleanup
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+READY? Run this now:
+
+  bash validate-all-prs.sh
+
+Then read the results in ~/caskwork/validation-YYYYMMDD-HHMMSS/SUMMARY.md
