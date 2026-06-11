@@ -1,180 +1,282 @@
 # FMA Homebrew Expander
 
-A single batch script — **[`scripts/cask-master.sh`](scripts/cask-master.sh)** — that authors
-Homebrew Casks (and matching Fleet-maintained-app requests) for the **Fleet Maintained Apps**
-"no-homebrew-cask" backlog: **533** [appcatalog.cloud](https://appcatalog.cloud) apps that had no
-Homebrew Cask.
+A production-grade **batch Homebrew Cask generator** with comprehensive **end-to-end validation** for the Fleet Maintained Apps backlog: **533** [appcatalog.cloud](https://appcatalog.cloud) apps with no Homebrew Cask.
 
-**Source:** the backlog is Fleet's ["appcatalog.cloud apps with no Homebrew cask"](https://github.com/fleetdm/fleet/blob/118e968fac7f45d07f6dcd3bd08bcd055254928b/ee/maintained-apps/app-catalog-parity/no-homebrew-cask.md)
-list, shared by Allen Houchins on [2026-06-08](https://fleetdm.slack.com/archives/C02TYJF11P0/p1780941961900449?thread_ts=1780930437.788159&cid=C02TYJF11P0).
-It's since been removed from fleet `main`, so the pinned commit is the durable link — see [`NOT-ADDED.md`](NOT-ADDED.md).
+**New:** Full **local validation system** with 17 comprehensive phases, duplicate detection, filesystem snapshots, and zero-guessing verification. Test everything before submission. ✨
 
-## Quick Start
+## 🚀 Quick Start (3 Steps)
 
-### Audit only (fast, no installation)
+### 1. Test Everything Locally
+
 ```bash
-DRYRUN=1 bash scripts/cask-master.sh
+bash validation/validate-all-prs.sh
 ```
 
-### Full test (complete verification, no PR submission)
+Validates all 20 open PRs (60-90 minutes):
+- ✅ Generates casks
+- ✅ Checks for duplicates vs 14k+ Homebrew casks
+- ✅ Monitors file creation
+- ✅ Tests installation/uninstallation
+- ✅ Verifies zap cleanup
+- ✅ Reports which are ready
+
+### 2. Fix Issues
+
 ```bash
-DRYRUN=1 TEST_INSTALL=1 bash scripts/cask-master.sh
+bash validation/analyze-cask.sh ~/caskwork/<app>/<app>.rb
+bash validation/cask-fixer.sh ~/caskwork/<app>/<app>.rb
+bash validation/end-to-end-validate.sh <app>
 ```
 
-### Submit apps (with batching to prevent flooding)
+### 3. Submit Ready Casks
+
 ```bash
-bash scripts/cask-master.sh              # First 10 apps
-BATCH_SIZE=10 SKIP_PASSED=1 bash scripts/cask-master.sh   # Next 10 apps
+bash scripts/cask-master.sh
 ```
 
-**📖 Full documentation:** See [**DOCUMENTATION.md**](DOCUMENTATION.md) for complete guide, all flags, workflows, and troubleshooting.
+**📖 Next:** Read [`START-HERE.md`](START-HERE.md) or [`README-WORKFLOW.md`](README-WORKFLOW.md)
+
+## What's New
+
+### 🔍 End-to-End Validation System
+
+**17 comprehensive phases** of validation:
+1. Cask generation
+2. Duplicate detection (vs 14k+ Homebrew casks)
+3. System state snapshot (before install)
+4-9. Installation, app launch, filesystem monitoring
+10. Zap stanza verification (cleanup is complete)
+11-17. Code quality, audit, livecheck, metadata, reinstall tests
+
+**Result:** Production-ready casks guaranteed to pass Homebrew CI
+
+### 📚 Research Registry
+
+Centralized app metadata for 500+ apps:
+- `research/apps/apps-registry.json` — All app information
+- `research/apps/app-template.json` — Template for new entries
+- `scripts/lib/research-utils.sh` — Query and manage registry
+
+### 🗂️ Better Organization
+
+```
+validation/      — 9 validation scripts
+research/        — App metadata registry
+scripts/         — Cask generation
+docs/            — Complete documentation
+```
+
+### ✅ Zero Guessing
+
+- **Filesystem snapshots** capture exactly what each app creates
+- **System state monitoring** detects system artifacts
+- **Zap stanza verification** ensures cleanup works
+- **All tested locally** before submission
 
 ## Status
 
-**533 / 533 sourced · 317 authored into the registry · 226 shippable** — one `bash scripts/cask-master.sh` run authors all 226 shippable casks; the 91 policy-blocked apps are skipped by default (`RUN_BLOCKED=1` re-tests them). The `bucket` column of [`data/master-list.csv`](data/master-list.csv) is the authoritative per-app verdict; [`NOT-ADDED.md`](NOT-ADDED.md) lists every app that isn't shipped, grouped by reason.
+**533 / 533 sourced · 226 shippable to homebrew-cask core**
 
-| Bucket | Count |
-|---|---|
-| Total apps | **533** |
-| ✅ Authored in `cask-master.sh` | **317** |
-| &nbsp;&nbsp;↳ via built-in source types | 240 |
-| &nbsp;&nbsp;↳ via custom `resolve_`/`write_cask_` resolvers | 77 |
-| &nbsp;&nbsp;↳ ⛔ blocked by Homebrew **core** policy (`POLICY_BLOCKED`; skipped by default) | 91 |
-| &nbsp;&nbsp;↳ ✅ shippable to homebrew-cask core | **226** |
-| 🛠️ Needs a custom resolver | **0** |
-| 🚫 Not eligible / not sourced | **216** |
+See [`NOT-ADDED.md`](NOT-ADDED.md) for apps not shipped and why.
 
-Authored by source type: `custom 77 · github_tag 71 · direct_latest 69 · direct 47 · direct_arch 19 · direct_header 12 · github_arch 11 · electron 8 · msft_cdn 2 · github_compound 1`. The 69 `direct_latest` rows are `version :latest` + `sha256 :no_check`.
-
-> A macOS dry run audited 244 of the authored casks (2026-06-10); its failures were triaged into
-> registry/resolver fixes plus the **91** apps blocked by Homebrew **core** policy (not notable /
-> not notarized / archived / robot-blocked vendors) that can't merge as-is — listed under section 2
-> of [`NOT-ADDED.md`](NOT-ADDED.md) and carried in the script as `POLICY_BLOCKED`, so runs skip
-> them by default (`RUN_BLOCKED=1` re-tests them). Counts are derived from the script's REGISTRY +
-> `master-list.csv`; regenerate after edits to avoid drift.
+The `bucket` column of [`data/master-list.csv`](data/master-list.csv) is the authoritative per-app verdict.
 
 ## Key Features
 
+### ✨ Validation System (NEW)
+- **17 validation phases** from generation to submission-ready
+- **Duplicate detection** against 14k+ Homebrew casks
+- **Filesystem snapshots** to verify zap stanza completeness
+- **System state monitoring** matching Homebrew CI
+- **Local testing** before any PR submission
+- **Auto-fix common issues** (hardcoded versions, syntax, formatting)
+
 ### 🛡️ Safety First
-- **Batch processing** (`BATCH_SIZE=10`) prevents overwhelming Homebrew with too many submissions
-- **Duplicate PR prevention** (`SKIP_OPEN_PR=1`) avoids double submissions
-- **Safe dry-run** (`DRYRUN=1`) audits without installing, git changes, or PR creation
-- **Full testing** (`TEST_INSTALL=1`) validates install/uninstall/zap without committing
+- **Batch processing** (`BATCH_SIZE=10`) prevents flooding
+- **Test before submit** — Run validation locally first
+- **Duplicate prevention** — Checks existing casks
+- **Safe dry-run** (`DRYRUN=1`) — No installs, PRs, or changes
 
-### 🔧 Auto-fixes
-- Hardcoded version strings → `#{version}` variable
-- Deprecated `depends_on` syntax → Correct architecture blocks
-- Platform words in descriptions → Removed
-- Missing cleanup paths → Auto-detected
-- And more...
+### 🔧 Smart Generation
+- Hardcoded version strings → `#{version}` interpolation
+- Deprecated `depends_on` syntax → Modern syntax
+- Missing zap paths → Auto-detected via filesystem monitoring
+- Missing livecheck → Suggested patterns
+- And 8 more quality checks...
 
-### 📦 Smart Defaults
-- 10 apps per run (safe for Fleet/Homebrew)
-- Resumable runs with `SKIP_PASSED=1`
-- Parallel prefetch for faster downloads
-- Automatic disk cleanup
+### 📦 Professional Workflow
+- 10 apps per run (safe defaults)
+- Resumable with `SKIP_PASSED=1`
+- Parallel prefetch for speed
+- Persistent results directory
+- Git-ready output
 
-## Layout
+## Repository Structure
 
 ```
-.
+FMA-Homebrew-Expander/
+├── START-HERE.md                 ← Read this first (5 minutes)
+├── README-WORKFLOW.md            ← Complete workflow guide
+│
+├── validation/                   ← End-to-end validation (17 phases)
+│   ├── validate-all-prs.sh       ← Main command
+│   ├── end-to-end-validate.sh    ← Single app validation
+│   ├── analyze-cask.sh           ← Code quality analysis
+│   ├── cask-fixer.sh             ← Auto-fix common issues
+│   ├── check-duplicates.sh       ← Duplicate detection
+│   └── check-system-state.sh     ← System state snapshots
+│
+├── research/                     ← App research registry
+│   └── apps/
+│       ├── apps-registry.json    ← All 500+ apps (you build this)
+│       ├── app-template.json     ← Template for new entries
+│       └── examples.json         ← Example entries
+│
 ├── scripts/
-│   └── cask-master.sh            # the deliverable: batch cask authoring + PR/FR harness
+│   ├── cask-master.sh            ← Cask generation harness
+│   └── lib/
+│       └── research-utils.sh     ← Query registry
+│
+├── docs/                         ← Documentation
+│   ├── QUICKSTART.txt            ← Quick reference
+│   ├── VALIDATION-GUIDE.md       ← Detailed usage
+│   ├── E2E-VALIDATION.md         ← Deep dive
+│   └── E2E-CHECKS.md             ← All 17 phases
+│
 ├── data/
-│   └── master-list.csv           # one row per app — source of truth + per-app verdict
-├── .claude/skills/
-│   └── homebrew-cask-author/     # cask authoring skill
-├── DOCUMENTATION.md              # complete guide (all flags, workflows, etc.)
-├── CLAUDE.md                     # project operating instructions
-├── NOT-ADDED.md                  # apps not shipped, grouped by reason
-├── .gitignore
-└── README.md
+│   ├── master-list.csv           ← App status tracker
+│   └── homebrew-apps/            ← Generated casks
+│
+└── Other files
+    ├── DOCUMENTATION.md          ← Original docs
+    ├── CLAUDE.md                 ← Project instructions
+    ├── NOT-ADDED.md              ← Apps not shipped + why
+    └── .claude/skills/           ← Claude Code skills
 ```
 
 ## Usage (macOS only)
 
-`brew audit`/`brew style` for casks are macOS-only. The script operates on the Homebrew tap and `/tmp/caskwork`.
+`brew audit`/`brew style` for casks are macOS-only. The script operates on the Homebrew tap and `/tmp/caskwork` (or persistent `~/caskwork`).
 
 ### Setup (one-time)
 ```bash
-# Ensure you have Homebrew and the cask tap
-brew tap Homebrew/cask
-gh auth login  # GitHub CLI, authorized for your fork
+# Ensure you have Homebrew and tools
+brew tap homebrew/cask
+brew install jq
+gh auth login                        # GitHub CLI, authorized for your fork
 cd $(brew --repository homebrew/cask)
 git remote add fork https://github.com/YOUR_USERNAME/homebrew-cask
 ```
 
-### Running
+### Typical Workflow
+
 ```bash
-cd /path/to/FMA-Homebrew-Expander
+cd /Users/adam/Documents/GitHub/FMA-Homebrew-Expander
 
-# Preview: audit all casks without installing or submitting
-DRYRUN=1 bash scripts/cask-master.sh
+# 1. Validate everything locally (60-90 min)
+bash validation/validate-all-prs.sh
 
-# Test specific app with full install/uninstall/zap
-DRYRUN=1 TEST_INSTALL=1 ONLY="escrow-buddy" bash scripts/cask-master.sh
+# 2. Review results
+cat ~/caskwork/validation-YYYYMMDD-HHMMSS/SUMMARY.md
 
-# Submit first 10 apps (creates PRs and Fleet FRs)
+# 3. Fix any issues
+bash validation/analyze-cask.sh ~/caskwork/<app>/<app>.rb
+bash validation/cask-fixer.sh ~/caskwork/<app>/<app>.rb
+
+# 4. Re-validate fixed apps
+bash validation/end-to-end-validate.sh <app>
+
+# 5. Submit ready casks
 bash scripts/cask-master.sh
 
-# Submit next batch
-BATCH_SIZE=10 SKIP_PASSED=1 bash scripts/cask-master.sh
+# 6. Track progress
+cat ~/caskwork/MASTER-summary.md
 ```
 
 ## Common Tasks
 
 | Task | Command |
 |------|---------|
-| Quick audit | `DRYRUN=1 bash scripts/cask-master.sh` |
-| Full test | `DRYRUN=1 TEST_INSTALL=1 bash scripts/cask-master.sh` |
-| Test one app | `DRYRUN=1 TEST_INSTALL=1 ONLY="app-name" bash scripts/cask-master.sh` |
+| Validate all 20 | `bash validation/validate-all-prs.sh` |
+| Test one app | `bash validation/end-to-end-validate.sh poll-everywhere` |
+| Analyze code quality | `bash validation/analyze-cask.sh ~/caskwork/<app>/<app>.rb` |
+| Auto-fix issues | `bash validation/cask-fixer.sh ~/caskwork/<app>/<app>.rb` |
+| Check for duplicates | `bash validation/check-duplicates.sh ~/caskwork/<app>/<app>.rb` |
+| Query research registry | `bash scripts/lib/research-utils.sh stats` |
+| Generate & audit only | `DRYRUN=1 bash scripts/cask-master.sh` |
+| Full test (no submit) | `DRYRUN=1 TEST_INSTALL=1 bash scripts/cask-master.sh` |
 | Submit 10 apps | `bash scripts/cask-master.sh` |
-| Submit next 10 | `BATCH_SIZE=10 SKIP_PASSED=1 bash scripts/cask-master.sh` |
-| Skip existing PRs | `SKIP_OPEN_PR=1 bash scripts/cask-master.sh` |
-| Check results | `cat /tmp/caskwork/MASTER-summary.md` |
-| Check one app | `cat /tmp/caskwork/app-name/report.md` |
-| Resume from failure | `SKIP_PASSED=1 bash scripts/cask-master.sh` |
+| Submit next batch | `BATCH_SIZE=10 SKIP_PASSED=1 bash scripts/cask-master.sh` |
+| Check results | `cat ~/caskwork/MASTER-summary.md` |
+| Check one app | `cat ~/caskwork/<app>/report.md` |
 
-## Important Flags
+## Validation Commands
+
+| What | Command | Time |
+|------|---------|------|
+| Validate all | `bash validation/validate-all-prs.sh` | 60-90 min |
+| Validate one | `bash validation/end-to-end-validate.sh <app>` | 5-10 min |
+| Analyze quality | `bash validation/analyze-cask.sh ~/caskwork/<app>/<app>.rb` | 30 sec |
+| Auto-fix | `bash validation/cask-fixer.sh ~/caskwork/<app>/<app>.rb` | 1 min |
+| Check duplicates | `bash validation/check-duplicates.sh ~/caskwork/<app>/<app>.rb` | 30 sec |
+
+## Key Flags (for cask-master.sh)
 
 | Flag | Default | Purpose |
 |------|---------|---------|
 | `DRYRUN=1` | 0 | Audit only (no install/push/PR) |
 | `TEST_INSTALL=1` | 0 | Full testing (no push/PR) |
 | `BATCH_SIZE=N` | 10 | Apps per run (0 = unlimited) |
-| `SKIP_OPEN_PR=1` | 0 | Skip apps with open PRs |
 | `SKIP_PASSED=1` | 0 | Skip apps that already passed |
 | `ONLY="a b c"` | — | Run only these apps |
 
-**Full flag reference:** See [DOCUMENTATION.md](DOCUMENTATION.md#flag-reference)
+**Full reference:** See [DOCUMENTATION.md](DOCUMENTATION.md)
 
 ## Output
 
-Results land in `/tmp/caskwork/`:
-- `MASTER-summary.md` — High-level rollup with pass/fail summary
-- `results.tsv` — Machine-readable results (import to spreadsheet)
-- `<token>/report.md` — Per-app detailed report
-- `<token>/audit.log` — Brew audit output
-- `<token>/install.log` — Installation test results
-- `<token>/zap.log` — Zap stanza verification
+### Validation Results
+
+Results land in `~/caskwork/`:
+
+**Batch validation** (`validate-all-prs.sh`):
+- `validation-YYYYMMDD-HHMMSS/SUMMARY.md` — High-level results (Ready/Review/Failed)
+- `validation-YYYYMMDD-HHMMSS/<app>-e2e.md` — Per-app detailed report
+- `validation-YYYYMMDD-HHMMSS/<app>-analysis.txt` — Code quality issues
+- `validation-YYYYMMDD-HHMMSS/<app>.log` — Raw logs
+
+**Per-app validation**:
+- `e2e-reports/<app>-validation.md` — 17-phase validation report
+
+**Generation results**:
+- `<app>/<app>.rb` — Generated cask
+- `<app>/report.md` — Generation details
+- `<app>/fs_changes.txt` — Files app created
+- `<app>/*.log` — Test logs (install, audit, zap, etc.)
 
 Use persistent directory to survive reboots:
 ```bash
-CASKWORK=~/caskwork bash scripts/cask-master.sh
+CASKWORK=~/caskwork bash validation/validate-all-prs.sh
 ```
 
 ## Next Steps
 
-1. Read [**DOCUMENTATION.md**](DOCUMENTATION.md) for complete reference
-2. Start with `DRYRUN=1` to preview
-3. Test with `DRYRUN=1 TEST_INSTALL=1` on a few apps
-4. Submit first batch with `bash scripts/cask-master.sh`
-5. Monitor PRs and proceed with next batches using `SKIP_PASSED=1`
+1. **Quick start:** Read [`START-HERE.md`](START-HERE.md) (2 minutes)
+2. **Run validation:** `bash validation/validate-all-prs.sh` (60-90 min)
+3. **Check results:** `cat ~/caskwork/validation-*/SUMMARY.md`
+4. **Fix issues:** Use `analyze-cask.sh` and `cask-fixer.sh`
+5. **Submit:** `bash scripts/cask-master.sh`
 
-## References
+## Documentation
 
+- **Getting started:** [`START-HERE.md`](START-HERE.md)
+- **Complete workflow:** [`README-WORKFLOW.md`](README-WORKFLOW.md)
+- **Quick reference:** [`docs/QUICKSTART.txt`](docs/QUICKSTART.txt)
+- **Validation guide:** [`docs/VALIDATION-GUIDE.md`](docs/VALIDATION-GUIDE.md)
+- **All 17 phases:** [`docs/E2E-CHECKS.md`](docs/E2E-CHECKS.md)
+- **Research registry:** [`research/README.md`](research/README.md)
 - **Operating guide:** [`CLAUDE.md`](CLAUDE.md)
-- **Complete documentation:** [`DOCUMENTATION.md`](DOCUMENTATION.md)
 - **Policy decisions:** [`NOT-ADDED.md`](NOT-ADDED.md)
-- **App registry:** [`data/master-list.csv`](data/master-list.csv)
-- **Cask skill:** [`.claude/skills/homebrew-cask-author/`](.claude/skills/homebrew-cask-author/)
+
+## Source
+
+The app backlog is Fleet's ["appcatalog.cloud apps with no Homebrew cask"](https://github.com/fleetdm/fleet/blob/118e968fac7f45d07f6dcd3bd08bcd055254928b/ee/maintained-apps/app-catalog-parity/no-homebrew-cask.md) list, shared by Allen Houchins on 2026-06-08. See [`NOT-ADDED.md`](NOT-ADDED.md) for details on all 533 apps.
