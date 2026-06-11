@@ -104,7 +104,7 @@ EOF
   fi
   mkdir -p "$app_work"
 
-  if DRYRUN=$DRYRUN TEST_INSTALL=$TEST_INSTALL BATCH_SIZE=1 ONLY="$app" bash scripts/cask-master.sh > "$app_work/gen.log" 2>&1; then
+  if CASKWORK=$CASKWORK DRYRUN=$DRYRUN TEST_INSTALL=$TEST_INSTALL BATCH_SIZE=1 ONLY="$app" bash scripts/cask-master.sh > "$app_work/gen.log" 2>&1; then
     log_pass "Cask generation successful"
     echo "" >> "$report"
     echo "## 1. Cask Generation" >> "$report"
